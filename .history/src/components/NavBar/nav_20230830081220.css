@@ -53,9 +53,9 @@ nav {
   flex-direction: column;
   position: fixed;
   top: 70px;
-  width: 220px;
+  width: 180px;
   row-gap: 24px;
-  right: -300px;
+  right: -350px;
   padding: 24px 16px;
   margin-top: 0rem;
   transition: all 0.2s;

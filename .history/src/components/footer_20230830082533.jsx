@@ -58,34 +58,26 @@ function Footer() {
         <h2 className="text-lg font-semibold">Mapa de Sitio</h2>
         <ul className="mt-2 space-y-2 sm:ml-0 sm:pl-0">
           <li className="text-red">
-            <Link href="/rent" className="hover:font-bold">
-              Renta un vehículo
-            </Link>
+            <Link href="/rent">Renta un vehículo</Link>
           </li>
           <li>
-            <Link href="/cars" className="hover:font-bold">
-              Vehículos
-            </Link>
+            <Link href="/cars">Vehículos</Link>
           </li>
           <li>
-            <Link href="/testimoniales" className="hover:font-bold">
-              Testimoniales
-            </Link>
+            <Link href="/testimoniales">Testimoniales</Link>
           </li>
           <li>
-            <Link href="/about" className="hover:font-bold">
-              Sobre nosotros
-            </Link>
+            <Link href="/about">Sobre nosotros</Link>
           </li>
           <li>
-            <Link href="/contact" className="hover:font-bold">
+            <Link
+              href="/contact"
+              className="hover:shadow-sm hover:shadow-white">
               ¿Tienes una duda?
             </Link>
           </li>
           <li>
-            <Link href="/signin" className="hover:font-bold">
-              Ingresa
-            </Link>
+            <Link href="/signin">Ingresa</Link>
           </li>
         </ul>
       </div>

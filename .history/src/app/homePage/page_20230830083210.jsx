@@ -9,6 +9,8 @@ import { FaCalendarAlt, FaSearchDollar } from "react-icons/fa";
 import { PiCar, PiCarProfile, PiPhoneCallBold } from "react-icons/pi";
 import { categorias } from "../../libs/categorias.js";
 
+console.log(categorias);
+
 const fontRubik = Rubik({
   weight: "600",
   subsets: ["latin"],
@@ -59,15 +61,7 @@ function HomePage() {
           categoría
         </label>
         <br />
-        <select className="bg-gris_fondo w-[200px] mb-4" name="categoría">
-          <option selected className="">
-            {" "}
-            Elige categoría{" "}
-          </option>
-          {categorias.map((c) => (
-            <option>{c.tipo}</option>
-          ))}
-        </select>
+        <input className="bg-gris_fondo w-[200px] mb-4" name="categoría" />{" "}
         <br />
         <label htmlFor="fechaInicio" className="">
           <FaCalendarAlt className="inline text-naranja_enf mr-1" /> Fecha de

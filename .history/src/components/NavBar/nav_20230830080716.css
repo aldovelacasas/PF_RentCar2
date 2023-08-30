@@ -31,7 +31,7 @@ nav {
   color: #e9e9e9;
   width: 80px;
   text-align: center;
-  padding: 0.5rem;
+  padding-left: 2rem;
   font-size: 1rem;
 }
 
@@ -52,15 +52,15 @@ nav {
   display: flex;
   flex-direction: column;
   position: fixed;
-  top: 70px;
-  width: 220px;
+  top: 53px;
+  width: 180px;
   row-gap: 24px;
   right: -300px;
   padding: 24px 16px;
-  margin-top: 0rem;
+  margin-top: 0.9rem;
   transition: all 0.2s;
   min-height: calc(100vh - 60px);
-  font-size: 1rem;
+  font-size: 1.4rem;
   background-color: #f1f1f1;
 }
 .nav__menu-list.active {
@@ -83,7 +83,7 @@ nav {
 }
 
 .HomeLogo {
-  font-size: 1rem;
+  font-size: 1.5rem;
   font-weight: 600;
   transition: 0.3s;
 }
