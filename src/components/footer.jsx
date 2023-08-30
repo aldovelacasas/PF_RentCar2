@@ -61,9 +61,6 @@ function Footer() {
             <Link href="/rent">Renta un vehículo</Link>
           </li>
           <li>
-            <Link href="/cars">Vehículos</Link>
-          </li>
-          <li>
             <Link href="/testimoniales">Testimoniales</Link>
           </li>
           <li>
