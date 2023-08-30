@@ -52,7 +52,7 @@ nav {
   display: flex;
   flex-direction: column;
   position: fixed;
-  top: 52px;
+  top: 50px;
   width: 220px;
   row-gap: 24px;
   right: -300px;
