@@ -1,8 +1,0 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-body {
-   @apply bg-gray-500; /* Fondo más claro */
-   color: gray-800; /* Texto oscuro */
-}
