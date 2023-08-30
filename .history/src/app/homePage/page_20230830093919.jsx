@@ -94,20 +94,18 @@ function HomePage() {
           />
           <br />
         </fieldset>
-        <fieldset>
-          <label htmlFor="fechaFin" className="">
-            <FaCalendarAlt className="inline text-naranja_enf mr-1" /> Fecha de
-            fin
-          </label>
-          <br />
-          <input
-            className="bg-gris_fondo w-[200px] text-[0.9em]"
-            name="fechaFin"
-            type="date"
-            min={new Date().toISOString().split("T")[0]}
-          />{" "}
-          <br />
-        </fieldset>
+        <label htmlFor="fechaFin" className="">
+          <FaCalendarAlt className="inline text-naranja_enf mr-1" /> Fecha de
+          fin
+        </label>
+        <br />
+        <input
+          className="bg-gris_fondo w-[200px] text-[0.9em]"
+          name="fechaFin"
+          type="date"
+          min={new Date().toISOString().split("T")[0]}
+        />{" "}
+        <br />
         <button
           className={`bg-naranja_enf text-white text-[0.7rem] px-4 py-1 mt-4 ${poppins} shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
           Buscar
@@ -288,10 +286,10 @@ function HomePage() {
         </div>
       </section>
       <section
-        className={`pt-16 px-5 ${rubik} mx-[auto] text-[0.8em] min-[480px]:max-w-[450px] bg-gris_frente pb-12`}>
+        className={`pt-16 px-5 ${rubik} mx-[auto] text-[0.8em] bg-gris_frente pb-12`}>
         <p className="text-center">FAQ</p>
         <p className="text-2xl text-center pb-4">Preguntas Frecuentes</p>
-        <table className="bg-white shadow-md shadow-black ">
+        <table className="bg-white shadow-md shadow-black">
           <tbody className="[&>*:nth-child(odd)]:bg-[#ea4e398a] bg-white">
             <tr>
               <td className="py-1 text-center">

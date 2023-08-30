@@ -117,9 +117,7 @@ nav {
     font-size: 0.8em;
     gap:15px;
     flex-direction: row;
-    padding:0;
-    align-items:center;
-    min-height: 40px;
+   max-height: 50px;
     width: min-content;
     align-items: space-evenly;
   }

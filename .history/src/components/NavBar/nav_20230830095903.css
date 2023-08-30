@@ -103,6 +103,7 @@ nav {
 }
 
 @media (min-width: 38em) {
+  *{color:red}
   nav{
     padding:1%;
   }
@@ -117,9 +118,7 @@ nav {
     font-size: 0.8em;
     gap:15px;
     flex-direction: row;
-    padding:0;
-    align-items:center;
-    min-height: 40px;
+    min-height: fit-content;
     width: min-content;
     align-items: space-evenly;
   }

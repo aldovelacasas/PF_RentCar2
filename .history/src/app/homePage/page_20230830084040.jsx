@@ -1,4 +1,3 @@
-"use client";
 import { Rubik, Poppins } from "next/font/google";
 import {
   BsChevronCompactRight,
@@ -9,7 +8,6 @@ import { BiSolidCar } from "react-icons/bi";
 import { FaCalendarAlt, FaSearchDollar } from "react-icons/fa";
 import { PiCar, PiCarProfile, PiPhoneCallBold } from "react-icons/pi";
 import { categorias } from "../../libs/categorias.js";
-import { useState } from "react";
 
 const fontRubik = Rubik({
   weight: "600",
@@ -20,21 +18,13 @@ const fontPoppins = Poppins({
   weight: "400",
   subsets: ["latin"],
 });
-
 const poppins = fontPoppins.className;
 const rubik = fontRubik.className;
 
 function HomePage() {
-  const [display, setDisplay] = useState(categorias[0].imagen);
-
-  function handleChange(e) {
-    let newdisplay = categorias.find((c) => c.tipo === e.target.value);
-    setDisplay(newdisplay.imagen);
-  }
   return (
-    <div className="grid bg-gris_frente">
-      <header
-        className={`bg-gris_fondo ${rubik} text-[1em] min-[400px]:text-[1.5em] space-y-0 space-x-2.5`}>
+    <>
+      <header className={`bg-gris_fondo ${rubik} space-y-0 space-x-2.5`}>
         <p className={`pt-12 ml-2.5 text-[0.8em] mb-2`}>
           Planea tu viaje ahora
         </p>
@@ -49,7 +39,7 @@ function HomePage() {
         <p className={`${poppins} text-[0.6em] pb-4`}>
           km ilimitado, opciones flexibles y mucho más.
         </p>
-        <div className="flex place-content-evenly w-full min-[450px]:w-2/3 mt-3 pb-10">
+        <div className="flex place-content-evenly w-full mt-3 pb-10">
           <button
             className={`bg-naranja_enf text-white text-[0.7em] px-4 py-1 ${poppins} shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
             Renta <BsCheckCircleFill className="inline pl-1" />
@@ -62,52 +52,46 @@ function HomePage() {
         </div>
       </header>
       <form
-        className={`pt-2 ${poppins} text-[0.8em] place-self-center bg-gris_frente pb-12`}>
-        <p className={`text-[1rem] ${rubik} mb-2 text-center`}>Renta un auto</p>
-        <fieldset>
-          <label htmlFor="categoria" className="">
-            <BiSolidCar className="inline text-naranja_enf mr-1" /> Elige una
-            categoría
-          </label>
-          <br />
-          <select
-            className="bg-gris_fondo w-[200px] mb-4 text-[0.9em]"
-            name="categoría">
-            <option defaultValue={true}>Elige categoría</option>
-            {categorias.map((c) => (
-              <option key={c.tipo}>{c.tipo}</option>
-            ))}
-          </select>
-          <br />
-        </fieldset>
-        <fieldset>
-          <label htmlFor="fechaInicio" className="">
-            <FaCalendarAlt className="inline text-naranja_enf mr-1" /> Fecha de
-            inicio
-          </label>
-          <br />
-          <input
-            className="bg-gris_fondo w-[200px] mb-4 text-[0.9em]"
-            name="fechaFin"
-            type="date"
-            min={new Date().toISOString().split("T")[0]}
-          />
-          <br />
-        </fieldset>
-        <fieldset>
-          <label htmlFor="fechaFin" className="">
-            <FaCalendarAlt className="inline text-naranja_enf mr-1" /> Fecha de
-            fin
-          </label>
-          <br />
-          <input
-            className="bg-gris_fondo w-[200px] text-[0.9em]"
-            name="fechaFin"
-            type="date"
-            min={new Date().toISOString().split("T")[0]}
-          />{" "}
-          <br />
-        </fieldset>
+        className={`pt-2 ${poppins} text-[0.8em] pl-14 bg-gris_frente pb-12`}>
+        <p className={`text-[1rem] ${rubik} mb-2`}>Renta un auto</p>
+        <label htmlFor="categoria" className="">
+          <BiSolidCar className="inline text-naranja_enf mr-1" /> Elige una
+          categoría
+        </label>
+        <br />
+        <select className="bg-gris_fondo w-[200px] mb-4" name="categoría">
+          <option selected className="text-[0.6em]">
+            Elige categoría
+          </option>
+          {categorias.map((c) => (
+            <option>{c.tipo}</option>
+          ))}
+        </select>
+        <br />
+        <label htmlFor="fechaInicio" className="">
+          <FaCalendarAlt className="inline text-naranja_enf mr-1" /> Fecha de
+          inicio
+        </label>
+        <br />
+        <input
+          className="bg-gris_fondo w-[200px] mb-4"
+          name="fechaFin"
+          type="date"
+          min={new Date().toISOString().split("T")[0]}
+        />{" "}
+        <br />
+        <label htmlFor="fechaFin" className="">
+          <FaCalendarAlt className="inline text-naranja_enf mr-1" /> Fecha de
+          fin
+        </label>
+        <br />
+        <input
+          className="bg-gris_fondo w-[200px]"
+          name="fechaFin"
+          type="date"
+          min={new Date().toISOString().split("T")[0]}
+        />{" "}
+        <br />
         <button
           className={`bg-naranja_enf text-white text-[0.7rem] px-4 py-1 mt-4 ${poppins} shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
           Buscar
@@ -162,21 +146,10 @@ function HomePage() {
         <p className={`text-[1rem] mb-6 text-center`}>
           Alquila tu auto fácil y rápido
         </p>
-        <img src={display} className="max-w-[400px] w-full" />
-        <div className="p-4 grid grid-cols-2 gap-4">
-          {categorias.map((c) => (
-            <button
-              key={c.tipo}
-              value={c.tipo}
-              onClick={handleChange}
-              className="bg-naranja_enf px-4 py-2 shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black">
-              {c.tipo}
-            </button>
-          ))}
-        </div>
+        {/* visualizador de vehículos */}
       </section>
       <section
-        className={`pt-4 ${rubik} mx-[auto] text-white text-center text-[0.8em] w-full bg-negro_fondo pb-6`}>
+        className={`pt-4 ${rubik} mx-[auto] text-white text-center text-[0.8em] bg-negro_fondo pb-6`}>
         <p className="text-2xl">Ven y ahorra con nosotros</p>
         <p>
           Contamos con atención al cliente{" "}
@@ -237,7 +210,7 @@ function HomePage() {
         </div>
       </section>
       <section
-        className={`pt-16 px-5 ${rubik} mx-[auto] text-[0.8em] bg-gris_fondo pb-12 min-[480px]:max-w-[450px]`}>
+        className={`pt-16 px-5 ${rubik} mx-[auto] text-[0.8em] bg-gris_fondo pb-12`}>
         <p className="text-center">Prueba Social</p>
         <p className="text-2xl text-center pb-4">
           Lee las reseñas de otros clientes
@@ -288,47 +261,45 @@ function HomePage() {
         </div>
       </section>
       <section
-        className={`pt-16 px-5 ${rubik} mx-[auto] text-[0.8em] min-[480px]:max-w-[450px] bg-gris_frente pb-12`}>
-        <p className="text-center">FAQ</p>
-        <p className="text-2xl text-center pb-4">Preguntas Frecuentes</p>
-        <table className="bg-white shadow-md shadow-black ">
-          <tbody className="[&>*:nth-child(odd)]:bg-[#ea4e398a] bg-white">
-            <tr>
-              <td className="py-1 text-center">
-                ¿Cuánto tiempo tengo para devolver el pedido?
-              </td>
-            </tr>
-            <tr>
-              <td className={`py-1 px-2 pb-2 ${poppins}`}>
-                Depués de vencido tu periodo de renta, cuentas con una hora de
-                tolerancia para devolver el vehículo.
-              </td>
-            </tr>
-            <tr>
-              <td className="py-1 text-center">
-                ¿Qué pasa si olvidé algo en el interior del auto?
-              </td>
-            </tr>
-            <tr>
-              <td className={`py-1 px-2 pb-2 ${poppins}`}>
-                No te preocupes, nosotros te contactaremos tan pronto realicemos
-                la limpieza del vehículo para que puedas venir a recoger tus
-                pertenencias.
-              </td>
-            </tr>
-            <tr>
-              <td className="py-1 text-center">
-                ¿El vehículo cuenta con seguro?
-              </td>
-            </tr>
-            <tr>
-              <td className={`py-1 px-2 pb-4 ${poppins}`}>
-                Claro que sí, todos nuestros vehículos se encuentran en buen
-                estado y con todos sus papeles en orden de manera que puedes
-                conducir sin preocupaciones.
-              </td>
-            </tr>
-          </tbody>
+        className={`pt-16 px-5 ${rubik} mx-[auto] text-[0.8em] bg-gris_frente pb-12`}>
+        <p>FAQ</p>
+        <p>Preguntas Frecuentes</p>
+        <table className="[&>*:nth-child(odd)]:bg-[#ea4e398a] bg-white shadow-md shadow-black">
+          <tr>
+            <td className="py-1 text-center">
+              ¿Cuánto tiempo tengo para devolver el pedido?
+            </td>
+          </tr>
+          <tr>
+            <td className={`py-1 px-2 pb-2 ${poppins}`}>
+              Depués de vencido tu periodo de renta, cuentas con una hora de
+              tolerancia para devolver el vehículo.
+            </td>
+          </tr>
+          <tr>
+            <td className="py-1 text-center">
+              ¿Qué pasa si olvidé algo en el interior del auto?
+            </td>
+          </tr>
+          <tr>
+            <td className={`py-1 px-2 pb-2 ${poppins}`}>
+              No te preocupes, nosotros te contactaremos tan pronto realicemos
+              la limpieza del vehículo para que puedas venir a recoger tus
+              pertenencias.
+            </td>
+          </tr>
+          <tr>
+            <td className="py-1 text-center">
+              ¿El vehículo cuenta con seguro?
+            </td>
+          </tr>
+          <tr>
+            <td className={`py-1 px-2 pb-4 ${poppins}`}>
+              Claro que sí, todos nuestros vehículos se encuentran en buen
+              estado y con todos sus papeles en orden de manera que puedes
+              conducir sin preocupaciones.
+            </td>
+          </tr>
         </table>
       </section>
       <form className={`pt-2 ${poppins} text-[0.8em] bg-gris_fondo px-4 pb-4`}>
@@ -342,7 +313,7 @@ function HomePage() {
           Suscribirme
         </button>
       </form>
-    </div>
+    </>
   );
 }
 

@@ -64,50 +64,44 @@ function HomePage() {
       <form
         className={`pt-2 ${poppins} text-[0.8em] place-self-center bg-gris_frente pb-12`}>
         <p className={`text-[1rem] ${rubik} mb-2 text-center`}>Renta un auto</p>
-        <fieldset>
-          <label htmlFor="categoria" className="">
-            <BiSolidCar className="inline text-naranja_enf mr-1" /> Elige una
-            categoría
-          </label>
-          <br />
-          <select
-            className="bg-gris_fondo w-[200px] mb-4 text-[0.9em]"
-            name="categoría">
-            <option defaultValue={true}>Elige categoría</option>
-            {categorias.map((c) => (
-              <option key={c.tipo}>{c.tipo}</option>
-            ))}
-          </select>
-          <br />
-        </fieldset>
-        <fieldset>
-          <label htmlFor="fechaInicio" className="">
-            <FaCalendarAlt className="inline text-naranja_enf mr-1" /> Fecha de
-            inicio
-          </label>
-          <br />
-          <input
-            className="bg-gris_fondo w-[200px] mb-4 text-[0.9em]"
-            name="fechaFin"
-            type="date"
-            min={new Date().toISOString().split("T")[0]}
-          />
-          <br />
-        </fieldset>
-        <fieldset>
-          <label htmlFor="fechaFin" className="">
-            <FaCalendarAlt className="inline text-naranja_enf mr-1" /> Fecha de
-            fin
-          </label>
-          <br />
-          <input
-            className="bg-gris_fondo w-[200px] text-[0.9em]"
-            name="fechaFin"
-            type="date"
-            min={new Date().toISOString().split("T")[0]}
-          />{" "}
-          <br />
-        </fieldset>
+        <label htmlFor="categoria" className="">
+          <BiSolidCar className="inline text-naranja_enf mr-1" /> Elige una
+          categoría
+        </label>
+        <br />
+        <select
+          className="bg-gris_fondo w-[200px] mb-4 text-[0.9em]"
+          name="categoría">
+          <option defaultValue={true}>Elige categoría</option>
+          {categorias.map((c) => (
+            <option key={c.tipo}>{c.tipo}</option>
+          ))}
+        </select>
+        <br />
+        <label htmlFor="fechaInicio" className="">
+          <FaCalendarAlt className="inline text-naranja_enf mr-1" /> Fecha de
+          inicio
+        </label>
+        <br />
+        <input
+          className="bg-gris_fondo w-[200px] mb-4 text-[0.9em]"
+          name="fechaFin"
+          type="date"
+          min={new Date().toISOString().split("T")[0]}
+        />
+        <br />
+        <label htmlFor="fechaFin" className="">
+          <FaCalendarAlt className="inline text-naranja_enf mr-1" /> Fecha de
+          fin
+        </label>
+        <br />
+        <input
+          className="bg-gris_fondo w-[200px] text-[0.9em]"
+          name="fechaFin"
+          type="date"
+          min={new Date().toISOString().split("T")[0]}
+        />{" "}
+        <br />
         <button
           className={`bg-naranja_enf text-white text-[0.7rem] px-4 py-1 mt-4 ${poppins} shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
           Buscar
@@ -237,7 +231,7 @@ function HomePage() {
         </div>
       </section>
       <section
-        className={`pt-16 px-5 ${rubik} mx-[auto] text-[0.8em] bg-gris_fondo pb-12 min-[480px]:max-w-[450px]`}>
+        className={`pt-16 px-5 ${rubik} mx-[auto] text-[0.8em] bg-gris_fondo pb-12`}>
         <p className="text-center">Prueba Social</p>
         <p className="text-2xl text-center pb-4">
           Lee las reseñas de otros clientes
@@ -246,7 +240,8 @@ function HomePage() {
           Más de 5 años de experiencia nos respaldan y nuestros clientes pueden
           corroborar nuestro excelentísimo servicio.
         </p>
-        <div className={`bg-white ${rubik} text-[0.7rem] p-4`}>
+        <div
+          className={`bg-white ${rubik} text-[0.7rem] p-4 min-[450px]:max-w-[400px]`}>
           <p>
             "Nunca habíamos rentado un auto antes, pero luego de haber puesto
             nuestro voto de confianza en esta página, es una experiencia que
@@ -288,10 +283,10 @@ function HomePage() {
         </div>
       </section>
       <section
-        className={`pt-16 px-5 ${rubik} mx-[auto] text-[0.8em] min-[480px]:max-w-[450px] bg-gris_frente pb-12`}>
+        className={`pt-16 px-5 ${rubik} mx-[auto] text-[0.8em] bg-gris_frente pb-12`}>
         <p className="text-center">FAQ</p>
         <p className="text-2xl text-center pb-4">Preguntas Frecuentes</p>
-        <table className="bg-white shadow-md shadow-black ">
+        <table className="bg-white shadow-md shadow-black">
           <tbody className="[&>*:nth-child(odd)]:bg-[#ea4e398a] bg-white">
             <tr>
               <td className="py-1 text-center">

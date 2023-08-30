@@ -288,10 +288,10 @@ function HomePage() {
         </div>
       </section>
       <section
-        className={`pt-16 px-5 ${rubik} mx-[auto] text-[0.8em] min-[480px]:max-w-[450px] bg-gris_frente pb-12`}>
+        className={`pt-16 px-5 ${rubik} mx-[auto] text-[0.8em] bg-gris_frente pb-12`}>
         <p className="text-center">FAQ</p>
         <p className="text-2xl text-center pb-4">Preguntas Frecuentes</p>
-        <table className="bg-white shadow-md shadow-black ">
+        <table className="bg-white shadow-md shadow-black min-[480px]:m-w-[450px]">
           <tbody className="[&>*:nth-child(odd)]:bg-[#ea4e398a] bg-white">
             <tr>
               <td className="py-1 text-center">

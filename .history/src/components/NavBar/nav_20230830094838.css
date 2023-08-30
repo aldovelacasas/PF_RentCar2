@@ -61,7 +61,7 @@ nav {
   transition: all 0.2s;
   min-height: calc(100vh - 60px);
   font-size: 1rem;
-  background-color: #dbdbdb;
+  background-color: #f1f1f1;
 }
 .nav__menu-list.active {
   right: 0;
@@ -102,31 +102,10 @@ nav {
   display: none;
 }
 
-@media (min-width: 38em) {
+@media (min-width: 50em) {
+  *{color:red}
   nav{
     padding:1%;
-  }
-  .HomeMenu {
-    display: block;
-  }
-  .nav__menu-bar {
-    display: none;
-  }
-  .nav__menu-list {
-    position: unset;
-    font-size: 0.8em;
-    gap:15px;
-    flex-direction: row;
-    padding:0;
-    align-items:center;
-    min-height: 40px;
-    width: min-content;
-    align-items: space-evenly;
-  }
-
-  .HomeLogo {
-    display: none;
-    font-size: 2rem;
   }
   /* nav {
     padding: 3%;
