@@ -13,9 +13,14 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
+<<<<<<< HEAD
+        <h1>Ola k ase</h1>
+        <div className="h-[calc(100vh-5rem)]">{children}</div>
+=======
         <h1>Navbar</h1>
-        <div className="">{children}</div>
-        <Footer />
+        <div className="h-[calc(100vh-5rem)]">{children}</div>
+        <Footer></Footer>
+>>>>>>> main
       </body>
     </html>
   );
