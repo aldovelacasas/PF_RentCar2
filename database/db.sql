@@ -12,16 +12,18 @@ CREATE TABLE product(
     description VARCHAR(200),
     price VARCHAR(50),
     image TEXT,
+     isActive BOOLEAN NOT NULL,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 
 CREATE TABLE user(
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(200) NOT NULL,
+    username VARCHAR(200) NOT NULL,
     passport VARCHAR(200) NOT NULL,
     email VARCHAR(200) NOT NULL,
     phone VARCHAR(200) NOT NULL,
+    password VARCHAR(200) NOT NULL, 
     typeUser INT NOT NULL,
     isActive BOOLEAN NOT NULL,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
