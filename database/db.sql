@@ -12,7 +12,8 @@ CREATE TABLE product(
     description VARCHAR(200),
     price VARCHAR(50),
     image TEXT,
-     isActive BOOLEAN NOT NULL,
+    rating INT NOT NULL,
+    isActive BOOLEAN NOT NULL,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -24,7 +25,6 @@ CREATE TABLE user(
     email VARCHAR(200) NOT NULL,
     phone VARCHAR(200) NOT NULL,
     password VARCHAR(200) NOT NULL, 
-    typeUser INT NOT NULL,
     isActive BOOLEAN NOT NULL,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -39,4 +39,19 @@ CREATE TABLE bookings (
     statusB INT NOT NULL,
     CONSTRAINT fk_product FOREIGN KEY (productID) REFERENCES product (id),
     CONSTRAINT fk_user FOREIGN KEY (userID) REFERENCES user (id)
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+
+CREATE TABLE posts (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    userID INT UNSIGNED,
+    description TEXT NOT NULL,
+    rating INT NOT NULL,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    CONSTRAINT fk_user FOREIGN KEY (userID) REFERENCES user (id)
+);
+
+
+
+
