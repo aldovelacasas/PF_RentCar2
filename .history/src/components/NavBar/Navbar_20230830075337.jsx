@@ -20,7 +20,7 @@ const Navbar = () => {
   const [activeIdx, setActiveIdx] = useState(-1);
 
   return (
-    <>
+    <header>
       <nav className={`nav`}>
         <div className="boxLogo">
           <Link href="/about">
@@ -58,7 +58,7 @@ const Navbar = () => {
           ))}
         </div>
       </nav>
-    </>
+    </header>
   );
 };
 
