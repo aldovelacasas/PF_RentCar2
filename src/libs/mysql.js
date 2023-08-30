@@ -1,12 +1,11 @@
-import mysql from "serverless-mysql"
-
- export const conn = mysql({
-    config: {
-        host:"localhost",
-        user: "root",
-        password: "naruto251",
-        port: 3306,
-        database: "nextmysqlcrud2"
-
-    }
-})
+import mysql from "serverless-mysql";
+const { DB_VALIDATION } = process.env;
+export const conn = mysql({
+  config: {
+    host: "localhost",
+    user: "root",
+    password: DB_VALIDATION,
+    port: 3306,
+    database: "nextmysqlcrud2",
+  },
+});
