@@ -1,3 +1,6 @@
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '';
+
+
 CREATE TABLE product(
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(200) NOT NULL,
@@ -10,4 +13,28 @@ CREATE TABLE product(
     price VARCHAR(50),
     image TEXT,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+CREATE TABLE user(
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(200) NOT NULL,
+    passport VARCHAR(200) NOT NULL,
+    email VARCHAR(200) NOT NULL,
+    phone VARCHAR(200) NOT NULL,
+    typeUser INT NOT NULL,
+    isActive BOOLEAN NOT NULL,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+CREATE TABLE bookings (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    userID INT UNSIGNED,
+    productID INT UNSIGNED,
+    fecha_inicio DATETIME,
+    fecha_fin DATETIME,
+    statusB INT NOT NULL,
+    CONSTRAINT fk_product FOREIGN KEY (productID) REFERENCES product (id),
+    CONSTRAINT fk_user FOREIGN KEY (userID) REFERENCES user (id)
 );
