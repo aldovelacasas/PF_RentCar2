@@ -16,7 +16,7 @@ const rubik = fontRubik.className;
 const testimonio = {
   name: "Juanito Perez",
   profession: "Abogado",
-  rating: 4,
+  rating: 5,
   image:
     "https://img.freepik.com/foto-gratis/chico-worldface-espanol-fondo-blanco_53876-137665.jpg?w=360",
   description:

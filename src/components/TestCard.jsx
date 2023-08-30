@@ -14,17 +14,23 @@ const rubik = fontRubik.className;
 
 function TestCard({ name, description, profession, rating, image }) {
   return (
-    <div className="p-4 my-4 border border-gray-300 rounded-lg shadow-md mx-20 bg-gris_fondo">
+    <div className="p-4 my-4 border border-gray-300 mx-20 bg-gris_fondo">
       <h4 className={`text-sm mb-2  italic ${poppins}`}>{description}</h4>
-      <div className="flex items-center space-x-3">
-        <div className="w-12 h-12 overflow-hidden rounded-full">
-          <img className="object-cover w-full h-full" src={image} alt={name} />
+      <div className="flex justify-between items-center space-x-3">
+        <div className="flex ">
+          <div className="w-12 h-12 overflow-hidden rounded-full">
+            <img
+              className="object-cover w-full h-full"
+              src={image}
+              alt={name}
+            />
+          </div>
+          <div className="ml-2">
+            <h4 className="text-base font-medium">{name}</h4>
+            <p className="text-sm text-gray-500">{profession}</p>
+          </div>
         </div>
-        <div>
-          <h4 className="text-base font-medium">{name}</h4>
-          <p className="text-sm text-gray-500">{profession}</p>
-        </div>
-        <div className="flex items-center text-yellow-400 space-x-1 mr-0">
+        <div className="flex items-center text-yellow-400 space-x-1 mr-1">
           {Array.from({ length: rating }).map((_, index) => (
             <svg
               key={index}
