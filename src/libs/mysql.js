@@ -1,5 +1,7 @@
+import { configDotenv } from "dotenv";
 import mysql from "serverless-mysql";
 
+require("dotenv").config();
 const { DB_VALIDATION } = process.env;
 
 export const conn = mysql({
