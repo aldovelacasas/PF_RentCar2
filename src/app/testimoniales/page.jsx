@@ -1,5 +1,6 @@
 import { Rubik, Poppins } from "next/font/google";
 import TestCard from "@/components/TestCard";
+import OpinionForm from "@/components/OpinionForm";
 
 const fontRubik = Rubik({
   weight: "600",
@@ -27,7 +28,7 @@ const arr = [1, 2, 3, 4];
 
 function Testimoniales() {
   return (
-    <div>
+    <div className="bg-white">
       <div>
         <h2 className={`${poppins} text-4xl p-10 bg-gray-400 sm:text-6xl`}>
           Testimoniales
@@ -47,6 +48,7 @@ function Testimoniales() {
           );
         })}
       </div>
+      <OpinionForm />
     </div>
   );
 }

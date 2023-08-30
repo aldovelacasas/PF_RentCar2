@@ -14,7 +14,7 @@ const rubik = fontRubik.className;
 
 function TestCard({ name, description, profession, rating, image }) {
   return (
-    <div className="p-4 my-5 border border-gray-300 mx-20 bg-gris_fondo shadow-black shadow-xl hover:shadow-2xl">
+    <div className="p-4 my-5 border border-gray-300 mx-20 bg-gris_fondo shadow-black shadow-2xl">
       <h4 className={`text-sm mb-2  italic ${poppins}`}>{description}</h4>
       <div className="flex justify-between items-center space-x-3">
         <div className="flex ">
