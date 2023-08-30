@@ -60,10 +60,7 @@ function HomePage() {
         </label>
         <br />
         <select className="bg-gris_fondo w-[200px] mb-4" name="categoría">
-          <option selected className="">
-            {" "}
-            Elige categoría{" "}
-          </option>
+          <option selected> Elige categoría </option>
           {categorias.map((c) => (
             <option>{c.tipo}</option>
           ))}

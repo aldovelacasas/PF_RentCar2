@@ -51,6 +51,9 @@ function HomePage() {
           </button>
         </div>
       </header>
+      {categorias.map((c) => (
+        <p>{c.tipo}</p>
+      ))}
       <form
         className={`pt-2 ${poppins} text-[0.8em] pl-14 bg-gris_frente pb-12`}>
         <p className={`text-[1rem] ${rubik} mb-2`}>Renta un auto</p>
@@ -59,15 +62,7 @@ function HomePage() {
           categoría
         </label>
         <br />
-        <select className="bg-gris_fondo w-[200px] mb-4" name="categoría">
-          <option selected className="">
-            {" "}
-            Elige categoría{" "}
-          </option>
-          {categorias.map((c) => (
-            <option>{c.tipo}</option>
-          ))}
-        </select>
+        <input className="bg-gris_fondo w-[200px] mb-4" name="categoría" />{" "}
         <br />
         <label htmlFor="fechaInicio" className="">
           <FaCalendarAlt className="inline text-naranja_enf mr-1" /> Fecha de
