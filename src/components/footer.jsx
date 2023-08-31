@@ -63,8 +63,7 @@ function Footer() {
             </Link>
           </li>
           <li>
-            <Link href="/vehiculos">Vehiculos</Link>
-            <Link href="/cars" className="hover:font-bold">
+            <Link href="/vehiculos" className="hover:font-bold">
               Vehículos
             </Link>
           </li>
