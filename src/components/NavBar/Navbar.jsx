@@ -10,9 +10,9 @@ import "./nav.css";
 const MENU_LIST = [
   { text: "Home", href: "/" },
   { text: "About", href: "/about" },
-  { text: "Vehiculos", href: "/" },
-  { text: "Testimoniales", href: "/" },
-  { text: "Contáctanos", href: "/" },
+  { text: "Vehiculos", href: "/vehiculos" },
+  { text: "Testimoniales", href: "/testimoniales" },
+  { text: "Contáctanos", href: "/contacto" },
   { text: "Ingresar", href: "/" },
 ];
 const Navbar = () => {
@@ -23,7 +23,7 @@ const Navbar = () => {
     <>
       <nav className={`nav navBar`}>
         <div className="boxLogo">
-          <Link href="/about">
+          <Link href="/">
             <h1 className="logo">LOGO</h1>
           </Link>
           <div className="HomeLogo">
