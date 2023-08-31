@@ -24,7 +24,11 @@ const Navbar = () => {
       <nav className={`nav navBar`}>
         <div className="boxLogo">
           <Link href="/">
-            <h1 className="logo">LOGO</h1>
+            <img
+              src="https://drive.google.com/uc?export=download&id=1xRyrzCMxPuU6OX97500cJd7M7Veh0KXR"
+              width={80}
+              className="border-black border-[1.5px] rounded-sm"
+            />
           </Link>
           <div className="HomeLogo">
             <Link href="/">
