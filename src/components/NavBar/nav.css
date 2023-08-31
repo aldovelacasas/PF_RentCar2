@@ -11,7 +11,7 @@ a {
   text-decoration: none;
   color: inherit;
 }
-header {
+.navBar {
   position: sticky;
   z-index: 30;
   top: 0;
@@ -19,12 +19,11 @@ header {
 nav {
   font-family: "Rubik", sans-serif;
   display: flex;
-  padding: 16px;
   justify-content: space-between;
   align-items: center;
   background-color: #dbdbdb;
   color: #282828;
-  padding: 10% 10% 5% 6%;
+  padding: 2%;
 }
 
 .logo {
@@ -32,7 +31,7 @@ nav {
   color: #e9e9e9;
   width: 80px;
   text-align: center;
-  padding: 1rem;
+  padding: 0.5rem;
   font-size: 1rem;
 }
 
@@ -53,20 +52,19 @@ nav {
   display: flex;
   flex-direction: column;
   position: fixed;
-  top: 53px;
-  width: 180px;
+  top: 52px;
+  width: 220px;
   row-gap: 24px;
   right: -300px;
   padding: 24px 16px;
-  margin-top: 0.9rem;
+  margin-top: 0rem;
   transition: all 0.2s;
   min-height: calc(100vh - 60px);
-  font-size: 1.4rem;
+  font-size: 1rem;
   background-color: #f1f1f1;
 }
 .nav__menu-list.active {
   right: 0;
-  top: 53px;
 }
 .nav__menu-list span {
   font-weight: 600;
@@ -84,7 +82,7 @@ nav {
 }
 
 .HomeLogo {
-  font-size: 1.5rem;
+  font-size: 1rem;
   font-weight: 600;
   transition: 0.3s;
 }
@@ -103,9 +101,35 @@ nav {
   display: none;
 }
 
-@media screen and (min-width: 1100px) {
-  nav {
-    padding: 1% 10% 1% 10%;
+@media (min-width: 38em) {
+  nav{
+    padding:1%;
+  }
+  .HomeMenu {
+    display: block;
+  }
+  .nav__menu-bar {
+    display: none;
+  }
+  .nav__menu-list {
+    position: unset;
+    font-size: 0.8em;
+    gap:15px;
+    flex-direction: row;
+    padding:0;
+    align-items:center;
+    min-height: 40px;
+    width: min-content;
+    align-items: space-evenly;
+    background-color: #dbdbdb;
+  }
+
+  .HomeLogo {
+    display: none;
+    font-size: 2rem;
+  }
+  /* nav {
+    padding: 3%;
   }
   .HomeMenu {
     display: block;
@@ -151,5 +175,5 @@ nav {
 
   .nav__link:hover:before {
     width: 100%;
-  }
+  } */
 }
