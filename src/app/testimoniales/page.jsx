@@ -242,7 +242,7 @@ function Testimoniales() {
           Testimoniales
         </h2>
       </div>
-      <div className="">
+      <div>
         {testimonios.map((testimonio) => {
           return (
             <TestCard
