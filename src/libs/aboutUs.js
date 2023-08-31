@@ -2,7 +2,7 @@ export const aboutUs = [
   {
     nombre: "Aldo Vela",
     area: "Backend",
-    imagen: "https://avatars.githubusercontent.com/u/129243850?v=4",
+    imagen: "https://ca.slack-edge.com/TPRS7H4PN-U059MD5TE4Q-248637cd9753-512",
     linkedIn: "https://www.linkedin.com/in/aldo-vela",
     github: "https://github.com/aldovelacasas",
   },
