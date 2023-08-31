@@ -24,7 +24,7 @@ async function ProductPage() {
                 <p className="text-gray-300">{product.description}</p>
                 <div className="mt-4 flex justify-between items-center">
                   <p className="text-green-500 font-semibold">${product.price}</p>
-                  <button className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition duration-300">Rentar</button>
+                  <Buttons productId={product.id} />  
                 </div>
               </div>
             ))}
