@@ -1,4 +1,7 @@
+"use client";
+
 import { Rubik, Poppins } from "next/font/google";
+import { useState } from "react";
 
 const fontRubik = Rubik({
   weight: "600",
@@ -13,6 +16,24 @@ const poppins = fontPoppins.className;
 const rubik = fontRubik.className;
 
 function OpinionForm() {
+  const [review, setReview] = useState({
+    mail: "",
+    name: "",
+    surname: "",
+    review: "",
+  });
+
+  const handleChange = (event) => {
+    console.log(event.target.name);
+    if (event.target.name === "nameSurname") {
+      const [inputName, inputSurname] = event.target.value.split(" ");
+      setReview({ ...review, name: inputName, surname: inputSurname });
+    } else {
+      setReview({ ...review, [event.target.name]: event.target.value });
+    }
+  };
+
+  console.log(review);
   return (
     <div className="bg-gray-400 flex flex-col items-center justify-center">
       <form className="p-4 mx-4 my-4 max-w-md w-full">
@@ -23,11 +44,17 @@ function OpinionForm() {
         <label htmlFor="email" className={`${poppins} block mb-1`}>
           Email
         </label>
-        <input type="email" name="email" className="w-full py-2 px-3 mb-3" />
+        <input
+          type="email"
+          name="email"
+          onChange={handleChange}
+          className="w-full py-2 px-3 mb-3"
+        />
         <label htmlFor="nameSurname" className={`${poppins} block mb-1`}>
           Nombre y apellido
         </label>
         <input
+          onChange={handleChange}
           type="text"
           name="nameSurname"
           className="w-full py-2 px-3 mb-3"
@@ -36,6 +63,7 @@ function OpinionForm() {
           Profesión
         </label>
         <input
+          onChange={handleChange}
           type="text"
           name="profession"
           className="w-full py-2 px-3 mb-3"
@@ -44,6 +72,7 @@ function OpinionForm() {
           Opinión
         </label>
         <textarea
+          onChange={handleChange}
           name="opinion"
           cols="30"
           rows="5"
