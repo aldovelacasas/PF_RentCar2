@@ -3,7 +3,7 @@ import Link from "next/link";
 
 function Footer() {
   return (
-    <div className="bg-gray-800 text-white py-8 flex flex-col sm:flex-row justify-between items-center p-4 font-poppins">
+    <div className="bg-negro_fondo text-white py-8 flex flex-col sm:flex-row justify-between items-center p-4 font-poppins">
       <div className="sm:w-1/3 p-4">
         <h3 className="text-lg font-semibold">Renta de autos</h3>
         <p className="text-sm">
@@ -63,6 +63,7 @@ function Footer() {
             </Link>
           </li>
           <li>
+            <Link href="/vehiculos">Vehiculos</Link>
             <Link href="/cars" className="hover:font-bold">
               Vehículos
             </Link>
