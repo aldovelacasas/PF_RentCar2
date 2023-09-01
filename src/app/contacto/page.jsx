@@ -16,17 +16,17 @@ const rubik = fontRubik.className;
 
 function page() {
   return (
-    <div className="grid bg-gris_frente ">
+    <div className="grid bg-gris_frente min-[800px]:text-[1.5em]">
       <header
-        className={`bg-gris_fondo flex items-center h-[175px] ${rubik} text-[1em] min-[400px]:text-[1.5em] space-y-0 space-x-2.5`}>
+        className={`bg-gris_fondo flex items-center h-[175px] ${rubik} text-[1em] min-[400px]:text-[1.5em] min-[800px]:text-[2em] pl-[10%] space-y-0 space-x-2.5`}>
         <p className={`text-[1.2em] mt-2 pl-4`}>Contáctanos</p>
       </header>
       <form
-        className={`pt-2 ${poppins} text-[0.8em] grid justify-self-center bg-gris_frente pb-12 mt-6`}>
-        <p className={`text-[1rem] ${rubik} mb-2 text-center`}>
+        className={`pt-2 ${poppins} text-[0.8em] min-[450px]:text-[1em] min-[800px]:text-[1.2em] px-[25%] justify-self-center bg-gris_frente pb-12`}>
+        <p className={`text-[0.8em] ${rubik} mb-2 text-center`}>
           ¿Necesitas más información?
         </p>
-        <p className={`text-[0.6rem] ${rubik} mb-2 text-center mb-8`}>
+        <p className={`text-[1em] ${rubik} mb-6 text-center`}>
           Cuéntanos tus dudas y te responderemos al momento
         </p>
 
