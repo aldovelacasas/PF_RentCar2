@@ -113,7 +113,7 @@ function HomePage() {
   }
 
   return (
-    <div className="grid bg-gris_frente min-[800px]:text-[1.5em]">
+    <div className="grid bg-gris_frente min-[800px]:text-[2em]">
       <header
         className={`bg-gris_fondo ${rubik} text-[1em] min-[400px]:text-[1.5em]  pl-[10%] space-y-0 space-x-2.5`}>
         <p className={`pt-12 ml-2.5 text-[0.8em] mb-2`}>
