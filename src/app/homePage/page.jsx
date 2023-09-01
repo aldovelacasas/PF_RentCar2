@@ -113,17 +113,17 @@ function HomePage() {
   }
 
   return (
-    <div className="grid bg-gris_frente min-[800px]:text-[2em]">
+    <div className="grid bg-gris_frente md:text-[2em]">
       <header
-        className={`bg-gris_fondo ${rubik} text-[1em] min-[400px]:text-[1.5em]  pl-[10%] space-y-0 space-x-2.5`}>
+        className={`bg-gris_fondo ${rubik} text-[1em] sm:text-[1.5em]  pl-[10%] space-y-0 space-x-2.5`}>
         <p className={`pt-12 ml-2.5 text-[0.8em] mb-2`}>
           Planea tu viaje ahora
         </p>
-        <p className="text-[1.3em]  leading-6 min-[800px]:leading-[1.8em]">
+        <p className="text-[1.3em]  leading-6  md:leading-[1.8em]">
           <span className="text-naranja_enf">Ahorra </span>
           con nuestra
         </p>
-        <p className="text-[1.3em] leading-6 min-[800px]:leading-[1.2em] min-[800px]:pb-4">
+        <p className="text-[1.3em] leading-6 md:leading-[1.2em] md:pb-4">
           renta de vehículos
         </p>
         <p className={`${poppins} text-[0.6em] mt-2`}>
@@ -132,7 +132,7 @@ function HomePage() {
         <p className={`${poppins} text-[0.6em] pb-4`}>
           km ilimitado, opciones flexibles y mucho más.
         </p>
-        <div className="flex place-content-evenly w-full  min-[450px]:w-2/3 mt-3 pb-10 min-[800px]:pt-[40px] min-[800px]:w-1/2">
+        <div className="flex place-content-evenly w-full  sm:w-2/3 mt-3 pb-10 md:pt-[40px] md:w-1/2">
           <button
             onClick={handleScrollForm}
             className={`bg-naranja_enf text-white text-[0.7em] px-4 py-1 ${poppins} shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
@@ -147,9 +147,9 @@ function HomePage() {
         </div>
       </header>
       <form
-        className={`bg-white pt-2 ${poppins} text-[0.8em] min-[450px]:text-[1em] min-[800px]:text-[1.2em] px-[25%] justify-self-center bg-gris_frente pb-12`}>
+        className={`bg-white pt-2 ${poppins} text-[0.8em] sm:text-[1em] md:text-[1.2em] px-[25%] justify-self-center bg-gris_frente pb-12`}>
         <p
-          className={`text-[1em] min-[800px]:text-[1.2em] ${rubik} mb-2 min-[800px]:mt-[80px] text-center`}>
+          className={`text-[1em] md:text-[1.2em] ${rubik} mb-2 md:mt-[80px] text-center`}>
           Renta un auto
         </p>
         <fieldset>
@@ -159,7 +159,7 @@ function HomePage() {
           </label>
           <br />
           <select
-            className="bg-gris_fondo w-[200px] mb-4 text-[0.9em] min-[800px]:w-[500px]"
+            className="bg-gris_fondo w-[200px] mb-4 text-[0.9em] md:w-[500px]"
             name="categoría">
             <option defaultValue={true}>Elige categoría</option>
             {categorias.map((c) => (
@@ -175,7 +175,7 @@ function HomePage() {
           </label>
           <br />
           <input
-            className="bg-gris_fondo w-[200px] mb-4 text-[0.9em] min-[800px]:w-[500px]"
+            className="bg-gris_fondo w-[200px] mb-4 text-[0.9em] md:w-[500px]"
             name="fechaFin"
             type="date"
             min={new Date().toISOString().split("T")[0]}
@@ -189,7 +189,7 @@ function HomePage() {
           </label>
           <br />
           <input
-            className="bg-gris_fondo w-[200px] text-[0.9em] min-[800px]:w-[500px]"
+            className="bg-gris_fondo w-[200px] text-[0.9em] md:w-[500px]"
             name="fechaFin"
             type="date"
             min={new Date().toISOString().split("T")[0]}
@@ -202,7 +202,7 @@ function HomePage() {
         </button>
       </form>
       <section
-        className={`pt-4 ${poppins} mx-[auto] text-[0.8em] bg-gris_frente pb-12 min-[400px]:text-[1.2em]`}>
+        className={`pt-4 ${poppins} mx-[auto] text-[0.8em] bg-gris_frente pb-12 sm:text-[1.2em]`}>
         <p className={`text-[0.8em] ${rubik} mb-2 text-center`}>
           Planea tu viaje
         </p>
@@ -245,14 +245,14 @@ function HomePage() {
         </div>
       </section>
       <section
-        className={`pt-4 ${rubik} grid mx-[auto] text-[0.8em] bg-gris_frente pb-12 min-[400px]:text-[1.2em]`}>
+        className={`pt-4 ${rubik} grid mx-[auto] text-[0.8em] bg-gris_frente pb-12 sm:text-[1.2em]`}>
         <p className={`text-[0.8em] mb-2 text-center`}>Planea tu viaje</p>
         <p className={`text-[1em] mb-6 text-center`}>
           Alquila tu auto fácil y rápido
         </p>
         <img
           src={display}
-          className="w-3/4 justify-self-center object-fill h-[200px]  min-[400px]:h-[350px] min-[800px]:h-[450px]"
+          className="w-3/4 justify-self-center object-fill h-[200px]  sm:h-[350px] md:h-[450px]"
         />
         <div className="p-4 grid grid-cols-2 gap-4 w-3/4 justify-self-center">
           {categorias.map((c) => (
@@ -267,8 +267,8 @@ function HomePage() {
         </div>
       </section>
       <section
-        className={`pt-4 ${rubik} mx-[auto] text-white text-center text-[0.8em] w-full bg-negro_fondo pb-6 min-[400px]:py-[40px] min-[800px]:py-[80px] min-[400px]:text-[1.2em]`}>
-        <p className="text-2xl min-[800px]:text-[1.8em] min-[800px]:leading-[1.8em]">
+        className={`pt-4 ${rubik} mx-[auto] text-white text-center text-[0.8em] w-full bg-negro_fondo pb-6 sm:py-[40px] md:py-[80px] sm:text-[1.2em]`}>
+        <p className="text-2xl md:text-[1.8em] md:leading-[1.8em]">
           Ven y ahorra con nosotros
         </p>
         <p>
@@ -277,9 +277,9 @@ function HomePage() {
         </p>
       </section>
       <section
-        className={` w-3/4 pt-4 ${rubik} mx-[auto] text-[0.8em] bg-gris_frente pb-12 min-[400px]:text-[1.2em]`}>
+        className={` w-3/4 pt-4 ${rubik} mx-[auto] text-[0.8em] bg-gris_frente pb-12 sm:text-[1.2em]`}>
         <p>¿Por qué rentar con nosotros?</p>
-        <p className="text-2xl min-[800px]:text-[1.9em] min-[800px]:leading-[1.2em]">
+        <p className="text-2xl md:text-[1.9em] md:leading-[1.2em]">
           Contamos el vehículo que necesitas al
           <span className="text-naranja_enf"> mejor precio</span>
         </p>
@@ -381,12 +381,12 @@ function HomePage() {
         </div>
       </section>
       <section
-        className={`pt-16 px-5 ${rubik} mx-[auto] text-[0.8em] min-[800px]:mt-[60px] w-3/4 bg-gris_frente pb-12 min-[400px]:text-[1.2em]`}>
+        className={`pt-16 px-5 ${rubik} mx-[auto] text-[0.8em] md:mt-[60px] w-3/4 bg-gris_frente pb-12 sm:text-[1.2em]`}>
         <p className="text-center">FAQ</p>
-        <p className="text-2xl text-center pb-4 min-[800px]:text-[1.2em]  min-[800px]:mb-[60px]">
+        <p className="text-2xl text-center pb-4 md:text-[1.2em]  md:mb-[60px]">
           Preguntas Frecuentes
         </p>
-        <table className="bg-white shadow-md shadow-black  min-[800px]:mb-[100px]">
+        <table className="bg-white shadow-md shadow-black  md:mb-[100px]">
           <tbody className="[&>*:nth-child(odd)]:bg-[#ea4e398a] bg-white">
             <tr onClick={handleCollapse}>
               <td className="py-1 text-center">
@@ -427,9 +427,8 @@ function HomePage() {
         </table>
       </section>
       <form
-        className={`pt-2 ${poppins} text-[0.8em]  min-[800px]:text-[1.2em] bg-gris_fondo  min-[400px]:px-[15%] px-4 pb-4  min-[400px]:py-[25px] min-[800px]:py-[50px]`}>
-        <p
-          className={`${rubik} text-2xl  min-[800px]:text-[1.8em]  min-[800px]:pt-6`}>
+        className={`pt-2 ${poppins} text-[0.8em]  md:text-[1.2em] bg-gris_fondo  sm:px-[15%] px-4 pb-4  sm:py-[25px] md:py-[50px]`}>
+        <p className={`${rubik} text-2xl  md:text-[1.8em]  md:pt-6`}>
           Suscríbete
         </p>
         <p className="py-2">
@@ -446,7 +445,7 @@ function HomePage() {
         />
         <button
           onClick={handleEmailSubmit}
-          className="text-white bg-naranja_enf px-4 ml-4 text-[1em]  min-[800px]:py-3 leading-5 shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black ">
+          className="text-white bg-naranja_enf px-4 ml-4 text-[1em]  md:py-3 leading-5 shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black ">
           Suscribirme
         </button>
         {errors && (

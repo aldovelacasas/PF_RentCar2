@@ -16,14 +16,14 @@ const rubik = fontRubik.className;
 
 function page() {
   return (
-    <div className="grid bg-gris_frente min-[800px]:text-[1.5em]">
+    <div className="grid bg-gris_frente md:text-[2em]">
       <header
-        className={`bg-gris_fondo flex items-center h-[175px] ${rubik} text-[1em] min-[400px]:text-[1.5em] min-[800px]:text-[2em] pl-[10%] space-y-0 space-x-2.5`}>
+        className={`bg-gris_fondo flex items-center h-[175px] ${rubik} text-[1em] md:text-[1.5em] md:800px]:text-[2em] pl-[10%] space-y-0 space-x-2.5`}>
         <p className={`text-[1.2em] mt-2 pl-4`}>Contáctanos</p>
       </header>
       <form
-        className={`min-[600px]:w-3/4 pt-2 ${poppins} text-[0.8em] min-[450px]:text-[1em] min-[800px]:text-[1.2em] px-[25%] justify-self-center bg-gris_frente pb-12`}>
-        <p className={`text-[0.8em] ${rubik} mb-2 text-center`}>
+        className={`md:w-3/4 pt-2 ${poppins} text-[0.8em] sm:text-[1em] md:text-[1em] px-[25%] justify-self-center bg-gris_frente pb-12`}>
+        <p className={`text-[0.8em] ${rubik} mb-2 text-center mt-6`}>
           ¿Necesitas más información?
         </p>
         <p className={`text-[1em] ${rubik} mb-6 text-center`}>
@@ -67,7 +67,7 @@ function page() {
           <br />
         </fieldset>
         <button
-          className={`bg-naranja_enf w-full justify-self-center text-white text-[0.7rem] px-4 py-1 ${poppins} shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
+          className={`bg-naranja_enf w-full justify-self-center text-white text-[0.7em] px-4 py-1 ${poppins} shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
           Enviar
         </button>
       </form>
