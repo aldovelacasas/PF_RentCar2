@@ -1,5 +1,6 @@
 // import { conn } from "@/libs/mysql"
 import axios from "axios";
+import Buttons from "./[id]/buttons";
 
 async function loadProducts() {
   const { data } = await axios.get("http://localhost:3000/api/products");
@@ -35,7 +36,7 @@ async function ProductPage() {
             <p className="text-gray-300">{product.description}</p>
             <div className="mt-4 flex justify-between items-center">
               <p className="text-green-500 font-semibold">${product.price}</p>
-              {/* <Buttons productId={product.id} />   */}
+              <Buttons productId={product.id} />
             </div>
           </div>
         ))}
