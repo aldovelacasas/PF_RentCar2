@@ -22,7 +22,7 @@ function page() {
         <p className={`text-[1.2em] mt-2 pl-4`}>Contáctanos</p>
       </header>
       <form
-        className={`md:w-3/4 pt-2 ${poppins} text-[0.8em] sm:text-[1em] md:text-[1em] px-[25%] justify-self-center bg-gris_frente pb-12`}>
+        className={`md:w-4/5 pt-2 ${poppins} text-[0.8em] sm:text-[1em]  px-[25%] justify-self-center bg-gris_frente pb-12`}>
         <p className={`text-[0.8em] ${rubik} mb-2 text-center mt-6`}>
           ¿Necesitas más información?
         </p>
