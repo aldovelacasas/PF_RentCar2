@@ -1,24 +1,30 @@
 import { NextResponse } from "next/server";
 import { conn } from "@/libs/mysql";
 
-export async function GET(request) {
+export async function GET(request, { params }) {
   try {
-    const { postId } = request.query;
-
     const result = await conn.query("SELECT * FROM posts WHERE id = ?", [
-      postId,
+      params.id,
     ]);
 
     if (result.length === 0) {
-      return NextResponse.json({ message: "Post not found" }, { status: 404 });
+      return NextResponse.json(
+        {
+          message: "Post not found",
+        },
+        {
+          status: 404,
+        }
+      );
     }
 
-    const post = result[0];
-
-    return NextResponse.json(post);
+    return NextResponse.json(result[0]);
   } catch (error) {
-    return NextResponse.json({ message: error.message }, { status: 500 });
+    return NextResponse.json(
+      {
+        message: error.message,
+      },
+      { status: 500 }
+    );
   }
 }
-
-
