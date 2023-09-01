@@ -87,7 +87,7 @@ function HomePage() {
       });
     } else {
       window.scrollTo({
-        top: 450,
+        top: 530,
         behavior: "smooth",
       });
     }
@@ -106,14 +106,14 @@ function HomePage() {
       });
     } else {
       window.scrollTo({
-        top: 980,
+        top: 1220,
         behavior: "smooth",
       });
     }
   }
 
   return (
-    <div className="grid bg-gris_frente md:text-[2em]">
+    <div className="grid bg-gris_frente md:text-[1.5em]">
       <header
         className={`bg-gris_fondo ${rubik} text-[1em] sm:text-[1.5em]  pl-[10%] space-y-0 space-x-2.5`}>
         <p className={`pt-12 ml-2.5 text-[0.8em] mb-2`}>
@@ -132,7 +132,7 @@ function HomePage() {
         <p className={`${poppins} text-[0.6em] pb-4`}>
           km ilimitado, opciones flexibles y mucho más.
         </p>
-        <div className="flex place-content-evenly w-full  sm:w-2/3 mt-3 pb-10 md:pt-[40px] md:w-1/2">
+        <div className="flex place-content-evenly w-full sm:w-2/3 mt-3 pb-10 md:pt-[40px] lg:w-1/2">
           <button
             onClick={handleScrollForm}
             className={`bg-naranja_enf text-white text-[0.7em] px-4 py-1 ${poppins} shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
@@ -197,50 +197,52 @@ function HomePage() {
           <br />
         </fieldset>
         <button
-          className={`bg-naranja_enf text-white text-[0.8em] px-4 py-1 mt-4 ${poppins} shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
+          className={`bg-naranja_enf w-full text-white text-[0.8em] px-4 py-1 mt-4 ${poppins} shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
           Buscar
         </button>
       </form>
       <section
-        className={`pt-4 ${poppins} mx-[auto] text-[0.8em] bg-gris_frente pb-12 sm:text-[1.2em]`}>
+        className={`pt-4 ${poppins} mx-[auto] text-[0.8em] bg-gris_frente pb-12 sm:text-[1.2em] grid`}>
         <p className={`text-[0.8em] ${rubik} mb-2 text-center`}>
           Planea tu viaje
         </p>
         <p className={`text-[1em] ${rubik} mb-6 text-center`}>
           Alquila tu auto fácil y rápido
         </p>
-        <div className="w-full flex justify-center items-center gap-x-4  px-3">
-          <figure className="bg-[#ea4e398a] float-left rounded-full h-[65px] w-[65px] flex justify-center items-center">
-            <PiCar className="text-[50px] text-naranja_enf" />
-          </figure>
-          <div className="w-2/3">
-            <p className={`text-[0.8em] ${rubik} mb-2`}>Elije tu carro</p>
-            <p className={`text-[0.8em] ${poppins}  `}>
-              Contamos con una gran colección de vehículos disponibles sólo para
-              ti.
-            </p>
+        <div className="md:flex items-baseline w-4/5 justify-self-center">
+          <div className="w-full flex justify-center items-center md:flex-col gap-x-4 px-3">
+            <figure className="bg-[#ea4e398a] float-left rounded-full h-[65px] w-[65px] md:h-[100px] md:w-[100px] flex justify-center items-center">
+              <PiCar className="text-[50px] md:text-[80px] text-naranja_enf" />
+            </figure>
+            <div className="w-2/3 md:text-center md:text-[0.8em]">
+              <p className={`text-[0.8em] ${rubik} mb-2`}>Elije tu carro</p>
+              <p className={`text-[0.8em] ${poppins}  `}>
+                Contamos con una gran colección de vehículos disponibles sólo
+                para ti.
+              </p>
+            </div>
           </div>
-        </div>
-        <div className="w-full flex justify-center items-center gap-x-4  px-3 my-10">
-          <figure className="bg-[#ea4e398a] float-left rounded-full h-[65px] w-[65px] flex justify-center items-center">
-            <PiPhoneCallBold className="text-[50px] text-naranja_enf font-thin" />
-          </figure>
-          <div className="w-2/3">
-            <p className={`text-[0.8em] ${rubik} mb-2`}>¿Dudas?</p>
-            <p className={`text-[0.8em] ${poppins} mb-2 `}>
-              Contacta con nosotros y te responderemos al momento.
-            </p>
+          <div className="w-full flex justify-center items-center md:flex-col gap-x-4  px-3 my-10">
+            <figure className="bg-[#ea4e398a] float-left rounded-full h-[65px] w-[65px] md:h-[100px] md:w-[100px] flex justify-center items-center">
+              <PiPhoneCallBold className="text-[50px] md:text-[80px] text-naranja_enf font-thin" />
+            </figure>
+            <div className="w-2/3 md:text-center md:text-[0.8em]">
+              <p className={`text-[0.8em] ${rubik} mb-2`}>¿Dudas?</p>
+              <p className={`text-[0.8em] ${poppins} mb-2 `}>
+                Contacta con nosotros y te responderemos al momento.
+              </p>
+            </div>
           </div>
-        </div>
-        <div className="w-full flex justify-center items-center gap-x-4  px-3">
-          <figure className="bg-[#ea4e398a] float-left rounded-full h-[65px] w-[65px] flex justify-center items-center">
-            <PiCarProfile className="text-[50px] text-naranja_enf" />
-          </figure>
-          <div className="w-2/3">
-            <p className={`text-[0.8em] ${rubik} mb-2`}>Conduce</p>
-            <p className={`text-[0.8em] ${poppins} mb-2 `}>
-              Disfruta de la renta de tu vehículo vayas a donde vayas.
-            </p>
+          <div className="w-full flex justify-center items-center md:flex-col gap-x-4  px-3">
+            <figure className="bg-[#ea4e398a] float-left rounded-full h-[65px] w-[65px] md:h-[100px] md:w-[100px] flex justify-center items-center">
+              <PiCarProfile className="text-[50px] md:text-[80px] text-naranja_enf" />
+            </figure>
+            <div className="w-2/3 md:text-center md:text-[0.8em]">
+              <p className={`text-[0.8em] ${rubik} mb-2`}>Conduce</p>
+              <p className={`text-[0.8em] ${poppins} mb-2 `}>
+                Disfruta de la renta de tu vehículo vayas a donde vayas.
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -277,7 +279,7 @@ function HomePage() {
         </p>
       </section>
       <section
-        className={` w-3/4 pt-4 ${rubik} mx-[auto] text-[0.8em] bg-gris_frente pb-12 sm:text-[1.2em]`}>
+        className={` w-3/4 pt-4 ${rubik} mx-[auto] text-[0.8em] bg-gris_frente pb-12 sm:text-[1.2em] grid`}>
         <p>¿Por qué rentar con nosotros?</p>
         <p className="text-2xl md:text-[1.9em] md:leading-[1.2em]">
           Contamos el vehículo que necesitas al
@@ -290,49 +292,51 @@ function HomePage() {
           vitas temas desagradables e inesperados que encontrarías en nuestra
           competencia.
         </p>
-        <div className="w-full flex justify-center items-center gap-x-4  px-3">
-          <figure className="bg-[#ea4e398a] float-left rounded-full h-[65px] w-[65px] flex justify-center items-center">
-            <PiCarProfile className="text-[50px] text-naranja_enf" />
-          </figure>
-          <div className="w-2/3">
-            <p className={`text-[0.8em] ${rubik} mb-2`}>
-              Conduce hasta donde quieras
-            </p>
-            <p className={`text-[0.8em] ${poppins}  `}>
-              Lleva tu próxima aventura al siguiente nivel con nuestros
-              vehículos de la mejor calidad.
-            </p>
+        <div className="md:flex items-baseline justify-self-center">
+          <div className="md:flex-col w-full flex justify-center items-center gap-x-4  px-3">
+            <figure className="bg-[#ea4e398a] float-left rounded-full h-[65px] w-[65px] md:h-[100px] md:w-[100px] flex justify-center items-center">
+              <PiCarProfile className="text-[50px] md:text-[80px] text-naranja_enf" />
+            </figure>
+            <div className="w-2/3 md:text-center md:text-[0.8em]">
+              <p className={`text-[0.8em] ${rubik} mb-2`}>
+                Conduce hasta donde quieras
+              </p>
+              <p className={`text-[0.8em] ${poppins}  `}>
+                Lleva tu próxima aventura al siguiente nivel con nuestros
+                vehículos de la mejor calidad.
+              </p>
+            </div>
           </div>
-        </div>
-        <div className="w-full flex justify-center items-center gap-x-4  px-3 my-10">
-          <figure className="bg-[#ea4e398a] float-left rounded-full h-[65px] w-[65px] flex justify-center items-center">
-            <BsFillCreditCard2BackFill className="text-[30px] text-naranja_enf font-thin" />
-          </figure>
-          <div className="w-2/3">
-            <p className={`text-[0.8em] ${rubik} mb-2`}>Facilidad de pago</p>
-            <p className={`text-[0.8em] ${poppins} mb-2 `}>
-              Paga con tu cuenta de mercadoPago de manera fácil, sencilla y
-              transparente.
-            </p>
+          <div className="md:flex-col w-full flex justify-center items-center gap-x-4  px-3 my-10">
+            <figure className="bg-[#ea4e398a] float-left rounded-full h-[65px] w-[65px] md:h-[100px] md:w-[100px] flex justify-center items-center">
+              <BsFillCreditCard2BackFill className="text-[30px] md:text-[60px] text-naranja_enf font-thin" />
+            </figure>
+            <div className="w-2/3 md:text-center md:text-[0.8em]">
+              <p className={`text-[0.8em] ${rubik} mb-2`}>Facilidad de pago</p>
+              <p className={`text-[0.8em] ${poppins} mb-2 `}>
+                Paga con tu cuenta de mercadoPago de manera fácil, sencilla y
+                transparente.
+              </p>
+            </div>
           </div>
-        </div>
-        <div className="w-full flex justify-center items-center gap-x-4  px-3">
-          <figure className="bg-[#ea4e398a] float-left rounded-full h-[65px] w-[65px] flex justify-center items-center">
-            <FaSearchDollar className="text-[30px] text-naranja_enf stroke-2" />
-          </figure>
-          <div className="w-2/3">
-            <p className={`text-[0.8em] ${rubik} mb-2`}>Sin cargos ocultos</p>
-            <p className={`text-[0.8em] ${poppins} mb-2 `}>
-              Nuestros precios son finales por lo que una vez pagado, puedes
-              disfrutar de la calma de tu viaje.
-            </p>
+          <div className="md:flex-col w-full flex justify-center items-center gap-x-4  px-3">
+            <figure className="bg-[#ea4e398a] float-left rounded-full h-[65px] w-[65px] md:h-[100px] md:w-[100px] flex justify-center items-center">
+              <FaSearchDollar className="text-[30px] md:text-[60px] text-naranja_enf stroke-2" />
+            </figure>
+            <div className="w-2/3 md:text-center md:text-[0.8em]">
+              <p className={`text-[0.8em] ${rubik} mb-2`}>Sin cargos ocultos</p>
+              <p className={`text-[0.8em] ${poppins} mb-2 `}>
+                Nuestros precios son finales por lo que una vez pagado, puedes
+                disfrutar de la calma de tu viaje.
+              </p>
+            </div>
           </div>
         </div>
       </section>
       <section
         className={`pt-16 px-5 ${rubik} mx-[auto] text-[0.8em] bg-gris_fondo pb-12 w-3/4`}>
-        <p className="text-center">Prueba Social</p>
-        <p className="text-2xl text-center pb-4">
+        <p className="text-center md:text-[1.3em]">Prueba Social</p>
+        <p className="text-2xl md:text-[1.5em] text-center pb-4 md:pb-8">
           Lee las reseñas de otros clientes
         </p>
         <p className="pb-4">
@@ -428,7 +432,7 @@ function HomePage() {
       </section>
       <form
         className={`pt-2 ${poppins} text-[0.8em]  md:text-[1.2em] bg-gris_fondo  sm:px-[15%] px-4 pb-4  sm:py-[25px] md:py-[50px]`}>
-        <p className={`${rubik} text-2xl  md:text-[1.8em]  md:pt-6`}>
+        <p className={`${rubik} text-2xl  md:text-[1.3em]  md:pt-6`}>
           Suscríbete
         </p>
         <p className="py-2">
@@ -440,7 +444,7 @@ function HomePage() {
           name="email"
           value={email}
           onChange={handleEmailChange}
-          className="w-3/5 placeholder:pl-1"
+          className="w-3/5 placeholder:pl-2"
           placeholder="juanperez@correo.com"
         />
         <button
