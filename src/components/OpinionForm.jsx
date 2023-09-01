@@ -26,7 +26,6 @@ const rubik = fontRubik.className;
 
 function OpinionForm({ cars }) {
   console.log(cars);
-
   const [review, setReview] = useState({
     email: "",
     name: "",
@@ -34,6 +33,7 @@ function OpinionForm({ cars }) {
     profession: "",
     opinion: "",
     rating: "",
+    car: "",
   });
 
   const [error, setError] = useState({
@@ -73,7 +73,8 @@ function OpinionForm({ cars }) {
       review.surname !== "" &&
       review.profession !== "" &&
       review.opinion !== "" &&
-      review.rating !== ""
+      review.rating !== "" &&
+      review.car !== ""
     );
   };
 
@@ -128,22 +129,17 @@ function OpinionForm({ cars }) {
         ) : (
           ""
         )}
-        <label htmlFor="profession" className={`${poppins} block mb-1`}>
-          Profesión
+        <label htmlFor="car" className={`${poppins} block mb-1`}>
+          Auto
         </label>
-        <input
-          onChange={handleChange}
-          type="text"
-          name="profession"
-          className="w-full py-2 px-3 mb-3"
-        />
-        {error.profession ? (
-          <span className={`${alertPoppins} text-sm`} style={{ color: "red" }}>
-            {error.profession}
-          </span>
-        ) : (
-          ""
-        )}
+        <select name="car" className="w-full py-2 px-3 mb-3 bg-white">
+          <option value="Seleccionar" selected disabled>
+            Seleccionar auto
+          </option>
+          {cars.map((car) => {
+            return <option value={car.id}>{car.model + " " + car.name}</option>;
+          })}
+        </select>
         <label htmlFor="rating">Rating</label>
         <input
           type="number"
