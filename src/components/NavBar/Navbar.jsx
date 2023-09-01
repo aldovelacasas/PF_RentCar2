@@ -26,8 +26,7 @@ const Navbar = () => {
           <Link href="/">
             <img
               src="https://drive.google.com/uc?export=download&id=1xRyrzCMxPuU6OX97500cJd7M7Veh0KXR"
-              width={80}
-              className="border-black border-[1.5px] rounded-sm"
+              className="border-black border-[1.5px] rounded-sm w-[80px] min-[800px]:w-[150px]"
             />
           </Link>
           <div className="HomeLogo">

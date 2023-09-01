@@ -4,7 +4,7 @@ export default function CarCard({ product }) {
   return (
     <div
       key={product.id}
-      className=" bg-white min-w-[200px] max-w-[250px] shadow-md hover:cursor-pointer hover:scale-105 transform transition-transform duration-300 border border-solid border-negro_fondo">
+      className=" bg-white min-w-[130px] max-w-[250px] shadow-md shadow-black hover:cursor-pointer hover:scale-105 transform transition-transform duration-300 border border-solid border-negro_fondo">
       <img
         src={product.image}
         alt={product.name}

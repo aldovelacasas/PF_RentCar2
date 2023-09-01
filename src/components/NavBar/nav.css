@@ -112,6 +112,7 @@ nav {
     display: none;
   }
   .nav__menu-list {
+    margin-right: 15px;
     position: unset;
     font-size: 0.8em;
     gap:15px;
@@ -126,7 +127,6 @@ nav {
 
   .HomeLogo {
     display: none;
-    font-size: 2rem;
   }
   /* nav {
     padding: 3%;
@@ -176,4 +176,16 @@ nav {
   .nav__link:hover:before {
     width: 100%;
   } */
+}
+@media (min-width: 42em) {
+  .nav__menu-list {
+    font-size: 1em;
+  }
+}
+
+@media (min-width: 60em) {
+  .nav__menu-list {
+    font-size: 1.4em;
+    margin-right: 30px;
+  }
 }
