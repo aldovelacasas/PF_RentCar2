@@ -24,7 +24,9 @@ const alertPoppins = alertFontPoppins.className;
 
 const rubik = fontRubik.className;
 
-function OpinionForm() {
+function OpinionForm({ cars }) {
+  console.log(cars);
+
   const [review, setReview] = useState({
     email: "",
     name: "",

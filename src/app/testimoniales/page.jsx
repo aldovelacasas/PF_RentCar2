@@ -1,6 +1,7 @@
 import { Rubik, Poppins } from "next/font/google";
 import TestCard from "@/components/TestCard";
 import OpinionForm from "@/components/OpinionForm";
+import axios from "axios";
 
 const fontRubik = Rubik({
   weight: "600",
@@ -233,7 +234,21 @@ const testimonios = [
   },
 ];
 
-function Testimoniales() {
+async function getCars() {
+  const { data } = await axios.get("http://www.localhost:3000/api/products");
+  const cars = [];
+  data.map((car) => {
+    cars.push({ name: car.name, model: car.mode, id: car.id });
+  });
+  return cars;
+}
+
+async function Testimoniales() {
+  try {
+    var cars = await getCars();
+  } catch (error) {
+    console.log(error.message);
+  }
   return (
     <div className="bg-white">
       <div>
@@ -256,7 +271,7 @@ function Testimoniales() {
           );
         })}
       </div>
-      <OpinionForm />
+      <OpinionForm cars={cars} />
     </div>
   );
 }
