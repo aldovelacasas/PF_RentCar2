@@ -25,7 +25,6 @@ const alertPoppins = alertFontPoppins.className;
 const rubik = fontRubik.className;
 
 function OpinionForm({ cars }) {
-  console.log(cars);
   const [review, setReview] = useState({
     email: "",
     name: "",
@@ -132,12 +131,19 @@ function OpinionForm({ cars }) {
         <label htmlFor="car" className={`${poppins} block mb-1`}>
           Auto
         </label>
-        <select name="car" className="w-full py-2 px-3 mb-3 bg-white">
-          <option value="Seleccionar" selected disabled>
+        <select
+          name="car"
+          defaultValue={"Seleccionar"}
+          className="w-full py-2 px-3 mb-3 bg-white">
+          <option value="Seleccionar" disabled>
             Seleccionar auto
           </option>
           {cars.map((car) => {
-            return <option value={car.id}>{car.model + " " + car.name}</option>;
+            return (
+              <option key={car.id} value={car.id}>
+                {car.model + " " + car.name}
+              </option>
+            );
           })}
         </select>
         <label htmlFor="rating">Rating</label>
