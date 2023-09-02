@@ -31,27 +31,36 @@ export function validateContactForm(inputs) {
 
   let errors = {};
 
-  if (!regexText.test(inputs.name.split(" ").join(""))) {
+  if (inputs.name !== "" && !regexText.test(inputs.name.split(" ").join(""))) {
     errors.name = "Por favor introduce un nombre válido";
   } else if (regexText.test(inputs.name.split(" ").join(""))) {
     delete errors.name;
   }
-  if (inputs.name.length < 3 || inputs.name.length > 30) {
+  if (
+    inputs.name !== "" &&
+    (inputs.name.length < 3 || inputs.name.length > 30)
+  ) {
     errors.nameLength = "El nombre debe ser de entre 4 y 30 caracteres";
   } else if (inputs.name.length > 3 && inputs.name.length <= 30) {
     delete errors.nameLength;
   }
-  if (!regexEmail.test(inputs.email)) {
+  if (inputs.email !== "" && !regexEmail.test(inputs.email)) {
     errors.email = "Por favor introduce un email válido";
   } else if (regexEmail.test(inputs.email)) {
     delete errors.email;
   }
-  if (!regexText.test(inputs.comments.split(" ").join(""))) {
+  if (
+    inputs.comments !== "" &&
+    !regexText.test(inputs.comments.split(" ").join(""))
+  ) {
     errors.comments = "Esta sección no puede contener caracteres especiales";
   } else if (regexText.test(inputs.comments.split(" ").join(""))) {
     delete errors.comments;
   }
-  if (inputs.comments.length < 8 || inputs.comments.length > 200) {
+  if (
+    inputs.comments !== "" &&
+    (inputs.comments.length < 8 || inputs.comments.length > 200)
+  ) {
     errors.commentsLength =
       "Las dudas/comentarios deben ser de entre 8 y 200 caracteres";
   } else if (inputs.comments.length >= 8 || inputs.comments.length <= 200) {

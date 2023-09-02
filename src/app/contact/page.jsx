@@ -1,8 +1,10 @@
 "use client";
-import { Rubik, Poppins } from "next/font/google";
 import { useState } from "react";
-import { validateContactForm } from "@/libs/functions";
 import emailjs from "@emailjs/browser";
+import { validateContactForm } from "@/libs/functions";
+import Alerts from "@/components/Alerts";
+import { Rubik, Poppins } from "next/font/google";
+
 const fontRubik = Rubik({
   weight: "600",
   subsets: ["latin"],
@@ -15,6 +17,7 @@ const fontPoppins = Poppins({
 
 const poppins = fontPoppins.className;
 const rubik = fontRubik.className;
+let message;
 
 function page() {
   const inputsInitialValue = {
@@ -25,45 +28,53 @@ function page() {
 
   const [errors, setErrors] = useState({});
   const [inputs, setInputs] = useState(inputsInitialValue);
+  const [visibility, setVisibility] = useState(false);
 
   function handleChange(e) {
     setInputs({ ...inputs, [e.target.name]: e.target.value });
+    setErrors(
+      validateContactForm({ ...inputs, [e.target.name]: e.target.value })
+    );
+  }
+
+  function handleVisible() {
+    setVisibility(!visibility);
+    console.log(visibility);
+    document.body.classList.toggle("stopScroll");
+  }
+
+  function sendMail() {
+    var templateParams = {
+      name: `${inputs.name}`,
+      email: `${inputs.email}`,
+      comments: `${inputs.comments}`,
+    };
+
+    emailjs
+      .send(
+        "service_m6um18e",
+        "template_lh4goqi",
+        templateParams,
+        "7QMYSYK9xg_8ZFAie"
+      )
+      .then(
+        function (response) {
+          console.log("SUCCESS!", response.status, response.text);
+          message = "Hemos recibido tu mensaje, te responderemos a la brevedad";
+          handleVisible();
+        },
+        function (error) {
+          console.log("FAILED...", error);
+          message = "Ha ocurrido un error, intenta de nuevo en unos minutos";
+          handleVisible();
+        }
+      );
   }
 
   function handleSubmit(e) {
     e.preventDefault();
-    setErrors(validateContactForm(inputs));
     let errorsLength = Object.keys(errors).length;
     if (!errorsLength.length) {
-      function sendMail() {
-        var templateParams = {
-          name: `${inputs.name}`,
-          email: `${inputs.email}`,
-          comments: `${inputs.comments}`,
-        };
-
-        emailjs
-          .send(
-            "service_m6um18e",
-            "template_lh4goqi",
-            templateParams,
-            "7QMYSYK9xg_8ZFAie"
-          )
-          .then(
-            function (response) {
-              console.log("SUCCESS!", response.status, response.text);
-              window.alert(
-                "Hemos recibido tu mensaje, te responderemos a la brevedad"
-              );
-            },
-            function (error) {
-              console.log("FAILED...", error);
-              window.alert(
-                "Ha ocurrido un error, intenta de nuevo en unos minutos"
-              );
-            }
-          );
-      }
       sendMail();
       setInputs(inputsInitialValue);
     }
@@ -134,7 +145,7 @@ function page() {
           <textarea
             name="comments"
             draggable="false"
-            placeholder="Escribe tus comentarios o dudas"
+            placeholder="20-200 caracteres"
             value={inputs.comments}
             onChange={handleChange}
             className="bg-gris_fondo w-full h-[100px] resize-none text-[0.9em] placeholder:text-grey pl-1"
@@ -157,6 +168,18 @@ function page() {
           Enviar
         </button>
       </form>
+      <Alerts visible={visibility}>
+        <p
+          className={`bg-naranja_enf text-white ${rubik} w-full text-center rounded-t-[15px]`}>
+          Hola
+        </p>
+        <p className="text-[0.8em] px-4">{message}</p>
+        <button
+          onClick={handleVisible}
+          className={` bg-naranja_enf ${rubik} text-white text-[0.8em] px-4 rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner`}>
+          Aceptar
+        </button>
+      </Alerts>
     </div>
   );
 }
