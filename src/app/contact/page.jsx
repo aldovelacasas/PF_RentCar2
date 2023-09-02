@@ -171,7 +171,7 @@ function page() {
       <Alerts visible={visibility}>
         <p
           className={`bg-naranja_enf text-white ${rubik} w-full text-center rounded-t-[15px]`}>
-          Hola
+          Alerta
         </p>
         <p className="text-[0.8em] px-4">{message}</p>
         <button
