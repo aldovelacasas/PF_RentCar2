@@ -6,18 +6,21 @@ import React, { useState } from "react";
 // import Logo from "./Logo";
 import NavItem from "./NavItem";
 import "./nav.css";
+import { usePathname } from "next/navigation";
 
 const MENU_LIST = [
   { text: "Home", href: "/" },
   { text: "About", href: "/about" },
   { text: "Vehiculos", href: "/vehiculos" },
   { text: "Testimoniales", href: "/testimoniales" },
-  { text: "Contáctanos", href: "/contacto" },
+  { text: "Contáctanos", href: "/contact" },
   { text: "Ingresar", href: "/" },
 ];
 const Navbar = () => {
   const [navActive, setNavActive] = useState(null);
   const [activeIdx, setActiveIdx] = useState(-1);
+
+  const route = usePathname();
 
   return (
     <>
@@ -31,7 +34,9 @@ const Navbar = () => {
           </Link>
           <div className="HomeLogo">
             <Link href="/">
-              <span className="nav__item">Home</span>
+              <span className={route === "/homePage" ? "current" : "nav__item"}>
+                Home
+              </span>
             </Link>
           </div>
         </div>
@@ -51,7 +56,15 @@ const Navbar = () => {
                 setNavActive(false);
               }}
               key={menu.text}
-              className={menu.text === "Home" ? "HomeMenu" : ""}>
+              className={
+                menu.text === "Home" && route === "/homePage"
+                  ? "Home current"
+                  : menu.text === "Home"
+                  ? "HomeMenu"
+                  : route === menu.href
+                  ? "current"
+                  : ""
+              }>
               <NavItem
                 active={activeIdx === idx}
                 className={menu.text === "Home" ? "HomeMenu" : ""}
