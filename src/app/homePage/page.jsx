@@ -66,6 +66,9 @@ function HomePage() {
             },
             function (error) {
               console.log("FAILED...", error);
+              window.alert(
+                "Ha ocurrido un error, intenta de nuevo en unos minutos"
+              );
             }
           );
       }
