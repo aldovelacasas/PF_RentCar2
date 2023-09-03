@@ -141,7 +141,7 @@ function Vehiculos() {
         <div className=" min-[1300px]:w-3/4 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 min-[1300]:place-items-center gap-2 gap-y-10">
           {data &&
             data.map((product) => (
-              <button  onClick={() => {router.push(`/vehiculos/${product.id}`);}}> 
+              <button  > 
               <CarCard key={product.id} product={product} /></button>
             ))}
         </div>

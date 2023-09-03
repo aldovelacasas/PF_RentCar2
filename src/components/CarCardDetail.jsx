@@ -1,6 +1,10 @@
 "use client";
+import { useRouter } from "next/navigation";
 
 export default function CarCardDetail({ product }) {
+
+  const router = useRouter();
+
   return (
     <div
       key={product.id}
@@ -92,7 +96,9 @@ export default function CarCardDetail({ product }) {
 
       <div className=" flex justify-center pb-3">
         <button
-          className={` w-[90%] bg-naranja_enf text-white text-[1em] px-4 py-1 shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
+          className={` w-[90%] bg-naranja_enf text-white text-[1em] px-4 py-1 shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}
+          onClick={() => {router.push(`/bookings/product/${product.id}`)}}  
+        >
           Rentar
         </button>
       </div>
