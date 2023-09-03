@@ -1,4 +1,5 @@
 "use client";
+
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Rubik, Poppins } from "next/font/google";
@@ -18,6 +19,7 @@ const fontPoppins = Poppins({
 const poppins = fontPoppins.className;
 const rubik = fontRubik.className;
 
+
 function Vehiculos() {
   const dispatch = useDispatch();
 
@@ -26,6 +28,59 @@ function Vehiculos() {
   }, []);
 
   const cars = useSelector((state) => state.cars.showCars);
+
+
+async function loadProducts() {
+  const { data } = await axios.get("http://localhost:3000/api/products");
+  return await data;
+}
+
+  const router = useRouter();
+
+  const [allProducts, setAllProducts] = useState([]);
+
+  useEffect(() => {
+    loadProducts().then((data) => setAllProducts(data));
+  }, []);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [allProducts]);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [allProducts]);
+
+  let dataToShow = allProducts;
+  let quantityPerPage = 12;
+  let max = Math.ceil(dataToShow.length / quantityPerPage);
+  let pages = [];
+  let x = 0;
+
+  while (x < max) {
+    x++;
+    pages.push(x);
+  }
+
+  let data = sliceData(dataToShow, currentPage, quantityPerPage);
+  let currentPages = slicePage(pages, currentPage, 2);
+
+  const handlePrevious = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const handleNext = () => {
+    if (currentPage < max) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const handlePageChange = (e) => {
+    setCurrentPage(Number(e.target.innerHTML));
+  };
 
   return (
     <>
