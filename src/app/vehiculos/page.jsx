@@ -1,6 +1,7 @@
 "use client";
-
-import { useEffect } from "react";
+import axios from "axios";
+import { sliceData, slicePage } from "@/libs/functions";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Rubik, Poppins } from "next/font/google";
 import FiltroVehiculos from "@/components/FiltroVehiculos";
@@ -19,7 +20,6 @@ const fontPoppins = Poppins({
 const poppins = fontPoppins.className;
 const rubik = fontRubik.className;
 
-
 function Vehiculos() {
   const dispatch = useDispatch();
 
@@ -29,13 +29,10 @@ function Vehiculos() {
 
   const cars = useSelector((state) => state.cars.showCars);
 
-
-async function loadProducts() {
-  const { data } = await axios.get("http://localhost:3000/api/products");
-  return await data;
-}
-
-  const router = useRouter();
+  async function loadProducts() {
+    const { data } = await axios.get("http://localhost:3000/api/products");
+    return await data;
+  }
 
   const [allProducts, setAllProducts] = useState([]);
 
