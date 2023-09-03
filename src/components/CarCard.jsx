@@ -1,22 +1,22 @@
 "use client";
 
-export default function CarCard({ product }) {
+export default function CarCard({ car }) {
   return (
     <div
-      key={product.id}
-      className=" bg-white min-w-[130px] max-w-[250px] shadow-md shadow-black hover:cursor-pointer hover:scale-105 transform transition-transform duration-300 border border-solid border-negro_fondo">
+      key={car.id}
+      className=" bg-white min-w-[200px] max-w-[250px] shadow-md hover:cursor-pointer hover:scale-105 transform transition-transform duration-300 border border-solid border-negro_fondo">
       <img
-        src={product.image}
-        alt={product.name}
+        src={car.image}
+        alt={car.name}
         className=" w-[100%] mx-auto mb-4  w-32 h-32 object-cover"
       />
       <div>
         <div className="flex flex-wrap justify-between px-3 mb-0">
           <h2 className="text-lg font-semibold text-negro_fondo mb-0 ">
-            {product.name}
+            {car.name}
           </h2>
           <p className="text-begro_fondo font-bold text-xl mb-0">
-            ${product.price}
+            ${car.price}
           </p>
         </div>
         <div className="flex px-2 justify-between mb-2">
@@ -75,17 +75,15 @@ export default function CarCard({ product }) {
           <p className="text-sm font-light pr-2">Por día</p>
         </div>
         <div className="flex justify-between px-2 font-light">
-          <p className="mb-2 text-negro_fondo">Modelo:{product.model}</p>
-          <p className="pr-2">Año:{product.year}</p>
+          <p className="mb-2 text-negro_fondo">Modelo:{car.model}</p>
+          <p className="pr-2">Año:{car.year}</p>
         </div>
         <div className="flex justify-between px-2 font-light">
-          <p className="mb-2 text-negro_fondo">
-            Cap:{product.capacity} Personas
-          </p>
-          <p className="pr-2">Tipo:{product.type}</p>
+          <p className="mb-2 text-negro_fondo">Cap:{car.capacity} Personas</p>
+          <p className="pr-2">Tipo:{car.type}</p>
         </div>
         <p className="text-negro_fondo text-xs font-light px-2">
-          {product.description}
+          {car.description}
         </p>
       </div>
       <hr className="my-3 mx-2" />
