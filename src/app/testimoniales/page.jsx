@@ -237,10 +237,10 @@ function Testimoniales() {
   return (
     <div className="bg-white">
       <div>
-        <h2
-          className={`${poppins} text-4xl py-10 bg-gray-400 sm:text-6xl text-center sm:text-left sm:p-10`}>
-          Testimoniales
-        </h2>
+        <header
+          className={`bg-gris_fondo flex items-center h-[175px] ${rubik} text-[1em] md:text-[1.5em] pl-[10%] space-y-0 space-x-2.5`}>
+          <p className={`text-[1.9em] mt-2 pl-4`}>Testimoniales</p>
+        </header>
       </div>
       <div>
         {testimonios.map((testimonio) => {

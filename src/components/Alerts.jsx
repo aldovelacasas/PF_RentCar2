@@ -1,5 +1,4 @@
 function Alerts({ children, visible }) {
-  console.log(visible);
   if (visible === false) return null;
   return (
     <div className="fixed w-[100vw] left-[0] h-[100vh] top-[0] bg-[#dbdbdbcc] grid">
