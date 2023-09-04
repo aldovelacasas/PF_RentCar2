@@ -1,7 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
 
-
 import { Rubik, Poppins } from "next/font/google";
 
 const fontRubik = Rubik({
@@ -26,7 +25,7 @@ export default function CarCardDetail({
   if (!visible) return null;
   return (
     <section
-      className={` ${poppins} fixed w-[100vw] top-0 left-0 pt-[15vh] h-[100vh] flex justify-center z-40`}>
+      className={` ${poppins} fixed w-[100vw] top-0 left-0 pt-[15vh] h-[100vh] flex justify-center bg-[#dbdbdbcc] z-40`}>
       <div
         key={product.id}
         className=" w-full max-h-[75vh] bg-white max-w-[1000px] shadow-md shadow-black hover:cursor-pointer border border-solid border-negro_fondo grid">
@@ -143,7 +142,6 @@ export default function CarCardDetail({
             Cerrar
           </button>
         </div>
-
       </div>
     </section>
   );
