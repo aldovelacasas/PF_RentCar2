@@ -24,22 +24,22 @@ const alertPoppins = alertFontPoppins.className;
 
 const rubik = fontRubik.className;
 
-function OpinionForm() {
+function OpinionForm({ cars }) {
   const [review, setReview] = useState({
     email: "",
     name: "",
     surname: "",
-    profession: "",
     opinion: "",
     rating: "",
+    car: "",
   });
 
   const [error, setError] = useState({
     email: "",
     nameSurname: "",
-    profession: "",
     opinion: "",
     rating: "",
+    car: "",
   });
 
   const handleChange = (event) => {
@@ -50,6 +50,8 @@ function OpinionForm() {
         ...error,
         nameSurname: validation(inputName, event.target.name, inputSurname),
       });
+    } else if (event.target.name === "car") {
+      setReview({ ...review, [event.target.name]: event.target.value });
     } else {
       setReview({ ...review, [event.target.name]: event.target.value });
       setError({
@@ -64,19 +66,22 @@ function OpinionForm() {
       !error.email &&
       !error.rating &&
       !error.nameSurname &&
-      !error.profession &&
       !error.opinion &&
       review.email !== "" &&
       review.name !== "" &&
       review.surname !== "" &&
       review.profession !== "" &&
       review.opinion !== "" &&
-      review.rating !== ""
+      review.rating !== "" &&
+      review.car !== ""
     );
   };
 
+  console.log(review);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
+    alert("Agregando Testimonio, Gracias!");
 
     // if (ready()) {
     //   try {
@@ -126,22 +131,34 @@ function OpinionForm() {
         ) : (
           ""
         )}
-        <label htmlFor="profession" className={`${poppins} block mb-1`}>
-          Profesión
+        <label htmlFor="car" className={`${poppins} block mb-1`}>
+          Auto
         </label>
-        <input
+        <select
           onChange={handleChange}
-          type="text"
-          name="profession"
-          className="w-full py-2 px-3 mb-3"
-        />
-        {error.profession ? (
-          <span className={`${alertPoppins} text-sm`} style={{ color: "red" }}>
-            {error.profession}
-          </span>
-        ) : (
-          ""
-        )}
+          name="car"
+          defaultValue={"Seleccionar"}
+          className="w-full py-2 px-3 mb-3 bg-white">
+          <option value="Seleccionar" disabled>
+            Seleccionar auto
+          </option>
+          {cars.map((car) => {
+            return (
+              <option key={car.id} value={car.id} name="car">
+                {car.model + " " + car.name}
+              </option>
+            );
+          })}
+          {error.car ? (
+            <span
+              className={`${alertPoppins} text-sm`}
+              style={{ color: "red" }}>
+              {error.car}
+            </span>
+          ) : (
+            ""
+          )}
+        </select>
         <label htmlFor="rating">Rating</label>
         <input
           type="number"
