@@ -139,6 +139,10 @@ async function Testimoniales() {
         <header
           className={`bg-gris_fondo flex items-center h-[175px] ${rubik} text-[1em] md:text-[1.5em] pl-[10%] space-y-0 space-x-2.5`}>
           <p className={`text-[1.9em] mt-2 pl-4`}>Testimoniales</p>
+          <img
+            src="https://drive.google.com/uc?export=download&id=18hd72ccmFxNZhgHNgcH0T3zFAUw4gNmU"
+            className=" float-right w-[30vw] md:w-[35vw] lg:w-[26vw] absolute right-[10%] top-[8%] z-1"
+          />
         </header>
       </div>
       <div>

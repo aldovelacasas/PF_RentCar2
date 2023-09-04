@@ -83,6 +83,10 @@ function page() {
       <header
         className={`bg-gris_fondo flex items-center h-[175px] ${rubik} text-[1em] md:text-[1.5em] pl-[10%] space-y-0 space-x-2.5`}>
         <p className={`text-[1em] mt-2 pl-4`}>Contáctanos</p>
+        <img
+          src="https://drive.google.com/uc?export=download&id=1dC0KTltA87LEAqLSbJw9Ic-V9i_D2-Pc"
+          className=" float-right w-[30vw] md:w-[20vw] lg:w-[18vw] absolute right-[5%] top-[10%] z-1"
+        />
       </header>
       <form
         className={`md:w-4/5 pt-2 ${poppins} text-[0.8em] sm:text-[1em] max-w-lg justify-self-center bg-gris_frente pb-12`}>

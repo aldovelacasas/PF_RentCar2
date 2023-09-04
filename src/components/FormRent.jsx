@@ -29,6 +29,7 @@ function FormRent({
   image,
 }) {
   const [category, setCategory] = useState(cat);
+  const [errors, setErrors] = useState({});
   const [imgsrc, setImgsrc] = useState(
     image ?? categorias.find((c) => c.tipo === cat).imagen
   );
@@ -42,6 +43,23 @@ function FormRent({
 
   function handleDateChange(e) {
     setDate({ ...dates, [e.target.name]: e.target.value });
+  }
+  function handleEndDateChange(e) {
+    setErrors({});
+    setDate({ ...dates, [e.target.name]: e.target.value });
+  }
+
+  function handleValidation(e) {
+    e.preventDefault();
+    if (dates.startDate > dates.endDate) {
+      setErrors({
+        ...errors,
+        dates: "La fecha de fin no puede ser menor a la fecha de inicio.",
+      });
+      return;
+    } else if (dates.startDate <= dates.endDate) {
+      setErrors({});
+    }
   }
 
   if (visible === false) return null;
@@ -139,13 +157,17 @@ function FormRent({
                 type="date"
                 min={dates.startDate}
                 value={dates.endDate}
-                onChange={handleDateChange}
+                onChange={handleEndDateChange}
               />{" "}
               <br />
             </fieldset>
+            {errors.dates && (
+              <p className="text-[1em] text-rojo_status">{errors.dates}</p>
+            )}
             <fieldset className="flex sticky bottom-0 bg-white justify-evenly w-full lg:w-1/2 py-6">
               <button
                 type="button"
+                onClick={handleValidation}
                 className={` bg-naranja_enf ${rubik} text-white text-[0.8em] px-4 py-1 rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
                 Rentar
               </button>
