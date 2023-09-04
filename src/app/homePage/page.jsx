@@ -3,6 +3,7 @@ import { emailValidate } from "@/libs/functions.js";
 import emailjs from "@emailjs/browser";
 import { useState } from "react";
 import { categorias } from "../../libs/categorias.js";
+import Alerts from "@/components/Alerts";
 import {
   BsChevronCompactRight,
   BsCheckCircleFill,
@@ -25,11 +26,13 @@ const fontPoppins = Poppins({
 
 const poppins = fontPoppins.className;
 const rubik = fontRubik.className;
+let message;
 
 function HomePage() {
   const [display, setDisplay] = useState(categorias[0].imagen);
   const [email, setEmail] = useState("");
   const [errors, setErrors] = useState({});
+  const [visibility, setVisibility] = useState(false);
 
   function handleChange(e) {
     let newdisplay = categorias.find((c) => c.tipo === e.target.value);
@@ -42,36 +45,37 @@ function HomePage() {
     setEmail(e.target.value);
   }
 
+  function sendMail() {
+    var templateParams = {
+      email: `${email}`,
+    };
+
+    emailjs
+      .send(
+        "service_m6um18e",
+        "template_0kxpm4e",
+        templateParams,
+        "7QMYSYK9xg_8ZFAie"
+      )
+      .then(
+        function (response) {
+          console.log("SUCCESS!", response.status, response.text);
+          message = "Suscrito exitosamente";
+          handleVisible();
+        },
+        function (error) {
+          console.log("FAILED...", error);
+          message = "Ha ocurrido un error, intenta de nuevo en unos minutos";
+          handleVisible();
+        }
+      );
+  }
+
   function handleEmailSubmit(e) {
     e.preventDefault();
     setErrors(emailValidate(email));
     let errorsLength = Object.keys(errors).length;
     if (!errorsLength) {
-      function sendMail() {
-        var templateParams = {
-          email: `${email}`,
-        };
-
-        emailjs
-          .send(
-            "service_m6um18e",
-            "template_0kxpm4e",
-            templateParams,
-            "7QMYSYK9xg_8ZFAie"
-          )
-          .then(
-            function (response) {
-              console.log("SUCCESS!", response.status, response.text);
-              window.alert("Suscrito exitosamente");
-            },
-            function (error) {
-              console.log("FAILED...", error);
-              window.alert(
-                "Ha ocurrido un error, intenta de nuevo en unos minutos"
-              );
-            }
-          );
-      }
       sendMail();
       setEmail("");
     }
@@ -113,6 +117,11 @@ function HomePage() {
         behavior: "smooth",
       });
     }
+  }
+
+  function handleVisible() {
+    setVisibility(!visibility);
+    document.body.classList.toggle("stopScroll");
   }
 
   return (
@@ -182,6 +191,7 @@ function HomePage() {
             name="fechaFin"
             type="date"
             min={new Date().toISOString().split("T")[0]}
+            value={new Date().toISOString().split("T")[0]}
           />
           <br />
         </fieldset>
@@ -196,6 +206,7 @@ function HomePage() {
             name="fechaFin"
             type="date"
             min={new Date().toISOString().split("T")[0]}
+            value={new Date().toISOString().split("T")[0]}
           />{" "}
           <br />
         </fieldset>
@@ -459,6 +470,18 @@ function HomePage() {
           <p className="text-[0.5em] text-rojo_status">{errors.email}</p>
         )}
       </form>
+      <Alerts visible={visibility}>
+        <p
+          className={`bg-naranja_enf text-white ${rubik} w-full text-center rounded-t-[15px]`}>
+          Alerta
+        </p>
+        <p className="text-[0.8em] px-4">{message}</p>
+        <button
+          onClick={handleVisible}
+          className={` bg-naranja_enf ${rubik} text-white text-[0.8em] px-4 rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner`}>
+          Aceptar
+        </button>
+      </Alerts>
     </div>
   );
 }

@@ -24,13 +24,18 @@ const optionsCapacidades = capacidades.map((capacidad) => ({
 export default function FiltroVehiculos() {
   const dispatch = useDispatch();
 
+  const [busqueda, setBusqueda] = useState([]);
   const [modelo, setModelo] = useState([]);
   const [categoria, setCategoria] = useState([]);
   const [capacidad, setCapacidad] = useState([]);
 
   useEffect(() => {
-    dispatch(setShowCars({ modelo, categoria, capacidad }));
-  }, [modelo, categoria, capacidad]);
+    dispatch(setShowCars({ modelo, categoria, capacidad, busqueda }));
+  }, [modelo, categoria, capacidad, busqueda]);
+
+  function handleSearch(e) {
+    setBusqueda(e.target.value);
+  }
 
   return (
     <form
@@ -43,6 +48,7 @@ export default function FiltroVehiculos() {
           type="text"
           className={`bg-white min-w-[80px] w-[95%] rounded h-10  p-2 text-black text-xs`}
           placeholder="Nombre Vehiculo"
+          onChange={handleSearch}
         />
       </div>
       <div className={`flex flex-col sm:w-[20%] w-full`}>

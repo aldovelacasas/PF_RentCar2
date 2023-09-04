@@ -1,12 +1,12 @@
 "use client";
-import axios from "axios";
 import { sliceData, slicePage } from "@/libs/functions";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Rubik, Poppins } from "next/font/google";
+import { getCars } from "@/store/slices/car";
 import FiltroVehiculos from "@/components/FiltroVehiculos";
 import CarCard from "@/components/CarCard.jsx";
-import { getCars } from "@/store/slices/car";
+import { Rubik, Poppins } from "next/font/google";
+import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
 
 const fontRubik = Rubik({
   weight: "600",
@@ -29,27 +29,16 @@ function Vehiculos() {
 
   const cars = useSelector((state) => state.cars.showCars);
 
-  async function loadProducts() {
-    const { data } = await axios.get("http://localhost:3000/api/products");
-    return await data;
-  }
-
-  const [allProducts, setAllProducts] = useState([]);
-
-  useEffect(() => {
-    loadProducts().then((data) => setAllProducts(data));
-  }, []);
-
   const [currentPage, setCurrentPage] = useState(1);
   useEffect(() => {
     setCurrentPage(1);
-  }, [allProducts]);
+  }, [cars]);
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [allProducts]);
+  }, [cars]);
 
-  let dataToShow = allProducts;
+  let dataToShow = cars;
   let quantityPerPage = 12;
   let max = Math.ceil(dataToShow.length / quantityPerPage);
   let pages = [];
@@ -98,11 +87,82 @@ function Vehiculos() {
       <section
         className={`pt-4 ${rubik} mx-[auto] text-[0.8em] bg-gris_frente pb-12 place-items-center w-[95%]`}>
         <div className="  grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-items-center gap-2 gap-y-10">
-          {cars?.map((car) => (
-            <CarCard key={car.id} car={car} />
-          ))}
+          {data?.map((car) => {
+            return <CarCard key={car.id} car={car} />;
+          })}
         </div>
       </section>
+      <div className="w-full flex justify-center gap-2 mt-8 mb-8">
+        {data.length === 0 && (
+          <p className="text-[1em] text-center text-naranja_enf px-4 bg-gris_fondo py-2 px-4 rounded-full">
+            Nada que mostrar
+          </p>
+        )}
+        <button
+          onClick={handlePrevious}
+          className={
+            currentPage === 1
+              ? "px-3 py-1 border-[2px] border-black bg-negro_fondo text-white rounded-md"
+              : "px-3 py-1 border-[2px] border-black bg-naranja_enf text-white rounded-md"
+          }>
+          <FiChevronLeft className="symbolSearch" />
+        </button>
+        {currentPage && (
+          <button
+            onClick={() => setCurrentPage(1)}
+            className={
+              currentPage === 1
+                ? "px-3 py-1 border-[2px] border-black bg-negro_fondo text-white rounded-md"
+                : "px-3 py-1 border-[2px] border-black bg-naranja_enf text-white rounded-md"
+            }>
+            1
+          </button>
+        )}
+        {currentPage > 4 && pages.length > 13 && <span>...</span>}
+        {currentPages
+          .filter((p) => p > 0 && p <= max)
+          .map((p) => {
+            return (
+              <button
+                onClick={handlePageChange}
+                className={
+                  currentPage === p
+                    ? "px-3 py-1 border-[2px] border-black bg-negro_fondo text-white rounded-md"
+                    : "px-3 py-1 border-[2px] border-black bg-naranja_enf text-white rounded-md"
+                }
+                key={p}>
+                {p}
+              </button>
+            );
+          })}
+        {currentPage + 3 < max ? (
+          <>
+            <span>...</span>
+            <button
+              onClick={() => setCurrentPage(max)}
+              className="px-3 py-1 border-[2px] border-black bg-naranja_enf text-white rounded-md">
+              {max}
+            </button>
+          </>
+        ) : (
+          currentPage + 3 <= max && (
+            <button
+              onClick={() => setCurrentPage(max)}
+              className="px-3 py-1 border-[2px] border-black bg-naranja_enf text-white rounded-md">
+              {max}
+            </button>
+          )
+        )}
+        <button
+          onClick={handleNext}
+          className={
+            currentPage === max
+              ? "px-3 py-1 border-[2px] border-black bg-negro_fondo text-white rounded-md"
+              : "px-3 py-1 border-[2px] border-black bg-naranja_enf text-white rounded-md"
+          }>
+          <FiChevronRight className="symbolSearch" />
+        </button>
+      </div>
     </>
   );
 }

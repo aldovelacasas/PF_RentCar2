@@ -39,7 +39,6 @@ function page() {
 
   function handleVisible() {
     setVisibility(!visibility);
-    console.log(visibility);
     document.body.classList.toggle("stopScroll");
   }
 
