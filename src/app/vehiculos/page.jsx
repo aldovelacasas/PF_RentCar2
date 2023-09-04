@@ -94,7 +94,7 @@ function Vehiculos() {
       </section>
       <div className="w-full flex justify-center gap-2 mt-8 mb-8">
         {data.length === 0 && (
-          <p className="text-[1em] text-center text-naranja_enf px-4 bg-gris_fondo py-2 px-4 rounded-full">
+          <p className="text-[1em] text-center text-naranja_enf px-4 bg-gris_fondo py-2 rounded-full">
             Nada que mostrar
           </p>
         )}

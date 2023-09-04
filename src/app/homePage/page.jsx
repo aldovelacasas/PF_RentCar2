@@ -4,6 +4,7 @@ import emailjs from "@emailjs/browser";
 import { useState } from "react";
 import { categorias } from "../../libs/categorias.js";
 import Alerts from "@/components/Alerts";
+import FormRent from "@/components/FormRent.jsx";
 import {
   BsChevronCompactRight,
   BsCheckCircleFill,
@@ -26,13 +27,20 @@ const fontPoppins = Poppins({
 
 const poppins = fontPoppins.className;
 const rubik = fontRubik.className;
+const today = new Date().toISOString().split("T")[0];
 let message;
 
 function HomePage() {
   const [display, setDisplay] = useState(categorias[0].imagen);
+  const [category, setCategory] = useState("sedan");
   const [email, setEmail] = useState("");
   const [errors, setErrors] = useState({});
   const [visibility, setVisibility] = useState(false);
+  const [formVisibility, setFormVisibility] = useState(false);
+  const [dates, setDate] = useState({
+    startDate: today,
+    endDate: today,
+  });
 
   function handleChange(e) {
     let newdisplay = categorias.find((c) => c.tipo === e.target.value);
@@ -119,8 +127,36 @@ function HomePage() {
     }
   }
 
+  function handleDateChange(e) {
+    setDate({ ...dates, [e.target.name]: e.target.value });
+  }
+
+  function handleValidation(e) {
+    e.preventDefault();
+    if (dates.startDate > dates.endDate) {
+      setErrors({
+        ...errors,
+        dates: "La fecha de fin no puede ser menor a la fecha de inicio.",
+      });
+      return;
+    } else if (dates.startDate <= dates.endDate) {
+      setErrors({});
+      handleFormVisibility();
+    }
+  }
+
+  function handleOption(e) {
+    setCategory(e.target.value);
+  }
+
   function handleVisible() {
     setVisibility(!visibility);
+    document.body.classList.toggle("stopScroll");
+  }
+
+  function handleFormVisibility() {
+    console.log("in");
+    setFormVisibility(!formVisibility);
     document.body.classList.toggle("stopScroll");
   }
 
@@ -151,6 +187,7 @@ function HomePage() {
             Renta <BsCheckCircleFill className="inline pl-1" />
           </button>
           <button
+            type="button"
             onClick={handleScrollInfo}
             className={`bg-negro_fondo text-white text-[0.7em] px-4 py-1 ${poppins} shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
             Conoce más
@@ -165,15 +202,15 @@ function HomePage() {
           Renta un auto
         </p>
         <fieldset>
-          <label htmlFor="categoria" className="">
+          <label htmlFor="category" className="">
             <BiSolidCar className="inline text-naranja_enf mr-1" /> Elige una
             categoría
           </label>
           <br />
           <select
             className="bg-gris_fondo w-[200px] mb-4 text-[0.9em] md:w-[500px]"
-            name="categoría">
-            <option defaultValue={true}>Elige categoría</option>
+            name="category"
+            onChange={handleOption}>
             {categorias.map((c) => (
               <option key={c.tipo}>{c.tipo}</option>
             ))}
@@ -188,29 +225,35 @@ function HomePage() {
           <br />
           <input
             className="bg-gris_fondo w-[200px] mb-4 text-[0.9em] md:w-[500px]"
-            name="fechaFin"
+            name="startDate"
             type="date"
-            min={new Date().toISOString().split("T")[0]}
-            value={new Date().toISOString().split("T")[0]}
+            min={today}
+            value={dates.startDate}
+            onChange={handleDateChange}
           />
           <br />
         </fieldset>
         <fieldset>
-          <label htmlFor="fechaFin" className="">
+          <label htmlFor="endDate" className="">
             <FaCalendarAlt className="inline text-naranja_enf mr-1" /> Fecha de
             fin
           </label>
           <br />
           <input
             className="bg-gris_fondo w-[200px] text-[0.9em] md:w-[500px]"
-            name="fechaFin"
+            name="endDate"
             type="date"
-            min={new Date().toISOString().split("T")[0]}
-            value={new Date().toISOString().split("T")[0]}
+            min={dates.startDate}
+            value={dates.endDate}
+            onChange={handleDateChange}
           />{" "}
           <br />
         </fieldset>
+        {errors.dates && (
+          <p className="text-[0.5em] text-rojo_status">{errors.dates}</p>
+        )}
         <button
+          onClick={handleValidation}
           className={`bg-naranja_enf w-full text-white text-[0.8em] px-4 py-1 mt-4 ${poppins} shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
           Buscar
         </button>
@@ -478,10 +521,17 @@ function HomePage() {
         <p className="text-[0.8em] px-4">{message}</p>
         <button
           onClick={handleVisible}
-          className={` bg-naranja_enf ${rubik} text-white text-[0.8em] px-4 rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner`}>
+          className={` bg-naranja_enf ${rubik} text-white text-[0.8em] px-4 rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black `}>
           Aceptar
         </button>
       </Alerts>
+      <FormRent
+        visible={formVisibility}
+        cat={category}
+        dat={dates}
+        isAuth={false}
+        handleVisible={handleFormVisibility}
+      />
     </div>
   );
 }

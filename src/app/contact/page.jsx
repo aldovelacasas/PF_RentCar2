@@ -175,7 +175,7 @@ function page() {
         <p className="text-[0.8em] px-4">{message}</p>
         <button
           onClick={handleVisible}
-          className={` bg-naranja_enf ${rubik} text-white text-[0.8em] px-4 rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner`}>
+          className={` bg-naranja_enf ${rubik} text-white text-[0.8em] px-4 rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
           Aceptar
         </button>
       </Alerts>
