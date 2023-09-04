@@ -29,10 +29,15 @@ function FormRent({
   image,
 }) {
   const [category, setCategory] = useState(cat);
+  const [imgsrc, setImgsrc] = useState(
+    image ?? categorias.find((c) => c.tipo === cat).imagen
+  );
   const [dates, setDate] = useState(dat);
 
   function handleOption(e) {
     setCategory(e.target.value);
+    let img = categorias.find((c) => c.tipo === category).imagen;
+    setImgsrc(img);
   }
 
   function handleDateChange(e) {
@@ -42,7 +47,7 @@ function FormRent({
   if (visible === false) return null;
   return (
     <div
-      className={`fixed w-[100vw] left-[0] h-[100vh] top-[0] bg-[#dbdbdbcc] lg:text-[18px] z-30  grid ${poppins}`}>
+      className={`fixed w-[100vw] left-[0] h-[100vh] top-[0] bg-[#dbdbdbcc] lg:text-[18px] z-50  grid ${poppins}`}>
       <form className="fixed w-3/4 justify-self-center top-[15%] flex flex-col items-center max-h-[80vh] overflow-x-auto bg-white border-[2px] border-black rounded-2xl">
         <p
           className={`bg-naranja_enf sticky top-0 text-white ${rubik} w-full text-center rounded-t-[15px] mb-4`}>
@@ -81,9 +86,7 @@ function FormRent({
               </p>
             )}
             <img
-              src={
-                image ? image : categorias.find((c) => c.tipo === cat).imagen
-              }
+              src={imgsrc}
               alt={`Imagen del modelo ${model}`}
               className="w-1/2 max-h-[200px] my-4 object-scale-down"
             />
@@ -93,16 +96,20 @@ function FormRent({
                 una categoría
               </label>
               <br />
-              <select
-                className="bg-gris_fondo w-[200px] mb-4 text-[0.9em] md:w-[500px]"
-                name="category"
-                onChange={handleOption}
-                value={category}>
-                {categorias.map((c) => (
-                  <option key={c.tipo}>{c.tipo}</option>
-                ))}
-              </select>
-              <br />
+              {!model && (
+                <>
+                  <select
+                    className="bg-gris_fondo w-[200px] mb-4 text-[0.9em] md:w-[500px]"
+                    name="category"
+                    onChange={handleOption}
+                    value={category}>
+                    {categorias.map((c) => (
+                      <option key={c.tipo}>{c.tipo}</option>
+                    ))}
+                  </select>
+                  <br />
+                </>
+              )}
             </fieldset>
             <fieldset>
               <label htmlFor="fechaInicio" className="">

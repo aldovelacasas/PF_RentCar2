@@ -100,7 +100,7 @@ function Vehiculos() {
   return (
     <>
       <header
-        className={`bg-gris_fondo relative ${rubik} space-y-0 space-x-2.5 p-10 md:text-[1.4em] h-[175px] flex items-center`}>
+        className={`bg-gris_fondo relative ${rubik} space-y-0 space-x-2.5 p-10 md:text-[1.4em] h-[175px] flex items-center overflow-x-clip`}>
         <p className="text-[2em]  leading-6 pl-6">Nuestros vehículos</p>
         <img
           src="https://drive.google.com/uc?export=download&id=1tTjEHMJE7Y2jdEUCYTCH5gYdg8t06OgM"

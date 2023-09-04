@@ -160,7 +160,7 @@ function HomePage() {
   }
 
   return (
-    <div className="grid bg-gris_frente md:text-[1.5em]">
+    <div className="grid bg-gris_frente md:text-[1.5em] overflow-x-hidden">
       <header
         className={`bg-gris_fondo relative ${rubik} text-[1em] sm:text-[1.5em]  pl-[10%] space-y-0 space-x-2.5`}>
         <img
