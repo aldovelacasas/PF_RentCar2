@@ -118,7 +118,8 @@ const testimonios = [
 ];
 
 async function getCars() {
-  const { data } = await axios.get("http://www.localhost:3000/api/products");
+  const { data } = await axios("http://localhost:3000/api/products");
+  console.log(data);
   const cars = [];
   data.map((car) => {
     cars.push({ name: car.name, model: car.model, id: car.id });

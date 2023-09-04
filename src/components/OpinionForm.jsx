@@ -29,7 +29,6 @@ function OpinionForm({ cars }) {
     email: "",
     name: "",
     surname: "",
-    profession: "",
     opinion: "",
     rating: "",
     car: "",
@@ -38,9 +37,9 @@ function OpinionForm({ cars }) {
   const [error, setError] = useState({
     email: "",
     nameSurname: "",
-    profession: "",
     opinion: "",
     rating: "",
+    car: "",
   });
 
   const handleChange = (event) => {
@@ -51,6 +50,8 @@ function OpinionForm({ cars }) {
         ...error,
         nameSurname: validation(inputName, event.target.name, inputSurname),
       });
+    } else if (event.target.name === "car") {
+      setReview({ ...review, [event.target.name]: event.target.value });
     } else {
       setReview({ ...review, [event.target.name]: event.target.value });
       setError({
@@ -65,7 +66,6 @@ function OpinionForm({ cars }) {
       !error.email &&
       !error.rating &&
       !error.nameSurname &&
-      !error.profession &&
       !error.opinion &&
       review.email !== "" &&
       review.name !== "" &&
@@ -76,6 +76,8 @@ function OpinionForm({ cars }) {
       review.car !== ""
     );
   };
+
+  console.log(review);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -132,6 +134,7 @@ function OpinionForm({ cars }) {
           Auto
         </label>
         <select
+          onChange={handleChange}
           name="car"
           defaultValue={"Seleccionar"}
           className="w-full py-2 px-3 mb-3 bg-white">
@@ -140,11 +143,20 @@ function OpinionForm({ cars }) {
           </option>
           {cars.map((car) => {
             return (
-              <option key={car.id} value={car.id}>
+              <option key={car.id} value={car.id} name="car">
                 {car.model + " " + car.name}
               </option>
             );
           })}
+          {error.car ? (
+            <span
+              className={`${alertPoppins} text-sm`}
+              style={{ color: "red" }}>
+              {error.car}
+            </span>
+          ) : (
+            ""
+          )}
         </select>
         <label htmlFor="rating">Rating</label>
         <input

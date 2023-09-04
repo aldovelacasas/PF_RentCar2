@@ -21,6 +21,10 @@ const validation = (value, input, surname) => {
     if (!/^[0-9]+$/.test(value)) return "Debe ser un número válido";
     if (value < 1 || value > 5) return "Debe ser entre 1 y 5";
     else return "";
+  }
+  if (input === "car") {
+    if (!value) return "no vacio";
+    else return "";
   } else {
     const wordCount = value
       .split(/\s+/)
