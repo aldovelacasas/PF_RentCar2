@@ -81,6 +81,7 @@ function OpinionForm({ cars }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    alert("Agregando Testimonio, Gracias!");
 
     // if (ready()) {
     //   try {

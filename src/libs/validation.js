@@ -1,4 +1,4 @@
-const validation = (value, input, surname) => {
+const validation = (value, input, extra) => {
   if (input === "email") {
     const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     if (regex.test(value)) return "";
@@ -6,9 +6,9 @@ const validation = (value, input, surname) => {
   }
   if (input === "nameSurname") {
     if (!value) return "No dejar vacio";
-    if (!surname) return "Agregar apellido";
+    if (!extra) return "Agregar apellido";
     const regex = /^[a-zA-Z\s]+$/;
-    if (!regex.test(value) || !regex.test(surname))
+    if (!regex.test(value) || !regex.test(extra))
       return "Nombre/Apellido invalido";
     else return "";
   }
@@ -23,8 +23,10 @@ const validation = (value, input, surname) => {
     else return "";
   }
   if (input === "car") {
-    if (!value) return "no vacio";
-    else return "";
+    console.log(extra);
+    const exist = extra.some((car) => car.id == input);
+    if (exist) return " ";
+    else return "Auto no valido";
   } else {
     const wordCount = value
       .split(/\s+/)
