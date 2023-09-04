@@ -3,7 +3,6 @@ import { categorias } from "@/libs/categorias.js";
 import { BiSolidCar } from "react-icons/bi";
 import { FaCalendarAlt } from "react-icons/fa";
 import { Rubik, Poppins } from "next/font/google";
-import { useRouter } from "next/navigation";
 
 const fontRubik = Rubik({
   weight: "600",
@@ -20,7 +19,15 @@ const rubik = fontRubik.className;
 
 const today = new Date().toISOString().split("T")[0];
 
-function FormRent({ visible, cat, dat, isAuth, handleVisible }) {
+function FormRent({
+  visible = false,
+  cat = "Sedan",
+  dat = { startDate: today, endDate: today },
+  isAuth = false,
+  handleVisible,
+  model,
+  image,
+}) {
   const [category, setCategory] = useState(cat);
   const [dates, setDate] = useState(dat);
 
@@ -35,90 +42,115 @@ function FormRent({ visible, cat, dat, isAuth, handleVisible }) {
   if (visible === false) return null;
   return (
     <div
-      className={`fixed w-[100vw] left-[0] h-[100vh] top-[0] bg-[#dbdbdbcc] grid ${poppins}`}>
-      <form className="fixed w-3/4 justify-self-center top-[20%] flex flex-col items-center bg-white border-[2px] border-black rounded-2xl pb-6">
+      className={`fixed w-[100vw] left-[0] h-[100vh] top-[0] bg-[#dbdbdbcc] lg:text-[18px] z-30  grid ${poppins}`}>
+      <form className="fixed w-3/4 justify-self-center top-[15%] flex flex-col items-center max-h-[80vh] overflow-x-auto bg-white border-[2px] border-black rounded-2xl">
         <p
-          className={`bg-naranja_enf text-white ${rubik} w-full text-center rounded-t-[15px] mb-4`}>
+          className={`bg-naranja_enf sticky top-0 text-white ${rubik} w-full text-center rounded-t-[15px] mb-4`}>
           Renta tu vehículo
         </p>
-        <fieldset>
-          <label htmlFor="category" className="">
-            <BiSolidCar className="inline text-naranja_enf mr-1" /> Elige una
-            categoría
-          </label>
-          <br />
-          <select
-            className="bg-gris_fondo w-[200px] mb-4 text-[0.9em] md:w-[500px]"
-            name="category"
-            onChange={handleOption}
-            value={category}>
-            {categorias.map((c) => (
-              <option key={c.tipo}>{c.tipo}</option>
-            ))}
-          </select>
-          <br />
-        </fieldset>
-        <fieldset>
-          <label htmlFor="fechaInicio" className="">
-            <FaCalendarAlt className="inline text-naranja_enf mr-1" /> Fecha de
-            inicio
-          </label>
-          <br />
-          <input
-            className="bg-gris_fondo w-[200px] mb-4 text-[0.9em] md:w-[500px]"
-            name="startDate"
-            type="date"
-            min={today}
-            value={dates.startDate}
-            onChange={handleDateChange}
-          />
-          <br />
-        </fieldset>
-        <fieldset>
-          <label htmlFor="endDate" className="">
-            <FaCalendarAlt className="inline text-naranja_enf mr-1" /> Fecha de
-            fin
-          </label>
-          <br />
-          <input
-            className="bg-gris_fondo w-[200px] text-[0.9em] md:w-[500px]"
-            name="endDate"
-            type="date"
-            min={dates.startDate}
-            value={dates.endDate}
-            onChange={handleDateChange}
-          />{" "}
-          <br />
-        </fieldset>
-        {isAuth === false && (
-          <fieldset className="py-4 grid">
+        {isAuth === false ? (
+          <fieldset className="pt-4 grid">
             <hr />
-            <p className="w-full text-[0.8em]">
+            <p className=" w-4/5 text-center place-self-center md:w-full text-[1em]">
               Para poder rentar un vehículo, necesitas estar registrado
             </p>
-            <button
-              className={` bg-naranja_enf w-1/2 max-w-[600px] place-self-center ${rubik} text-white text-[0.8em] mt-4 rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
-              Inicia Sesión
-            </button>
+            <fieldset className="flex justify-evenly w-full place-self-center lg:w-2/3 py-6">
+              <button
+                className={` bg-naranja_enf ${rubik} text-white px-4 text-[0.8em] rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
+                Inicia Sesión
+              </button>
+              <button
+                type="button"
+                onClick={handleVisible}
+                className={` bg-gris_fondo ${rubik} text-[0.8em] px-4 rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
+                Cancelar
+              </button>
+            </fieldset>
           </fieldset>
+        ) : (
+          <>
+            {model ? (
+              <p className={`${rubik} text-[1.2em]`}>
+                Modelo:
+                <span className="text-naranja_enf"> {model}</span>
+              </p>
+            ) : (
+              <p className={`${rubik} text-[1.2em]`}>
+                Categoría:
+                <span className="text-naranja_enf"> {cat}</span>
+              </p>
+            )}
+            <img
+              src={
+                image ? image : categorias.find((c) => c.tipo === cat).imagen
+              }
+              alt={`Imagen del modelo ${model}`}
+              className="w-1/2 max-h-[200px] my-4 object-scale-down"
+            />
+            <fieldset>
+              <label htmlFor="category" className="">
+                <BiSolidCar className="inline text-naranja_enf mr-1" /> Elige
+                una categoría
+              </label>
+              <br />
+              <select
+                className="bg-gris_fondo w-[200px] mb-4 text-[0.9em] md:w-[500px]"
+                name="category"
+                onChange={handleOption}
+                value={category}>
+                {categorias.map((c) => (
+                  <option key={c.tipo}>{c.tipo}</option>
+                ))}
+              </select>
+              <br />
+            </fieldset>
+            <fieldset>
+              <label htmlFor="fechaInicio" className="">
+                <FaCalendarAlt className="inline text-naranja_enf mr-1" /> Fecha
+                de inicio
+              </label>
+              <br />
+              <input
+                className="bg-gris_fondo w-[200px] mb-4 text-[0.9em] md:w-[500px]"
+                name="startDate"
+                type="date"
+                min={today}
+                value={dates.startDate}
+                onChange={handleDateChange}
+              />
+              <br />
+            </fieldset>
+            <fieldset>
+              <label htmlFor="endDate" className="">
+                <FaCalendarAlt className="inline text-naranja_enf mr-1" /> Fecha
+                de fin
+              </label>
+              <br />
+              <input
+                className="bg-gris_fondo w-[200px] text-[0.9em] md:w-[500px]"
+                name="endDate"
+                type="date"
+                min={dates.startDate}
+                value={dates.endDate}
+                onChange={handleDateChange}
+              />{" "}
+              <br />
+            </fieldset>
+            <fieldset className="flex sticky bottom-0 bg-white justify-evenly w-full lg:w-1/2 py-6">
+              <button
+                type="button"
+                className={` bg-naranja_enf ${rubik} text-white text-[0.8em] px-4 py-1 rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
+                Rentar
+              </button>
+              <button
+                type="button"
+                onClick={handleVisible}
+                className={` bg-gris_fondo ${rubik} text-[0.8em] px-4 py-1 rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
+                Cancelar
+              </button>
+            </fieldset>
+          </>
         )}
-        <fieldset className="flex justify-evenly w-1/2 py-6">
-          <button
-            type="button"
-            className={
-              isAuth
-                ? ` bg-naranja_enf ${rubik} text-white text-[0.8em] px-4 rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`
-                : ` bg-gris_fondo ${rubik} text-slate-500 text-[0.8em] px-4 rounded-lg cursor-default`
-            }>
-            Rentar
-          </button>
-          <button
-            type="button"
-            onClick={handleVisible}
-            className={` bg-gris_fondo ${rubik} text-[0.8em] px-4 rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
-            Cancelar
-          </button>
-        </fieldset>
       </form>
     </div>
   );

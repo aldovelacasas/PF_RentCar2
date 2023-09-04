@@ -32,7 +32,7 @@ let message;
 
 function HomePage() {
   const [display, setDisplay] = useState(categorias[0].imagen);
-  const [category, setCategory] = useState("sedan");
+  const [category, setCategory] = useState("Sedan");
   const [email, setEmail] = useState("");
   const [errors, setErrors] = useState({});
   const [visibility, setVisibility] = useState(false);
@@ -155,7 +155,6 @@ function HomePage() {
   }
 
   function handleFormVisibility() {
-    console.log("in");
     setFormVisibility(!formVisibility);
     document.body.classList.toggle("stopScroll");
   }
@@ -163,7 +162,11 @@ function HomePage() {
   return (
     <div className="grid bg-gris_frente md:text-[1.5em]">
       <header
-        className={`bg-gris_fondo ${rubik} text-[1em] sm:text-[1.5em]  pl-[10%] space-y-0 space-x-2.5`}>
+        className={`bg-gris_fondo relative ${rubik} text-[1em] sm:text-[1.5em]  pl-[10%] space-y-0 space-x-2.5`}>
+        <img
+          src="https://drive.google.com/uc?export=download&id=1fDhpaiHuiS5DursxYDnpl3Damj5u7Tep"
+          className=" float-right w-[50vw] absolute right-[-15%] scale-x-[-1] top-0 z-1"
+        />
         <p className={`pt-12 ml-2.5 text-[0.8em] mb-2`}>
           Planea tu viaje ahora
         </p>
@@ -174,7 +177,7 @@ function HomePage() {
         <p className="text-[1.3em] leading-6 md:leading-[1.2em] md:pb-4">
           renta de vehículos
         </p>
-        <p className={`${poppins} text-[0.6em] mt-2`}>
+        <p className={`${poppins} text-[0.6em] mt-2 z-3`}>
           Renta el auto de tus sueños con precios imbatibles,
         </p>
         <p className={`${poppins} text-[0.6em] pb-4`}>
@@ -529,7 +532,7 @@ function HomePage() {
         visible={formVisibility}
         cat={category}
         dat={dates}
-        isAuth={false}
+        isAuth={true}
         handleVisible={handleFormVisibility}
       />
     </div>

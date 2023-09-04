@@ -7,6 +7,8 @@ import FiltroVehiculos from "@/components/FiltroVehiculos";
 import CarCard from "@/components/CarCard.jsx";
 import { Rubik, Poppins } from "next/font/google";
 import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
+import FormRent from "../../components/FormRent";
+import CarCardDetail from "@/components/CarCardDetail";
 
 const fontRubik = Rubik({
   weight: "600",
@@ -23,13 +25,19 @@ const rubik = fontRubik.className;
 function Vehiculos() {
   const dispatch = useDispatch();
 
+  const [visibility, setVisibility] = useState(false);
+  const [detailVisibility, setDetailVisibility] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [detailData, setDetailData] = useState();
+  const [model, setModel] = useState();
+  const [image, setImage] = useState();
+
   useEffect(() => {
     dispatch(getCars());
   }, []);
 
   const cars = useSelector((state) => state.cars.showCars);
 
-  const [currentPage, setCurrentPage] = useState(1);
   useEffect(() => {
     setCurrentPage(1);
   }, [cars]);
@@ -37,6 +45,27 @@ function Vehiculos() {
   useEffect(() => {
     setCurrentPage(1);
   }, [cars]);
+
+  function handleVisibility(data) {
+    if (data.name) {
+      setModel(data.name);
+    }
+    if (data.image) {
+      setImage(data.image);
+    }
+    setVisibility(!visibility);
+    document.body.classList.toggle("stopScroll");
+  }
+
+  function handleDetail(data) {
+    setDetailData(data);
+    handleDetailVisibility();
+  }
+
+  function handleDetailVisibility() {
+    setDetailVisibility(!detailVisibility);
+    document.body.classList.toggle("stopScroll");
+  }
 
   let dataToShow = cars;
   let quantityPerPage = 12;
@@ -71,15 +100,16 @@ function Vehiculos() {
   return (
     <>
       <header
-        className={`bg-gris_fondo ${rubik} space-y-0 space-x-2.5 p-10 text-center`}>
-        <p className="text-[2em]  leading-6">
-          <span className="text-naranja_enf">Nuestros </span>
-          vehículos
-        </p>
+        className={`bg-gris_fondo relative ${rubik} space-y-0 space-x-2.5 p-10 md:text-[1.4em] h-[175px] flex items-center`}>
+        <p className="text-[2em]  leading-6 pl-6">Nuestros vehículos</p>
+        <img
+          src="https://drive.google.com/uc?export=download&id=1tTjEHMJE7Y2jdEUCYTCH5gYdg8t06OgM"
+          className=" float-right w-[50vw] absolute right-[-15%] scale-x-[-1] top-0 z-1"
+        />
       </header>
       <section
         className={`pt-4 ${poppins} mx-[auto] text-[0.8em] bg-gris_frente pb-12`}>
-        <p className={`text-[1rem] ${rubik} mb-2 text-center`}>
+        <p className={`text-[2.4em] ${rubik} mb-2 text-center mt-6`}>
           Encuentra el vehículo ideal
         </p>
         <FiltroVehiculos />
@@ -88,7 +118,15 @@ function Vehiculos() {
         className={`pt-4 ${rubik} mx-[auto] text-[0.8em] bg-gris_frente pb-12 place-items-center w-[95%]`}>
         <div className="  grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-items-center gap-2 gap-y-10">
           {data?.map((car) => {
-            return <CarCard key={car.id} car={car} />;
+            return (
+              <CarCard
+                key={car.id}
+                car={car}
+                handleVisibility={handleVisibility}
+                handleDetailVisibility={handleDetailVisibility}
+                handleDetail={handleDetail}
+              />
+            );
           })}
         </div>
       </section>
@@ -163,6 +201,19 @@ function Vehiculos() {
           <FiChevronRight className="symbolSearch" />
         </button>
       </div>
+      <FormRent
+        isAuth={true}
+        visible={visibility}
+        handleVisible={handleVisibility}
+        model={model}
+        image={image}
+      />
+      <CarCardDetail
+        visible={detailVisibility}
+        product={detailData}
+        handleClose={handleDetailVisibility}
+        handleRentVisibility={handleVisibility}
+      />
     </>
   );
 }
