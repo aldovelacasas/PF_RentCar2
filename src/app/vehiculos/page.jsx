@@ -96,11 +96,87 @@ function Vehiculos() {
         <FiltroVehiculos />
       </section>
       <section
-        className={`pt-4 ${rubik} mx-[auto] text-[0.8em] bg-gris_frente pb-12 place-items-center w-[95%]`}>
-        <div className="  grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-items-center gap-2 gap-y-10">
-          {cars?.map((car) => (
-            <CarCard key={car.id} car={car} />
-          ))}
+        className={`pt-4 ${rubik} mx-[auto] text-[0.8em] bg-gris_frente pb-12 place-items-center grid w-[95%]`}>
+        <div className=" min-[1300px]:w-3/4 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 min-[1300]:place-items-center gap-2 gap-y-10">
+          {data &&
+            data.map((product) => (
+              <button  > 
+              <CarCard key={product.id} product={product} /></button>
+            ))}
+        </div>
+        <div className="w-full flex justify-center gap-2 mt-8">
+          {data.length === 0 && <p className="text-2xl">Nada que mostrar</p>}
+          <button
+            onClick={handlePrevious}
+            className={
+              currentPage === 1
+                ? "px-3 py-1 border-[2px] border-black bg-negro_fondo text-white rounded-md"
+                : "px-3 py-1 border-[2px] border-black bg-naranja_enf text-white rounded-md"
+            }>
+            <FiChevronLeft className="symbolSearch" />
+          </button>
+          {currentPage && (
+            <button
+              onClick={() => setCurrentPage(1)}
+              className={
+                currentPage === 1
+                  ? "px-3 py-1 border-[2px] border-black bg-negro_fondo text-white rounded-md"
+                  : "px-3 py-1 border-[2px] border-black bg-naranja_enf text-white rounded-md"
+              }>
+              1
+            </button>
+          )}
+          {currentPage > 4 && pages.length > 13 && <span>...</span>}
+          {currentPages
+            .filter((p) => p > 0 && p <= max)
+            .map((p) => {
+              return (
+                <button
+                  onClick={handlePageChange}
+                  className={
+                    currentPage === p
+                      ? "px-3 py-1 border-[2px] border-black bg-negro_fondo text-white rounded-md"
+                      : "px-3 py-1 border-[2px] border-black bg-naranja_enf text-white rounded-md"
+                  }
+                  key={p}>
+                  {p}
+                </button>
+              );
+            })}
+          {currentPage + 3 < max ? (
+            <>
+              <span>...</span>
+              <button
+                onClick={() => setCurrentPage(max)}
+                className="px-3 py-1 border-[2px] border-black bg-naranja_enf text-white rounded-md">
+                {max}
+              </button>
+            </>
+          ) : (
+            currentPage + 3 <= max && (
+              <button
+                onClick={() => setCurrentPage(max)}
+                className="px-3 py-1 border-[2px] border-black bg-naranja_enf text-white rounded-md">
+                {max}
+              </button>
+            )
+          )}
+          <button
+            onClick={handleNext}
+            className={
+              currentPage === max
+                ? "px-3 py-1 border-[2px] border-black bg-negro_fondo text-white rounded-md"
+                : "px-3 py-1 border-[2px] border-black bg-naranja_enf text-white rounded-md"
+            }>
+            <FiChevronRight className="symbolSearch" />
+          </button>
+
+//         className={`pt-4 ${rubik} mx-[auto] text-[0.8em] bg-gris_frente pb-12 place-items-center w-[95%]`}>
+//         <div className="  grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-items-center gap-2 gap-y-10">
+//           {cars?.map((car) => (
+//             <CarCard key={car.id} car={car} />
+//           ))}
+
         </div>
       </section>
     </>
