@@ -12,14 +12,6 @@ async function loadProduct(id) {
     return await data;
   }
 
-export  function getUrlId(){
-  const url = window.location.href;
-  console.log(url);
-  const partes = url.split('/');
-  const stringId = partes[partes.length - 1];
-  const id=Number(stringId)
-  return id
-}
 
 function page({productId}) {
 

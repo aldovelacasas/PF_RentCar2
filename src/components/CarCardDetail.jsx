@@ -1,4 +1,6 @@
 "use client";
+import { useRouter } from "next/navigation";
+
 
 import { Rubik, Poppins } from "next/font/google";
 
@@ -128,7 +130,6 @@ export default function CarCardDetail({
           </div>
         </main>
         <hr className="my-3 mx-2" />
-
         <div
           className={` ${rubik} flex justify-evenly lg:w-1/2 mx-[auto] text-[0.9em] py-6  pb-2 mb-4`}>
           <button
@@ -142,6 +143,7 @@ export default function CarCardDetail({
             Cerrar
           </button>
         </div>
+
       </div>
     </section>
   );
