@@ -47,7 +47,8 @@ export const carSlice = createSlice({
         );
         state.showCars = state.modelCars;
       } else {
-        state.modelCars = state.allCars;
+        state.modelCars = state.searchCars;
+        state.showCars = state.modelCars;
       }
 
       // Verifica si categoria tiene elementos
@@ -59,7 +60,8 @@ export const carSlice = createSlice({
         state.showCars = state.categoryCars;
       } else {
         // Si no se selecciona ningún tipo en categoria, mostrar todos los autos
-        state.categoryCars = state.allCars;
+        state.categoryCars = state.modelCars;
+        state.showCars = state.categoryCars;
       }
 
       // Verifica si capacidad tiene elementos
@@ -68,6 +70,9 @@ export const carSlice = createSlice({
         state.capacityCars = state.categoryCars.filter((car) =>
           capacidad.some((value) => value.value === car.capacity)
         );
+        state.showCars = state.capacityCars;
+      } else {
+        state.capacityCars = state.categoryCars;
         state.showCars = state.capacityCars;
       }
     },

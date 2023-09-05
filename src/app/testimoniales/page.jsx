@@ -141,7 +141,7 @@ async function Testimoniales() {
           <p className={`text-[1.9em] mt-2 pl-4`}>Testimoniales</p>
           <img
             src="https://drive.google.com/uc?export=download&id=18hd72ccmFxNZhgHNgcH0T3zFAUw4gNmU"
-            className=" float-right w-[30vw] md:w-[35vw] lg:w-[26vw] absolute right-[10%] top-[8%] z-1"
+            className=" float-right h-[10vh] md:h-[25vh] lg:h-[29vh] absolute right-[10%] top-[8%] z-1"
           />
         </header>
       </div>
