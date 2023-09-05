@@ -2,24 +2,6 @@
 import Link from "next/link";
 
 function Footer() {
-  function handleScrollForm() {
-    if (window.innerWidth <= 400) {
-      window.scrollTo({
-        top: 220,
-        behavior: "smooth",
-      });
-    } else if (window.innerWidth <= 800) {
-      window.scrollTo({
-        top: 270,
-        behavior: "smooth",
-      });
-    } else {
-      window.scrollTo({
-        top: 530,
-        behavior: "smooth",
-      });
-    }
-  }
   return (
     <div className="bg-negro_fondo text-white py-8 flex flex-col sm:flex-row justify-between items-center p-4 font-poppins">
       <div className="sm:w-1/3 p-4">
