@@ -19,7 +19,7 @@ export const carSlice = createSlice({
       state.showCars = action.payload.cars;
     },
     setShowCars: (state, action) => {
-      const { modelo, categoria, capacidad } = action.payload;
+      const { modelo, categoria, capacidad, busqueda } = action.payload;
 
       // Verifica si categoria tiene elementos
       if (categoria && categoria.length > 0) {
@@ -45,6 +45,12 @@ export const carSlice = createSlice({
         // Filtra los autos cuyo atributo modelo coincida con alguno de los valores seleccionados en modelo
         state.showCars = state.showCars.filter((car) =>
           modelo.some((value) => value.value === car.name)
+        );
+      }
+
+      if (busqueda && busqueda.length > 0) {
+        state.showCars = state.showCars.filter((car) =>
+          car.name.toLowerCase().includes(busqueda.toLowerCase())
         );
       }
     },

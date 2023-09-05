@@ -3,6 +3,8 @@ import { emailValidate } from "@/libs/functions.js";
 import emailjs from "@emailjs/browser";
 import { useState } from "react";
 import { categorias } from "../../libs/categorias.js";
+import Alerts from "@/components/Alerts";
+import FormRent from "@/components/FormRent.jsx";
 import {
   BsChevronCompactRight,
   BsCheckCircleFill,
@@ -25,11 +27,20 @@ const fontPoppins = Poppins({
 
 const poppins = fontPoppins.className;
 const rubik = fontRubik.className;
+const today = new Date().toISOString().split("T")[0];
+let message;
 
 function HomePage() {
   const [display, setDisplay] = useState(categorias[0].imagen);
+  const [category, setCategory] = useState("Sedan");
   const [email, setEmail] = useState("");
   const [errors, setErrors] = useState({});
+  const [visibility, setVisibility] = useState(false);
+  const [formVisibility, setFormVisibility] = useState(false);
+  const [dates, setDate] = useState({
+    startDate: today,
+    endDate: today,
+  });
 
   function handleChange(e) {
     let newdisplay = categorias.find((c) => c.tipo === e.target.value);
@@ -42,36 +53,37 @@ function HomePage() {
     setEmail(e.target.value);
   }
 
+  function sendMail() {
+    var templateParams = {
+      email: `${email}`,
+    };
+
+    emailjs
+      .send(
+        "service_m6um18e",
+        "template_0kxpm4e",
+        templateParams,
+        "7QMYSYK9xg_8ZFAie"
+      )
+      .then(
+        function (response) {
+          console.log("SUCCESS!", response.status, response.text);
+          message = "Suscrito exitosamente";
+          handleVisible();
+        },
+        function (error) {
+          console.log("FAILED...", error);
+          message = "Ha ocurrido un error, intenta de nuevo en unos minutos";
+          handleVisible();
+        }
+      );
+  }
+
   function handleEmailSubmit(e) {
     e.preventDefault();
     setErrors(emailValidate(email));
     let errorsLength = Object.keys(errors).length;
     if (!errorsLength) {
-      function sendMail() {
-        var templateParams = {
-          email: `${email}`,
-        };
-
-        emailjs
-          .send(
-            "service_m6um18e",
-            "template_0kxpm4e",
-            templateParams,
-            "7QMYSYK9xg_8ZFAie"
-          )
-          .then(
-            function (response) {
-              console.log("SUCCESS!", response.status, response.text);
-              window.alert("Suscrito exitosamente");
-            },
-            function (error) {
-              console.log("FAILED...", error);
-              window.alert(
-                "Ha ocurrido un error, intenta de nuevo en unos minutos"
-              );
-            }
-          );
-      }
       sendMail();
       setEmail("");
     }
@@ -115,10 +127,46 @@ function HomePage() {
     }
   }
 
+  function handleDateChange(e) {
+    setDate({ ...dates, [e.target.name]: e.target.value });
+  }
+
+  function handleValidation(e) {
+    e.preventDefault();
+    if (dates.startDate > dates.endDate) {
+      setErrors({
+        ...errors,
+        dates: "La fecha de fin no puede ser menor a la fecha de inicio.",
+      });
+      return;
+    } else if (dates.startDate <= dates.endDate) {
+      setErrors({});
+      handleFormVisibility();
+    }
+  }
+
+  function handleOption(e) {
+    setCategory(e.target.value);
+  }
+
+  function handleVisible() {
+    setVisibility(!visibility);
+    document.body.classList.toggle("stopScroll");
+  }
+
+  function handleFormVisibility() {
+    setFormVisibility(!formVisibility);
+    document.body.classList.toggle("stopScroll");
+  }
+
   return (
-    <div className="grid bg-gris_frente md:text-[1.5em]">
+    <div className="grid bg-gris_frente md:text-[1.5em] overflow-x-hidden">
       <header
-        className={`bg-gris_fondo ${rubik} text-[1em] sm:text-[1.5em]  pl-[10%] space-y-0 space-x-2.5`}>
+        className={`bg-gris_fondo relative ${rubik} text-[1em] sm:text-[1.5em]  pl-[10%] space-y-0 space-x-2.5`}>
+        <img
+          src="https://drive.google.com/uc?export=download&id=1fDhpaiHuiS5DursxYDnpl3Damj5u7Tep"
+          className=" float-right w-[50vw] absolute right-[-15%] scale-x-[-1] top-0 z-1"
+        />
         <p className={`pt-12 ml-2.5 text-[0.8em] mb-2`}>
           Planea tu viaje ahora
         </p>
@@ -129,7 +177,7 @@ function HomePage() {
         <p className="text-[1.3em] leading-6 md:leading-[1.2em] md:pb-4">
           renta de vehículos
         </p>
-        <p className={`${poppins} text-[0.6em] mt-2`}>
+        <p className={`${poppins} text-[0.6em] mt-2 z-3`}>
           Renta el auto de tus sueños con precios imbatibles,
         </p>
         <p className={`${poppins} text-[0.6em] pb-4`}>
@@ -142,6 +190,7 @@ function HomePage() {
             Renta <BsCheckCircleFill className="inline pl-1" />
           </button>
           <button
+            type="button"
             onClick={handleScrollInfo}
             className={`bg-negro_fondo text-white text-[0.7em] px-4 py-1 ${poppins} shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
             Conoce más
@@ -156,15 +205,15 @@ function HomePage() {
           Renta un auto
         </p>
         <fieldset>
-          <label htmlFor="categoria" className="">
+          <label htmlFor="category" className="">
             <BiSolidCar className="inline text-naranja_enf mr-1" /> Elige una
             categoría
           </label>
           <br />
           <select
             className="bg-gris_fondo w-[200px] mb-4 text-[0.9em] md:w-[500px]"
-            name="categoría">
-            <option defaultValue={true}>Elige categoría</option>
+            name="category"
+            onChange={handleOption}>
             {categorias.map((c) => (
               <option key={c.tipo}>{c.tipo}</option>
             ))}
@@ -179,27 +228,35 @@ function HomePage() {
           <br />
           <input
             className="bg-gris_fondo w-[200px] mb-4 text-[0.9em] md:w-[500px]"
-            name="fechaFin"
+            name="startDate"
             type="date"
-            min={new Date().toISOString().split("T")[0]}
+            min={today}
+            value={dates.startDate}
+            onChange={handleDateChange}
           />
           <br />
         </fieldset>
         <fieldset>
-          <label htmlFor="fechaFin" className="">
+          <label htmlFor="endDate" className="">
             <FaCalendarAlt className="inline text-naranja_enf mr-1" /> Fecha de
             fin
           </label>
           <br />
           <input
             className="bg-gris_fondo w-[200px] text-[0.9em] md:w-[500px]"
-            name="fechaFin"
+            name="endDate"
             type="date"
-            min={new Date().toISOString().split("T")[0]}
+            min={dates.startDate}
+            value={dates.endDate}
+            onChange={handleDateChange}
           />{" "}
           <br />
         </fieldset>
+        {errors.dates && (
+          <p className="text-[0.5em] text-rojo_status">{errors.dates}</p>
+        )}
         <button
+          onClick={handleValidation}
           className={`bg-naranja_enf w-full text-white text-[0.8em] px-4 py-1 mt-4 ${poppins} shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
           Buscar
         </button>
@@ -459,6 +516,25 @@ function HomePage() {
           <p className="text-[0.5em] text-rojo_status">{errors.email}</p>
         )}
       </form>
+      <Alerts visible={visibility}>
+        <p
+          className={`bg-naranja_enf text-white ${rubik} w-full text-center rounded-t-[15px]`}>
+          Alerta
+        </p>
+        <p className="text-[0.8em] px-4">{message}</p>
+        <button
+          onClick={handleVisible}
+          className={` bg-naranja_enf ${rubik} text-white text-[0.8em] px-4 rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black `}>
+          Aceptar
+        </button>
+      </Alerts>
+      <FormRent
+        visible={formVisibility}
+        cat={category}
+        dat={dates}
+        isAuth={true}
+        handleVisible={handleFormVisibility}
+      />
     </div>
   );
 }

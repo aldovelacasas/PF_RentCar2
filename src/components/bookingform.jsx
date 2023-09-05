@@ -1,13 +1,35 @@
 "use client"
-import {useRef, useState} from 'react'
+import {useEffect, useRef, useState} from 'react'
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 
+
+async function loadProduct(id) {
+  const { data } = await axios.get(`http://localhost:3000/api/products/${id}`,id);
+  console.log(data);
+  return await data;
+}
+
 function BookingForm({productId}) {
   console.log(productId);
+
+  const [productID, setProductID] = useState({});
+
+
+  useEffect(() => {
+    const url = window.location.href;
+  console.log(url);
+  const partes = url.split('/');
+  const stringId = partes[partes.length - 1];
+  const id=Number(stringId)
+
+    loadProduct(id).then((data) => setProductID(data));
+  }, []);
+
+
   
     const [booking,setBooking]=useState({
-        userID:"",
+        userID:1,
         productID:"",
         fecha_inicio:"",
         fecha_fin:"",
@@ -17,17 +39,12 @@ function BookingForm({productId}) {
     const form =useRef(null);
     const router = useRouter()
 
-    
 
-
-     
-     //await conn.query("SELECT * FROM product WHERE product.id=productID;")
-  
 
     const handleChange = (e) => {
       setBooking({
       ...booking,
-      [e.target.userID]: e.target.value
+      [e.target.name]: e.target.value
       })
       }
 
@@ -37,8 +54,11 @@ function BookingForm({productId}) {
 
       const res = await axios.post("/api/bookings", booking)
       console.log(res);
+      const rdo=booking
+    
       form.current.reset();
       router.push("/bookings")
+      alert("la reserva del vehículo con identificador # "+rdo.productID+", ha sido exitosa!!!")
       }
 
   return (
@@ -51,7 +71,14 @@ function BookingForm({productId}) {
     <div className="grid grid-cols-2 gap-3">
       
       <div>
-        <p>{productId}</p>
+        <p>{productID.price}</p>
+      </div>
+
+      <div>
+        <label htmlFor="productID" className='block text-gray-700 text-sm font-bold mb-2'>Vehículo(id)</label>
+        <input name="productID" type="string" value={productID.id} onChange={handleChange}
+          className='shadow appearance-none border rounded w-full py-2 px-3'
+        />
       </div>
 
       <div>
