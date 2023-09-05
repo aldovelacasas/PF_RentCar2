@@ -13,27 +13,35 @@ function ProductForm() {
     transmission: "",
     description: "",
     price: "",
-    image: "",
   });
+
+  const [image, setImage] = useState("");
 
   const form = useRef(null);
   const router = useRouter();
 
   const handleChange = (e) => {
-    setProduct({
-      ...product,
-      [e.target.name]: e.target.value,
-    });
+    if (e.target.name === "image") {
+      console.log(e.target.files[0]);
+      setImage(e.target.files[0]);
+    } else {
+      setProduct({
+        ...product,
+        [e.target.name]: e.target.value,
+      });
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(product);
+    const formData = new FormData();
 
-    const res = await axios.post("/api/products", product);
-    console.log(res);
+    formData.append("data", JSON.stringify(product));
+    formData.append("file", image);
+
+    const res = await axios.post("/api/products", formData);
     form.current.reset();
-    router.push("/products");
+    router.push("/homePage");
   };
 
   return (
@@ -163,8 +171,7 @@ function ProductForm() {
           </label>
           <input
             name="image"
-            type="text"
-            placeholder="Enter image URL"
+            type="file"
             onChange={handleChange}
             className="shadow appearance-none border rounded w-full py-2 px-3"
           />
