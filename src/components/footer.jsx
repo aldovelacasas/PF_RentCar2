@@ -58,7 +58,7 @@ function Footer() {
         <h2 className="text-lg font-semibold">Mapa de Sitio</h2>
         <ul className="mt-2 space-y-2 sm:ml-0 sm:pl-0">
           <li className="text-red">
-            <Link href="/rent" className="hover:font-bold">
+            <Link href="/homePage" className="hover:font-bold">
               Renta un vehículo
             </Link>
           </li>
@@ -83,7 +83,7 @@ function Footer() {
             </Link>
           </li>
           <li>
-            <Link href="/signin" className="hover:font-bold">
+            <Link href="/homePage" className="hover:font-bold">
               Ingresa
             </Link>
           </li>

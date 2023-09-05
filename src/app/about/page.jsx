@@ -22,6 +22,10 @@ function AboutPage() {
       <header
         className={`bg-gris_fondo flex items-center h-[175px] ${rubik} text-[1em] sm:text-[1.5em] pl-[10%] space-y-0 space-x-2.5`}>
         <p className={`text-[1.2em] mt-2 pl-4`}>Nuestro Equipo</p>
+        <img
+          src="https://drive.google.com/uc?export=download&id=1NW9G16ClvYbufG9oBwPhKfgqBc_zg8r0"
+          className=" float-right h-[20vh] md:h-[30vh] lg:h-[35vh] absolute right-[10%] scale-x-[-1] top-[10%] z-1"
+        />
       </header>
       <section
         className={`pt-4 ${poppins} mx-[auto] w-3/4 text-[0.8em] bg-gris_frente pb-10 mt-8 sm:text-[1.5em]`}>
