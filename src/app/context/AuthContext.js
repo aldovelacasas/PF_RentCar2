@@ -41,7 +41,7 @@ export const AuthContextProvider = ({ children }) => {
       console.log(currentUser);
     });
     return () => unsubscribe();
-  }, [user]);
+  }, []);
 
   return (
     <AuthContext.Provider

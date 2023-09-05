@@ -1,6 +1,5 @@
 "use client";
 
-
 export default function CarCard({ car, handleVisibility, handleDetail }) {
   return (
     <div

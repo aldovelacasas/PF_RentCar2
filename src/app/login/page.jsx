@@ -3,7 +3,6 @@ import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import axios from "axios";
 import Alert from "./Alert";
 
 export default function Login() {
@@ -27,6 +26,7 @@ export default function Login() {
     setError("");
     try {
       await login(user.email, user.password);
+      insertUserIntoMySQL(user);
       router.push("/");
     } catch (error) {
       console.log(error.code);

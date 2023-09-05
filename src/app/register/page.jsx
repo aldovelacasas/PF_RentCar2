@@ -3,7 +3,6 @@ import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useRouter } from "next/navigation";
 import Alert from "../login/Alert";
-import axios from "axios";
 
 export default function Register() {
   const [user, setUser] = useState({
@@ -26,7 +25,6 @@ export default function Register() {
     setError("");
     try {
       signup(user.email, user.password);
-      await axios.post("api/users", user);
       router.push("/login");
     } catch (error) {
       if (error.code === "auth/email-already-in-use") {
