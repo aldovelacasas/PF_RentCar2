@@ -41,13 +41,21 @@ function HomePage() {
     startDate: today,
     endDate: today,
   });
+  const [collapsed, setCollapsed] = useState({
+    One: false,
+    Two: true,
+    Three: true,
+  });
 
   function handleChange(e) {
     let newdisplay = categorias.find((c) => c.tipo === e.target.value);
     setDisplay(newdisplay.imagen);
   }
 
-  function handleCollapse() {}
+  function handleCollapse(number) {
+    setCollapsed({ ...collapsed, [number]: !collapsed[number] });
+    console.log(collapsed);
+  }
 
   function handleEmailChange(e) {
     setEmail(e.target.value);
@@ -452,41 +460,62 @@ function HomePage() {
         </p>
         <table className="bg-white shadow-md shadow-black  md:mb-[100px]">
           <tbody className="[&>*:nth-child(odd)]:bg-[#ea4e398a] bg-white">
-            <tr onClick={handleCollapse}>
+            <tr
+              onClick={() => handleCollapse("One")}
+              className="cursor-pointer hover:text-blue-600 ">
               <td className="py-1 text-center">
                 ¿Cuánto tiempo tengo para devolver el pedido?
               </td>
+              <td className="px-2">▼</td>
             </tr>
             <tr>
-              <td className={`py-1 px-2 pb-8 ${poppins}`}>
-                Depués de vencido tu periodo de renta, cuentas con una hora de
-                tolerancia para devolver el vehículo.
-              </td>
+              {collapsed.One === true ? (
+                <></>
+              ) : (
+                <td className={`py-1 px-2 pb-8 ${poppins}`}>
+                  Depués de vencido tu periodo de renta, cuentas con una hora de
+                  tolerancia para devolver el vehículo.
+                </td>
+              )}
             </tr>
-            <tr>
+            <tr
+              onClick={() => handleCollapse("Two")}
+              className="cursor-pointer hover:text-blue-600 ">
               <td className="py-1 text-center">
                 ¿Qué pasa si olvidé algo en el interior del auto?
               </td>
+              <td className="px-2">▼</td>
             </tr>
             <tr>
-              <td className={`py-1 px-2 pb-8 ${poppins}`}>
-                No te preocupes, nosotros te contactaremos tan pronto realicemos
-                la limpieza del vehículo para que puedas venir a recoger tus
-                pertenencias.
-              </td>
+              {collapsed.Two === true ? (
+                <></>
+              ) : (
+                <td className={`py-1 px-2 pb-8 ${poppins}`}>
+                  No te preocupes, nosotros te contactaremos tan pronto
+                  realicemos la limpieza del vehículo para que puedas venir a
+                  recoger tus pertenencias.
+                </td>
+              )}
             </tr>
-            <tr>
+            <tr
+              className="cursor-pointer hover:text-blue-600 "
+              onClick={() => handleCollapse("Three")}>
               <td className="py-1 text-center">
                 ¿El vehículo cuenta con seguro?
               </td>
+              <td className="px-2">▼</td>
             </tr>
-            <tr>
-              <td className={`py-1 px-2 pb-8 ${poppins}`}>
-                Claro que sí, todos nuestros vehículos se encuentran en buen
-                estado y con todos sus papeles en orden de manera que puedes
-                conducir sin preocupaciones.
-              </td>
-            </tr>
+            {collapsed.Three === true ? (
+              <></>
+            ) : (
+              <tr>
+                <td className={`py-1 px-2 pb-8 ${poppins}`}>
+                  Claro que sí, todos nuestros vehículos se encuentran en buen
+                  estado y con todos sus papeles en orden de manera que puedes
+                  conducir sin preocupaciones.
+                </td>
+              </tr>
+            )}
           </tbody>
         </table>
       </section>
