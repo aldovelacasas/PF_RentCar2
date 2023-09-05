@@ -2,6 +2,24 @@
 import Link from "next/link";
 
 function Footer() {
+  function handleScrollForm() {
+    if (window.innerWidth <= 400) {
+      window.scrollTo({
+        top: 220,
+        behavior: "smooth",
+      });
+    } else if (window.innerWidth <= 800) {
+      window.scrollTo({
+        top: 270,
+        behavior: "smooth",
+      });
+    } else {
+      window.scrollTo({
+        top: 530,
+        behavior: "smooth",
+      });
+    }
+  }
   return (
     <div className="bg-negro_fondo text-white py-8 flex flex-col sm:flex-row justify-between items-center p-4 font-poppins">
       <div className="sm:w-1/3 p-4">
@@ -58,7 +76,7 @@ function Footer() {
         <h2 className="text-lg font-semibold">Mapa de Sitio</h2>
         <ul className="mt-2 space-y-2 sm:ml-0 sm:pl-0">
           <li className="text-red">
-            <Link href="/rent" className="hover:font-bold">
+            <Link href="/homePage" className="hover:font-bold">
               Renta un vehículo
             </Link>
           </li>
@@ -83,7 +101,7 @@ function Footer() {
             </Link>
           </li>
           <li>
-            <Link href="/signin" className="hover:font-bold">
+            <Link href="/homePage" className="hover:font-bold">
               Ingresa
             </Link>
           </li>
