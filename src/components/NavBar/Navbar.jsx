@@ -14,7 +14,7 @@ const MENU_LIST = [
   { text: "Vehiculos", href: "/vehiculos" },
   { text: "Testimoniales", href: "/testimoniales" },
   { text: "Contáctanos", href: "/contact" },
-  { text: "Ingresar", href: "/" },
+  { text: "Ingresar", href: "/login" },
 ];
 const Navbar = () => {
   const [navActive, setNavActive] = useState(null);

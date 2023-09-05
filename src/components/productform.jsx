@@ -33,7 +33,7 @@ function ProductForm() {
     const res = await axios.post("/api/products", product);
     console.log(res);
     form.current.reset();
-    router.push("/products");
+    router.push("/vehiculos");
   };
 
   return (
