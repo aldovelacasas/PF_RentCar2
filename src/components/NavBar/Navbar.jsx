@@ -7,6 +7,7 @@ import React, { useState } from "react";
 import NavItem from "./NavItem";
 import "./nav.css";
 import { usePathname } from "next/navigation";
+import { useAuth } from "@/app/context/AuthContext";
 
 const MENU_LIST = [
   { text: "Home", href: "/" },
@@ -14,11 +15,12 @@ const MENU_LIST = [
   { text: "Vehiculos", href: "/vehiculos" },
   { text: "Testimoniales", href: "/testimoniales" },
   { text: "Contáctanos", href: "/contact" },
-  { text: "Ingresar", href: "/" },
+  { text: "Ingresar", href: "/login" },
 ];
 const Navbar = () => {
   const [navActive, setNavActive] = useState(null);
   const [activeIdx, setActiveIdx] = useState(-1);
+  const { logOut } = useAuth();
 
   const route = usePathname();
 
@@ -39,6 +41,14 @@ const Navbar = () => {
               </span>
             </Link>
           </div>
+        </div>
+
+        <div>
+          <button
+            onClick={logOut}
+            className="bg-blue-500 hover:bg-blue-700 text-white text-sm font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+            LOG OUT
+          </button>
         </div>
 
         <div
