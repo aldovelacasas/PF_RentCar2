@@ -2,8 +2,35 @@
 import { useRef, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import { Poppins } from "next/font/google";
+
+const alertFontPoppins = Poppins({
+  weight: "200",
+  subsets: ["latin"],
+});
+
+const alertPoppins = alertFontPoppins.className;
 
 function ProductForm() {
+  useEffect(() => {
+    const jsondata = window.localStorage.getItem("formData");
+    const data = JSON.parse(jsondata);
+
+    for (const key in data) {
+      if (key === "image") {
+        setLocalImage(data[key]);
+      } else if (key && key !== "") {
+        setProduct((prevProduct) => ({
+          ...prevProduct,
+          [key]: data[key],
+        }));
+      }
+    }
+  }, []);
+
+  const [localimage, setLocalImage] = useState(false);
+
   const [product, setProduct] = useState({
     name: "",
     model: "",
@@ -22,7 +49,6 @@ function ProductForm() {
 
   const handleChange = (e) => {
     if (e.target.name === "image") {
-      console.log(e.target.files[0]);
       setImage(e.target.files[0]);
     } else {
       setProduct({
@@ -30,18 +56,34 @@ function ProductForm() {
         [e.target.name]: e.target.value,
       });
     }
+    setLocalStorage();
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const formData = new FormData();
+    localStorage.removeItem("formData");
+    alert("bien");
+    // const formData = new FormData();
 
-    formData.append("data", JSON.stringify(product));
-    formData.append("file", image);
+    // formData.append("data", JSON.stringify(product));
+    // formData.append("file", image);
 
-    const res = await axios.post("/api/products", formData);
-    form.current.reset();
-    router.push("/vehiculos");
+    // const res = await axios.post("/api/products", formData);
+    // form.current.reset();
+    // router.push("/vehiculos");
+  };
+
+  const setLocalStorage = () => {
+    try {
+      const existImage = image !== null;
+      console.log("image es ", image);
+      console.log("existe", existImage);
+      const data = { ...product, image: existImage };
+      const datajson = JSON.stringify(data);
+      window.localStorage.setItem("formData", datajson);
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   return (
@@ -57,6 +99,7 @@ function ProductForm() {
             Product Name
           </label>
           <input
+            value={product.name}
             name="name"
             type="text"
             placeholder="Enter product name"
@@ -72,6 +115,7 @@ function ProductForm() {
             Product Model
           </label>
           <input
+            value={product.model}
             name="model"
             type="text"
             placeholder="Enter product model"
@@ -86,6 +130,7 @@ function ProductForm() {
             Year
           </label>
           <input
+            value={product.year}
             name="year"
             type="text"
             placeholder="Enter year"
@@ -100,6 +145,7 @@ function ProductForm() {
             Type
           </label>
           <input
+            value={product.type}
             name="type"
             type="text"
             placeholder="Enter product type"
@@ -114,6 +160,7 @@ function ProductForm() {
             Capacity
           </label>
           <input
+            value={product.capacity}
             name="capacity"
             type="text"
             placeholder="Enter capacity"
@@ -128,6 +175,7 @@ function ProductForm() {
             Transmission
           </label>
           <input
+            value={product.transmission}
             name="transmission"
             type="text"
             placeholder="Enter transmission"
@@ -142,6 +190,7 @@ function ProductForm() {
             Description
           </label>
           <textarea
+            value={product.description}
             name="description"
             rows={3}
             placeholder="Enter description"
@@ -156,6 +205,7 @@ function ProductForm() {
             Price
           </label>
           <input
+            value={product.price}
             name="price"
             type="text"
             placeholder="00.00"
@@ -175,6 +225,15 @@ function ProductForm() {
             onChange={handleChange}
             className="shadow appearance-none border rounded w-full py-2 px-3"
           />
+          {localimage ? (
+            <span
+              className={`${alertPoppins} text-sm`}
+              style={{ color: "red" }}>
+              Vuelve a subir tu archivo
+            </span>
+          ) : (
+            ""
+          )}
         </div>
         <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded">
           Save Product
