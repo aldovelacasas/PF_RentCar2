@@ -9,6 +9,7 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
 } from "firebase/auth";
+import axios from "axios";
 
 const AuthContext = createContext();
 
@@ -21,25 +22,54 @@ export const useAuth = () => {
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
-  const signup = (email, password) =>
-    createUserWithEmailAndPassword(auth, email, password);
+  const signup = async (email, password) => {
+    const userCredential = await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+    const uid = userCredential.user.uid;
+    await saveUid(uid);
+  };
 
-  const login = (email, password) =>
-    signInWithEmailAndPassword(auth, email, password);
+  const login = async (email, password) => {
+    const userCredential = await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+    const uid = userCredential.user.uid;
+    await saveUid(uid);
+  };
 
-  const loginWithGoogle = () => {
+  const loginWithGoogle = async () => {
     const googleProvider = new GoogleAuthProvider();
-    return signInWithPopup(auth, googleProvider);
+    const userCredential = await signInWithPopup(auth, googleProvider);
+    const uid = userCredential.user.uid;
+    await saveUid(uid);
   };
 
   const logOut = () => {
     signOut(auth);
   };
 
+  const saveUid = async (uid) => {
+    try {
+      await axios.post("/api/users", { uid });
+    } catch (error) {
+      console.error("Error al guardar usuario en la base de datos", error);
+    }
+  };
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-      console.log(currentUser);
+      if (currentUser) {
+        setUser(currentUser);
+        console.log("usuario autenticado", currentUser);
+      } else {
+        setUser(null);
+        console.log("Usuario no autenticado");
+      }
     });
     return () => unsubscribe();
   }, []);

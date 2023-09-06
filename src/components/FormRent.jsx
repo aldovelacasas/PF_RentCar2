@@ -165,12 +165,14 @@ function FormRent({
               <p className="text-[1em] text-rojo_status">{errors.dates}</p>
             )}
             <fieldset className="flex sticky bottom-0 bg-white justify-evenly w-full lg:w-1/2 py-6">
-              <button
-                type="button"
-                onClick={handleValidation}
-                className={` bg-naranja_enf ${rubik} text-white text-[0.8em] px-4 py-1 rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
-                Rentar
-              </button>
+            <script async
+                src="https://js.stripe.com/v3/buy-button.js">
+                     </script>
+
+                     <stripe-buy-button 
+                       buy-button-id="buy_btn_1NnP0dC8CY4zllMLPaQ8yFpb"
+                       publishable-key="pk_test_51Nn2KYC8CY4zllMLpqkuDGM7gpaw1TRnW1MSev2p37I8cucia4ZGTp6Divr3e2rbE32vkqmXtrpizkPgoWtEZ4z800Eno12mKH">
+                     </stripe-buy-button>
               <button
                 type="button"
                 onClick={handleVisible}

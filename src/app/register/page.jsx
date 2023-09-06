@@ -12,7 +12,7 @@ export default function Register() {
     password: "",
     phone: "",
   });
-  const { signup } = useAuth();
+  const { signup, loginWithGoogle } = useAuth();
   const [error, setError] = useState();
   const router = useRouter();
 
@@ -35,6 +35,15 @@ export default function Register() {
       } else if (error.code === "auth/invalid-email") {
         setError("El correo ingresado no es válido");
       }
+    }
+  };
+
+  const handleGoogleLogin = async () => {
+    try {
+      await loginWithGoogle();
+      router.push("/");
+    } catch (error) {
+      setError(error.message);
     }
   };
 
@@ -93,6 +102,14 @@ export default function Register() {
           Register
         </button>
       </form>
+
+      <div className="p-10">
+        <button
+          onClick={handleGoogleLogin}
+          className="bg-slate-50 hover:bg-slate-200 text-black shadow-md rounded border-2 border-gray py-2 px-4 w-full">
+          Ingresa con tu cuenta de Google
+        </button>
+      </div>
     </div>
   );
 }
