@@ -28,7 +28,8 @@ export const AuthContextProvider = ({ children }) => {
       password
     );
     const uid = userCredential.user.uid;
-    await saveUid(uid);
+    const emailUser = userCredential.user.email;
+    await saveData(uid, emailUser);
   };
 
   const login = async (email, password) => {
@@ -38,23 +39,25 @@ export const AuthContextProvider = ({ children }) => {
       password
     );
     const uid = userCredential.user.uid;
-    await saveUid(uid);
+    const emailUser = userCredential.user.email;
+    await saveData(uid, emailUser);
   };
 
   const loginWithGoogle = async () => {
     const googleProvider = new GoogleAuthProvider();
     const userCredential = await signInWithPopup(auth, googleProvider);
     const uid = userCredential.user.uid;
-    await saveUid(uid);
+    const emailUser = userCredential.user.email;
+    await saveData(uid, emailUser);
   };
 
   const logOut = () => {
     signOut(auth);
   };
 
-  const saveUid = async (uid) => {
+  const saveData = async (uid, emailUser) => {
     try {
-      await axios.post("/api/users", { uid });
+      await axios.post("/api/users", { uid, emailUser });
     } catch (error) {
       console.error("Error al guardar usuario en la base de datos", error);
     }
