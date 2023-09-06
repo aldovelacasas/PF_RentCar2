@@ -3,25 +3,15 @@ import { conn } from "@/libs/mysql";
 
 export async function POST(request) {
   try {
-    const { username, passport, email, password, phone } = await request.json();
+    const { uid } = await request.json();
 
-    const result = await conn.query("INSERT INTO user SET ?", {
-      username,
-      passport,
-      email,
-      password,
-      phone,
+    const result = await conn.query("INSERT INTO usuarios_firebase SET ?", {
+      uid,
     });
 
     return NextResponse.json({
-      username,
-      passport,
-      email,
-      password,
-      phone,
+      uid: " ",
       id: result.insertId,
-      isActive: 1,
-      typeUser: 1,
     });
   } catch (error) {
     console.log(error);
