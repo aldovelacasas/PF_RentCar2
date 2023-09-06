@@ -48,14 +48,20 @@ function RentalDetail({ visible, data, handleVisible }) {
           <hr className="my-3 mx-2 border-white" />
         </div>
         <div className={`${rubik} flex justify-evenly w-3/4 pb-6 pt-4`}>
-          <button
-            className={`rounded-md px-4 py-[2px] bg-naranja_enf text-white text-[1em] shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
-            Finalizar
-          </button>
+          <div className="flex justify-evenly gap-4">
+            <button
+              className={`rounded-md px-4 py-[2px] bg-naranja_enf text-white text-[1em] shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
+              Finalizar renta
+            </button>
+            <button
+              className={`rounded-md px-4 py-[2px] bg-gris_fondo text-[1em] shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
+              Cancelar renta
+            </button>
+          </div>
           <button
             onClick={handleVisible}
-            className={`bg-gris_fondo text-black text-[1em] px-4 py-[2px] rounded-md shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
-            Cerrar
+            className={`bg-negro_fondo text-white text-[1em] px-4 py-[2px] rounded-md shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
+            Volver
           </button>
         </div>
       </figure>

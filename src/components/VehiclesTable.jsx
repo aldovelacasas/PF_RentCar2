@@ -31,10 +31,10 @@ function VehiclesTable({ visible }) {
   const [detailData, setDetailData] = useState();
   const [vehiclesDetailVisibility, setVehiclesDetailVisibility] =
     useState(false);
-
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [vehiculos]);
+  const [search, setSearch] = useState("");
+  const [data, setData] = useState();
+  const [category, setCategory] = useState("name");
+  const [aux, setAux] = useState(false);
 
   useEffect(() => {
     setCurrentPage(1);
@@ -51,7 +51,10 @@ function VehiclesTable({ visible }) {
     pages.push(x);
   }
 
-  let data = sliceData(dataToShow, currentPage, quantityPerPage);
+  useEffect(() => {
+    setData(sliceData(dataToShow, currentPage, quantityPerPage));
+  }, [currentPage]);
+
   let currentPages = slicePage(pages, currentPage, 2);
 
   const handlePrevious = () => {
@@ -81,6 +84,40 @@ function VehiclesTable({ visible }) {
     document.body.classList.toggle("stopScroll");
   };
 
+  function handleSearch(e) {
+    setSearch(e.target.value);
+    setData(
+      dataToShow.filter((d) =>
+        d[category].toLowerCase().includes(e.target.value.toLowerCase())
+      )
+    );
+    setCurrentPage(1);
+  }
+
+  function handleSearchCategory(e) {
+    setCategory(e.target.value);
+  }
+
+  function handleSort(sortCategory) {
+    let order = "asc";
+    if (order === "asc") {
+      let ordenated = dataToShow.sort((a, b) => {
+        if (a[sortCategory] < b[sortCategory]) {
+          return -1;
+        }
+        if (a[sortCategory] > b[sortCategory]) {
+          return 1;
+        }
+        return 0;
+      });
+      setData(sliceData(ordenated, currentPage, quantityPerPage));
+      setCurrentPage;
+      setAux(!aux);
+    } else {
+      setData(data.sort((a, b) => b[sortCategory] - a[sortCategory]));
+    }
+  }
+
   if (visible === false) return null;
   return (
     <section className="text-[12px] md:text-[16px]">
@@ -95,33 +132,77 @@ function VehiclesTable({ visible }) {
         <p className={`${poppins} text-[0.9em] pl-2`}>
           Vista de los vehículos de la empresa
         </p>
+        <div className="flex flex-wrap">
+          <label htmlFor="search" className="shrink-0 basis-[100%]">
+            Búsqueda:
+          </label>
+          <input
+            name="search"
+            className={`${poppins} pl-2 basis-[50%] text-[0.8em] max-w-[50%] border-2 border-black rounded-md mr-4`}
+            placeholder={`Búsqueda por ${category}`}
+            value={search}
+            onChange={handleSearch}
+          />
+          <select
+            className="max-w-[30%]  bg-naranja_enf text-white px-2 rounded-full cursor-pointer shadow-sm shadow-black hover:shadow-md hover:shadow-black"
+            onChange={handleSearchCategory}>
+            <option value="name">Nombre</option>
+            <option value="model">Modelo</option>
+          </select>
+        </div>
         <table className={`${poppins} bg-white mt-6`}>
           <tbody className="">
             <tr className="">
               {pantalla === "chica" ? (
                 <>
-                  <th className={`${rubik} px-2 md:px-4 text-left`}>Nombre</th>
-                  <th className={`${rubik} px-1 md:px-4 text-left break-all`}>
+                  <th
+                    onClick={() => handleSort("name")}
+                    className={`${rubik} px-2 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
+                    Nombre
+                  </th>
+                  <th
+                    onClick={() => handleSort("model")}
+                    className={`${rubik} px-1 md:px-4 text-left break-all hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
                     Modelo
                   </th>
-                  <th className={`${rubik} px-1 md:px-4 text-left`}>Precio</th>
+                  <th
+                    onClick={() => handleSort("price")}
+                    className={`${rubik} px-1 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
+                    Precio
+                  </th>
                   <th className={`${rubik} px-1 md:px-4 text-left`}>
                     Acciones
                   </th>
                 </>
               ) : (
                 <>
-                  <th className={`${rubik} px-2 md:px-4 text-left`}>Nombre</th>
-                  <th className={`${rubik} px-1 md:px-4 text-left`}>Modelo</th>
-                  <th className={`${rubik} px-1 md:px-4 text-left`}>Tipo</th>
-                  <th className={`${rubik} px-1 md:px-4 text-left`}>Precio</th>
+                  <th
+                    onClick={() => handleSort("name")}
+                    className={`${rubik} px-2 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
+                    Nombre
+                  </th>
+                  <th
+                    onClick={() => handleSort("model")}
+                    className={`${rubik} px-1 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
+                    Modelo
+                  </th>
+                  <th
+                    onClick={() => handleSort("type")}
+                    className={`${rubik} px-1 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
+                    Tipo
+                  </th>
+                  <th
+                    onClick={() => handleSort("price")}
+                    className={`${rubik} px-1 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
+                    Precio
+                  </th>
                   <th className={`${rubik} px-1 md:px-4 text-left`}>
                     Acciones
                   </th>
                 </>
               )}
             </tr>
-            {data.map((d) => {
+            {data?.map((d) => {
               let ultimo;
 
               if (data.at(quantityPerPage) === d || data.at(-1) === d) {
@@ -182,7 +263,7 @@ function VehiclesTable({ visible }) {
         </table>
       </figure>
       <div className="w-full flex justify-center gap-2 mt-8 mb-8">
-        {data.length === 0 && (
+        {data?.length === 0 && (
           <p className="text-[1em] text-center text-naranja_enf px-4 bg-gris_fondo py-2 rounded-full">
             Nada que mostrar
           </p>

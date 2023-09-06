@@ -45,8 +45,9 @@ function AdminMain() {
         <h2 className="text-[1.5em] pl-2">Bienvenido Admin</h2>
         <div
           className={
-            rentalsVisibility &&
-            "bg-gris_fondo px-2 rounded-2xl break-words grid place-items-center"
+            rentalsVisibility
+              ? "bg-gris_fondo px-2 rounded-2xl break-words grid place-items-center"
+              : ""
           }>
           <h3
             onClick={() => setRentalsVisibility(!rentalsVisibility)}
@@ -61,8 +62,9 @@ function AdminMain() {
         </div>
         <div
           className={
-            vehiclesVisibility &&
-            "bg-gris_fondo pb-2 rounded-2xl grid place-items-center lg:pb-6"
+            vehiclesVisibility
+              ? "bg-gris_fondo pb-2 rounded-2xl grid place-items-center lg:pb-6"
+              : ""
           }>
           <h3
             onClick={() => setVehiclesVisibility(!vehiclesVisibility)}
@@ -77,8 +79,9 @@ function AdminMain() {
         </div>
         <div
           className={
-            formVisibility &&
-            "bg-gris_fondo pb-2 rounded-2xl grid place-items-center lg:pb-6"
+            formVisibility
+              ? "bg-gris_fondo pb-2 rounded-2xl grid place-items-center lg:pb-6"
+              : ""
           }>
           <h3
             onClick={() => setFormVisibility(!formVisibility)}

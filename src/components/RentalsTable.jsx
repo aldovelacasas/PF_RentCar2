@@ -29,10 +29,10 @@ function RentalsTable({ visible }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [detailData, setDetailData] = useState();
   const [rentalDetailVisibility, setRentalDetailVisibility] = useState(false);
-
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [rentas]);
+  const [search, setSearch] = useState("");
+  const [data, setData] = useState();
+  const [category, setCategory] = useState("vehiculo");
+  const [aux, setAux] = useState(false);
 
   useEffect(() => {
     setCurrentPage(1);
@@ -49,7 +49,10 @@ function RentalsTable({ visible }) {
     pages.push(x);
   }
 
-  let data = sliceData(dataToShow, currentPage, quantityPerPage);
+  useEffect(() => {
+    setData(sliceData(dataToShow, currentPage, quantityPerPage));
+  }, [currentPage]);
+
   let currentPages = slicePage(pages, currentPage, 2);
 
   const handlePrevious = () => {
@@ -69,15 +72,47 @@ function RentalsTable({ visible }) {
   };
 
   const handleRentVisibility = (data) => {
-    console.log("out");
     if (data) {
-      console.log("in");
-
       setDetailData(data);
     }
     setRentalDetailVisibility(!rentalDetailVisibility);
     document.body.classList.toggle("stopScroll");
   };
+
+  function handleSearch(e) {
+    setSearch(e.target.value);
+    setData(
+      dataToShow.filter((d) =>
+        d[category].toLowerCase().includes(e.target.value.toLowerCase())
+      )
+    );
+    setCurrentPage(1);
+  }
+
+  function handleSearchCategory(e) {
+    setCategory(e.target.value);
+  }
+
+  function handleSort(sortCategory) {
+    let order = "asc";
+    if (order === "asc") {
+      let ordenated = dataToShow.sort((a, b) => {
+        if (a[sortCategory] < b[sortCategory]) {
+          return -1;
+        }
+        if (a[sortCategory] > b[sortCategory]) {
+          return 1;
+        }
+        return 0;
+      });
+      setData(sliceData(ordenated, currentPage, quantityPerPage));
+      setCurrentPage;
+      setAux(!aux);
+    } else {
+      setData(data.sort((a, b) => b[sortCategory] - a[sortCategory]));
+    }
+  }
+
   let total = 0;
   dataToShow.forEach((d) => (total += parseFloat(d.monto.slice(1))));
   total = total * 2;
@@ -93,32 +128,79 @@ function RentalsTable({ visible }) {
           </span>
         </h3>
         <p className={`${poppins} text-[0.9em]`}>Vista de las rentas del mes</p>
+        <div className="flex flex-wrap">
+          <label htmlFor="search" className="shrink-0 basis-[100%]">
+            Búsqueda:
+          </label>
+          <input
+            name="search"
+            className={`${poppins} pl-2 basis-[50%] text-[0.8em] max-w-[50%] border-2 border-black rounded-md mr-4`}
+            placeholder={`Búsqueda por ${category}`}
+            value={search}
+            onChange={handleSearch}
+          />
+          <select
+            className="max-w-[30%]  bg-naranja_enf text-white px-2 rounded-full cursor-pointer shadow-sm shadow-black hover:shadow-md hover:shadow-black"
+            onChange={handleSearchCategory}>
+            <option value="vehiculo">Vehiculo</option>
+            <option value="usuario">Usuario</option>
+          </select>
+        </div>
+
         <table className={`${poppins} bg-white mt-6`}>
           <tbody className="">
             <tr className="">
               {pantalla === "chica" ? (
                 <>
-                  <th className={`${rubik} px-2 md:px-4 text-left`}>#ID</th>
-                  <th className={`${rubik} px-1 md:px-4 text-left break-all`}>
+                  <th
+                    onClick={() => handleSort("id")}
+                    className={`${rubik} px-2 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
+                    #ID
+                  </th>
+                  <th
+                    onClick={() => handleSort("vehiculo")}
+                    className={`${rubik} px-1 md:px-4 text-left break-all hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
                     Vehículo
                   </th>
-                  <th className={`${rubik} px-1 md:px-4 text-left`}>Estado</th>
+                  <th
+                    onClick={() => handleSort("estado")}
+                    className={`${rubik} px-1 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
+                    Estado
+                  </th>
                   <th className={`${rubik} px-1 md:px-4 text-left`}>Detalle</th>
                 </>
               ) : (
                 <>
-                  <th className={`${rubik} px-2 md:px-4 text-left`}>#ID</th>
-                  <th className={`${rubik} px-1 md:px-4 text-left`}>Usuario</th>
-                  <th className={`${rubik} px-1 md:px-4 text-left`}>
+                  <th
+                    onClick={() => handleSort("id")}
+                    className={`${rubik} px-2 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
+                    #ID
+                  </th>
+                  <th
+                    onClick={() => handleSort("usuario")}
+                    className={`${rubik} px-1 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
+                    Usuario
+                  </th>
+                  <th
+                    onClick={() => handleSort("vehiculo")}
+                    className={`${rubik} px-1 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
                     Vehículo
                   </th>
-                  <th className={`${rubik} px-1 md:px-4 text-left`}>Estado</th>
-                  <th className={`${rubik} px-1 md:px-4 text-left`}>Monto</th>
+                  <th
+                    onClick={() => handleSort("estado")}
+                    className={`${rubik} px-1 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
+                    Estado
+                  </th>
+                  <th
+                    onClick={() => handleSort("monto")}
+                    className={`${rubik} px-1 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
+                    Monto
+                  </th>
                   <th className={`${rubik} px-1 md:px-4 text-left`}>Detalle</th>
                 </>
               )}
             </tr>
-            {data.map((d) => {
+            {data?.map((d) => {
               let ultimo;
               let estado = d.estado
                 .charAt(0)
@@ -195,7 +277,7 @@ function RentalsTable({ visible }) {
         </table>
       </figure>
       <div className="w-full flex justify-center gap-2 mt-8 mb-8">
-        {data.length === 0 && (
+        {data?.length === 0 && (
           <p className="text-[1em] text-center text-naranja_enf px-4 bg-gris_fondo py-2 rounded-full">
             Nada que mostrar
           </p>
