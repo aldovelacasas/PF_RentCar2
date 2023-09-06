@@ -10,6 +10,12 @@ const alertFontPoppins = Poppins({
   subsets: ["latin"],
 });
 
+const fontPoppins = Poppins({
+  weight: "400",
+  subsets: ["latin"],
+});
+
+const poppins = fontPoppins.className;
 const alertPoppins = alertFontPoppins.className;
 
 function ProductForm() {
@@ -81,123 +87,126 @@ function ProductForm() {
     }
   };
 
+  const ready = () => {
+    return true;
+  };
+
   return (
     <form
-      className="bg-white shadow-md rounded-md px-8 pt-4 pb-4 mb-4"
+      className="bg-white shadow-md rounded-md px-4 sm:px-8 pt-4 pb-4 my-10"
       onSubmit={handleSubmit}
       ref={form}>
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <div>
           <label
             htmlFor="name"
             className="block text-gray-700 text-sm font-bold mb-2">
-            Product Name
+            Marca
           </label>
           <input
             value={product.name}
             name="name"
             type="text"
-            placeholder="Enter product name"
+            placeholder="Ingresar nombre"
             onChange={handleChange}
-            className="shadow appearance-none border rounded w-full py-2 px-3"
-            autoFocus
+            className="focus:outline-none focus:border-naranja_enf focus:border-2  shadow appearance-none border  w-full py-2 px-3 mb-3"
           />
         </div>
         <div>
           <label
             htmlFor="model"
             className="block text-gray-700 text-sm font-bold mb-2">
-            Product Model
+            Modelo
           </label>
           <input
             value={product.model}
             name="model"
             type="text"
-            placeholder="Enter product model"
+            placeholder="Ingresar modelo"
             onChange={handleChange}
-            className="shadow appearance-none border rounded w-full py-2 px-3"
+            className="focus:outline-none focus:border-naranja_enf focus:border-2  shadow appearance-none border  w-full py-2 px-3 mb-3"
           />
         </div>
         <div>
           <label
             htmlFor="year"
             className="block text-gray-700 text-sm font-bold mb-2">
-            Year
+            Año
           </label>
           <input
             value={product.year}
             name="year"
             type="text"
-            placeholder="Enter year"
+            placeholder="Ingresar año"
             onChange={handleChange}
-            className="shadow appearance-none border rounded w-full py-2 px-3"
+            className="focus:outline-none focus:border-naranja_enf focus:border-2  shadow appearance-none border  w-full py-2 px-3 mb-3"
           />
         </div>
         <div>
           <label
             htmlFor="type"
             className="block text-gray-700 text-sm font-bold mb-2">
-            Type
+            Tipo
           </label>
           <input
             value={product.type}
             name="type"
             type="text"
-            placeholder="Enter product type"
+            placeholder="Ingresar tipo de producto"
             onChange={handleChange}
-            className="shadow appearance-none border rounded w-full py-2 px-3"
+            className="focus:outline-none focus:border-naranja_enf focus:border-2  shadow appearance-none border  w-full py-2 px-3 mb-3"
           />
         </div>
         <div>
           <label
             htmlFor="capacity"
             className="block text-gray-700 text-sm font-bold mb-2">
-            Capacity
+            Capacidad
           </label>
           <input
             value={product.capacity}
             name="capacity"
             type="text"
-            placeholder="Enter capacity"
+            placeholder="Ingresar capacidad"
             onChange={handleChange}
-            className="shadow appearance-none border rounded w-full py-2 px-3"
+            className="focus:outline-none focus:border-naranja_enf focus:border-2  shadow appearance-none border  w-full py-2 px-3 mb-3"
           />
         </div>
         <div>
           <label
             htmlFor="transmission"
             className="block text-gray-700 text-sm font-bold mb-2">
-            Transmission
+            Transmision
           </label>
           <input
             value={product.transmission}
             name="transmission"
             type="text"
-            placeholder="Enter transmission"
+            placeholder="Ingresar transmision"
             onChange={handleChange}
-            className="shadow appearance-none border rounded w-full py-2 px-3"
+            className="focus:outline-none focus:border-naranja_enf focus:border-2  shadow appearance-none border  w-full py-2 px-3 mb-3"
           />
         </div>
         <div>
           <label
             htmlFor="description"
             className="block text-gray-700 text-sm font-bold mb-2">
-            Description
+            Descripcion
           </label>
           <textarea
             value={product.description}
             name="description"
             rows={3}
-            placeholder="Enter description"
+            placeholder="Ingresar descripcion"
             onChange={handleChange}
-            className="shadow appearance-none border rounded w-full py-2 px-3"
+            className="focus:outline-none focus:border-naranja_enf focus:border-2 shadow appearance-none border rounded w-full py-2 px-3"
           />
         </div>
         <div>
           <label
             htmlFor="price"
             className="block text-gray-700 text-sm font-bold mb-2">
-            Price
+            Precio
           </label>
           <input
             value={product.price}
@@ -205,20 +214,26 @@ function ProductForm() {
             type="text"
             placeholder="00.00"
             onChange={handleChange}
-            className="shadow appearance-none border rounded w-full py-2 px-3"
+            className="focus:outline-none focus:border-naranja_enf focus:border-2  shadow appearance-none border  w-full py-2 px-3"
           />
         </div>
         <div>
           <label
             htmlFor="image"
             className="block text-gray-700 text-sm font-bold mb-2">
-            Image
+            Imagen
           </label>
           <input
             name="image"
             type="file"
             onChange={handleChange}
-            className="shadow appearance-none border rounded w-full py-2 px-3"
+            className="focus:outline-none focus:border-naranja_enf focus:border-2  shadow appearance-none border  w-full py-2 px-3 mb-3
+            file:mr-4 file:py-2 file:px-4
+            file:rounded-full file:border-0
+            file:text-sm file:font-semibold
+            file:bg-naranja_enf file:text-gray-700
+            hover:file:bg-negro_fondo hover:file:text-white
+            sm:text-hidden"
           />
           {localimage ? (
             <span
@@ -230,8 +245,13 @@ function ProductForm() {
             ""
           )}
         </div>
-        <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded">
-          Save Product
+        <button
+          className={`${poppins} bg-naranja_enf my-3 rounded p-2  ${
+            !ready() ? "opacity-60" : ""
+          }`}
+          type="submit"
+          disabled={!ready()}>
+          Guardar auto
         </button>
       </div>
     </form>
