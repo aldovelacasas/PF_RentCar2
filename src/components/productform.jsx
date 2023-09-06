@@ -62,15 +62,14 @@ function ProductForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     localStorage.removeItem("formData");
-    alert("bien");
-    // const formData = new FormData();
+    const formData = new FormData();
 
-    // formData.append("data", JSON.stringify(product));
-    // formData.append("file", image);
+    formData.append("data", JSON.stringify(product));
+    formData.append("file", image);
 
-    // const res = await axios.post("/api/products", formData);
-    // form.current.reset();
-    // router.push("/vehiculos");
+    const res = await axios.post("/api/products", formData);
+    form.current.reset();
+    router.push("/vehiculos");
   };
 
   const setLocalStorage = () => {
