@@ -4,6 +4,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { Poppins } from "next/font/google";
+import validation from "@/libs/validation";
 
 const alertFontPoppins = Poppins({
   weight: "200",
@@ -48,6 +49,18 @@ function ProductForm() {
     price: "",
   });
 
+  const [error, setError] = useState({
+    name: "",
+    model: "",
+    year: "",
+    type: "",
+    capacity: "",
+    transmission: "",
+    description: "",
+    price: "",
+    image: "",
+  });
+
   const [image, setImage] = useState("");
 
   const form = useRef(null);
@@ -56,10 +69,15 @@ function ProductForm() {
   const handleChange = (e) => {
     if (e.target.name === "image") {
       setImage(e.target.files[0]);
+      setError({ ...error, image: validation(e.target.files[0], "file") });
     } else {
       setProduct({
         ...product,
         [e.target.name]: e.target.value,
+      });
+      setError({
+        ...error,
+        [e.target.name]: validation(e.target.value, e.target.name),
       });
     }
     setLocalStorage();
@@ -88,7 +106,26 @@ function ProductForm() {
   };
 
   const ready = () => {
-    return true;
+    return (
+      !error.name &&
+      !error.model &&
+      !error.year &&
+      !error.type &&
+      !error.capacity &&
+      !error.transmission &&
+      !error.description &&
+      !error.price &&
+      !error.image &&
+      product.name !== "" &&
+      product.model !== "" &&
+      product.year !== "" &&
+      product.type !== "" &&
+      product.capacity !== "" &&
+      product.transmission !== "" &&
+      product.description !== "" &&
+      product.price !== "" &&
+      image !== ""
+    );
   };
 
   return (
@@ -111,6 +148,15 @@ function ProductForm() {
             onChange={handleChange}
             className="focus:outline-none focus:border-naranja_enf focus:border-2  shadow appearance-none border  w-full py-2 px-3 mb-3"
           />
+          {error.name ? (
+            <span
+              className={`${alertPoppins} text-sm`}
+              style={{ color: "red" }}>
+              {error.name}
+            </span>
+          ) : (
+            ""
+          )}
         </div>
         <div>
           <label
@@ -141,6 +187,15 @@ function ProductForm() {
             onChange={handleChange}
             className="focus:outline-none focus:border-naranja_enf focus:border-2  shadow appearance-none border  w-full py-2 px-3 mb-3"
           />
+          {error.year ? (
+            <span
+              className={`${alertPoppins} text-sm`}
+              style={{ color: "red" }}>
+              {error.year}
+            </span>
+          ) : (
+            ""
+          )}
         </div>
         <div>
           <label
@@ -156,6 +211,15 @@ function ProductForm() {
             onChange={handleChange}
             className="focus:outline-none focus:border-naranja_enf focus:border-2  shadow appearance-none border  w-full py-2 px-3 mb-3"
           />
+          {error.type ? (
+            <span
+              className={`${alertPoppins} text-sm`}
+              style={{ color: "red" }}>
+              {error.type}
+            </span>
+          ) : (
+            ""
+          )}
         </div>
         <div>
           <label
@@ -171,6 +235,15 @@ function ProductForm() {
             onChange={handleChange}
             className="focus:outline-none focus:border-naranja_enf focus:border-2  shadow appearance-none border  w-full py-2 px-3 mb-3"
           />
+          {error.capacity ? (
+            <span
+              className={`${alertPoppins} text-sm`}
+              style={{ color: "red" }}>
+              {error.capacity}
+            </span>
+          ) : (
+            ""
+          )}
         </div>
         <div>
           <label
@@ -186,6 +259,15 @@ function ProductForm() {
             onChange={handleChange}
             className="focus:outline-none focus:border-naranja_enf focus:border-2  shadow appearance-none border  w-full py-2 px-3 mb-3"
           />
+          {error.transmission ? (
+            <span
+              className={`${alertPoppins} text-sm`}
+              style={{ color: "red" }}>
+              {error.transmission}
+            </span>
+          ) : (
+            ""
+          )}
         </div>
         <div>
           <label
@@ -216,6 +298,15 @@ function ProductForm() {
             onChange={handleChange}
             className="focus:outline-none focus:border-naranja_enf focus:border-2  shadow appearance-none border  w-full py-2 px-3"
           />
+          {error.price ? (
+            <span
+              className={`${alertPoppins} text-sm`}
+              style={{ color: "red" }}>
+              {error.price}
+            </span>
+          ) : (
+            ""
+          )}
         </div>
         <div>
           <label
@@ -235,11 +326,20 @@ function ProductForm() {
             hover:file:bg-negro_fondo hover:file:text-white
             sm:text-hidden"
           />
-          {localimage ? (
+          {localimage && image === "" ? (
             <span
               className={`${alertPoppins} text-sm`}
               style={{ color: "red" }}>
               Vuelve a subir tu archivo
+            </span>
+          ) : (
+            ""
+          )}
+          {error.image ? (
+            <span
+              className={`${alertPoppins} text-sm`}
+              style={{ color: "red" }}>
+              {error.image}
             </span>
           ) : (
             ""

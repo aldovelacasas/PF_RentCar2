@@ -23,16 +23,49 @@ const validation = (value, input, extra) => {
     else return "";
   }
   if (input === "car") {
-    console.log(extra);
     const exist = extra.some((car) => car.id == input);
     if (exist) return " ";
     else return "Auto no valido";
-  } else {
+  }
+  if (input === "opinion") {
     const wordCount = value
       .split(/\s+/)
       .filter((word) => word.length > 0).length;
     if (wordCount >= 10 && wordCount <= 200) return "";
     else return "La opinión debe tener entre 10 y 200 palabras";
+  }
+  if (["name", "type", "transmission"].includes(input)) {
+    if (!value) return "No dejar vacio";
+    const regex = /^[a-zA-Z\s]+$/;
+    if (!regex.test(value)) return "Campo invalido";
+    else return "";
+  }
+  if (input === "year") {
+    if (!/^[0-9]{4}$/.test(value)) {
+      return "Año invalido";
+    }
+    const actualDate = new Date();
+    const actualYear = actualDate.getFullYear();
+    if (value > actualYear || value < 1990) return "Año invalido";
+    else return "";
+  }
+  if (input === "capacity" || input === "price") {
+    if (!/^[0-9]+$/.test(value)) return "Número inválido";
+    else return "";
+  }
+  if (input === "file") {
+    if (value instanceof File) {
+      const typesOfImages = [
+        "image/jpeg",
+        "image/png",
+        "image/gif",
+        "image/jpg",
+        "image/webp",
+      ];
+      if (!typesOfImages.includes(value.type))
+        return "Sube un formato valido (jpeg, png, gif, jpg, webp)";
+      else return "";
+    } else return "No es un archivo valido";
   }
 };
 export default validation;
