@@ -26,8 +26,7 @@ export default function Login() {
     setError("");
     try {
       await login(user.email, user.password);
-      insertUserIntoMySQL(user);
-      router.push("/");
+      router.push("/homePage");
     } catch (error) {
       console.log(error.code);
       if (error.code === "auth/missing-password") {
