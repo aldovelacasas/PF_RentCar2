@@ -63,10 +63,8 @@ function ProductForm() {
     e.preventDefault();
     localStorage.removeItem("formData");
     const formData = new FormData();
-
     formData.append("data", JSON.stringify(product));
     formData.append("file", image);
-
     const res = await axios.post("/api/products", formData);
     form.current.reset();
     router.push("/vehiculos");
@@ -75,8 +73,6 @@ function ProductForm() {
   const setLocalStorage = () => {
     try {
       const existImage = image !== null;
-      console.log("image es ", image);
-      console.log("existe", existImage);
       const data = { ...product, image: existImage };
       const datajson = JSON.stringify(data);
       window.localStorage.setItem("formData", datajson);
