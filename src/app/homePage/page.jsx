@@ -54,7 +54,6 @@ function HomePage() {
 
   function handleCollapse(number) {
     setCollapsed({ ...collapsed, [number]: !collapsed[number] });
-    console.log(collapsed);
   }
 
   function handleEmailChange(e) {
