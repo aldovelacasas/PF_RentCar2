@@ -71,7 +71,7 @@ function FormRent({
       let cant = (endDate - startDate) / 3600000 / 24;
       cant += 1;
       router.push(
-        `/payment?item=${model}&cant=${cant}&img=${imgsrc}&price=${price}`,
+        `/payment?item=${model}&cant=${cant}&img=${imgsrc}&price=${price}&startDate=${dates.startDate}&endDate=${dates.endDate}`,
         {
           query: { item: `${model}`, cant: `${cant}` },
         }

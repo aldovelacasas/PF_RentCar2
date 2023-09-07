@@ -16,13 +16,17 @@ const fontRubik = Rubik({
 
 const rubik = fontRubik.className;
 
-export default function CheckoutForm() {
+export default function CheckoutForm({ paymentKey }) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const item = searchParams.get("item");
   const cant = searchParams.get("cant");
   const img = searchParams.get("img");
   const price = searchParams.get("price");
+  const startDate = searchParams.get("startDate");
+  const endDate = searchParams.get("endDate");
+  let total = cant * price;
+  console.log(paymentKey);
 
   if (item === null || cant === null || img === null || price === null) {
     router.push("/homePage");
@@ -36,8 +40,8 @@ export default function CheckoutForm() {
       model: item,
       cant: cant,
       price: price,
-      startDate: ``,
-      endDate: ``,
+      startDate: startDate,
+      endDate: endDate,
     };
 
     emailjs
@@ -130,7 +134,6 @@ export default function CheckoutForm() {
     layout: "tabs",
   };
 
-  let total = cant * price;
   return (
     <main className="grid grid-cols-1 lg:grid-cols-2 p-8 bg-white">
       <section className="grid place-content-center mb-6">

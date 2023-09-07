@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "@/components/CheckoutForm";
+import { v4 } from "uuid";
 import axios from "axios";
 
 // Make sure to call loadStripe outside of a component’s render to avoid
@@ -14,9 +15,12 @@ const stripePromise = loadStripe(
 
 export default function App() {
   const [clientSecret, setClientSecret] = useState("");
+  const [paymentKey, setPaymentKey] = useState("");
 
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
+    setPaymentKey(v4());
+
     let item = { id: "xl-tshirt", price: 80 };
     let cant = 6;
     axios
@@ -39,7 +43,7 @@ export default function App() {
     <div className="App">
       {clientSecret && (
         <Elements options={options} stripe={stripePromise}>
-          <CheckoutForm />
+          <CheckoutForm paymentKey={paymentKey} />
         </Elements>
       )}
     </div>
