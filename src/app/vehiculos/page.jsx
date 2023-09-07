@@ -9,7 +9,6 @@ import { Rubik, Poppins } from "next/font/google";
 import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
 import FormRent from "../../components/FormRent";
 import CarCardDetail from "@/components/CarCardDetail";
-import { vehiculos } from "@/libs/placeholdersAdmin";
 
 const fontRubik = Rubik({
   weight: "600",
@@ -38,8 +37,7 @@ function Vehiculos() {
     dispatch(getCars());
   }, []);
 
-  // const cars = useSelector((state) => state.cars.showCars);
-  const cars = vehiculos;
+  const cars = useSelector((state) => state.cars.showCars);
 
   useEffect(() => {
     setCurrentPage(1);

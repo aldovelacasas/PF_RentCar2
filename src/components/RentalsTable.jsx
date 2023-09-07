@@ -26,6 +26,13 @@ if (window.innerWidth <= 870) {
 }
 
 function RentalsTable({ visible }) {
+  const arrowInitialState = {
+    id: false,
+    usuario: false,
+    vehiculo: false,
+    estado: false,
+    monto: false,
+  };
   const [currentPage, setCurrentPage] = useState(1);
   const [detailData, setDetailData] = useState();
   const [rentalDetailVisibility, setRentalDetailVisibility] = useState(false);
@@ -33,6 +40,7 @@ function RentalsTable({ visible }) {
   const [data, setData] = useState();
   const [category, setCategory] = useState("vehiculo");
   const [aux, setAux] = useState(false);
+  const [arrow, setArrow] = useState(arrowInitialState);
 
   useEffect(() => {
     setCurrentPage(1);
@@ -108,6 +116,7 @@ function RentalsTable({ visible }) {
       setData(sliceData(ordenated, currentPage, quantityPerPage));
       setCurrentPage;
       setAux(!aux);
+      setArrow({ ...arrowInitialState, [sortCategory]: true });
     } else {
       setData(data.sort((a, b) => b[sortCategory] - a[sortCategory]));
     }
@@ -118,7 +127,7 @@ function RentalsTable({ visible }) {
   total = total * 2;
   if (visible === false) return null;
   return (
-    <section className="text-[12px] md:text-[16px]">
+    <section className="text-[10px] sm:text-[12px] md:text-[16px]">
       <figure className="bg-white grid place-content-center sm:px-2 md:px-8 py-4 rounded-2xl">
         <h3 className="text-[1.2em]">
           Rentas
@@ -154,18 +163,18 @@ function RentalsTable({ visible }) {
                 <>
                   <th
                     onClick={() => handleSort("id")}
-                    className={`${rubik} px-2 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
-                    #ID
+                    className={`${rubik} sm:px-2 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
+                    {arrow.id ? "#Id ▼" : "#Id"}
                   </th>
                   <th
                     onClick={() => handleSort("vehiculo")}
-                    className={`${rubik} px-1 md:px-4 text-left break-all hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
-                    Vehículo
+                    className={`${rubik} min-w-[80px] sm:px-1 md:px-4 text-left break-all hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
+                    {arrow.vehiculo ? "Vehiculo ▼" : "Vehiculo"}
                   </th>
                   <th
                     onClick={() => handleSort("estado")}
-                    className={`${rubik} px-1 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
-                    Estado
+                    className={`${rubik} min-w-[80px] px-1 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
+                    {arrow.estado ? "Estado ▼" : "Estado"}
                   </th>
                   <th className={`${rubik} px-1 md:px-4 text-left`}>Detalle</th>
                 </>
@@ -173,28 +182,28 @@ function RentalsTable({ visible }) {
                 <>
                   <th
                     onClick={() => handleSort("id")}
-                    className={`${rubik} px-2 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
-                    #ID
+                    className={`${rubik} sm:px-2 md:px-4 md:min-w-[80px] text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
+                    {arrow.id ? "#Id ▼" : "#Id"}
                   </th>
                   <th
                     onClick={() => handleSort("usuario")}
-                    className={`${rubik} px-1 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
-                    Usuario
+                    className={`${rubik} sm:px-1 md:px-4 md:min-w-[160px] lg:min-w-[200px] text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
+                    {arrow.usuario ? "Usuario ▼" : "Usuario"}
                   </th>
                   <th
                     onClick={() => handleSort("vehiculo")}
-                    className={`${rubik} px-1 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
-                    Vehículo
+                    className={`${rubik} sm:px-1 md:px-4 md:min-w-[175px] text-left lg:min-w-[200px] hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
+                    {arrow.vehiculo ? "Vehiculo ▼" : "Vehiculo"}
                   </th>
                   <th
                     onClick={() => handleSort("estado")}
-                    className={`${rubik} px-1 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
-                    Estado
+                    className={`${rubik} sm:px-1 md:px-4 md:min-w-[150px] text-left lg:min-w-[150px] hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
+                    {arrow.estado ? "Estado ▼" : "Estado"}
                   </th>
                   <th
                     onClick={() => handleSort("monto")}
                     className={`${rubik} px-1 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
-                    Monto
+                    {arrow.monto ? "Monto ▼" : "Monto"}
                   </th>
                   <th className={`${rubik} px-1 md:px-4 text-left`}>Detalle</th>
                 </>
@@ -222,8 +231,8 @@ function RentalsTable({ visible }) {
                   {pantalla === "chica" ? (
                     <>
                       <td className=" p-4">{d.id}</td>
-                      <td className=" p-4 break-all">{d.vehiculo}</td>
-                      <td className="p-4">
+                      <td className=" sm:p-4 break-all">{d.vehiculo}</td>
+                      <td className="p-1 sm:p-4">
                         <span
                           className={
                             d.estado === "activo"
@@ -277,11 +286,6 @@ function RentalsTable({ visible }) {
         </table>
       </figure>
       <div className="w-full flex justify-center gap-2 mt-8 mb-8">
-        {data?.length === 0 && (
-          <p className="text-[1em] text-center text-naranja_enf px-4 bg-gris_fondo py-2 rounded-full">
-            Nada que mostrar
-          </p>
-        )}
         <button
           onClick={handlePrevious}
           className={

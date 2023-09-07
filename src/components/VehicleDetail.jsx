@@ -44,7 +44,7 @@ function VehicleDetail({ visible, data, handleVisible }) {
           Vehículo #{data.id}
         </h3>
         <form className="bg-gris_fondo lg:w-1/2 px-6 rounded-2xl overflow-y-scroll max-h-[420px] py-3">
-          <fieldset>
+          <fieldset className="grid place-content-center">
             <img
               src="https://picsum.photos/200/300"
               className="max-h-[200px]"

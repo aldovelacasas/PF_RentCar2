@@ -6,6 +6,7 @@ import RentalsTable from "@/components/RentalsTable";
 import VehiclesTable from "@/components/VehiclesTable";
 import HelpForm from "@/components/HelpForm";
 import { useRouter } from "next/navigation";
+import Alerts from "@/components/Alerts";
 
 const fontRubik = Rubik({
   weight: "600",
@@ -25,8 +26,14 @@ function AdminMain() {
   const [rentalsVisibility, setRentalsVisibility] = useState(true);
   const [vehiclesVisibility, setVehiclesVisibility] = useState(false);
   const [formVisibility, setFormVisibility] = useState(false);
+  const [alertsVisibility, setAlertsVisibility] = useState(false);
 
   let router = useRouter();
+
+  function handleAlertsVisibility() {
+    setAlertsVisibility(!alertsVisibility);
+    document.body.classList.toggle("stopScroll");
+  }
 
   if (!validation) {
     router.push("/");
@@ -75,7 +82,10 @@ function AdminMain() {
             }>
             ▼ Administrar vehículos ▼
           </h3>
-          <VehiclesTable visible={vehiclesVisibility} />
+          <VehiclesTable
+            visible={vehiclesVisibility}
+            handleAlertsVisibility={handleAlertsVisibility}
+          />
         </div>
         <div
           className={
@@ -95,6 +105,28 @@ function AdminMain() {
           <HelpForm visible={formVisibility} />
         </div>
       </main>
+      <Alerts visible={alertsVisibility}>
+        <p
+          className={`bg-naranja_enf text-white ${rubik} w-full text-center rounded-t-[15px]`}>
+          Alerta
+        </p>
+        <p className="text-[1em] px-4">
+          ¿Estás seguro de eliminar este vehículo?
+        </p>
+        <p className="text-[0.8em] mt-[-6px] px-4">{`(Podrás ver los vehículos eliminados en la página de restauración)`}</p>
+
+        <div className="flex w-1/2 justify-evenly">
+          <button
+            className={` bg-naranja_enf ${rubik} text-white text-[1em] px-4 rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black `}>
+            Borrar
+          </button>
+          <button
+            onClick={handleAlertsVisibility}
+            className={` bg-negro_fondo ${rubik} text-white text-[1em] px-4 rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black `}>
+            Cerrar
+          </button>
+        </div>
+      </Alerts>
     </div>
   );
 }

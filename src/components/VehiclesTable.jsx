@@ -26,7 +26,13 @@ if (window.innerWidth <= 870) {
   pantalla = "grande";
 }
 
-function VehiclesTable({ visible }) {
+function VehiclesTable({ visible, handleAlertsVisibility }) {
+  const arrowInitialState = {
+    name: false,
+    model: false,
+    type: false,
+    price: false,
+  };
   const [currentPage, setCurrentPage] = useState(1);
   const [detailData, setDetailData] = useState();
   const [vehiclesDetailVisibility, setVehiclesDetailVisibility] =
@@ -35,6 +41,7 @@ function VehiclesTable({ visible }) {
   const [data, setData] = useState();
   const [category, setCategory] = useState("name");
   const [aux, setAux] = useState(false);
+  const [arrow, setArrow] = useState(arrowInitialState);
 
   useEffect(() => {
     setCurrentPage(1);
@@ -113,6 +120,7 @@ function VehiclesTable({ visible }) {
       setData(sliceData(ordenated, currentPage, quantityPerPage));
       setCurrentPage;
       setAux(!aux);
+      setArrow({ ...arrowInitialState, [sortCategory]: true });
     } else {
       setData(data.sort((a, b) => b[sortCategory] - a[sortCategory]));
     }
@@ -120,7 +128,7 @@ function VehiclesTable({ visible }) {
 
   if (visible === false) return null;
   return (
-    <section className="text-[12px] md:text-[16px]">
+    <section className="text-[10px] sm:text-[12px] md:text-[16px]">
       <figure className="bg-white grid place-content-center sm:px-2 md:px-8 py-4 rounded-2xl">
         <h3 className="text-[1.2em] pl-2">
           Vehículos
@@ -132,7 +140,7 @@ function VehiclesTable({ visible }) {
         <p className={`${poppins} text-[0.9em] pl-2`}>
           Vista de los vehículos de la empresa
         </p>
-        <div className="flex flex-wrap">
+        <div className="flex flex-wrap pl-2">
           <label htmlFor="search" className="shrink-0 basis-[100%]">
             Búsqueda:
           </label>
@@ -157,18 +165,18 @@ function VehiclesTable({ visible }) {
                 <>
                   <th
                     onClick={() => handleSort("name")}
-                    className={`${rubik} px-2 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
-                    Nombre
+                    className={`${rubik} min-w-[90px] sm:min-w-[250px] px-2 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
+                    {arrow.name ? "Nombre ▼" : "Nombre"}
                   </th>
                   <th
                     onClick={() => handleSort("model")}
-                    className={`${rubik} px-1 md:px-4 text-left break-all hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
-                    Modelo
+                    className={`${rubik} min-w-[90px] sm:min-w-[250px] px-1 md:px-4 text-left break-all hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
+                    {arrow.model ? "Modelo ▼" : "Modelo"}
                   </th>
                   <th
                     onClick={() => handleSort("price")}
-                    className={`${rubik} px-1 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
-                    Precio
+                    className={`${rubik} min-w-[60px] px-1 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
+                    {arrow.price ? "Precio ▼" : "Precio"}
                   </th>
                   <th className={`${rubik} px-1 md:px-4 text-left`}>
                     Acciones
@@ -178,23 +186,23 @@ function VehiclesTable({ visible }) {
                 <>
                   <th
                     onClick={() => handleSort("name")}
-                    className={`${rubik} px-2 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
-                    Nombre
+                    className={`${rubik} md:min-w-[150px] px-2 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
+                    {arrow.name ? "Nombre ▼" : "Nombre"}
                   </th>
                   <th
                     onClick={() => handleSort("model")}
-                    className={`${rubik} px-1 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
-                    Modelo
+                    className={`${rubik} md:min-w-[150px] px-1 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
+                    {arrow.model ? "Modelo ▼" : "Modelo"}
                   </th>
                   <th
                     onClick={() => handleSort("type")}
-                    className={`${rubik} px-1 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
-                    Tipo
+                    className={`${rubik} md:min-w-[150px] px-1 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
+                    {arrow.type ? "Tipo ▼" : "Tipo"}
                   </th>
                   <th
                     onClick={() => handleSort("price")}
-                    className={`${rubik} px-1 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
-                    Precio
+                    className={`${rubik} md:min-w-[120px] px-1 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
+                    {arrow.price ? "Precio ▼" : "Precio"}
                   </th>
                   <th className={`${rubik} px-1 md:px-4 text-left`}>
                     Acciones
@@ -249,7 +257,7 @@ function VehiclesTable({ visible }) {
                           <BsPencilFill />
                         </button>
                         <button
-                          onClick={() => handleVehiclesVisibility(d)}
+                          onClick={handleAlertsVisibility}
                           className="px-2 ml-2 py-1 border-[1px] rounded-md bg-red-500 text-white border-negro_fondo hover:bg-negro_fondo hover:text-white">
                           <BsFillTrash3Fill />
                         </button>
@@ -263,11 +271,6 @@ function VehiclesTable({ visible }) {
         </table>
       </figure>
       <div className="w-full flex justify-center gap-2 mt-8 mb-8">
-        {data?.length === 0 && (
-          <p className="text-[1em] text-center text-naranja_enf px-4 bg-gris_fondo py-2 rounded-full">
-            Nada que mostrar
-          </p>
-        )}
         <button
           onClick={handlePrevious}
           className={
