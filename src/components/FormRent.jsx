@@ -166,13 +166,14 @@ function FormRent({
             )}
             <fieldset className="flex sticky bottom-0 bg-white justify-evenly w-full lg:w-1/2 py-6">
             <script async
-                src="https://js.stripe.com/v3/buy-button.js">
-                     </script>
+  src="https://js.stripe.com/v3/buy-button.js">
+</script>
 
-                     <stripe-buy-button 
-                       buy-button-id="buy_btn_1NnP0dC8CY4zllMLPaQ8yFpb"
-                       publishable-key="pk_test_51Nn2KYC8CY4zllMLpqkuDGM7gpaw1TRnW1MSev2p37I8cucia4ZGTp6Divr3e2rbE32vkqmXtrpizkPgoWtEZ4z800Eno12mKH">
-                     </stripe-buy-button>
+<stripe-buy-button
+  buy-button-id="buy_btn_1NnTKeC8CY4zllML3xtEIOJK"
+  publishable-key="pk_test_51Nn2KYC8CY4zllMLpqkuDGM7gpaw1TRnW1MSev2p37I8cucia4ZGTp6Divr3e2rbE32vkqmXtrpizkPgoWtEZ4z800Eno12mKH"
+>
+</stripe-buy-button>
               <button
                 type="button"
                 onClick={handleVisible}
