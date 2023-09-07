@@ -3,9 +3,15 @@
 import { Rubik, Poppins } from "next/font/google";
 import { useState } from "react";
 import validation from "@/libs/validation";
+import { useRouter } from "next/navigation";
 
 const fontRubik = Rubik({
   weight: "600",
+  subsets: ["latin"],
+});
+
+const bigFontRubik = Rubik({
+  weight: "800",
   subsets: ["latin"],
 });
 
@@ -23,8 +29,11 @@ const poppins = fontPoppins.className;
 const alertPoppins = alertFontPoppins.className;
 
 const rubik = fontRubik.className;
+const bigrubik = bigFontRubik.className;
 
 function OpinionForm({ cars }) {
+  const router = useRouter();
+
   const [review, setReview] = useState({
     email: "",
     name: "",
@@ -92,9 +101,32 @@ function OpinionForm({ cars }) {
     // }
   };
 
+  const isUser = () => {
+    return false;
+  };
+
   return (
-    <div className="bg-gray-400 flex flex-col items-center justify-center">
-      <form onSubmit={handleSubmit} className="p-4 mx-4 my-4 max-w-md w-full">
+    <div className={`bg-gray-400 flex flex-col items-center justify-center`}>
+      {!isUser() ? (
+        <div className="z-10 absolute bg-white sm:p-4 p-2 sm:m-auto m-2 rounded-xl border-black border-2 flex flex-col items-center shadow-sm shadow-black !important">
+          <h3 className={`${bigrubik} text-2xl mb-2 text-center`}>
+            Inicia Sesión para dejar tu testimonio
+          </h3>
+          <button
+            onClick={() => router.push("/login")}
+            className={`${poppins} bg-naranja_enf rounded-xl px-3 py-2 text-sm sm:text-base hover:bg-negro_fondo hover:text-white`}
+            type="button">
+            Iniciar Sesión
+          </button>
+        </div>
+      ) : (
+        ""
+      )}
+      <form
+        onSubmit={handleSubmit}
+        className={`p-4 mx-4 my-4 max-w-md w-full ${
+          isUser() ? "opacity-100" : "opacity-20"
+        } `}>
         <h3 className={`${rubik} text-2xl font-bold mb-2`}>Deja tu reseña</h3>
         <p className={`${poppins} text-base text-gray-600 mb-6`}>
           Dinos qué opinas de nuestros servicios
@@ -103,6 +135,7 @@ function OpinionForm({ cars }) {
           Email
         </label>
         <input
+          disabled={!isUser()}
           type="email"
           name="email"
           onChange={handleChange}
@@ -119,6 +152,7 @@ function OpinionForm({ cars }) {
           Nombre y apellido
         </label>
         <input
+          disabled={!isUser()}
           onChange={handleChange}
           type="text"
           name="nameSurname"
@@ -135,6 +169,7 @@ function OpinionForm({ cars }) {
           Auto
         </label>
         <select
+          disabled={!isUser()}
           onChange={handleChange}
           name="car"
           defaultValue={"Seleccionar"}
@@ -161,6 +196,7 @@ function OpinionForm({ cars }) {
         </select>
         <label htmlFor="rating">Rating</label>
         <input
+          disabled={!isUser()}
           type="number"
           onChange={handleChange}
           name="rating"
@@ -178,6 +214,7 @@ function OpinionForm({ cars }) {
           Opinión
         </label>
         <textarea
+          disabled={!isUser()}
           onChange={handleChange}
           name="opinion"
           cols="30"
