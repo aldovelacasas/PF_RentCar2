@@ -14,12 +14,13 @@ CREATE TABLE product(
 
 CREATE TABLE user(
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(200) NOT NULL,
-    passport VARCHAR(200) NOT NULL,
-    email VARCHAR(200) NOT NULL,
-    phone VARCHAR(200) NOT NULL,
-    password VARCHAR(200) NOT NULL, 
-    isActive BOOLEAN NOT NULL,
+    uid VARCHAR (50),
+    username VARCHAR(200) ,
+    passport VARCHAR(200) ,
+    emailUser VARCHAR(200) ,
+    phone VARCHAR(200) ,
+    password VARCHAR(200) , 
+    isActive BOOLEAN,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
