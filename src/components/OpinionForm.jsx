@@ -86,8 +86,6 @@ function OpinionForm({ cars }) {
     );
   };
 
-  console.log(review);
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     alert("Agregando Testimonio, Gracias!");
