@@ -3,6 +3,7 @@ import { categorias } from "@/libs/categorias.js";
 import { BiSolidCar } from "react-icons/bi";
 import { FaCalendarAlt } from "react-icons/fa";
 import { Rubik, Poppins } from "next/font/google";
+import { useRouter } from "next/navigation";
 
 const fontRubik = Rubik({
   weight: "600",
@@ -26,6 +27,7 @@ function FormRent({
   isAuth = false,
   handleVisible,
   model,
+  price,
   image,
 }) {
   const [category, setCategory] = useState(cat);
@@ -49,6 +51,8 @@ function FormRent({
     setDate({ ...dates, [e.target.name]: e.target.value });
   }
 
+  let router = useRouter();
+
   function handleValidation(e) {
     e.preventDefault();
     if (dates.startDate > dates.endDate) {
@@ -59,6 +63,22 @@ function FormRent({
       return;
     } else if (dates.startDate <= dates.endDate) {
       setErrors({});
+      // let year = dates.endDate.split("-")[0];
+      // let month = dates.endDate.split("-")[1];
+      // let day = dates.endDate.split("-")[2]
+      let endDate = new Date(dates.endDate);
+      let startDate = new Date(dates.startDate);
+      let cant = (endDate - startDate) / 3600000 / 24;
+      cant += 1;
+      router.push(
+        `/payment?item=${model}&cant=${cant}&img=${imgsrc}&price=${price}`,
+        {
+          query: { item: `${model}`, cant: `${cant}` },
+        }
+      );
+      if (document.body.classList.length === 2) {
+        document.body.classList.remove("stopScroll");
+      }
     }
   }
 
@@ -165,14 +185,11 @@ function FormRent({
               <p className="text-[1em] text-rojo_status">{errors.dates}</p>
             )}
             <fieldset className="flex sticky bottom-0 bg-white justify-evenly w-full lg:w-1/2 py-6">
-            <script async
-                src="https://js.stripe.com/v3/buy-button.js">
-                     </script>
-
-                     <stripe-buy-button 
-                       buy-button-id="buy_btn_1NnP0dC8CY4zllMLPaQ8yFpb"
-                       publishable-key="pk_test_51Nn2KYC8CY4zllMLpqkuDGM7gpaw1TRnW1MSev2p37I8cucia4ZGTp6Divr3e2rbE32vkqmXtrpizkPgoWtEZ4z800Eno12mKH">
-                     </stripe-buy-button>
+              <button
+                onClick={handleValidation}
+                className={` bg-naranja_enf ${rubik} text-white text-[0.8em] px-4 py-1 rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
+                Rentar
+              </button>
               <button
                 type="button"
                 onClick={handleVisible}

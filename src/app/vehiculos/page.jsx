@@ -9,6 +9,7 @@ import { Rubik, Poppins } from "next/font/google";
 import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
 import FormRent from "../../components/FormRent";
 import CarCardDetail from "@/components/CarCardDetail";
+import { vehiculos } from "@/libs/placeholdersAdmin";
 
 const fontRubik = Rubik({
   weight: "600",
@@ -29,6 +30,7 @@ function Vehiculos() {
   const [detailVisibility, setDetailVisibility] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [detailData, setDetailData] = useState();
+  const [price, setPrice] = useState();
   const [model, setModel] = useState();
   const [image, setImage] = useState();
 
@@ -36,11 +38,8 @@ function Vehiculos() {
     dispatch(getCars());
   }, []);
 
-  const cars = useSelector((state) => state.cars.showCars);
-
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [cars]);
+  // const cars = useSelector((state) => state.cars.showCars);
+  const cars = vehiculos;
 
   useEffect(() => {
     setCurrentPage(1);
@@ -50,11 +49,20 @@ function Vehiculos() {
     if (data.name) {
       setModel(data.name);
     }
+    if (data.price) {
+      setPrice(data.price);
+      console.log(data.price);
+    }
     if (data.image) {
       setImage(data.image);
     }
     setVisibility(!visibility);
-    document.body.classList.toggle("stopScroll");
+    console.log(document.body.classList);
+    if (document.body.classList.length === 1) {
+      document.body.classList.toggle("stopScroll");
+    } else if (!detailVisibility) {
+      document.body.classList.remove("stopScroll");
+    }
   }
 
   function handleDetail(data) {
@@ -207,6 +215,7 @@ function Vehiculos() {
         handleVisible={handleVisibility}
         model={model}
         image={image}
+        price={price}
       />
       <CarCardDetail
         visible={detailVisibility}
