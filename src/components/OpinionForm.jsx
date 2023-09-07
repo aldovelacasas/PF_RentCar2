@@ -4,6 +4,7 @@ import { Rubik, Poppins } from "next/font/google";
 import { useState } from "react";
 import validation from "@/libs/validation";
 import { useRouter } from "next/navigation";
+import { useAuth } from "@/app/context/AuthContext";
 
 const fontRubik = Rubik({
   weight: "600",
@@ -100,7 +101,8 @@ function OpinionForm({ cars }) {
   };
 
   const isUser = () => {
-    return false;
+    if (useAuth().user) return true;
+    else return false;
   };
 
   return (
