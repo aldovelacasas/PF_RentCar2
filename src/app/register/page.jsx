@@ -3,6 +3,14 @@ import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useRouter } from "next/navigation";
 import Alert from "../login/Alert";
+import { Poppins } from "next/font/google";
+
+const fontPoppins = Poppins({
+  weight: "400",
+  subsets: ["latin"],
+});
+
+const poppins = fontPoppins.className;
 
 export default function Register() {
   const [user, setUser] = useState({
@@ -39,7 +47,7 @@ export default function Register() {
   };
 
   return (
-    <div className="w-full max-w-xs m-auto">
+    <div className="w-full sm:max-w-xl max-w-lg sm:p-auto p-1 sm:m-auto my-8">
       {error && <Alert message={error} />}
 
       <form
@@ -53,7 +61,7 @@ export default function Register() {
           name="email"
           placeholder="correo@gmail.com"
           onChange={handleChange}
-          className="shadow apparence-none border rounded w-full mt-2 mb-3 py-2 px-3 text-gray-700 "
+          className="focus:outline-none focus:border-gray-400 focus:border-2  shadow appearance-none border  w-full py-2 px-3 mb-3"
         />
 
         <label htmlFor="password">Password</label>
@@ -62,7 +70,7 @@ export default function Register() {
           name="password"
           onChange={handleChange}
           placeholder="********"
-          className="shadow apparence-none border rounded w-full mt-2 mb-3 py-2 px-3 text-gray-700"
+          className="focus:outline-none focus:border-gray-400 focus:border-2  shadow appearance-none border  w-full py-2 px-3 mb-3"
         />
 
         <label>Nombre de usuario</label>
@@ -70,15 +78,15 @@ export default function Register() {
           type="text"
           name="username"
           onChange={handleChange}
-          className="shadow apparence-none border rounded w-full mt-2 mb-3 py-2 px-3 text-gray-700"
+          className="focus:outline-none focus:border-gray-400 focus:border-2  shadow appearance-none border  w-full py-2 px-3 mb-3"
         />
 
-        <label>telefono</label>
+        <label>Telefono</label>
         <input
           type="text"
           name="phone"
           onChange={handleChange}
-          className="shadow apparence-none border rounded w-full mt-2 mb-3 py-2 px-3 text-gray-700"
+          className="focus:outline-none focus:border-gray-400 focus:border-2  shadow appearance-none border  w-full py-2 px-3 mb-3"
         />
 
         <label>Pasaporte</label>
@@ -86,10 +94,11 @@ export default function Register() {
           type="text"
           name="passport"
           onChange={handleChange}
-          className="shadow apparence-none border rounded w-full mt-2 mb-3 py-2 px-3 text-gray-500"
+          className="focus:border-gray-400 focus:border-2  shadow appearance-none border  w-full py-2 px-3 mb-3"
         />
 
-        <button className="bg-green-300 hover:bg-slate-200 text-black shadow-md rounded border-2 border-gray mt-5 py-3 px-2 w-full">
+        <button
+          className={`${poppins} bg-naranja_enf my-3 rounded p-2 w-full hover:bg-negro_fondo hover:text-white`}>
           Register
         </button>
       </form>
