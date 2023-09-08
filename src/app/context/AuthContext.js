@@ -8,6 +8,9 @@ import {
   signOut,
   GoogleAuthProvider,
   signInWithPopup,
+  linkWithPopup,
+  fetchSignInMethodsForEmail,
+  updatePassword,
 } from "firebase/auth";
 import axios from "axios";
 
@@ -44,12 +47,55 @@ export const AuthContextProvider = ({ children }) => {
     await saveData(uid, emailUser);
   };
 
+  const linkGoogleAccount = async (currentUser) => {
+    try {
+      const email = currentUser.email;
+      const signInMethods = await fetchSignInMethodsForEmail(auth, email);
+
+      if (!signInMethods.includes("google.com")) {
+        const googleProvider = new GoogleAuthProvider();
+        await linkWithPopup(currentUser, googleProvider);
+        console.log("Cuenta de Google vinculada con éxito.");
+      } else {
+        console.log("La cuenta ya está vinculada con Google.");
+      }
+    } catch (error) {
+      console.error("Error al vincular la cuenta de Google:", error);
+      throw error;
+    }
+  };
+
   const loginWithGoogle = async () => {
-    const googleProvider = new GoogleAuthProvider();
-    const userCredential = await signInWithPopup(auth, googleProvider);
-    const uid = userCredential.user.uid;
-    const emailUser = userCredential.user.email;
-    await saveData(uid, emailUser);
+    try {
+      const googleProvider = new GoogleAuthProvider();
+      const userCredential = await signInWithPopup(auth, googleProvider);
+      const uid = userCredential.user.uid;
+      const emailUser = userCredential.user.email;
+
+      // Verificar si el usuario ya tiene una contraseña configurada
+      const currentUser = auth.currentUser;
+      const signInMethods = await fetchSignInMethodsForEmail(auth, emailUser);
+
+      if (!signInMethods.includes("password")) {
+        // El usuario no tiene una contraseña configurada, ofrecer la opción de registrar una contraseña
+        const newPassword = prompt("Crea una contraseña para tu cuenta:");
+        if (newPassword) {
+          // Registrar la contraseña
+          await updatePassword(currentUser, newPassword);
+        }
+      }
+
+      // Vincular la cuenta de Google al usuario actual si no está vinculada
+      await linkGoogleAccount(currentUser);
+
+      // Luego de la vinculación, el usuario podrá iniciar sesión con ambas opciones
+      await saveData(uid, emailUser);
+    } catch (error) {
+      console.error(
+        "Error en el proceso de inicio de sesión con Google:",
+        error
+      );
+    }
   };
 
   const logOut = () => {
