@@ -381,8 +381,8 @@ function HomePage() {
             <div className="w-2/3 md:text-center md:text-[0.8em]">
               <p className={`text-[0.8em] ${rubik} mb-2`}>Facilidad de pago</p>
               <p className={`text-[0.8em] ${poppins} mb-2 `}>
-                Paga con tu cuenta de mercadoPago de manera fácil, sencilla y
-                transparente.
+                Paga con tu tarjeta de crédito o débito de manera fácil y
+                segura.
               </p>
             </div>
           </div>
@@ -414,7 +414,7 @@ function HomePage() {
           <p>
             "Nunca habíamos rentado un auto antes, pero luego de haber puesto
             nuestro voto de confianza en esta página, es una experiencia que
-            quiero repetir cada que tenga vacaciones".
+            quiero repetir cada vez que tenga vacaciones".
           </p>
           <div className="flex place-content-between items-center">
             <div className="flex w-1/2 gap-3 items-center mt-4">
@@ -443,7 +443,7 @@ function HomePage() {
                 className="w-[30px] h-[30px] rounded-full"
               />
               <div>
-                <p>Juanita López</p>
+                <p>Juana López</p>
                 <p className={`${poppins} text-[0.8em]`}>Contadora</p>
               </div>
             </div>
