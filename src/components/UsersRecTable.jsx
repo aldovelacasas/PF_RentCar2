@@ -1,10 +1,11 @@
 import { Rubik, Poppins } from "next/font/google";
-import { vehiculos } from "@/libs/placeholdersAdmin";
+import { usuariosBorrados } from "@/libs/placeholdersAdmin";
 import { sliceData, slicePage } from "@/libs/functions";
 import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
-import { BsPencilFill, BsFillTrash3Fill } from "react-icons/bs";
+import { RiRecycleFill } from "react-icons/ri";
+import { PiPlusCircleBold } from "react-icons/pi";
+import UserDetail from "./UserDetail";
 import { useEffect, useState } from "react";
-import VehicleDetail from "./VehicleDetail";
 
 const fontRubik = Rubik({
   weight: "600",
@@ -26,30 +27,28 @@ if (window.innerWidth <= 870) {
   pantalla = "grande";
 }
 
-function VehiclesTable({ visible, handleAlertsVisibility }) {
+function CarRecTable({ visible, handleAlertsVisibility }) {
   const arrowInitialState = {
-    name: false,
-    model: false,
-    type: false,
-    price: false,
+    id: false,
+    nombre: false,
+    pasaporte: false,
+    correo: false,
   };
   const [currentPage, setCurrentPage] = useState(1);
   const [detailData, setDetailData] = useState();
   const [vehiclesDetailVisibility, setVehiclesDetailVisibility] =
     useState(false);
-  const [createVehiclesVisibility, setCreateVehiclesVisibility] =
-    useState(false);
   const [search, setSearch] = useState("");
   const [data, setData] = useState();
-  const [category, setCategory] = useState("name");
+  const [category, setCategory] = useState("nombre");
   const [aux, setAux] = useState(false);
   const [arrow, setArrow] = useState(arrowInitialState);
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [vehiculos]);
+  }, [usuariosBorrados]);
 
-  let dataToShow = vehiculos;
+  let dataToShow = usuariosBorrados;
   let quantityPerPage = 10;
   let max = Math.ceil(dataToShow.length / quantityPerPage);
   let pages = [];
@@ -89,11 +88,6 @@ function VehiclesTable({ visible, handleAlertsVisibility }) {
     setVehiclesDetailVisibility(!vehiclesDetailVisibility);
     document.body.classList.toggle("stopScroll");
   };
-
-  function handleCreateVehiclesVisibility() {
-    setCreateVehiclesVisibility(!createVehiclesVisibility);
-    document.body.classList.toggle("stopScroll");
-  }
 
   function handleSearch(e) {
     setSearch(e.target.value);
@@ -135,14 +129,14 @@ function VehiclesTable({ visible, handleAlertsVisibility }) {
     <section className="text-[10px] sm:text-[12px] md:text-[16px]">
       <figure className="bg-white grid place-content-center sm:px-2 md:px-8 py-4 rounded-2xl">
         <h3 className="text-[1.2em] pl-2">
-          Vehículos
+          Usuarios
           <span
             className={`${poppins} text-[0.8em] bg-gris_fondo ml-2 py-1 px-2 rounded-full`}>
             {dataToShow.length}
           </span>
         </h3>
         <p className={`${poppins} text-[0.9em] pl-2`}>
-          Vista de los vehículos de la empresa
+          Vista de los usuarios dados de baja
         </p>
         <div className="flex flex-wrap pl-2">
           <label htmlFor="search" className="shrink-0 basis-[100%]">
@@ -158,61 +152,34 @@ function VehiclesTable({ visible, handleAlertsVisibility }) {
           <select
             className="max-w-[30%]  bg-naranja_enf text-white px-2 rounded-full cursor-pointer shadow-sm shadow-black hover:shadow-md hover:shadow-black"
             onChange={handleSearchCategory}>
-            <option value="name">Nombre</option>
-            <option value="model">Modelo</option>
+            <option value="nombre">Nombre</option>
+            <option value="pasaporte">pasaporte</option>
           </select>
         </div>
         <table className={`${poppins} bg-white mt-6`}>
           <tbody className="">
             <tr className="">
-              {pantalla === "chica" ? (
-                <>
-                  <th
-                    onClick={() => handleSort("name")}
-                    className={`${rubik} min-w-[90px] sm:min-w-[250px] px-2 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
-                    {arrow.name ? "Nombre ▼" : "Nombre"}
-                  </th>
-                  <th
-                    onClick={() => handleSort("model")}
-                    className={`${rubik} min-w-[90px] sm:min-w-[250px] px-1 md:px-4 text-left break-all hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
-                    {arrow.model ? "Modelo ▼" : "Modelo"}
-                  </th>
-                  <th
-                    onClick={() => handleSort("price")}
-                    className={`${rubik} min-w-[60px] px-1 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
-                    {arrow.price ? "Precio ▼" : "Precio"}
-                  </th>
-                  <th className={`${rubik} px-1 md:px-4 text-left`}>
-                    Acciones
-                  </th>
-                </>
-              ) : (
-                <>
-                  <th
-                    onClick={() => handleSort("name")}
-                    className={`${rubik} md:min-w-[150px] px-2 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
-                    {arrow.name ? "Nombre ▼" : "Nombre"}
-                  </th>
-                  <th
-                    onClick={() => handleSort("model")}
-                    className={`${rubik} md:min-w-[150px] px-1 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
-                    {arrow.model ? "Modelo ▼" : "Modelo"}
-                  </th>
-                  <th
-                    onClick={() => handleSort("type")}
-                    className={`${rubik} md:min-w-[150px] px-1 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
-                    {arrow.type ? "Tipo ▼" : "Tipo"}
-                  </th>
-                  <th
-                    onClick={() => handleSort("price")}
-                    className={`${rubik} md:min-w-[120px] px-1 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
-                    {arrow.price ? "Precio ▼" : "Precio"}
-                  </th>
-                  <th className={`${rubik} px-1 md:px-4 text-left`}>
-                    Acciones
-                  </th>
-                </>
-              )}
+              <th
+                onClick={() => handleSort("id")}
+                className={`${rubik} min-w-[50px] sm:min-w-[100px] px-2 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
+                {arrow.id ? "#Id ▼" : "#Id"}
+              </th>
+              <th
+                onClick={() => handleSort("nombre")}
+                className={`${rubik} min-w-[90px] sm:min-w-[250px] px-2 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
+                {arrow.nombre ? "Nombre ▼" : "Nombre"}
+              </th>
+              <th
+                onClick={() => handleSort("pasaporte")}
+                className={`${rubik} min-w-[60px] sm:min-w-[150px] px-1 md:px-4 text-left break-all hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
+                {arrow.pasaporte ? "Pasaporte ▼" : "Pasaporte"}
+              </th>
+              <th
+                onClick={() => handleSort("correo")}
+                className={`${rubik} min-w-[60px] sm:min-w-[200px] px-1 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
+                {arrow.correo ? "Correo ▼" : "Correo"}
+              </th>
+              <th className={`${rubik} px-1 md:px-4 text-left`}>Acciones</th>
             </tr>
             {data?.map((d) => {
               let ultimo;
@@ -230,44 +197,22 @@ function VehiclesTable({ visible, handleAlertsVisibility }) {
                       ? "hover:bg-gris_frente "
                       : "border-b-2 hover:bg-gris_frente "
                   }>
-                  {pantalla === "chica" ? (
-                    <>
-                      <td className=" p-4">{d.name}</td>
-                      <td className=" break-all">{d.model}</td>
-                      <td className="p-4 text-right"> ${d.price}</td>
-                      <td className=" p-4">
-                        <button
-                          onClick={() => handleVehiclesVisibility(d)}
-                          className="px-1 py-1 border-[1px] rounded-md bg-gris_fondo border-negro_fondo hover:bg-negro_fondo hover:text-white">
-                          <BsPencilFill />
-                        </button>
-                        <button
-                          onClick={() => handleVehiclesVisibility(d)}
-                          className="px-1 py-1 border-[1px] rounded-md bg-red-500 text-white border-negro_fondo hover:bg-negro_fondo hover:text-white">
-                          <BsFillTrash3Fill />
-                        </button>
-                      </td>
-                    </>
-                  ) : (
-                    <>
-                      <td className=" p-4">{d.name}</td>
-                      <td className=" p-4">{d.model}</td>
-                      <td className=" p-4">{d.type}</td>
-                      <td className="p-4 text-right">${d.price}</td>
-                      <td className=" p-4">
-                        <button
-                          onClick={() => handleVehiclesVisibility(d)}
-                          className="px-2 py-1 border-[1px] rounded-md bg-gris_fondo border-negro_fondo hover:bg-negro_fondo hover:text-white">
-                          <BsPencilFill />
-                        </button>
-                        <button
-                          onClick={handleAlertsVisibility}
-                          className="px-2 ml-2 py-1 border-[1px] rounded-md bg-red-500 text-white border-negro_fondo hover:bg-negro_fondo hover:text-white">
-                          <BsFillTrash3Fill />
-                        </button>
-                      </td>
-                    </>
-                  )}
+                  <td className=" p-4">{d.id}</td>
+                  <td className=" break-all">{d.nombre}</td>
+                  <td className="p-4 text-right"> {d.pasaporte}</td>
+                  <td className="p-4 text-right"> {d.correo}</td>
+                  <td className=" p-4">
+                    <button
+                      onClick={() => handleVehiclesVisibility(d)}
+                      className="px-2 py-1 border-[1px] rounded-md bg-gris_fondo border-negro_fondo hover:bg-negro_fondo hover:text-white">
+                      <PiPlusCircleBold />
+                    </button>
+                    <button
+                      onClick={handleAlertsVisibility}
+                      className="px-2 ml-2 py-1 border-[1px] rounded-md bg-green-500 text-white border-negro_fondo hover:bg-negro_fondo hover:text-white">
+                      <RiRecycleFill />
+                    </button>
+                  </td>
                 </tr>
               );
             })}
@@ -340,22 +285,13 @@ function VehiclesTable({ visible, handleAlertsVisibility }) {
           <FiChevronRight className="symbolSearch" />
         </button>
       </div>
-      <button
-        onClick={handleCreateVehiclesVisibility}
-        className={`bg-naranja_enf w-full text-white text-[1.2em] px-4 py-2 rounded-md shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
-        Añadir vehículo +
-      </button>
-      <VehicleDetail
+      <UserDetail
         visible={vehiclesDetailVisibility}
         data={detailData}
         handleVisible={handleVehiclesVisibility}
-      />
-      <VehicleDetail
-        visible={createVehiclesVisibility}
-        handleVisible={handleCreateVehiclesVisibility}
       />
     </section>
   );
 }
 
-export default VehiclesTable;
+export default CarRecTable;

@@ -69,3 +69,44 @@ export function validateContactForm(inputs) {
 
   return errors;
 }
+
+export function validateUserForm(inputs) {
+  const regexText = /^[A-Záéíóúa-z0-9_,;.-]*$/i;
+  const regexEmail = /^([\wñ]{1,20})@([\w]{1,10})\.([a-z]{2,4})$/i;
+  const regexPasaporte = /^([A-Za-z]{3})([0-9]{6})$/i;
+  const regexPhone = /^[0-9]{10}$/i;
+  let errors = {};
+  if (
+    inputs.nombre !== "" &&
+    !regexText.test(inputs.nombre.split(" ").join(""))
+  ) {
+    errors.nombre = "Por favor introduce un nombre válido";
+  } else if (regexText.test(inputs.nombre.split(" ").join(""))) {
+    delete errors.nombre;
+  }
+  if (
+    inputs.name !== "" &&
+    (inputs.nombre.length < 3 || inputs.nombre.length > 30)
+  ) {
+    errors.nameLength = "El nombre debe ser de entre 4 y 30 caracteres";
+  } else if (inputs.nombre.length > 3 && inputs.nombre.length <= 30) {
+    delete errors.nameLength;
+  }
+  if (inputs.correo !== "" && !regexEmail.test(inputs.correo)) {
+    errors.correo = "Por favor introduce un email válido";
+  } else if (regexEmail.test(inputs.correo)) {
+    delete errors.correo;
+  }
+  if (inputs.pasaporte !== "" && !regexPasaporte.test(inputs.pasaporte)) {
+    errors.pasaporte = "Por favor introduce un número de pasaporte válido";
+  } else if (regexPasaporte.test(inputs.pasaporte)) {
+    delete errors.pasaporte;
+  }
+  if (inputs.telefono !== "" && !regexPhone.test(inputs.telefono)) {
+    errors.telefono = "Por favor introduce un número de pasaporte válido";
+  } else if (regexPhone.test(inputs.telefono)) {
+    delete errors.telefono;
+  }
+
+  return errors;
+}

@@ -4,6 +4,20 @@ import { useAuth } from "../context/AuthContext";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Alert from "./Alert";
+import { Rubik, Poppins } from "next/font/google";
+
+const fontRubik = Rubik({
+  weight: "600",
+  subsets: ["latin"],
+});
+
+const fontPoppins = Poppins({
+  weight: "400",
+  subsets: ["latin"],
+});
+
+const poppins = fontPoppins.className;
+const rubik = fontRubik.className;
 
 export default function Login() {
   const [user, setUser] = useState({
@@ -106,6 +120,28 @@ export default function Login() {
           className="bg-slate-50 hover:bg-slate-200 text-black shadow-md rounded border-2 border-gray py-5 px-6 w-full">
           Registrate
         </Link>
+      </div>
+      <div
+        id="alerta"
+        className="hidden bg-white rounded-2xl w-[300px] lg:w-[500px] fixed top-[40%] mx-[auto] pt-0">
+        <p
+          className={`bg-naranja_enf text-white text-[1.2em] ${rubik} w-full rounded-t-2xl text-center`}>
+          Crea una contraseña para tu cuenta:
+        </p>
+        <fieldset className="px-4">
+          <input
+            type="password"
+            id="input"
+            placeholder="Contraseña"
+            className="border-[2px] w-full border-black bg-gris_frente my-4 pl-2 rounded-md"
+          />{" "}
+          <br />
+          <button
+            id="boton"
+            className={`bg-naranja_enf w-full justify-self-center text-white ${rubik} px-4 py-1 rounded-lg my-4 shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
+            Aceptar
+          </button>
+        </fieldset>
       </div>
     </div>
   );

@@ -13,7 +13,20 @@ const fontPoppins = Poppins({
 const poppins = fontPoppins.className;
 const rubik = fontRubik.className;
 
-function VehicleDetail({ visible, data, handleVisible }) {
+function VehicleDetail({
+  visible,
+  data = {
+    price: "",
+    name: "",
+    model: "",
+    year: "",
+    type: "",
+    capacity: "",
+    transmission: "",
+    description: "",
+  },
+  handleVisible,
+}) {
   if (!visible) return null;
 
   const [inputs, setInputs] = useState({
