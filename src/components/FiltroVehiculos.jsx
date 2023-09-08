@@ -1,37 +1,42 @@
 "use client";
 import React, { useState } from "react";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setShowCars } from "@/store/slices/car";
 import { MultiSelect } from "react-multi-select-component";
-import { categorias, modelos, capacidades } from "../libs/categorias";
-
-const optionsCategorias = categorias.map((categoria) => ({
-  label: categoria.tipo,
-  value: categoria.tipo,
-}));
-
-const optionsModelos = modelos.map((modelo) => ({
-  label: modelo.tipo,
-  value: modelo.tipo,
-}));
-
-const optionsCapacidades = capacidades.map((capacidad) => ({
-  label: capacidad.capacity,
-  value: capacidad.capacity,
-}));
 
 export default function FiltroVehiculos() {
   const dispatch = useDispatch();
 
+  const categorias = useSelector((state) => state.cars.categorias);
+  const marcas = useSelector((state) => state.cars.marcas);
+  const capacidades = useSelector((state) => state.cars.capacidad);
+
+  // console.log(categorias);
+
+  const optionsCategorias = categorias.map((categoria) => ({
+    label: categoria,
+    value: categoria,
+  }));
+
+  const optionsMarcas = marcas.map((modelo) => ({
+    label: modelo,
+    value: modelo,
+  }));
+
+  const optionsCapacidades = capacidades?.map((capacidad) => ({
+    label: capacidad,
+    value: capacidad,
+  }));
+
   const [busqueda, setBusqueda] = useState([]);
-  const [modelo, setModelo] = useState([]);
+  const [marca, setMarca] = useState([]);
   const [categoria, setCategoria] = useState([]);
   const [capacidad, setCapacidad] = useState([]);
 
   useEffect(() => {
-    dispatch(setShowCars({ modelo, categoria, capacidad, busqueda }));
-  }, [modelo, categoria, capacidad, busqueda]);
+    dispatch(setShowCars({ marca, categoria, capacidad, busqueda }));
+  }, [marca, categoria, capacidad, busqueda]);
 
   function handleSearch(e) {
     setBusqueda(e.target.value);
@@ -53,13 +58,13 @@ export default function FiltroVehiculos() {
       </div>
       <div className={`flex flex-col sm:w-[20%] w-full`}>
         <label htmlFor="Modelo" className={`text-[1rem] text-white mb-1`}>
-          Modelo
+          Marca
         </label>
 
         <MultiSelect
-          options={optionsModelos}
-          value={modelo}
-          onChange={setModelo}
+          options={optionsMarcas}
+          value={marca}
+          onChange={setMarca}
           labelledBy="Modelo"
           className={` min-w-[80px] max-w-[95%] rounded py-1`}
           overrideStrings={{

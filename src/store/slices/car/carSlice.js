@@ -8,6 +8,10 @@ const initialState = {
   categoryCars: [],
   capacityCars: [],
   isLoading: false,
+  modelos: [],
+  categorias: [],
+  marcas: [],
+  capacidad: [],
 };
 
 export const carSlice = createSlice({
@@ -26,8 +30,20 @@ export const carSlice = createSlice({
       state.categoryCars = action.payload.cars;
       state.capacityCars = action.payload.cars;
     },
+    setModels: (state, action) => {
+      const allCars = state.allCars;
+      const uniqueModels = new Set(allCars.map((car) => car.model));
+      const uniqueCategory = new Set(allCars.map((car) => car.type));
+      const uniqueMarcas = new Set(allCars.map((car) => car.name));
+      const uniqueCapacity = new Set(allCars.map((car) => car.capacity));
+
+      state.modelos = Array.from(uniqueModels);
+      state.categorias = Array.from(uniqueCategory);
+      state.marcas = Array.from(uniqueMarcas);
+      state.capacidad = Array.from(uniqueCapacity);
+    },
     setShowCars: (state, action) => {
-      const { modelo, categoria, capacidad, busqueda } = action.payload;
+      const { marca, categoria, capacidad, busqueda } = action.payload;
 
       if (busqueda === "") {
         state.searchCars = state.allCars;
@@ -39,11 +55,11 @@ export const carSlice = createSlice({
         state.searchCars = state.showCars;
       }
 
-      // Verifica si modelo tiene elementos
-      if (modelo && modelo.length > 0) {
-        // Filtra los autos cuyo atributo modelo coincida con alguno de los valores seleccionados en modelo
+      // Verifica si marca tiene elementos
+      if (marca && marca.length > 0) {
+        // Filtra los autos cuyo atributo marca coincida con alguno de los valores seleccionados en marca
         state.modelCars = state.searchCars.filter((car) =>
-          modelo.some((value) => value.value === car.name)
+          marca.some((value) => value.value === car.name)
         );
         state.showCars = state.modelCars;
       } else {
@@ -80,4 +96,5 @@ export const carSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { startLoadingCars, setCars, setShowCars } = carSlice.actions;
+export const { startLoadingCars, setCars, setShowCars, setModels } =
+  carSlice.actions;
