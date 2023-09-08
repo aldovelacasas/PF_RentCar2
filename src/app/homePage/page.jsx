@@ -188,7 +188,7 @@ function HomePage() {
           Renta el auto de tus sueños con precios imbatibles,
         </p>
         <p className={`${poppins} text-[0.6em] pb-4`}>
-          km ilimitado, opciones flexibles y mucho más.
+          km ilimitados, opciones flexibles y mucho más.
         </p>
         <div className="flex place-content-evenly w-full sm:w-2/3 mt-3 pb-10 md:pt-[40px] lg:w-1/2">
           <button
@@ -472,8 +472,8 @@ function HomePage() {
                 <></>
               ) : (
                 <td className={`py-1 px-2 pb-8 ${poppins}`}>
-                  Depués de vencido tu periodo de renta, cuentas con una hora de
-                  tolerancia para devolver el vehículo.
+                  Después de vencido tu periodo de renta, cuentas con una hora
+                  de tolerancia para devolver el vehículo.
                 </td>
               )}
             </tr>

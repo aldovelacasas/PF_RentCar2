@@ -83,7 +83,7 @@ function Footer() {
             </Link>
           </li>
           <li>
-            <Link href="/homePage" className="hover:font-bold">
+            <Link href="/login" className="hover:font-bold">
               Ingresa
             </Link>
           </li>
