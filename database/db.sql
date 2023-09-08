@@ -16,7 +16,7 @@ CREATE TABLE product(
 CREATE TABLE user(
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     uid VARCHAR(155) NOT NULL unique,
-    email VARCHAR(200) NOT NULL unique,
+    emailUser VARCHAR(200) NOT NULL unique,
     username VARCHAR(200),
     passport VARCHAR(200),
     phone VARCHAR(200),
