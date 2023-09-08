@@ -32,18 +32,12 @@ export default function NavDefault() {
     <nav
       className={` ${rubik} sticky top-0 w-full z-20 lg:text-[1.5em] flex flex-wrap justify-between  items-center px-5 py-4`}>
       <div className="flex gap-8">
-        <img
-          src="https://drive.google.com/uc?export=download&id=1xRyrzCMxPuU6OX97500cJd7M7Veh0KXR"
-          className="border-black border-[1.5px] rounded-sm w-[80px] md:w-[150px]"
-        />
-        <li
-          className={
-            route === "/homePage"
-              ? "list-none text-naranja_enf underline md:hidden"
-              : "list-none md:hidden"
-          }>
-          <Link href="/homePage">Home</Link>
-        </li>
+        <Link href="/homePage">
+          <img
+            src="https://drive.google.com/uc?export=download&id=1xRyrzCMxPuU6OX97500cJd7M7Veh0KXR"
+            className="border-black border-[1.5px] rounded-sm w-[80px] md:w-[150px]"
+          />
+        </Link>
       </div>
       <div
         onClick={() => setNavActive(!navActive)}

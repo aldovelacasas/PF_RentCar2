@@ -44,15 +44,15 @@ export default function Login() {
     } catch (error) {
       console.log(error.code);
       if (error.code === "auth/missing-password") {
-        setError("La contraseña debe tener cómo minimo seis caracteres");
+        setError("Los datos ingresados son incorrectos");
       }
       if (error.code === "auth/email-already-in-use") {
-        setError("El correo ingresado ya se encuentra registrado");
+        setError("Los datos ingresados son incorrectos");
       }
       if (error.code === "auth/user-not-found") {
-        setError("El usuario no existe");
+        setError("Los datos ingresados son incorrectos");
       } else if (error.code === "auth/invalid-email") {
-        setError("El correo ingresado no es válido");
+        setError("Los datos ingresados son incorrectos");
       }
     }
   };
