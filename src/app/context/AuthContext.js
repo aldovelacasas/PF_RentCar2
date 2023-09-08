@@ -51,7 +51,6 @@ export const AuthContextProvider = ({ children }) => {
     try {
       const email = currentUser.email;
       const signInMethods = await fetchSignInMethodsForEmail(auth, email);
-
       if (!signInMethods.includes("google.com")) {
         const googleProvider = new GoogleAuthProvider();
         await linkWithPopup(currentUser, googleProvider);
@@ -64,6 +63,18 @@ export const AuthContextProvider = ({ children }) => {
       throw error;
     }
   };
+
+  function askPassword() {
+    document.getElementById("alerta").classList.remove("hidden");
+    document.body.classList.add("stopScroll");
+    return new Promise((resolve, reject) => {
+      document.getElementById("boton").onclick = () => {
+        resolve(document.getElementById("input").value);
+        document.getElementById("alerta").classList.add("hidden");
+        document.body.classList.remove("stopScroll");
+      };
+    });
+  }
 
   const loginWithGoogle = async () => {
     try {
@@ -78,7 +89,9 @@ export const AuthContextProvider = ({ children }) => {
 
       if (!signInMethods.includes("password")) {
         // El usuario no tiene una contraseña configurada, ofrecer la opción de registrar una contraseña
-        const newPassword = prompt("Crea una contraseña para tu cuenta:");
+        const newPassword = await askPassword();
+        // const newPassword = prompt("Crea una contraseña para tu cuenta:");
+
         if (newPassword) {
           // Registrar la contraseña
           await updatePassword(currentUser, newPassword);

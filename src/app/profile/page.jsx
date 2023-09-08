@@ -108,6 +108,7 @@ function page() {
                 type="checkbox"
                 name="promociones"
                 className="h-[25px] w-[25px] rounded-md border-[4px] mr-2 border-black "
+                defaultChecked={true}
               />
               <label htmlFor="promociones">
                 Recibir ofertas y promociones por correo
@@ -118,6 +119,7 @@ function page() {
                 type="checkbox"
                 name="alertas"
                 className="h-[25px] w-[25px] rounded-md border-[4px] mr-2 border-black "
+                defaultChecked={true}
               />
               <label htmlFor="alertas">
                 Recibir alertas sobre el tiempo restante de mis rentas
@@ -128,6 +130,7 @@ function page() {
                 type="checkbox"
                 name="llamadas"
                 className="h-[25px] w-[25px] rounded-md border-[4px] mr-2 border-black "
+                defaultChecked={true}
               />
               <label htmlFor="llamadas">Recibir llamadas y SMS</label>
             </fieldset>
@@ -136,6 +139,7 @@ function page() {
                 type="checkbox"
                 name="publicidad"
                 className="h-[25px] w-[25px] rounded-md border-[4px] mr-2 border-black "
+                defaultChecked={true}
               />
               <label htmlFor="publicidad">
                 Permitir que se usen mis datos con fines publicitarios
