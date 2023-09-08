@@ -418,3 +418,173 @@ export const vehiculos = [
     image: " ",
   },
 ];
+
+export const vehiculosBorrados = [
+  {
+    id: 20,
+    name: "Honda ",
+    model: "Civic",
+    year: 2023,
+    type: "sedán",
+    capacity: 5,
+    transmission: "automática",
+    description: "Un clásico en el segmento de los sedanes compactos.",
+    price: "30",
+    image: " ",
+  },
+  {
+    id: 21,
+    name: "Renault",
+    model: "Duster",
+    year: 2023,
+    type: "SUV",
+    capacity: 5,
+    transmission: "manual",
+    description: "Una SUV asequible para aventuras todoterreno.",
+    price: "40",
+    image: " ",
+  },
+  {
+    id: 22,
+    name: "Volkswagen",
+    model: "Amarok",
+    year: 2023,
+    type: "camioneta",
+    capacity: 5,
+    transmission: "automática",
+    description: "Una potente camioneta para el trabajo y el ocio.",
+    price: "50",
+    image: " ",
+  },
+];
+
+export const usuariosBorrados = [
+  {
+    id: 1,
+    correo: "correo1@correo.com",
+    nombre: "Juanito Uno",
+    pasaporte: 123451,
+    reservas: [
+      {
+        vehiculo: "Ford1",
+        fechaInicio: "1996/27/05",
+        fechaFin: "1996/27/25",
+        estado: "finalizado",
+      },
+      {
+        vehiculo: "Ford1",
+        fechaInicio: "1996/27/05",
+        fechaFin: "1996/27/25",
+        estado: "finalizado",
+      },
+      {
+        vehiculo: "Ford1",
+        fechaInicio: "1996/27/05",
+        fechaFin: "1996/27/25",
+        estado: "cancelado",
+      },
+      {
+        vehiculo: "Ford1",
+        fechaInicio: "1996/27/05",
+        fechaFin: "1996/27/25",
+        estado: "finalizado",
+      },
+    ],
+  },
+  {
+    id: 2,
+    correo: "correo2@correo.com",
+    nombre: "Juanito Dos",
+    pasaporte: 123452,
+    reservas: [
+      {
+        vehiculo: "Ford1",
+        fechaInicio: "1996/27/05",
+        fechaFin: "1996/27/25",
+        estado: "finalizado",
+      },
+      {
+        vehiculo: "Ford1",
+        fechaInicio: "1996/27/05",
+        fechaFin: "1996/27/25",
+        estado: "finalizado",
+      },
+      {
+        vehiculo: "Ford1",
+        fechaInicio: "1996/27/05",
+        fechaFin: "1996/27/25",
+        estado: "cancelado",
+      },
+      {
+        vehiculo: "Ford1",
+        fechaInicio: "1996/27/05",
+        fechaFin: "1996/27/25",
+        estado: "finalizado",
+      },
+    ],
+  },
+  {
+    id: 3,
+    correo: "correo3@correo.com",
+    nombre: "Juanito Tres",
+    pasaporte: 123453,
+    reservas: [
+      {
+        vehiculo: "Ford1",
+        fechaInicio: "1996/27/05",
+        fechaFin: "1996/27/25",
+        estado: "finalizado",
+      },
+      {
+        vehiculo: "Ford1",
+        fechaInicio: "1996/27/05",
+        fechaFin: "1996/27/25",
+        estado: "finalizado",
+      },
+      {
+        vehiculo: "Ford1",
+        fechaInicio: "1996/27/05",
+        fechaFin: "1996/27/25",
+        estado: "cancelado",
+      },
+      {
+        vehiculo: "Ford1",
+        fechaInicio: "1996/27/05",
+        fechaFin: "1996/27/25",
+        estado: "finalizado",
+      },
+    ],
+  },
+  {
+    id: 4,
+    correo: "correo4@correo.com",
+    nombre: "Juanito Cuatro",
+    pasaporte: 123454,
+    reservas: [
+      {
+        vehiculo: "Ford1",
+        fechaInicio: "1996/27/05",
+        fechaFin: "1996/27/25",
+        estado: "finalizado",
+      },
+      {
+        vehiculo: "Ford1",
+        fechaInicio: "1996/27/05",
+        fechaFin: "1996/27/25",
+        estado: "finalizado",
+      },
+      {
+        vehiculo: "Ford1",
+        fechaInicio: "1996/27/05",
+        fechaFin: "1996/27/25",
+        estado: "cancelado",
+      },
+      {
+        vehiculo: "Ford1",
+        fechaInicio: "1996/27/05",
+        fechaFin: "1996/27/25",
+        estado: "finalizado",
+      },
+    ],
+  },
+];

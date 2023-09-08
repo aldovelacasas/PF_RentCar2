@@ -142,7 +142,7 @@ export default function CheckoutForm({ paymentKey }) {
         <p>
           <span className="font-bold">Vehículo:</span> {item}
         </p>
-        {cant !== 1 ? (
+        {cant === "1" ? (
           <p>
             Por un total de <span className="font-bold">{cant}</span> día
           </p>

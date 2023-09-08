@@ -17,7 +17,7 @@ function RentalDetail({ visible, data, handleVisible }) {
   return (
     <div
       className={` ${poppins} fixed w-[100vw] top-0 left-0 pt-[15vh] h-[100vh] flex justify-center bg-[#dbdbdbcc] z-40`}>
-      <figure className=" w-full md:w-4/5 lg:w-3/4 max-h-[75vh] place-items-center bg-white max-w-[1000px] shadow-md shadow-black hover:cursor-pointer border border-solid border-negro_fondo grid">
+      <figure className=" w-full md:w-4/5 lg:w-1/2 rounded-2xl max-h-[75vh] place-items-center bg-gris_fondo max-w-[1000px] shadow-md shadow-black hover:cursor-pointer border border-solid border-negro_fondo grid">
         <h3
           className={`${rubik} w-1/2 text-center py-1 bg-negro_fondo text-white rounded-full`}>
           Renta #{data.id}

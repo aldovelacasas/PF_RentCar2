@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import { Rubik, Poppins } from "next/font/google";
-import RentalsTable from "@/components/RentalsTable";
-import VehiclesTable from "@/components/VehiclesTable";
+import CarRecTable from "@/components/CarRecTable";
+import UsersRecTable from "@/components/UsersRecTable";
 import HelpForm from "@/components/HelpForm";
 import { useRouter } from "next/navigation";
 import Alerts from "@/components/Alerts";
@@ -49,7 +49,9 @@ function Recoveries() {
       </header>
       <main
         className={`pt-4 ${rubik} mx-[auto] text-[0.8em] bg-gris_frente pb-12 sm:text-[1.2em] grid gap-[12px]`}>
-        <h2 className="text-[1.5em] pl-2">Bienvenido Admin</h2>
+        <h2 className="text-[1.5em] pl-2">
+          Recuperación de elementos eliminados
+        </h2>
         <div
           className={
             rentalsVisibility
@@ -63,9 +65,12 @@ function Recoveries() {
                 ? `lg:px-[8em] text-center text-[1em] mb-2 bg-gris_fondo px-4 py-1 shadow-sm shadow-black hover:shadow-md cursor-pointer rounded-md hover:shadow-black active:shadow-inner active:shadow-black`
                 : `w-4/5 md:w-3/4 text-[1em] mb-2 bg-negro_fondo text-white text-center px-4 py-1 shadow-sm shadow-black hover:shadow-md cursor-pointer rounded-md hover:shadow-black active:shadow-inner active:shadow-black`
             }>
-            ▼ Vehículos en renta ▼
+            ▼ Vehículos dados de baja ▼
           </h3>
-          <RentalsTable visible={rentalsVisibility} />
+          <CarRecTable
+            visible={rentalsVisibility}
+            handleAlertsVisibility={handleAlertsVisibility}
+          />
         </div>
         <div
           className={
@@ -80,9 +85,9 @@ function Recoveries() {
                 ? `lg:px-[8em] text-center text-[1em] mb-2 bg-gris_fondo px-4 py-1 shadow-sm shadow-black hover:shadow-md cursor-pointer rounded-md hover:shadow-black active:shadow-inner active:shadow-black`
                 : `w-4/5 md:w-3/4 text-[1em] mb-2 bg-negro_fondo text-white text-center px-4 py-1 shadow-sm shadow-black hover:shadow-md cursor-pointer rounded-md hover:shadow-black active:shadow-inner active:shadow-black`
             }>
-            ▼ Administrar vehículos ▼
+            ▼ Usuarios dados de baja ▼
           </h3>
-          <VehiclesTable
+          <UsersRecTable
             visible={vehiclesVisibility}
             handleAlertsVisibility={handleAlertsVisibility}
           />
@@ -118,7 +123,7 @@ function Recoveries() {
         <div className="flex w-1/2 justify-evenly">
           <button
             className={` bg-naranja_enf ${rubik} text-white text-[1em] px-4 rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black `}>
-            Borrar
+            Recuperar
           </button>
           <button
             onClick={handleAlertsVisibility}
