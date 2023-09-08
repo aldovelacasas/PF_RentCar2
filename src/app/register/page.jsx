@@ -47,61 +47,63 @@ export default function Register() {
   };
 
   return (
-    <div className="w-full sm:max-w-xl max-w-lg sm:p-auto p-1 sm:m-auto my-8">
-      {error && <Alert message={error} />}
+    <div className="flex justify-center items-center h-full ">
+      <div className="sm:my-8 my-4 max-w-xl m-2 sm:m-auto ">
+        {error && <Alert message={error} />}
 
-      <form
-        onSubmit={handleSubmit}
-        className="bg-white shadow-md rounded px-8 pt-8 pb-10 mb-4">
-        <label htmlFor="email" className="block">
-          Email
-        </label>
-        <input
-          type="email"
-          name="email"
-          placeholder="correo@gmail.com"
-          onChange={handleChange}
-          className="focus:outline-none focus:border-gray-400 focus:border-2  shadow appearance-none border  w-full py-2 px-3 mb-3"
-        />
+        <form
+          onSubmit={handleSubmit}
+          className="bg-white shadow-md rounded px-8 pt-8 pb-10 mb-4">
+          <label htmlFor="email" className="block">
+            Email
+          </label>
+          <input
+            type="email"
+            name="email"
+            placeholder="correo@gmail.com"
+            onChange={handleChange}
+            className="focus:outline-none focus:border-gray-400 focus:border-2  shadow appearance-none border  w-full py-2 px-3 mb-3"
+          />
 
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          name="password"
-          onChange={handleChange}
-          placeholder="********"
-          className="focus:outline-none focus:border-gray-400 focus:border-2  shadow appearance-none border  w-full py-2 px-3 mb-3"
-        />
+          <label htmlFor="password">Password</label>
+          <input
+            type="password"
+            name="password"
+            onChange={handleChange}
+            placeholder="********"
+            className="focus:outline-none focus:border-gray-400 focus:border-2  shadow appearance-none border  w-full py-2 px-3 mb-3"
+          />
 
-        <label>Nombre de usuario</label>
-        <input
-          type="text"
-          name="username"
-          onChange={handleChange}
-          className="focus:outline-none focus:border-gray-400 focus:border-2  shadow appearance-none border  w-full py-2 px-3 mb-3"
-        />
+          <label>Nombre de usuario</label>
+          <input
+            type="text"
+            name="username"
+            onChange={handleChange}
+            className="focus:outline-none focus:border-gray-400 focus:border-2  shadow appearance-none border  w-full py-2 px-3 mb-3"
+          />
 
-        <label>Telefono</label>
-        <input
-          type="text"
-          name="phone"
-          onChange={handleChange}
-          className="focus:outline-none focus:border-gray-400 focus:border-2  shadow appearance-none border  w-full py-2 px-3 mb-3"
-        />
+          <label>Telefono</label>
+          <input
+            type="text"
+            name="phone"
+            onChange={handleChange}
+            className="focus:outline-none focus:border-gray-400 focus:border-2  shadow appearance-none border  w-full py-2 px-3 mb-3"
+          />
 
-        <label>Pasaporte</label>
-        <input
-          type="text"
-          name="passport"
-          onChange={handleChange}
-          className="focus:border-gray-400 focus:border-2  shadow appearance-none border  w-full py-2 px-3 mb-3"
-        />
+          <label>Pasaporte</label>
+          <input
+            type="text"
+            name="passport"
+            onChange={handleChange}
+            className="focus:border-gray-400 focus:border-2  shadow appearance-none border  w-full py-2 px-3 mb-3"
+          />
 
-        <button
-          className={`${poppins} bg-naranja_enf my-3 rounded p-2 w-full hover:bg-negro_fondo hover:text-white`}>
-          Register
-        </button>
-      </form>
+          <button
+            className={`${poppins} bg-naranja_enf my-3 rounded p-2 w-full hover:bg-negro_fondo hover:text-white`}>
+            Register
+          </button>
+        </form>
+      </div>
     </div>
   );
 }
