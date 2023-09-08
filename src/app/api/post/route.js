@@ -1,9 +1,19 @@
 import { NextResponse } from "next/server";
 import { conn } from "@/libs/mysql";
 
+
+    /*
+
+      SELECT posts.id AS id_post, user.username AS nombre_usuario, posts.decription AS mensaje, posts.rating AS rating
+      FROM posts
+      JOIN user ON posts.userID = user.id
+
+    */
+
+
 export async function GET() {
   try {
-    const results = await conn.query("SELECT * FROM posts");
+    const results = await conn.query("SELECT posts.id AS id_post, user.username AS nombre_usuario, posts.decription AS mensaje, posts.rating AS rating FROM posts JOIN user ON posts.userID = user.id");
     return NextResponse.json(results);
   } catch (error) {
     return NextResponse.json(
