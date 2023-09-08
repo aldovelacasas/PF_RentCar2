@@ -110,7 +110,7 @@ export default function NavUser({ userName, userPhoto }) {
             </span>
             <button
               onClick={logOut}
-              className=" block w-full bg-blue-500 hover:bg-blue-700 text-white text-xs font-bold py-1 px-2 rounded focus:outline-none focus:shadow-outline">
+              className=" block w-full bg-naranja_enf hover:bg-negro_fondo text-white text-xs font-bold py-1 px-2 rounded focus:outline-none focus:shadow-outline">
               LOG OUT
             </button>
           </div>
