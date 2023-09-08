@@ -68,7 +68,7 @@ export const AuthContextProvider = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
         setUser(currentUser);
-        console.log("usuario autenticado", currentUser);
+        // console.log("usuario autenticado", currentUser);
       } else {
         setUser(null);
         console.log("Usuario no autenticado");
