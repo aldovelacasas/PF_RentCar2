@@ -43,6 +43,15 @@ export default function Login() {
     }
   };
 
+  const handleGoogleLogin = async () => {
+    try {
+      await loginWithGoogle();
+      router.push("/");
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+
   return (
     <div className="w-full max-w-xs m-auto">
       {error && <Alert message={error} />}
@@ -79,6 +88,14 @@ export default function Login() {
           LOGIN
         </button>
       </form>
+
+      <div className="p-10">
+        <button
+          onClick={handleGoogleLogin}
+          className="bg-slate-50 hover:bg-slate-200 text-black shadow-md rounded border-2 border-gray py-2 px-4 w-full">
+          Ingresa con tu cuenta de Google
+        </button>
+      </div>
 
       <div className="p-10">
         <p className="pb-10 w-full py-2 px-3 text-gray-700">
