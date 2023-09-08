@@ -457,7 +457,7 @@ function HomePage() {
         <p className="text-2xl text-center pb-4 md:text-[1.2em]  md:mb-[60px]">
           Preguntas Frecuentes
         </p>
-        <table className="bg-white shadow-md shadow-black  md:mb-[100px]">
+        <table className="bg-white shadow-md shadow-black min-w-[300px] sm:min-w-[600px] md:mb-[100px] md:min-w-[600px] lg:min-w-[1100px]">
           <tbody className="[&>*:nth-child(odd)]:bg-[#ea4e398a] bg-white">
             <tr
               onClick={() => handleCollapse("One")}

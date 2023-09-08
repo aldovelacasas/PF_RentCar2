@@ -1,8 +1,10 @@
 import { Rubik, Poppins } from "next/font/google";
-import { vehiculos } from "@/libs/placeholdersAdmin";
+import { vehiculosBorrados } from "@/libs/placeholdersAdmin";
 import { sliceData, slicePage } from "@/libs/functions";
 import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
-import { BsPencilFill, BsFillTrash3Fill } from "react-icons/bs";
+import { BsPencilFill } from "react-icons/bs";
+import { RiRecycleFill } from "react-icons/ri";
+
 import { useEffect, useState } from "react";
 import VehicleDetail from "./VehicleDetail";
 
@@ -26,7 +28,7 @@ if (window.innerWidth <= 870) {
   pantalla = "grande";
 }
 
-function VehiclesTable({ visible, handleAlertsVisibility }) {
+function CarRecTable({ visible, handleAlertsVisibility }) {
   const arrowInitialState = {
     name: false,
     model: false,
@@ -37,8 +39,6 @@ function VehiclesTable({ visible, handleAlertsVisibility }) {
   const [detailData, setDetailData] = useState();
   const [vehiclesDetailVisibility, setVehiclesDetailVisibility] =
     useState(false);
-  const [createVehiclesVisibility, setCreateVehiclesVisibility] =
-    useState(false);
   const [search, setSearch] = useState("");
   const [data, setData] = useState();
   const [category, setCategory] = useState("name");
@@ -47,9 +47,9 @@ function VehiclesTable({ visible, handleAlertsVisibility }) {
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [vehiculos]);
+  }, [vehiculosBorrados]);
 
-  let dataToShow = vehiculos;
+  let dataToShow = vehiculosBorrados;
   let quantityPerPage = 10;
   let max = Math.ceil(dataToShow.length / quantityPerPage);
   let pages = [];
@@ -89,11 +89,6 @@ function VehiclesTable({ visible, handleAlertsVisibility }) {
     setVehiclesDetailVisibility(!vehiclesDetailVisibility);
     document.body.classList.toggle("stopScroll");
   };
-
-  function handleCreateVehiclesVisibility() {
-    setCreateVehiclesVisibility(!createVehiclesVisibility);
-    document.body.classList.toggle("stopScroll");
-  }
 
   function handleSearch(e) {
     setSearch(e.target.value);
@@ -142,7 +137,7 @@ function VehiclesTable({ visible, handleAlertsVisibility }) {
           </span>
         </h3>
         <p className={`${poppins} text-[0.9em] pl-2`}>
-          Vista de los vehículos de la empresa
+          Vista de los vehículos en desuso
         </p>
         <div className="flex flex-wrap pl-2">
           <label htmlFor="search" className="shrink-0 basis-[100%]">
@@ -169,7 +164,7 @@ function VehiclesTable({ visible, handleAlertsVisibility }) {
                 <>
                   <th
                     onClick={() => handleSort("name")}
-                    className={`${rubik} min-w-[90px] sm:min-w-[250px] px-2 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
+                    className={`${rubik} min-w-[90px] sm:min-w-[150px] px-2 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
                     {arrow.name ? "Nombre ▼" : "Nombre"}
                   </th>
                   <th
@@ -242,9 +237,9 @@ function VehiclesTable({ visible, handleAlertsVisibility }) {
                           <BsPencilFill />
                         </button>
                         <button
-                          onClick={() => handleVehiclesVisibility(d)}
-                          className="px-1 py-1 border-[1px] rounded-md bg-red-500 text-white border-negro_fondo hover:bg-negro_fondo hover:text-white">
-                          <BsFillTrash3Fill />
+                          onClick={handleAlertsVisibility}
+                          className="px-1 py-1 border-[1px] rounded-md bg-green-500 text-white border-negro_fondo hover:bg-negro_fondo hover:text-white">
+                          <RiRecycleFill />
                         </button>
                       </td>
                     </>
@@ -262,8 +257,8 @@ function VehiclesTable({ visible, handleAlertsVisibility }) {
                         </button>
                         <button
                           onClick={handleAlertsVisibility}
-                          className="px-2 ml-2 py-1 border-[1px] rounded-md bg-red-500 text-white border-negro_fondo hover:bg-negro_fondo hover:text-white">
-                          <BsFillTrash3Fill />
+                          className="px-2 ml-2 py-1 border-[1px] rounded-md bg-green-500 text-white border-negro_fondo hover:bg-negro_fondo hover:text-white">
+                          <RiRecycleFill />
                         </button>
                       </td>
                     </>
@@ -340,22 +335,13 @@ function VehiclesTable({ visible, handleAlertsVisibility }) {
           <FiChevronRight className="symbolSearch" />
         </button>
       </div>
-      <button
-        onClick={handleCreateVehiclesVisibility}
-        className={`bg-naranja_enf w-full text-white text-[1.2em] px-4 py-2 rounded-md shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
-        Añadir vehículo +
-      </button>
       <VehicleDetail
         visible={vehiclesDetailVisibility}
         data={detailData}
         handleVisible={handleVehiclesVisibility}
       />
-      <VehicleDetail
-        visible={createVehiclesVisibility}
-        handleVisible={handleCreateVehiclesVisibility}
-      />
     </section>
   );
 }
 
-export default VehiclesTable;
+export default CarRecTable;

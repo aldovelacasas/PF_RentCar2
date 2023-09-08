@@ -6,8 +6,9 @@ import {
   useStripe,
   useElements,
 } from "@stripe/react-stripe-js";
-import { useSearchParams, useRouter } from "next/navigation";
+import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import emailjs from "@emailjs/browser";
+import Alerts from "./Alerts";
 
 const fontRubik = Rubik({
   weight: "600",
@@ -17,6 +18,8 @@ const fontRubik = Rubik({
 const rubik = fontRubik.className;
 
 export default function CheckoutForm({ paymentKey }) {
+  const [visibility, setVisibility] = useState(false);
+  const path = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();
   const item = searchParams.get("item");
@@ -89,16 +92,16 @@ export default function CheckoutForm({ paymentKey }) {
     stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
       switch (paymentIntent.status) {
         case "succeeded":
-          setMessage("Payment succeeded!");
+          setMessage("Pago realizado, gracias por confiar en AutoConnect");
           break;
         case "processing":
-          setMessage("Your payment is processing.");
+          setMessage("Pago en proceso.");
           break;
         case "requires_payment_method":
-          setMessage("Your payment was not successful, please try again.");
+          setMessage("Algo salió mal, intenta nuevamente en unos minutos.");
           break;
         default:
-          setMessage("Something went wrong.");
+          setMessage("Hubo un error al momento de hacer la transacción.");
           break;
       }
     });
@@ -117,68 +120,93 @@ export default function CheckoutForm({ paymentKey }) {
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        return_url: "http://localhost:3000",
+        return_url: path,
       },
     });
+
+    setVisibility(true);
 
     if (error.type === "card_error" || error.type === "validation_error") {
       setMessage(error.message);
     } else {
-      setMessage("An unexpected error occurred.");
+      setMessage("Pago realizado, gracias por confiar en AutoConnect");
     }
 
     setIsLoading(false);
   };
+
+  function handleAccept() {
+    if (message === "Pago realizado, gracias por confiar en AutoConnect") {
+      setVisibility(false);
+      router.push("/");
+    } else {
+    }
+  }
 
   const paymentElementOptions = {
     layout: "tabs",
   };
 
   return (
-    <main className="grid grid-cols-1 lg:grid-cols-2 p-8 bg-white">
-      <section className="grid place-content-center mb-6">
-        <h1 className={`${rubik} text-center text-[1.5em]`}>Tu vehículo:</h1>
-        <img className="max-w-[300px] lg:max-w-[400px]" src={img} />
-        <p>
-          <span className="font-bold">Vehículo:</span> {item}
+    <>
+      <main className="grid grid-cols-1 lg:grid-cols-2 p-8 bg-white">
+        <section className="grid place-content-center mb-6">
+          <h1 className={`${rubik} text-center text-[1.5em]`}>Tu vehículo:</h1>
+          <img className="max-w-[300px] lg:max-w-[400px]" src={img} />
+          <p>
+            <span className="font-bold">Vehículo:</span> {item}
+          </p>
+          {cant === "1" ? (
+            <p>
+              Por un total de <span className="font-bold">{cant}</span> día
+            </p>
+          ) : (
+            <p>
+              Por un total de <span className="font-bold">{cant}</span> días
+            </p>
+          )}
+          <p className="font-bold">Total de la renta:</p>
+          <p className="text-[1.5em]">${total.toLocaleString()} USD</p>
+        </section>
+        <form
+          className=" p-6 grid gap-6 shadow-2xl shadow-gris_fondo"
+          id="payment-form"
+          onSubmit={handleSubmit}>
+          <PaymentElement
+            id="payment-element"
+            options={paymentElementOptions}
+          />
+          <button
+            className="bg-[#0074d4] text-white py-2 rounded-md"
+            disabled={isLoading || !stripe || !elements}
+            id="submit">
+            <span id="button-text">
+              {isLoading ? (
+                <div className="spinner" id="spinner"></div>
+              ) : (
+                "Pay now"
+              )}
+            </span>
+          </button>
+
+          {message && <div id="payment-message">{message}</div>}
+        </form>
+      </main>
+      <Alerts visible={visibility} className="fixed top-[40%]">
+        <p
+          className={`bg-naranja_enf text-white ${rubik} w-full text-center rounded-t-[15px]`}>
+          Alerta
         </p>
-        {cant !== 1 ? (
-          <p>
-            Por un total de <span className="font-bold">{cant}</span> día
-          </p>
-        ) : (
-          <p>
-            Por un total de <span className="font-bold">{cant}</span> días
-          </p>
-        )}
-        <p className="font-bold">Total de la renta:</p>
-        <p className="text-[1.5em]">${total.toLocaleString()} USD</p>
-      </section>
-      <form
-        className=" p-6 grid gap-6 shadow-2xl shadow-gris_fondo"
-        id="payment-form"
-        onSubmit={handleSubmit}>
-        {/* <LinkAuthenticationElement
-          id="link-authentication-element"
-          onChange={(e) => setEmail(e.target.value)}
-        /> */}
-        {/* email */}
-        <PaymentElement id="payment-element" options={paymentElementOptions} />
+        <p className="text-[1em] px-4">{message}</p>
         <button
-          className="bg-[#0074d4] text-white py-2 rounded-md"
-          disabled={isLoading || !stripe || !elements}
-          id="submit">
-          <span id="button-text">
-            {isLoading ? (
-              <div className="spinner" id="spinner"></div>
-            ) : (
-              "Pay now"
-            )}
-          </span>
+          onClick={handleAccept}
+          className={` bg-naranja_enf ${rubik} text-white text-[1em] px-4 rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
+          Aceptar
         </button>
-        {/* Show any error or success messages */}
-        {message && <div id="payment-message">{message}</div>}
-      </form>
-    </main>
+        <p className="text-[0.8em] mt-[-10px]">
+          *Al dar click en aceptar serás redirigido a la página principal
+        </p>
+      </Alerts>
+    </>
   );
 }
