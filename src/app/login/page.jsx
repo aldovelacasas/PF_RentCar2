@@ -51,9 +51,8 @@ export default function Login() {
       }
       if (error.code === "auth/user-not-found") {
         setError("Los datos ingresados son incorrectos");
-      } else if (error.code === "auth/invalid-email") {
-        setError("Los datos ingresados son incorrectos");
       }
+      setError("Los datos ingresados son incorrectos");
     }
   };
 
