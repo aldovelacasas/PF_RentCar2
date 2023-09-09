@@ -129,10 +129,10 @@ export default function Login() {
       </div>
       <div
         id="alerta"
-        className="hidden bg-white rounded-2xl w-[300px] lg:w-[500px] fixed top-[40%] mx-[auto] pt-0">
+        className="hidden bg-white rounded-2xl w-[300px] lg:w-[500px] fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pt-0">
         <p
           className={`bg-naranja_enf text-white text-[1.2em] ${rubik} w-full rounded-t-2xl text-center`}>
-          Crea una contraseña para tu cuenta:
+          Ingresa tu contraseña:
         </p>
         <fieldset className="px-4">
           <input
@@ -140,7 +140,7 @@ export default function Login() {
             id="input"
             placeholder="Contraseña"
             className="border-[2px] w-full border-black bg-gris_frente my-4 pl-2 rounded-md"
-          />{" "}
+          />
           <br />
           <button
             id="boton"
