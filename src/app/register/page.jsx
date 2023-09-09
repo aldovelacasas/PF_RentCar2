@@ -53,7 +53,7 @@ export default function Register() {
 
         <form
           onSubmit={handleSubmit}
-          className="bg-white shadow-md rounded px-8 pt-8 pb-10 mb-4">
+          className="mb-8 bg-white bg-opacity-70 shadow-md rounded px-8 pt-8 pb-10 mb-4">
           <label htmlFor="email" className="block">
             Email
           </label>
@@ -62,16 +62,16 @@ export default function Register() {
             name="email"
             placeholder="correo@gmail.com"
             onChange={handleChange}
-            className="focus:outline-none focus:border-gray-400 focus:border-2  shadow appearance-none border  w-full py-2 px-3 mb-3"
+            className="mt-3 focus:outline-none focus:border-gray-400 focus:border-2  shadow appearance-none border  w-full py-2 px-3 mb-3"
           />
 
-          <label htmlFor="password">Password</label>
+          <label htmlFor="password">Contraseña</label>
           <input
             type="password"
             name="password"
             onChange={handleChange}
             placeholder="********"
-            className="focus:outline-none focus:border-gray-400 focus:border-2  shadow appearance-none border  w-full py-2 px-3 mb-3"
+            className="mt-3 focus:outline-none focus:border-gray-400 focus:border-2  shadow appearance-none border  w-full py-2 px-3 mb-3"
           />
 
           <label>Nombre de usuario</label>
@@ -79,7 +79,7 @@ export default function Register() {
             type="text"
             name="username"
             onChange={handleChange}
-            className="focus:outline-none focus:border-gray-400 focus:border-2  shadow appearance-none border  w-full py-2 px-3 mb-3"
+            className="mt-3 focus:outline-none focus:border-gray-400 focus:border-2  shadow appearance-none border  w-full py-2 px-3 mb-3"
           />
 
           <label>Telefono</label>
@@ -87,7 +87,7 @@ export default function Register() {
             type="text"
             name="phone"
             onChange={handleChange}
-            className="focus:outline-none focus:border-gray-400 focus:border-2  shadow appearance-none border  w-full py-2 px-3 mb-3"
+            className="mt-3 focus:outline-none focus:border-gray-400 focus:border-2  shadow appearance-none border  w-full py-2 px-3 mb-3"
           />
 
           <label>Pasaporte</label>
@@ -95,12 +95,12 @@ export default function Register() {
             type="text"
             name="passport"
             onChange={handleChange}
-            className="focus:border-gray-400 focus:border-2  shadow appearance-none border  w-full py-2 px-3 mb-3"
+            className="mt-3 focus:border-gray-400 focus:border-2  shadow appearance-none border  w-full py-2 px-3 mb-3"
           />
 
           <button
-            className={`${poppins} bg-naranja_enf my-3 rounded p-2 w-full hover:bg-negro_fondo hover:text-white`}>
-            Register
+            className={`${poppins} mt-10 bg-naranja_enf my-3 rounded p-2 w-full hover:bg-negro_fondo hover:text-white`}>
+            Registrarse
           </button>
         </form>
       </div>

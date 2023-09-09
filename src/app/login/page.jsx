@@ -27,7 +27,7 @@ export default function Login() {
     password: "",
     phone: "",
   });
-  const { login, loginWithGoogle } = useAuth();
+  const { login, loginWithGoogle, handleForgotPassword } = useAuth();
   const [error, setError] = useState();
   const router = useRouter();
 
@@ -67,13 +67,13 @@ export default function Login() {
   };
 
   return (
-    <div className="w-full max-w-xs m-auto">
+    <div className="w-full pt-20 max-w-xs m-auto">
       {error && <Alert message={error} />}
 
       <form
         onSubmit={handleSubmit}
-        className="bg-white shadow-md rounded px-8 pt-8 pb-10 mb-4">
-        <div className="mb-6">
+        className="mb-8 text-center bg-white bg-opacity-70 shadow-md rounded px-8 pt-8 pb-10 mb-4">
+        <div className="mb-8">
           <label htmlFor="email" className="block">
             Email
           </label>
@@ -82,43 +82,49 @@ export default function Login() {
             name="email"
             placeholder="correo@gmail.com"
             onChange={handleChange}
-            className="shadow apparence-none border rounded w-full py-2 px-3 text-gray-700 leading-tig focus:outline-none focus:shadow-outline"
+            className=" text-center mt-3 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
         </div>
 
-        <div className="mb-6">
-          <label htmlFor="password">Password</label>
+        <div className="mb-12">
+          <label htmlFor="password">Contraseña</label>
           <input
             type="password"
             name="password"
             id="password"
             onChange={handleChange}
             placeholder="*******"
-            className="shadow apparence-none border rounded w-full py-2 px-3 text-gray-700 leading-tig focus:outline-none focus:shadow-outline"
+            className="text-center mt-3 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
         </div>
 
-        <button className="bg-blue-500 hover:bg-blue-700 text-white text-sm font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-          LOGIN
+        <button
+          className={`${poppins} mb-3 bg-naranja_enf my-3 rounded p-2 w-full hover:bg-negro_fondo hover:text-white`}>
+          INGRESAR
+        </button>
+
+        <div>
+          <button
+            onClick={handleForgotPassword}
+            className="bg-slate-40 mt-5 mb-10 hover:bg-slate-200 text-black shadow-md rounded border-2 border-gray py-2 px-4 w-full">
+            ¿Olvidaste tu contraseña?
+          </button>
+        </div>
+
+        <button
+          onClick={handleGoogleLogin}
+          className="bg-slate-40 mt-10 mb-5 hover:bg-slate-200 text-black shadow-md rounded border-2 border-gray py-2 px-4 w-full">
+          Ingresa con tu cuenta de Google
         </button>
       </form>
 
-      <div className="p-10">
-        <button
-          onClick={handleGoogleLogin}
-          className="bg-slate-50 hover:bg-slate-200 text-black shadow-md rounded border-2 border-gray py-2 px-4 w-full">
-          Ingresa con tu cuenta de Google
-        </button>
-      </div>
+      <div className="p-10 grid grid-rows-2 gap-4 items-center">
+        <p className="w-full py-3 px-8 text-gray-700">No tienes una cuenta?</p>
 
-      <div className="p-10">
-        <p className="pb-10 w-full py-2 px-3 text-gray-700">
-          No tienes una cuenta?
-        </p>
         <Link
           href="/register"
-          className="bg-slate-50 hover:bg-slate-200 text-black shadow-md rounded border-2 border-gray py-5 px-6 w-full">
-          Registrate
+          className={`${poppins} bg-naranja_enf my-3 text-center rounded p-4 w-full hover:bg-negro_fondo hover:text-white`}>
+          Crear usuario
         </Link>
       </div>
       <div
