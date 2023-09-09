@@ -2,6 +2,9 @@
 import { Rubik, Poppins } from "next/font/google";
 import { aboutUs } from "@/libs/aboutUs";
 import { PiCar, PiMapPinBold, PiMoney } from "react-icons/pi";
+import Map from "@/components/maps";
+
+const mapURL = `https://maps.googleapis.com/maps/api/js?v=3.exp&key=${process.env.mapsKey}`;
 
 const fontRubik = Rubik({
   weight: "600",
@@ -38,6 +41,16 @@ function AboutPage() {
           así como toda la infomación que necesites para que puedas comenzar tu
           próximo viaje sin preocupaciones.
         </p>
+        <br />
+        <p className={`text-[0.8em] ${rubik} text-center`}>
+          ¿Donde nos encontras?
+        </p>
+        <Map
+          googleMapURL={mapURL}
+          loadingElement={<div style={{ height: "100%" }} />}
+          containerElement={<div style={{ height: "50vh" }} />}
+          mapElement={<div style={{ height: "100%" }} />}
+        />
         <div className="flex items-baseline">
           <div className="w-full flex flex-col justify-center items-center gap-x-4  px-3">
             <figure className="bg-[#ea4e398a]  rounded-full h-[65px] w-[65px] flex justify-center items-center">
@@ -68,6 +81,7 @@ function AboutPage() {
           </div>
         </div>
       </section>
+
       <section className="p-4 pb-[90px] grid justify-self-center">
         <p className={`text-[1em] ${rubik} mb-6 text-center `}>
           Nuestro Equipo
