@@ -42,9 +42,10 @@ CREATE TABLE bookings (
 CREATE TABLE posts (
     id INT AUTO_INCREMENT PRIMARY KEY,
     userID INT UNSIGNED NOT NULL,
+     productID INT UNSIGNED NOT NULL,
     description TEXT NOT NULL,
     rating INT NOT NULL,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT fk_user_posts FOREIGN KEY (userID) REFERENCES user (id),
-    CONSTRAINT fk_product_posts FOREIGN KEY (productID) REFERENCES product (id)
+    CONSTRAINT fk_product_posts FOREIGN KEY (productID) REFERENCES product (id),
+    CONSTRAINT fk_user_posts FOREIGN KEY (userID) REFERENCES user (id)
 );

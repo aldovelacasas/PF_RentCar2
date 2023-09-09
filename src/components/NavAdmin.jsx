@@ -17,9 +17,7 @@ const rubik = fontRubik.className;
 // import Link from "next/link";
 import React, { useState } from "react";
 // import NavItem from "./NavItem";
-import "./NavBar/nav.css";
 import { useAuth } from "@/app/context/AuthContext";
-import { BiLink } from "react-icons/bi";
 import Link from "next/link";
 
 export default function NavUser({ userName, userPhoto }) {
@@ -28,12 +26,10 @@ export default function NavUser({ userName, userPhoto }) {
 
   const route = usePathname();
 
-  let login = false;
-
   return (
     <nav
-      className={` ${rubik} sticky top-0 w-full z-20 lg:text-[1.5em] flex flex-wrap justify-between px-5 py-4`}>
-      <div className="flex gap-8">
+      className={` ${rubik} sticky top-0 w-full z-20 lg:text-[1.5em] flex flex-wrap justify-between content-center px-5 py-4`}>
+      <div className="flex gap-8 ">
         <Link href="/homePage">
           <img
             href="/homePage"
@@ -59,23 +55,23 @@ export default function NavUser({ userName, userPhoto }) {
         }>
         <li
           className={
-            route === "/homePage"
+            route === "/AdminConsole"
               ? "list-none text-naranja_enf underline "
-              : "list-none hover:text-naranja_enf transition ease-in-out duration-300   "
+              : "list-none hover:text-naranja_enf transition ease-in-out duration-300  "
           }>
-          <Link href="/homePage">Dashboard</Link>
+          <Link href="/AdminConsole">Consola</Link>
         </li>
 
         <li
           className={
-            route === "/vehiculos"
+            route === "/AdminConsole/Recoveries"
               ? "list-none text-naranja_enf underline"
               : "list-none hover:text-naranja_enf transition ease-in-out duration-300 "
           }>
-          <Link href="/vehiculos">Vehículos</Link>
+          <Link href="/AdminConsole/Recoveries">Recuperaciones</Link>
         </li>
 
-        <li
+        {/* <li
           className={
             route === "/contact"
               ? "list-none text-naranja_enf underline"
@@ -83,7 +79,7 @@ export default function NavUser({ userName, userPhoto }) {
           }>
           <Link href="/contact">Contáctanos</Link>
         </li>
-        {/* <li
+        <li
           className={
             route === "/profile"
               ? "list-none text-naranja_enf underline"
@@ -101,7 +97,10 @@ export default function NavUser({ userName, userPhoto }) {
             />
           </a>
           <div className="">
-            <span className="block w-full text-sm pb-1">Hola, {userName}</span>
+            <span className="block w-full font-light text-sm pb-1">
+              {" "}
+              {userName}
+            </span>
             <button
               onClick={logOut}
               className=" block w-full bg-naranja_enf hover:bg-negro_fondo text-white text-xs font-bold py-1 px-2 rounded focus:outline-none focus:shadow-outline">

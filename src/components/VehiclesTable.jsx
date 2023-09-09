@@ -1,10 +1,12 @@
 import { Rubik, Poppins } from "next/font/google";
-import { vehiculos } from "@/libs/placeholdersAdmin";
 import { sliceData, slicePage } from "@/libs/functions";
 import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
 import { BsPencilFill, BsFillTrash3Fill } from "react-icons/bs";
 import { useEffect, useState } from "react";
+import VehicleCreate from "@/components/VehicleCreate";
 import VehicleDetail from "./VehicleDetail";
+import { getCars } from "@/store/slices/car";
+import { useDispatch, useSelector } from "react-redux";
 
 const fontRubik = Rubik({
   weight: "600",
@@ -33,6 +35,15 @@ function VehiclesTable({ visible, handleAlertsVisibility }) {
     type: false,
     price: false,
   };
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getCars());
+  }, []);
+
+  let cars = useSelector((state) => state.cars.showCars);
+
   const [currentPage, setCurrentPage] = useState(1);
   const [detailData, setDetailData] = useState();
   const [vehiclesDetailVisibility, setVehiclesDetailVisibility] =
@@ -44,13 +55,19 @@ function VehiclesTable({ visible, handleAlertsVisibility }) {
   const [category, setCategory] = useState("name");
   const [aux, setAux] = useState(false);
   const [arrow, setArrow] = useState(arrowInitialState);
+  const [dataToShow, setDataToShow] = useState([]);
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [vehiculos]);
+  }, [cars]);
 
-  let dataToShow = vehiculos;
-  let quantityPerPage = 10;
+  // let dataToShow = [...cars].filter((c) => c.isActive === true);
+  useEffect(() => {
+    setDataToShow([...cars]);
+    setCurrentPage(1);
+  }, [cars, aux, visible]);
+
+  let quantityPerPage = 8;
   let max = Math.ceil(dataToShow.length / quantityPerPage);
   let pages = [];
   let x = 0;
@@ -62,7 +79,7 @@ function VehiclesTable({ visible, handleAlertsVisibility }) {
 
   useEffect(() => {
     setData(sliceData(dataToShow, currentPage, quantityPerPage));
-  }, [currentPage]);
+  }, [cars, currentPage]);
 
   let currentPages = slicePage(pages, currentPage, 2);
 
@@ -132,7 +149,7 @@ function VehiclesTable({ visible, handleAlertsVisibility }) {
 
   if (visible === false) return null;
   return (
-    <section className="text-[10px] sm:text-[12px] md:text-[16px]">
+    <section className="text-[10px] sm:text-[12px] md:text-[16px] px-4">
       <figure className="bg-white grid place-content-center sm:px-2 md:px-8 py-4 rounded-2xl">
         <h3 className="text-[1.2em] pl-2">
           Vehículos
@@ -150,7 +167,7 @@ function VehiclesTable({ visible, handleAlertsVisibility }) {
           </label>
           <input
             name="search"
-            className={`${poppins} pl-2 basis-[50%] text-[0.8em] max-w-[50%] border-2 border-black rounded-md mr-4`}
+            className={`${poppins} pl-2 basis-[50%] text-[0.8em] max-w-[50%] border-[1px] border-black rounded-md mr-4`}
             placeholder={`Búsqueda por ${category}`}
             value={search}
             onChange={handleSearch}
@@ -261,7 +278,7 @@ function VehiclesTable({ visible, handleAlertsVisibility }) {
                           <BsPencilFill />
                         </button>
                         <button
-                          onClick={handleAlertsVisibility}
+                          onClick={() => handleAlertsVisibility(d.id)}
                           className="px-2 ml-2 py-1 border-[1px] rounded-md bg-red-500 text-white border-negro_fondo hover:bg-negro_fondo hover:text-white">
                           <BsFillTrash3Fill />
                         </button>
@@ -279,8 +296,8 @@ function VehiclesTable({ visible, handleAlertsVisibility }) {
           onClick={handlePrevious}
           className={
             currentPage === 1
-              ? "px-3 py-1 border-[2px] border-black bg-negro_fondo text-white rounded-md"
-              : "px-3 py-1 border-[2px] border-black bg-naranja_enf text-white rounded-md"
+              ? "px-3 py-1 shadow-sm shadow-black bg-negro_fondo text-white rounded-md hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black"
+              : "px-3 py-1 shadow-sm shadow-black bg-naranja_enf text-white rounded-md hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black"
           }>
           <FiChevronLeft className="symbolSearch" />
         </button>
@@ -289,8 +306,8 @@ function VehiclesTable({ visible, handleAlertsVisibility }) {
             onClick={() => setCurrentPage(1)}
             className={
               currentPage === 1
-                ? "px-3 py-1 border-[2px] border-black bg-negro_fondo text-white rounded-md"
-                : "px-3 py-1 border-[2px] border-black bg-naranja_enf text-white rounded-md"
+                ? "px-3 py-1 shadow-sm shadow-black bg-negro_fondo text-white rounded-md hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black"
+                : "px-3 py-1 shadow-sm shadow-black bg-naranja_enf text-white rounded-md hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black"
             }>
             1
           </button>
@@ -304,8 +321,8 @@ function VehiclesTable({ visible, handleAlertsVisibility }) {
                 onClick={handlePageChange}
                 className={
                   currentPage === p
-                    ? "px-3 py-1 border-[2px] border-black bg-negro_fondo text-white rounded-md"
-                    : "px-3 py-1 border-[2px] border-black bg-naranja_enf text-white rounded-md"
+                    ? "px-3 py-1 shadow-sm shadow-black bg-negro_fondo text-white rounded-md hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black"
+                    : "px-3 py-1 shadow-sm shadow-black bg-naranja_enf text-white rounded-md hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black"
                 }
                 key={p}>
                 {p}
@@ -317,7 +334,7 @@ function VehiclesTable({ visible, handleAlertsVisibility }) {
             <span>...</span>
             <button
               onClick={() => setCurrentPage(max)}
-              className="px-3 py-1 border-[2px] border-black bg-naranja_enf text-white rounded-md">
+              className="px-3 py-1 shadow-sm shadow-black bg-naranja_enf text-white rounded-md hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black">
               {max}
             </button>
           </>
@@ -325,7 +342,7 @@ function VehiclesTable({ visible, handleAlertsVisibility }) {
           currentPage + 3 <= max && (
             <button
               onClick={() => setCurrentPage(max)}
-              className="px-3 py-1 border-[2px] border-black bg-naranja_enf text-white rounded-md">
+              className="px-3 py-1 shadow-sm shadow-black bg-naranja_enf text-white rounded-md hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black">
               {max}
             </button>
           )
@@ -334,8 +351,8 @@ function VehiclesTable({ visible, handleAlertsVisibility }) {
           onClick={handleNext}
           className={
             currentPage === max
-              ? "px-3 py-1 border-[2px] border-black bg-negro_fondo text-white rounded-md"
-              : "px-3 py-1 border-[2px] border-black bg-naranja_enf text-white rounded-md"
+              ? "px-3 py-1 shadow-sm shadow-black bg-negro_fondo text-white rounded-md hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black"
+              : "px-3 py-1 shadow-sm shadow-black bg-naranja_enf text-white rounded-md hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black"
           }>
           <FiChevronRight className="symbolSearch" />
         </button>
@@ -346,11 +363,13 @@ function VehiclesTable({ visible, handleAlertsVisibility }) {
         Añadir vehículo +
       </button>
       <VehicleDetail
+        // handleReload={handleReload}
         visible={vehiclesDetailVisibility}
         data={detailData}
         handleVisible={handleVehiclesVisibility}
       />
-      <VehicleDetail
+      <VehicleCreate
+        // handleReload={handleReload}
         visible={createVehiclesVisibility}
         handleVisible={handleCreateVehiclesVisibility}
       />

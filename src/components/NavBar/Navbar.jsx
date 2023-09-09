@@ -9,14 +9,17 @@ import NavItem from "./NavItem";
 import { useAuth } from "@/app/context/AuthContext";
 import NavDefault from "../NavDefault";
 import NavUser from "../NavUser";
+import NavAdmin from "../NavAdmin";
 
 const Navbar = () => {
   const { user } = useAuth();
-  console.log(user);
+  // console.log(user);
 
   return (
     <div className="">
-      {user ? (
+      {user?.displayName === "Auto Contact" ? (
+        <NavAdmin userName={user?.displayName} userPhoto={user?.photoURL} />
+      ) : user ? (
         <NavUser userName={user?.displayName} userPhoto={user?.photoURL} />
       ) : (
         <NavDefault></NavDefault>

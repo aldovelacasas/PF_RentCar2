@@ -23,12 +23,29 @@ const rubik = fontRubik.className;
 let validation = true;
 
 function Recoveries() {
-  const [rentalsVisibility, setRentalsVisibility] = useState(true);
-  const [vehiclesVisibility, setVehiclesVisibility] = useState(false);
-  const [formVisibility, setFormVisibility] = useState(false);
-  const [alertsVisibility, setAlertsVisibility] = useState(false);
-
   let router = useRouter();
+
+  const initialState = {
+    rentalsVisibility: true,
+    vehiclesVisibility: false,
+    formVisibility: false,
+  };
+
+  const falseState = {
+    rentalsVisibility: false,
+    vehiclesVisibility: false,
+    formVisibility: false,
+  };
+
+  const [alertsVisibility, setAlertsVisibility] = useState(false);
+  const [visibility, setVisibility] = useState(initialState);
+
+  function handleVisibility(name) {
+    setVisibility({
+      ...falseState,
+      [name]: !visibility[name],
+    });
+  }
 
   function handleAlertsVisibility() {
     setAlertsVisibility(!alertsVisibility);
@@ -54,60 +71,60 @@ function Recoveries() {
         </h2>
         <div
           className={
-            rentalsVisibility
+            visibility.rentalsVisibility
               ? "bg-gris_fondo px-2 rounded-2xl break-words grid place-items-center"
               : ""
           }>
           <h3
-            onClick={() => setRentalsVisibility(!rentalsVisibility)}
+            onClick={() => handleVisibility("rentalsVisibility")}
             className={
-              !rentalsVisibility
+              !visibility.rentalsVisibility
                 ? `lg:px-[8em] text-center text-[1em] mb-2 bg-gris_fondo px-4 py-1 shadow-sm shadow-black hover:shadow-md cursor-pointer rounded-md hover:shadow-black active:shadow-inner active:shadow-black`
                 : `w-4/5 md:w-3/4 text-[1em] mb-2 bg-negro_fondo text-white text-center px-4 py-1 shadow-sm shadow-black hover:shadow-md cursor-pointer rounded-md hover:shadow-black active:shadow-inner active:shadow-black`
             }>
             ▼ Vehículos dados de baja ▼
           </h3>
           <CarRecTable
-            visible={rentalsVisibility}
+            visible={visibility.rentalsVisibility}
             handleAlertsVisibility={handleAlertsVisibility}
           />
         </div>
         <div
           className={
-            vehiclesVisibility
+            visibility.vehiclesVisibility
               ? "bg-gris_fondo pb-2 rounded-2xl grid place-items-center lg:pb-6"
               : ""
           }>
           <h3
-            onClick={() => setVehiclesVisibility(!vehiclesVisibility)}
+            onClick={() => handleVisibility("vehiclesVisibility")}
             className={
-              !vehiclesVisibility
+              !visibility.vehiclesVisibility
                 ? `lg:px-[8em] text-center text-[1em] mb-2 bg-gris_fondo px-4 py-1 shadow-sm shadow-black hover:shadow-md cursor-pointer rounded-md hover:shadow-black active:shadow-inner active:shadow-black`
                 : `w-4/5 md:w-3/4 text-[1em] mb-2 bg-negro_fondo text-white text-center px-4 py-1 shadow-sm shadow-black hover:shadow-md cursor-pointer rounded-md hover:shadow-black active:shadow-inner active:shadow-black`
             }>
             ▼ Usuarios dados de baja ▼
           </h3>
           <UsersRecTable
-            visible={vehiclesVisibility}
-            handleAlertsVisibility={handleAlertsVisibility}
+            visible={visibility.vehiclesVisibility}
+            onClick={() => setVehiclesVisibility(!vehiclesVisibility)}
           />
         </div>
         <div
           className={
-            formVisibility
+            visibility.formVisibility
               ? "bg-gris_fondo pb-2 rounded-2xl grid place-items-center lg:pb-6"
               : ""
           }>
           <h3
-            onClick={() => setFormVisibility(!formVisibility)}
+            onClick={() => handleVisibility("formVisibility")}
             className={
-              !formVisibility
+              !visibility.formVisibility
                 ? `lg:px-[8em] text-center text-[1em] mb-2 bg-gris_fondo px-4 py-1 shadow-sm shadow-black hover:shadow-md cursor-pointer rounded-md hover:shadow-black active:shadow-inner active:shadow-black`
                 : `w-4/5 md:w-3/4 text-[1em] mb-2 bg-negro_fondo text-white text-center px-4 py-1 shadow-sm shadow-black hover:shadow-md cursor-pointer rounded-md hover:shadow-black active:shadow-inner active:shadow-black`
             }>
             ▼ Solicitar ayuda ▼
           </h3>
-          <HelpForm visible={formVisibility} />
+          <HelpForm visible={visibility.formVisibility} />
         </div>
       </main>
       <Alerts visible={alertsVisibility}>

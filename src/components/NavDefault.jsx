@@ -52,7 +52,7 @@ export default function NavDefault() {
         className={
           navActive
             ? "flex flex-col gap-8 h-full bg-white fixed top-[95px] right-0 w-3/5 pl-8 pt-8"
-            : "md:flex md:gap-4 lg:gap-8 md:mr-3 hidden"
+            : "md:flex md:gap-4 lg:gap-8 md:mr-3 hidden items-center"
         }>
         <li
           className={
@@ -60,16 +60,9 @@ export default function NavDefault() {
               ? "list-none text-naranja_enf underline"
               : "list-none hover:text-naranja_enf transition ease-in-out duration-300  "
           }>
-          <Link href="/homePage">Home</Link>
+          <Link href="/homePage">Inicio</Link>
         </li>
-        <li
-          className={
-            route === "/about"
-              ? "list-none text-naranja_enf underline"
-              : "list-none hover:text-naranja_enf transition ease-in-out duration-300 "
-          }>
-          <Link href="/about">About</Link>
-        </li>
+
         <li
           className={
             route === "/vehiculos"
@@ -85,6 +78,14 @@ export default function NavDefault() {
               : "list-none hover:text-naranja_enf transition ease-in-out duration-300 "
           }>
           <Link href="/testimoniales">Testimoniales</Link>
+        </li>
+        <li
+          className={
+            route === "/about"
+              ? "list-none text-naranja_enf underline"
+              : "list-none hover:text-naranja_enf transition ease-in-out duration-300 "
+          }>
+          <Link href="/about">Nosotros</Link>
         </li>
         <li
           className={

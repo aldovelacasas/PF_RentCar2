@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Alerts from "@/components/Alerts";
 import { Rubik, Poppins } from "next/font/google";
 import { validateUserForm } from "@/libs/functions";
@@ -19,7 +19,7 @@ const poppins = fontPoppins.className;
 const rubik = fontRubik.className;
 let login = true;
 
-function page() {
+function Profile() {
   const router = useRouter();
   if (!login) {
     router.push("/");
@@ -27,11 +27,11 @@ function page() {
   }
 
   const inputsInitialValue = {
-    nombre: "Juanito Pérez",
-    correo: "correodetamañorazonable@gmail.com",
+    nombre: userData ? userData.displayName : "Perfil",
+    correo: userData ? userData.email : "Correo",
     pasaporte: "ZZZ123456",
     telefono: "5512345678",
-    imagen: "https://picsum.photos/200",
+    imagen: userData ? userData.photoURL : "",
   };
 
   const [errors, setErrors] = useState({});
@@ -260,4 +260,4 @@ function page() {
   );
 }
 
-export default page;
+export default Profile;

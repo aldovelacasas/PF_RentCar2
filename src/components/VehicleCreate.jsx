@@ -22,9 +22,9 @@ function VehicleDetail({
     name: "",
     model: "",
     year: "",
-    type: "",
+    type: "Sedan",
     capacity: "",
-    transmission: "",
+    transmission: "manual",
     description: "",
     image: "",
   },
@@ -98,18 +98,18 @@ function VehicleDetail({
   }
 
   const handleSubmit = async (e) => {
-    let errorsLength = Object.values(error).filter((e) => e !== "").length;
+    let errorsLength = Object.values(error).filter(
+      (e) => e !== "" && e !== undefined
+    ).length;
     if (errorsLength === 0) {
       e.preventDefault();
       localStorage.removeItem("formData");
       const formData = new FormData();
       formData.append("data", JSON.stringify(inputs));
-      if (imageRender != image) {
-        formData.append("file", image);
-      }
-      const res = await axios.put(`/api/products/${inputs.id}`, inputs);
+      formData.append("file", image);
+      const res = await axios.post(`/api/products/`, formData);
       console.log(res);
-      // handleReload();
+      //   handleReload();
       handleVisible();
     } else {
       console.log(error);
