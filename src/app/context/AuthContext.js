@@ -27,14 +27,20 @@ export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
   const signup = async (email, password) => {
-    const userCredential = await createUserWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
-    const uid = userCredential.user.uid;
-    const emailUser = userCredential.user.email;
-    await saveData(uid, emailUser);
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+      const uid = userCredential.user.uid;
+      const emailUser = userCredential.user.email;
+
+      await saveData(uid, emailUser);
+    } catch (error) {
+      throw error;
+    }
   };
 
   const login = async (email, password) => {

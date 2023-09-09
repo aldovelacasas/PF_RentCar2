@@ -31,17 +31,21 @@ export default function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
+
     try {
-      signup(user.email, user.password);
+      await signup(user.email, user.password);
       router.push("/login");
     } catch (error) {
       if (error.code === "auth/email-already-in-use") {
         setError("El correo ingresado ya se encuentra registrado");
-        if (error.code === "auth/missing-password") {
-          setError("La contraseña debe tener cómo minimo seis caracteres");
-        }
+      } else if (error.code === "auth/missing-password") {
+        setError("La contraseña debe tener al menos seis caracteres");
       } else if (error.code === "auth/invalid-email") {
         setError("El correo ingresado no es válido");
+      } else {
+        setError(
+          "Error al registrar usuario. Por favor, inténtalo nuevamente."
+        );
       }
     }
   };
