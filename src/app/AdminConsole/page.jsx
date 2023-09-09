@@ -6,6 +6,7 @@ import RentalsTable from "@/components/RentalsTable";
 import VehiclesTable from "@/components/VehiclesTable";
 import HelpForm from "@/components/HelpForm";
 import { useRouter } from "next/navigation";
+import axios from "axios";
 import Alerts from "@/components/Alerts";
 
 const fontRubik = Rubik({
@@ -23,16 +24,42 @@ const rubik = fontRubik.className;
 let validation = true;
 
 function AdminMain() {
-  const [rentalsVisibility, setRentalsVisibility] = useState(true);
-  const [vehiclesVisibility, setVehiclesVisibility] = useState(false);
-  const [formVisibility, setFormVisibility] = useState(false);
+  const initialState = {
+    rentalsVisibility: true,
+    vehiclesVisibility: false,
+    formVisibility: false,
+  };
+
+  const falseState = {
+    rentalsVisibility: false,
+    vehiclesVisibility: false,
+    formVisibility: false,
+  };
+
   const [alertsVisibility, setAlertsVisibility] = useState(false);
+  const [visibility, setVisibility] = useState(initialState);
+  const [id, setId] = useState("");
 
   let router = useRouter();
 
-  function handleAlertsVisibility() {
+  function handleVisibility(name) {
+    setVisibility({
+      ...falseState,
+      [name]: !visibility[name],
+    });
+  }
+
+  function handleDeletion() {
+    // axios.put(`/api/products/${id}`, { isActive: false }).then(console.log("Borrado exitosamente"));
+    axios
+      .delete(`/api/products/${id}?id=${id}`)
+      .then(console.log("Borrado exitosamente"));
+  }
+
+  function handleAlertsVisibility(dataId) {
     setAlertsVisibility(!alertsVisibility);
     document.body.classList.toggle("stopScroll");
+    setId(dataId);
   }
 
   if (!validation) {
@@ -52,57 +79,57 @@ function AdminMain() {
         <h2 className="text-[1.5em] pl-2">Bienvenido Admin</h2>
         <div
           className={
-            rentalsVisibility
+            visibility.rentalsVisibility
               ? "bg-gris_fondo px-2 rounded-2xl break-words grid place-items-center"
               : ""
           }>
           <h3
-            onClick={() => setRentalsVisibility(!rentalsVisibility)}
+            onClick={() => handleVisibility("rentalsVisibility")}
             className={
-              !rentalsVisibility
+              !visibility.rentalsVisibility
                 ? `lg:px-[8em] text-center text-[1em] mb-2 bg-gris_fondo px-4 py-1 shadow-sm shadow-black hover:shadow-md cursor-pointer rounded-md hover:shadow-black active:shadow-inner active:shadow-black`
                 : `w-4/5 md:w-3/4 text-[1em] mb-2 bg-negro_fondo text-white text-center px-4 py-1 shadow-sm shadow-black hover:shadow-md cursor-pointer rounded-md hover:shadow-black active:shadow-inner active:shadow-black`
             }>
             ▼ Vehículos en renta ▼
           </h3>
-          <RentalsTable visible={rentalsVisibility} />
+          <RentalsTable visible={visibility.rentalsVisibility} />
         </div>
         <div
           className={
-            vehiclesVisibility
+            visibility.vehiclesVisibility
               ? "bg-gris_fondo pb-2 rounded-2xl grid place-items-center lg:pb-6"
               : ""
           }>
           <h3
-            onClick={() => setVehiclesVisibility(!vehiclesVisibility)}
+            onClick={() => handleVisibility("vehiclesVisibility")}
             className={
-              !vehiclesVisibility
+              !visibility.vehiclesVisibility
                 ? `lg:px-[8em] text-center text-[1em] mb-2 bg-gris_fondo px-4 py-1 shadow-sm shadow-black hover:shadow-md cursor-pointer rounded-md hover:shadow-black active:shadow-inner active:shadow-black`
                 : `w-4/5 md:w-3/4 text-[1em] mb-2 bg-negro_fondo text-white text-center px-4 py-1 shadow-sm shadow-black hover:shadow-md cursor-pointer rounded-md hover:shadow-black active:shadow-inner active:shadow-black`
             }>
             ▼ Administrar vehículos ▼
           </h3>
           <VehiclesTable
-            visible={vehiclesVisibility}
+            visible={visibility.vehiclesVisibility}
             handleAlertsVisibility={handleAlertsVisibility}
           />
         </div>
         <div
           className={
-            formVisibility
+            visibility.formVisibility
               ? "bg-gris_fondo pb-2 rounded-2xl grid place-items-center lg:pb-6"
               : ""
           }>
           <h3
-            onClick={() => setFormVisibility(!formVisibility)}
+            onClick={() => handleVisibility("formVisibility")}
             className={
-              !formVisibility
+              !visibility.formVisibility
                 ? `lg:px-[8em] text-center text-[1em] mb-2 bg-gris_fondo px-4 py-1 shadow-sm shadow-black hover:shadow-md cursor-pointer rounded-md hover:shadow-black active:shadow-inner active:shadow-black`
                 : `w-4/5 md:w-3/4 text-[1em] mb-2 bg-negro_fondo text-white text-center px-4 py-1 shadow-sm shadow-black hover:shadow-md cursor-pointer rounded-md hover:shadow-black active:shadow-inner active:shadow-black`
             }>
             ▼ Solicitar ayuda ▼
           </h3>
-          <HelpForm visible={formVisibility} />
+          <HelpForm visible={visibility.formVisibility} />
         </div>
       </main>
       <Alerts visible={alertsVisibility}>
@@ -117,6 +144,7 @@ function AdminMain() {
 
         <div className="flex w-1/2 justify-evenly">
           <button
+            onClick={handleDeletion}
             className={` bg-naranja_enf ${rubik} text-white text-[1em] px-4 rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black `}>
             Borrar
           </button>

@@ -14,6 +14,7 @@ import { FaCalendarAlt, FaSearchDollar } from "react-icons/fa";
 import { PiCar, PiCarProfile, PiPhoneCallBold } from "react-icons/pi";
 import { BiSolidCar } from "react-icons/bi";
 import { Rubik, Poppins } from "next/font/google";
+import { useRouter } from "next/navigation.js";
 
 const fontRubik = Rubik({
   weight: "600",
@@ -31,6 +32,8 @@ const today = new Date().toISOString().split("T")[0];
 let message;
 
 function HomePage() {
+  const router = useRouter();
+
   const [display, setDisplay] = useState(categorias[0].imagen);
   const [category, setCategory] = useState("Sedan");
   const [email, setEmail] = useState("");
@@ -128,7 +131,7 @@ function HomePage() {
       });
     } else {
       window.scrollTo({
-        top: 1220,
+        top: 1100,
         behavior: "smooth",
       });
     }
@@ -148,7 +151,7 @@ function HomePage() {
       return;
     } else if (dates.startDate <= dates.endDate) {
       setErrors({});
-      handleFormVisibility();
+      router.push("/login");
     }
   }
 
@@ -206,9 +209,9 @@ function HomePage() {
         </div>
       </header>
       <form
-        className={`bg-white pt-2 ${poppins} text-[0.8em] sm:text-[1em] md:text-[1.2em] px-[25%] justify-self-center bg-gris_frente pb-12`}>
+        className={` rounded-3xl mt-8 ${poppins} text-[0.8em] sm:text-[1em] md:text-[1.2em] px-[20%] justify-self-center bg-[#fff6] mb-2 shadow-sm shadow-negro_fondo pb-12`}>
         <p
-          className={`text-[1em] md:text-[1.2em] ${rubik} mb-2 md:mt-[80px] text-center`}>
+          className={`text-[1em] md:text-[1.2em] ${rubik} mb-2 md:mt-[40px] text-center`}>
           Renta un auto
         </p>
         <fieldset>
@@ -264,8 +267,8 @@ function HomePage() {
         )}
         <button
           onClick={handleValidation}
-          className={`bg-naranja_enf w-full text-white text-[0.8em] px-4 py-1 mt-4 ${poppins} shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
-          Buscar
+          className={`bg-naranja_enf w-full text-white text-[0.8em] px-4 py-1 mt-8 ${rubik} shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
+          Rentar
         </button>
       </form>
       <section
@@ -314,29 +317,29 @@ function HomePage() {
         </div>
       </section>
       <section
-        className={`pt-4 ${rubik} grid mx-[auto] text-[0.8em] bg-gris_frente pb-12 sm:text-[1.2em]`}>
+        className={`pt-4 ${rubik} w-4/5 grid mx-[auto] text-[0.8em] bg-gris_frente pb-12 sm:text-[1.2em]`}>
         <p className={`text-[0.8em] mb-2 text-center`}>Planea tu viaje</p>
-        <p className={`text-[1em] mb-6 text-center`}>
+        <p className={`text-[1em] mb-2 text-center`}>
           Alquila tu auto fácil y rápido
         </p>
         <img
           src={display}
-          className="w-3/4 justify-self-center object-fill h-[200px]  sm:h-[350px] md:h-[450px]"
+          className="w-4/5 justify-self-center object-scale-down max-h-[300px] md:max-h-[400px]"
         />
-        <div className="p-4 grid grid-cols-2 gap-4 w-3/4 justify-self-center">
+        <div className="p-4 grid grid-cols-1 lg:grid-cols-3 gap-4 w-4/5 justify-self-center">
           {categorias.map((c) => (
             <button
               key={c.tipo}
               value={c.tipo}
               onClick={handleChange}
-              className="bg-naranja_enf px-4 py-2 shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black">
+              className="bg-naranja_enf px-4 py-2 shadow-sm text-white shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black">
               {c.tipo}
             </button>
           ))}
         </div>
       </section>
       <section
-        className={`pt-4 ${rubik} mx-[auto] text-white text-center text-[0.8em] w-full bg-negro_fondo pb-6 sm:py-[40px] md:py-[80px] sm:text-[1.2em]`}>
+        className={`pt-4 ${rubik} mx-[auto] my-8 text-white text-center text-[0.8em] w-full bg-negro_fondo pb-6 sm:py-[40px] md:py-[80px] sm:text-[1.2em]`}>
         <p className="text-2xl md:text-[1.8em] md:leading-[1.8em]">
           Ven y ahorra con nosotros
         </p>
@@ -346,7 +349,7 @@ function HomePage() {
         </p>
       </section>
       <section
-        className={` w-3/4 pt-4 ${rubik} mx-[auto] text-[0.8em] bg-gris_frente pb-12 sm:text-[1.2em] grid`}>
+        className={` w-3/4 pt-4 ${rubik} mx-[auto] text-[0.8em] bg-gris_frente mt-8 pb-12 sm:text-[1.2em] grid`}>
         <p>¿Por qué rentar con nosotros?</p>
         <p className="text-2xl md:text-[1.9em] md:leading-[1.2em]">
           Contamos el vehículo que necesitas al
@@ -401,7 +404,7 @@ function HomePage() {
         </div>
       </section>
       <section
-        className={`pt-16 px-5 ${rubik} mx-[auto] text-[0.8em] bg-gris_fondo pb-12 w-3/4`}>
+        className={`pt-8 px-5 ${rubik} mx-[auto] text-[0.8em] bg-gris_fondo rounded-3xl shadow-sm shadow-black pb-12 w-3/4`}>
         <p className="text-center md:text-[1.3em]">Prueba Social</p>
         <p className="text-2xl md:text-[1.5em] text-center pb-4 md:pb-8">
           Lee las reseñas de otros clientes
@@ -410,7 +413,8 @@ function HomePage() {
           Más de 5 años de experiencia nos respaldan y nuestros clientes pueden
           corroborar nuestro excelentísimo servicio.
         </p>
-        <div className={`bg-white ${rubik} text-[0.8em] p-4`}>
+        <div
+          className={`bg-white ${rubik}  p-8 shadow-sm shadow-black rounded-xl mb-4`}>
           <p>
             "Nunca habíamos rentado un auto antes, pero luego de haber puesto
             nuestro voto de confianza en esta página, es una experiencia que
@@ -430,7 +434,8 @@ function HomePage() {
             <p className="text-amarillo_status text-2xl mt-4">★★★★★</p>
           </div>
         </div>
-        <div className={`bg-white ${rubik} text-[0.8em] p-4 mt-6`}>
+        <div
+          className={`bg-white ${rubik}  p-8 shadow-sm shadow-black rounded-xl`}>
           <p>
             "Después de estas últimas vacaciones me sentí tan libre que me
             gustaría poder recomendarle a todos una aventura igual a la mía. De
@@ -452,17 +457,17 @@ function HomePage() {
         </div>
       </section>
       <section
-        className={`pt-16 px-5 ${rubik} mx-[auto] text-[0.8em] md:mt-[60px] w-3/4 bg-gris_frente pb-12 sm:text-[1.2em]`}>
+        className={`pt-8 px-5 ${rubik} mx-[auto] text-[0.8em] md:mt-[60px] w-3/4 bg-gris_frente pb-12 sm:text-[1.2em]`}>
         <p className="text-center">FAQ</p>
         <p className="text-2xl text-center pb-4 md:text-[1.2em]  md:mb-[60px]">
           Preguntas Frecuentes
         </p>
-        <table className="bg-white shadow-md shadow-black min-w-[300px] sm:min-w-[600px] md:mb-[100px] md:min-w-[600px] lg:min-w-[1100px]">
+        <table className="bg-white shadow-md shadow-black md:mb-8">
           <tbody className="[&>*:nth-child(odd)]:bg-[#ea4e398a] bg-white">
             <tr
               onClick={() => handleCollapse("One")}
               className="cursor-pointer hover:text-blue-600 ">
-              <td className="py-1 text-center">
+              <td className="py-1 text-center w-full">
                 ¿Cuánto tiempo tengo para devolver el pedido?
               </td>
               <td className="px-2">▼</td>
