@@ -2,13 +2,17 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   allUsers: [],
-  userId: "",
-  userName: "",
-  userEmail: "",
-  userPassport: "",
-  userPhone: "",
-  userImage: "",
-  userIsActive: "",
+  isLoading: false,
+  currentUser: {
+    userId: "",
+    userUid: "",
+    userName: "",
+    userEmail: "",
+    userPassport: "",
+    userPhone: "",
+    userImage: "",
+    userIsActive: "",
+  },
 };
 
 export const userSlice = createSlice({
@@ -20,17 +24,20 @@ export const userSlice = createSlice({
     },
     setUser: (state, action) => {
       state.isLoading = false;
-      state.userId = action.payload.user;
-      let currentUser = action.payload.user.filter(
-        (u) => u.name === "Auto Contact"
-      );
-      state.userId = currentUser.id;
-      state.userName = currentUser.emailUser;
-      state.userEmail = currentUser.username;
-      state.userPassport = currentUser.passport;
-      state.userPhone = currentUser.phone;
-      state.userImage = currentUser?.image;
-      state.userIsActive = currentUser?.isActive;
+      state.allUsers = action.payload;
+    },
+    setCurrentUser: (state, action) => {
+      let user = state.allUsers.filter((u) => u.emailUser === action.payload);
+      state.currentUser = {
+        userId: user.id,
+        userUid: user.uid,
+        userName: user.username,
+        userEmail: user.emailUser,
+        userPassport: user.passport,
+        userPhone: user.phone,
+        userImage: user.image,
+        userIsActive: user.isActive === null,
+      };
     },
   },
 });

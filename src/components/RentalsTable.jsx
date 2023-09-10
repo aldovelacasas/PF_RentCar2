@@ -1,5 +1,5 @@
 import { Rubik, Poppins } from "next/font/google";
-import { rentas } from "@/libs/placeholdersAdmin";
+import axios from "axios";
 import { sliceData, slicePage } from "@/libs/functions";
 import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
 import { useEffect, useState } from "react";
@@ -41,12 +41,41 @@ function RentalsTable({ visible }) {
   const [category, setCategory] = useState("vehiculo");
   const [aux, setAux] = useState(false);
   const [arrow, setArrow] = useState(arrowInitialState);
+  const [rentals, setRentals] = useState();
+
+  async function fetchRentals() {
+    const res = await axios
+      .get("http://localhost:3000/api/bookings")
+      .then((data) => setRentals(data));
+    console.log(res);
+  }
+  useEffect(() => {
+    fetchRentals();
+    console.log(rentals);
+  }, []);
+
+  return (
+    <div>
+      {rentals?.length &&
+        rentals.map((r) => {
+          return (
+            <div key={r.id}>
+              <p>UserId: {userID}</p>
+              <p>{r.fecha_inicio}</p>
+              <p>{r.fecha_fin}</p>
+              <p>Monto: {r.monto}</p>
+              <p>Estado: {r.statusB}</p>
+            </div>
+          );
+        })}
+    </div>
+  );
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [rentas]);
+  }, [rentals]);
 
-  let dataToShow = rentas;
+  let dataToShow = rentals;
   let quantityPerPage = 10;
   let max = Math.ceil(dataToShow.length / quantityPerPage);
   let pages = [];

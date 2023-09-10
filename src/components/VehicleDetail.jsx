@@ -98,13 +98,15 @@ function VehicleDetail({
   }
 
   const handleSubmit = async (e) => {
-    let errorsLength = Object.values(error).filter((e) => e !== "").length;
+    let errorsLength = Object.values(error).filter(
+      (e) => e !== "" && e !== undefined
+    ).length;
     if (errorsLength === 0) {
       e.preventDefault();
       localStorage.removeItem("formData");
       const formData = new FormData();
       formData.append("data", JSON.stringify(inputs));
-      if (imageRender != image) {
+      if (imageRender !== image) {
         formData.append("file", image);
       }
       const res = await axios.put(`/api/products/${inputs.id}`, inputs);

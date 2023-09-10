@@ -28,6 +28,8 @@ if (window.innerWidth <= 870) {
   pantalla = "grande";
 }
 
+let dataToShow;
+
 function VehiclesTable({ visible, handleAlertsVisibility }) {
   const arrowInitialState = {
     name: false,
@@ -37,12 +39,6 @@ function VehiclesTable({ visible, handleAlertsVisibility }) {
   };
 
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getCars());
-  }, []);
-
-  let cars = useSelector((state) => state.cars.showCars);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [detailData, setDetailData] = useState();
@@ -55,7 +51,12 @@ function VehiclesTable({ visible, handleAlertsVisibility }) {
   const [category, setCategory] = useState("name");
   const [aux, setAux] = useState(false);
   const [arrow, setArrow] = useState(arrowInitialState);
-  const [dataToShow, setDataToShow] = useState([]);
+
+  useEffect(() => {
+    dispatch(getCars());
+  }, []);
+
+  let cars = useSelector((state) => state.cars.showCars);
 
   useEffect(() => {
     setCurrentPage(1);
@@ -63,12 +64,11 @@ function VehiclesTable({ visible, handleAlertsVisibility }) {
 
   // let dataToShow = [...cars].filter((c) => c.isActive === true);
   useEffect(() => {
-    setDataToShow([...cars]);
-    setCurrentPage(1);
-  }, [cars, aux, visible]);
+    dataToShow = [...cars];
+  }, [cars]);
 
   let quantityPerPage = 8;
-  let max = Math.ceil(dataToShow.length / quantityPerPage);
+  let max = Math.ceil(dataToShow?.length / quantityPerPage);
   let pages = [];
   let x = 0;
 
@@ -114,11 +114,12 @@ function VehiclesTable({ visible, handleAlertsVisibility }) {
 
   function handleSearch(e) {
     setSearch(e.target.value);
-    setData(
-      dataToShow.filter((d) =>
-        d[category].toLowerCase().includes(e.target.value.toLowerCase())
-      )
+    dataToShow = [...cars];
+    let results = dataToShow.filter((d) =>
+      d[category].toLowerCase().includes(e.target.value.toLowerCase())
     );
+    dataToShow = results;
+    setData(sliceData(results, currentPage, quantityPerPage));
     setCurrentPage(1);
   }
 
@@ -127,24 +128,20 @@ function VehiclesTable({ visible, handleAlertsVisibility }) {
   }
 
   function handleSort(sortCategory) {
-    let order = "asc";
-    if (order === "asc") {
-      let ordenated = dataToShow.sort((a, b) => {
-        if (a[sortCategory] < b[sortCategory]) {
-          return -1;
-        }
-        if (a[sortCategory] > b[sortCategory]) {
-          return 1;
-        }
-        return 0;
-      });
-      setData(sliceData(ordenated, currentPage, quantityPerPage));
-      setCurrentPage;
-      setAux(!aux);
-      setArrow({ ...arrowInitialState, [sortCategory]: true });
-    } else {
-      setData(data.sort((a, b) => b[sortCategory] - a[sortCategory]));
-    }
+    let ordenated = dataToShow.sort((a, b) => {
+      if (a[sortCategory] < b[sortCategory]) {
+        return -1;
+      }
+      if (a[sortCategory] > b[sortCategory]) {
+        return 1;
+      }
+      return 0;
+    });
+    dataToShow = ordenated;
+    setAux(!aux);
+    setData(sliceData(ordenated, currentPage, quantityPerPage));
+    setCurrentPage(1);
+    setArrow({ ...arrowInitialState, [sortCategory]: true });
   }
 
   if (visible === false) return null;
@@ -155,7 +152,7 @@ function VehiclesTable({ visible, handleAlertsVisibility }) {
           Vehículos
           <span
             className={`${poppins} text-[0.8em] bg-gris_fondo ml-2 py-1 px-2 rounded-full`}>
-            {dataToShow.length}
+            {dataToShow?.length}
           </span>
         </h3>
         <p className={`${poppins} text-[0.9em] pl-2`}>
@@ -168,14 +165,16 @@ function VehiclesTable({ visible, handleAlertsVisibility }) {
           <input
             name="search"
             className={`${poppins} pl-2 basis-[50%] text-[0.8em] max-w-[50%] border-[1px] border-black rounded-md mr-4`}
-            placeholder={`Búsqueda por ${category}`}
+            placeholder={`Búsqueda por ${
+              category === "name" ? "Marca" : "Modelo"
+            }`}
             value={search}
             onChange={handleSearch}
           />
           <select
             className="max-w-[30%]  bg-naranja_enf text-white px-2 rounded-full cursor-pointer shadow-sm shadow-black hover:shadow-md hover:shadow-black"
             onChange={handleSearchCategory}>
-            <option value="name">Nombre</option>
+            <option value="name">Marca</option>
             <option value="model">Modelo</option>
           </select>
         </div>
@@ -187,7 +186,7 @@ function VehiclesTable({ visible, handleAlertsVisibility }) {
                   <th
                     onClick={() => handleSort("name")}
                     className={`${rubik} min-w-[90px] sm:min-w-[250px] px-2 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
-                    {arrow.name ? "Nombre ▼" : "Nombre"}
+                    {arrow.name ? "Marca ▼" : "Marca"}
                   </th>
                   <th
                     onClick={() => handleSort("model")}
