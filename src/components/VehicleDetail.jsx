@@ -2,6 +2,7 @@ import { Rubik, Poppins } from "next/font/google";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import validation from "@/libs/validation";
+import { useRouter } from "next/navigation";
 
 const fontRubik = Rubik({
   weight: "600",
@@ -31,6 +32,7 @@ function VehicleDetail({
   handleVisible,
   handleReload,
 }) {
+  const router = useRouter();
   if (!visible) return null;
 
   useEffect(() => {
@@ -107,8 +109,8 @@ function VehicleDetail({
       if (imageRender != image) {
         formData.append("file", image);
       }
-      const res = await axios.put(`/api/products/${inputs.id}`, inputs);
-      console.log(res);
+      const res = await axios.put(`/api/products/${inputs.id}`, formData);
+      router.push("/vehiculos");
       // handleReload();
       handleVisible();
     } else {
