@@ -11,6 +11,7 @@ import {
   linkWithPopup,
   fetchSignInMethodsForEmail,
   updatePassword,
+  sendPasswordResetEmail,
 } from "firebase/auth";
 import axios from "axios";
 
@@ -26,14 +27,20 @@ export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
   const signup = async (email, password) => {
-    const userCredential = await createUserWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
-    const uid = userCredential.user.uid;
-    const emailUser = userCredential.user.email;
-    await saveData(uid, emailUser);
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+      const uid = userCredential.user.uid;
+      const emailUser = userCredential.user.email;
+
+      await saveData(uid, emailUser);
+    } catch (error) {
+      throw error;
+    }
   };
 
   const login = async (email, password) => {
@@ -111,6 +118,23 @@ export const AuthContextProvider = ({ children }) => {
     }
   };
 
+  const handleForgotPassword = async () => {
+    try {
+      const email = prompt("Ingrese su dirección de correo electrónico:");
+      if (email) {
+        await sendPasswordResetEmail(auth, email);
+        alert(
+          "Se ha enviado un correo electrónico con instrucciones para restablecer su contraseña. Revise su bandeja de entrada."
+        );
+      }
+    } catch (error) {
+      console.error(
+        "Error al enviar el correo electrónico de recuperación de contraseña:",
+        error
+      );
+    }
+  };
+
   const logOut = () => {
     signOut(auth);
   };
@@ -138,7 +162,14 @@ export const AuthContextProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ user, signup, login, loginWithGoogle, logOut }}>
+      value={{
+        user,
+        signup,
+        login,
+        loginWithGoogle,
+        logOut,
+        handleForgotPassword,
+      }}>
       {children}
     </AuthContext.Provider>
   );
