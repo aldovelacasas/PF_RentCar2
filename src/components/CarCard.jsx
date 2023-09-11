@@ -76,15 +76,9 @@ export default function CarCard({ car, handleVisibility, handleDetail }) {
             </div>
             <p className="text-sm font-light pr-2">Por día</p>
           </div>
-          <div className="flex justify-between px-2 font-light">
-            <p className="mb-2">Modelo:{car.model}</p>
-            <p className="pr-2">Año:{car.year}</p>
-          </div>
-          <div className="flex justify-between px-2 font-light">
-            <p className="mb-2">Cap:{car.capacity} Personas</p>
-            <p className="pr-2">Tipo:{car.type}</p>
-          </div>
-          <p className=" text-xs font-light px-2">{car.description}</p>
+
+
+
         </div>
         <hr className="my-3 mx-2" />
       </main>
