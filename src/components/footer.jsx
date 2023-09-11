@@ -41,7 +41,7 @@ function Footer() {
             />
           </svg>
 
-          <span className="m-1"> rentadeautos@correo.com</span>
+          <span className="m-1"> autocontactofficial@gmail.com </span>
         </div>
       </div>
       <div className="sm:w-1/3 p-4 mt-4 sm:mt-0">
