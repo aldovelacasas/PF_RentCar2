@@ -137,6 +137,7 @@ export const AuthContextProvider = ({ children }) => {
 
   const logOut = () => {
     signOut(auth);
+    router.push("/login");
   };
 
   const saveData = async (uid, emailUser) => {
