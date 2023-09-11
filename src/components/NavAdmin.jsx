@@ -97,10 +97,7 @@ export default function NavUser({ userName, userPhoto }) {
             />
           </a>
           <div className="">
-            <span className="block w-full font-light text-sm pb-1">
-              {" "}
-              {userName}
-            </span>
+            <span className="block w-full text-sm pb-1">Hola, {userName}</span>
             <button
               onClick={logOut}
               className=" block w-full bg-naranja_enf hover:bg-negro_fondo text-white text-xs font-bold py-1 px-2 rounded focus:outline-none focus:shadow-outline">

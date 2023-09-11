@@ -80,7 +80,7 @@ function RentalsTable({ visible }) {
     } else {
       setAux(!aux);
     }
-  }, [allRentals, allCars, allUsers, aux]);
+  }, [allRentals, aux]);
 
   useEffect(() => {
     setCurrentPage(1);
