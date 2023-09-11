@@ -16,40 +16,10 @@ const fontPoppins = Poppins({
 const poppins = fontPoppins.className;
 const rubik = fontRubik.className;
 
-function VehicleDetail({
-  visible,
-  data = {
-    price: "",
-    name: "",
-    model: "",
-    year: "",
-    type: "",
-    capacity: "",
-    transmission: "",
-    description: "",
-    image: "",
-  },
-  handleVisible,
-  handleReload,
-}) {
+function VehicleDetail({ visible, data, handleVisible, handleReload }) {
   const router = useRouter();
   if (!visible) return null;
 
-  useEffect(() => {
-    const jsondata = window.localStorage.getItem("formData");
-    const data = JSON.parse(jsondata);
-
-    for (const key in data) {
-      if (key === "image") {
-        setLocalImage(data[key]);
-      } else if (key && key !== "") {
-        setInputs((prevProduct) => ({
-          ...prevProduct,
-          [key]: data[key],
-        }));
-      }
-    }
-  }, []);
   const initialState = {
     id: data.id,
     image: data.image,
@@ -62,6 +32,21 @@ function VehicleDetail({
     price: data.price,
     description: data.description,
   };
+
+  useEffect(() => {
+    const jsondata = window.localStorage.getItem("formData");
+    const data = JSON.parse(jsondata);
+    for (const key in data) {
+      if (key === "image") {
+        setLocalImage(data[key]);
+        // } else if (key && key !== "") {
+        //   setInputs((initialState) => ({
+        //     ...initialState,
+        //     [key]: data[key],
+        //   }));
+      }
+    }
+  }, []);
 
   const [localimage, setLocalImage] = useState(false);
   const [inputs, setInputs] = useState(initialState);

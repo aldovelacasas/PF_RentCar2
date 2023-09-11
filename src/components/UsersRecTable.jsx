@@ -19,14 +19,6 @@ const fontPoppins = Poppins({
 const poppins = fontPoppins.className;
 const rubik = fontRubik.className;
 
-let pantalla;
-
-if (window.innerWidth <= 870) {
-  pantalla = "chica";
-} else if (window.innerWidth > 870) {
-  pantalla = "grande";
-}
-
 function CarRecTable({ visible, handleAlertsVisibility }) {
   const arrowInitialState = {
     id: false,

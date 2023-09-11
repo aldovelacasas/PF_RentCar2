@@ -103,7 +103,7 @@ export function validateUserForm(inputs) {
     delete errors.pasaporte;
   }
   if (inputs.telefono !== "" && !regexPhone.test(inputs.telefono)) {
-    errors.telefono = "Por favor introduce un número de pasaporte válido";
+    errors.telefono = "Por favor introduce un número de teléfono válido";
   } else if (regexPhone.test(inputs.telefono)) {
     delete errors.telefono;
   }
