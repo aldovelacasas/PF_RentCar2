@@ -112,7 +112,6 @@ function VehicleDetail({
         formData.append("file", image);
       }
       const res = await axios.put(`/api/products/${inputs.id}`, formData);
-      router.push("/vehiculos");
       // handleReload();
       handleVisible();
     } else {

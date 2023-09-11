@@ -1,9 +1,10 @@
 import { Rubik, Poppins } from "next/font/google";
-import axios from "axios";
 import { sliceData, slicePage } from "@/libs/functions";
 import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
 import { useEffect, useState } from "react";
 import RentalDetail from "./RentalDetail";
+import { useDispatch, useSelector } from "react-redux";
+import { getRental, getCars, getUser } from "@/store/slices/rental";
 
 const fontRubik = Rubik({
   weight: "600",
@@ -18,6 +19,8 @@ const poppins = fontPoppins.className;
 const rubik = fontRubik.className;
 
 let pantalla;
+let completeRentals = {};
+let dataToShow;
 
 if (window.innerWidth <= 870) {
   pantalla = "chica";
@@ -28,56 +31,67 @@ if (window.innerWidth <= 870) {
 function RentalsTable({ visible }) {
   const arrowInitialState = {
     id: false,
-    usuario: false,
-    vehiculo: false,
-    estado: false,
+    user: false,
+    vehicle: false,
+    status: false,
     monto: false,
   };
+
+  const dispatch = useDispatch();
+
   const [currentPage, setCurrentPage] = useState(1);
   const [detailData, setDetailData] = useState();
   const [rentalDetailVisibility, setRentalDetailVisibility] = useState(false);
   const [search, setSearch] = useState("");
   const [data, setData] = useState();
-  const [category, setCategory] = useState("vehiculo");
+  const [category, setCategory] = useState("vehicle");
   const [aux, setAux] = useState(false);
   const [arrow, setArrow] = useState(arrowInitialState);
-  const [rentals, setRentals] = useState();
 
-  async function fetchRentals() {
-    const res = await axios
-      .get("http://localhost:3000/api/bookings")
-      .then((data) => setRentals(data));
-    console.log(res);
-  }
   useEffect(() => {
-    fetchRentals();
-    console.log(rentals);
+    dispatch(getRental());
+    dispatch(getCars());
+    dispatch(getUser());
   }, []);
 
-  return (
-    <div>
-      {rentals?.length &&
-        rentals.map((r) => {
-          return (
-            <div key={r.id}>
-              <p>UserId: {userID}</p>
-              <p>{r.fecha_inicio}</p>
-              <p>{r.fecha_fin}</p>
-              <p>Monto: {r.monto}</p>
-              <p>Estado: {r.statusB}</p>
-            </div>
-          );
-        })}
-    </div>
-  );
+  let allUsers = useSelector((state) => state.rental.allUsers);
+  let allCars = useSelector((state) => state.rental.allCars);
+  let allRentals = useSelector((state) => state.rental.allRentals);
+
+  useEffect(() => {
+    if (allUsers.length && allRentals.length && allCars.length) {
+      completeRentals = allRentals.map((r) => {
+        let user = allUsers.filter((u) => u.id == r.userID)[0];
+        let vehicle = allCars.filter((c) => c.id === r.productID)[0];
+        if (user && vehicle) {
+          return {
+            ...r,
+            user: user.userName ?? user.emailUser,
+            vehicle: vehicle.name,
+            status:
+              r.statusB == 1 && new Date() > new Date(r.fecha_fin)
+                ? "terminado"
+                : r.statusB == 1 && new Date() < new Date(r.fecha_fin)
+                ? "activo"
+                : "cancelado",
+          };
+        }
+      });
+    } else {
+      setAux(!aux);
+    }
+  }, [allRentals, allCars, allUsers, aux]);
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [rentals]);
+  }, [completeRentals]);
 
-  let dataToShow = rentals;
+  useEffect(() => {
+    dataToShow = completeRentals;
+  }, [completeRentals]);
+
   let quantityPerPage = 10;
-  let max = Math.ceil(dataToShow.length / quantityPerPage);
+  let max = Math.ceil(dataToShow?.length / quantityPerPage);
   let pages = [];
   let x = 0;
 
@@ -87,8 +101,10 @@ function RentalsTable({ visible }) {
   }
 
   useEffect(() => {
-    setData(sliceData(dataToShow, currentPage, quantityPerPage));
-  }, [currentPage]);
+    if (dataToShow && dataToShow[0]) {
+      setData(sliceData(dataToShow, currentPage, quantityPerPage));
+    }
+  }, [completeRentals, currentPage, dataToShow]);
 
   let currentPages = slicePage(pages, currentPage, 2);
 
@@ -118,11 +134,12 @@ function RentalsTable({ visible }) {
 
   function handleSearch(e) {
     setSearch(e.target.value);
-    setData(
-      dataToShow.filter((d) =>
-        d[category].toLowerCase().includes(e.target.value.toLowerCase())
-      )
+    dataToShow = completeRentals;
+    let results = dataToShow.filter((d) =>
+      d[category].toLowerCase().includes(e.target.value.toLowerCase())
     );
+    dataToShow = results;
+    setData(sliceData(results, currentPage, quantityPerPage));
     setCurrentPage(1);
   }
 
@@ -131,29 +148,28 @@ function RentalsTable({ visible }) {
   }
 
   function handleSort(sortCategory) {
-    let order = "asc";
-    if (order === "asc") {
-      let ordenated = dataToShow.sort((a, b) => {
-        if (a[sortCategory] < b[sortCategory]) {
-          return -1;
-        }
-        if (a[sortCategory] > b[sortCategory]) {
-          return 1;
-        }
-        return 0;
-      });
-      setData(sliceData(ordenated, currentPage, quantityPerPage));
-      setCurrentPage;
-      setAux(!aux);
-      setArrow({ ...arrowInitialState, [sortCategory]: true });
-    } else {
-      setData(data.sort((a, b) => b[sortCategory] - a[sortCategory]));
-    }
+    let ordenated = dataToShow.sort((a, b) => {
+      if (a[sortCategory] < b[sortCategory]) {
+        return -1;
+      }
+      if (a[sortCategory] > b[sortCategory]) {
+        return 1;
+      }
+      return 0;
+    });
+    dataToShow = ordenated;
+    setAux(!aux);
+    setData(sliceData(ordenated, currentPage, quantityPerPage));
+    setCurrentPage(1);
+    setArrow({ ...arrowInitialState, [sortCategory]: true });
   }
 
   let total = 0;
-  dataToShow.forEach((d) => (total += parseFloat(d.monto.slice(1))));
-  total = total * 2;
+  if (data && data.length) {
+    dataToShow.forEach((d) => (total += 5));
+    total = total * 2;
+  }
+
   if (visible === false) return null;
   return (
     <section className="text-[10px] sm:text-[12px] md:text-[16px]">
@@ -162,7 +178,7 @@ function RentalsTable({ visible }) {
           Rentas
           <span
             className={`${poppins} text-[0.8em] bg-gris_fondo ml-2 py-1 px-2 rounded-full`}>
-            {dataToShow.length}
+            {dataToShow?.length}
           </span>
         </h3>
         <p className={`${poppins} text-[0.9em]`}>Vista de las rentas del mes</p>
@@ -180,8 +196,8 @@ function RentalsTable({ visible }) {
           <select
             className="max-w-[30%]  bg-naranja_enf text-white px-2 rounded-full cursor-pointer shadow-sm shadow-black hover:shadow-md hover:shadow-black"
             onChange={handleSearchCategory}>
-            <option value="vehiculo">Vehiculo</option>
-            <option value="usuario">Usuario</option>
+            <option value="vehicle">Vehiculo</option>
+            <option value="user">Usuario</option>
           </select>
         </div>
 
@@ -192,18 +208,18 @@ function RentalsTable({ visible }) {
                 <>
                   <th
                     onClick={() => handleSort("id")}
-                    className={`${rubik} sm:px-2 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
+                    className={`${rubik} sm:px-2 min-w-[100px] md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
                     {arrow.id ? "#Id ▼" : "#Id"}
                   </th>
                   <th
-                    onClick={() => handleSort("vehiculo")}
+                    onClick={() => handleSort("vehicle")}
                     className={`${rubik} min-w-[80px] sm:px-1 md:px-4 text-left break-all hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
-                    {arrow.vehiculo ? "Vehiculo ▼" : "Vehiculo"}
+                    {arrow.vehicle ? "Vehiculo ▼" : "Vehiculo"}
                   </th>
                   <th
-                    onClick={() => handleSort("estado")}
+                    onClick={() => handleSort("status")}
                     className={`${rubik} min-w-[80px] px-1 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
-                    {arrow.estado ? "Estado ▼" : "Estado"}
+                    {arrow.status ? "Estado ▼" : "Estado"}
                   </th>
                   <th className={`${rubik} px-1 md:px-4 text-left`}>Detalle</th>
                 </>
@@ -215,19 +231,19 @@ function RentalsTable({ visible }) {
                     {arrow.id ? "#Id ▼" : "#Id"}
                   </th>
                   <th
-                    onClick={() => handleSort("usuario")}
+                    onClick={() => handleSort("user")}
                     className={`${rubik} sm:px-1 md:px-4 md:min-w-[160px] lg:min-w-[200px] text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
-                    {arrow.usuario ? "Usuario ▼" : "Usuario"}
+                    {arrow.user ? "Usuario ▼" : "Usuario"}
                   </th>
                   <th
-                    onClick={() => handleSort("vehiculo")}
+                    onClick={() => handleSort("vehicle")}
                     className={`${rubik} sm:px-1 md:px-4 md:min-w-[175px] text-left lg:min-w-[200px] hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
-                    {arrow.vehiculo ? "Vehiculo ▼" : "Vehiculo"}
+                    {arrow.vehicle ? "Vehiculo ▼" : "Vehiculo"}
                   </th>
                   <th
-                    onClick={() => handleSort("estado")}
+                    onClick={() => handleSort("status")}
                     className={`${rubik} sm:px-1 md:px-4 md:min-w-[150px] text-left lg:min-w-[150px] hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
-                    {arrow.estado ? "Estado ▼" : "Estado"}
+                    {arrow.status ? "Estado ▼" : "Estado"}
                   </th>
                   <th
                     onClick={() => handleSort("monto")}
@@ -240,10 +256,10 @@ function RentalsTable({ visible }) {
             </tr>
             {data?.map((d) => {
               let ultimo;
-              let estado = d.estado
+              let estado = d.status
                 .charAt(0)
                 .toUpperCase()
-                .concat(d.estado.slice(1));
+                .concat(d.status.slice(1));
               if (data.at(quantityPerPage) === d || data.at(-1) === d) {
                 ultimo = true;
               } else {
@@ -260,13 +276,13 @@ function RentalsTable({ visible }) {
                   {pantalla === "chica" ? (
                     <>
                       <td className=" p-4">{d.id}</td>
-                      <td className=" sm:p-4 break-all">{d.vehiculo}</td>
+                      <td className=" sm:p-4 break-all">{d.vehicle}</td>
                       <td className="p-1 sm:p-4">
                         <span
                           className={
-                            d.estado === "activo"
+                            d.status === "activo"
                               ? "bg-[#d1fae5] text-[#047857] inline px-2 rounded-md"
-                              : d.estado === "terminado"
+                              : d.status === "terminado"
                               ? "bg-[#f3f4f6] inline px-2 rounded-md"
                               : "bg-[#ffe4e6] text-[#be123c] inline px-2 rounded-md"
                           }>
@@ -276,7 +292,7 @@ function RentalsTable({ visible }) {
                       <td className=" p-4">
                         <button
                           onClick={() => handleRentVisibility(d)}
-                          className="px-2 py-1 border-[1px] rounded-md border-negro_fondo hover:bg-negro_fondo hover:text-white">
+                          className="px-2 md:px-4 py-1 border-[1px] rounded-md border-negro_fondo hover:bg-negro_fondo hover:text-white">
                           Detalle
                         </button>
                       </td>
@@ -284,14 +300,14 @@ function RentalsTable({ visible }) {
                   ) : (
                     <>
                       <td className=" p-4">{d.id}</td>
-                      <td className=" p-4">{d.usuario}</td>
-                      <td className=" p-4">{d.vehiculo}</td>
+                      <td className=" p-4">{d.user}</td>
+                      <td className=" p-4">{d.vehicle}</td>
                       <td className="p-4">
                         <span
                           className={
-                            d.estado === "activo"
+                            d.status === "activo"
                               ? "bg-[#d1fae5] text-[#047857] inline px-2 rounded-md"
-                              : d.estado === "terminado"
+                              : d.status === "terminado"
                               ? "bg-[#f3f4f6] inline px-2 rounded-md"
                               : "bg-[#ffe4e6] text-[#be123c] inline px-2 rounded-md"
                           }>
@@ -302,7 +318,7 @@ function RentalsTable({ visible }) {
                       <td className=" p-4">
                         <button
                           onClick={() => handleRentVisibility(d)}
-                          className="px-2 py-1 border-[1px] rounded-md border-negro_fondo hover:bg-negro_fondo hover:text-white">
+                          className="px-2 md:px-4 py-1 border-[1px] rounded-md border-negro_fondo hover:bg-negro_fondo hover:text-white">
                           Detalle
                         </button>
                       </td>

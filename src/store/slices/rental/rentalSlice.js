@@ -2,7 +2,13 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   allRentals: [],
-  isLoading: false,
+  allCars: [],
+  allUsers: [],
+  allRentalsConnected: [],
+  currentUserRentals: [],
+  isRentalsLoading: false,
+  isCarsLoading: false,
+  isUsersLoading: false,
 };
 
 export const rentalSlice = createSlice({
@@ -10,13 +16,35 @@ export const rentalSlice = createSlice({
   initialState,
   reducers: {
     startLoadingRentals: (state) => {
-      state.isLoading = true;
+      state.isRentalsLoading = true;
     },
     setRental: (state, action) => {
-      state.isLoading = false;
-      state.allRentals = action.payload;
+      state.isRentalsLoading = false;
+      state.allRentals = action.payload.rental;
+    },
+    startLoadingCars: (state /* action */) => {
+      state.isCarsLoading = true;
+    },
+    setCars: (state, action) => {
+      state.isCarsLoading = false;
+      state.allCars = action.payload.cars;
+    },
+    startLoadingUsers: (state) => {
+      state.isUsersLoading = true;
+    },
+    setUser: (state, action) => {
+      state.isUsersLoading = false;
+      state.allUsers = action.payload.user;
     },
   },
 });
 
-export const { startLoadingRentals, setRental } = userSlice.actions;
+export const {
+  setRental,
+  startLoadingRentals,
+  setUser,
+  startLoadingUsers,
+  setCars,
+  startLoadingCars,
+  getAllRentals,
+} = rentalSlice.actions;
