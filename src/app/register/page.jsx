@@ -3,14 +3,19 @@ import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useRouter } from "next/navigation";
 import Alert from "../login/Alert";
-import { Poppins } from "next/font/google";
+import { Poppins, Rubik } from "next/font/google";
 
 const fontPoppins = Poppins({
   weight: "400",
   subsets: ["latin"],
 });
 
+const fontRubik = Rubik({
+  subsets: ["latin"],
+});
+
 const poppins = fontPoppins.className;
+const rubik = fontRubik.className;
 
 export default function Register() {
   const [user, setUser] = useState({
@@ -54,58 +59,74 @@ export default function Register() {
     <div className="flex justify-center items-center h-full ">
       <div className="sm:my-8 my-4 max-w-xl m-2 sm:m-auto ">
         {error && <Alert message={error} />}
-
         <form
           onSubmit={handleSubmit}
-          className="mb-8 bg-white bg-opacity-70 shadow-md rounded px-8 pt-8 pb-10 mb-4">
-          <label htmlFor="email" className="block">
-            Email
-          </label>
-          <input
-            type="email"
-            name="email"
-            placeholder="correo@gmail.com"
-            onChange={handleChange}
-            className="mt-3 focus:outline-none focus:border-gray-400 focus:border-2  shadow appearance-none border  w-full py-2 px-3 mb-3"
-          />
+          className={` ${poppins} mb-4 bg-white bg-opacity-70 shadow-md rounded-2xl pb-4`}>
+          <h1 className="bg-gris_fondo text-center font-bold text-[1.2em] rounded-t-2xl py-2 mb-5 ">
+            Crea una cuenta
+          </h1>
+          <section className="px-8">
+            <fieldset className="pb-3">
+              <label htmlFor="email" className="font-bold">
+                Email
+              </label>
+              <input
+                type="email"
+                name="email"
+                placeholder="correo@gmail.com"
+                onChange={handleChange}
+                className="mt-1 focus:outline-none focus:border-gray-400 focus:border-2 bg-gris_fondo rounded-md appearance-none border  w-full py-2 px-3 mb-3"
+              />
+            </fieldset>
 
-          <label htmlFor="password">Contraseña</label>
-          <input
-            type="password"
-            name="password"
-            onChange={handleChange}
-            placeholder="********"
-            className="mt-3 focus:outline-none focus:border-gray-400 focus:border-2  shadow appearance-none border  w-full py-2 px-3 mb-3"
-          />
+            <fieldset className="pb-3">
+              <label htmlFor="password" className="font-bold">
+                Contraseña
+              </label>
+              <input
+                type="password"
+                name="password"
+                onChange={handleChange}
+                placeholder="********"
+                className="mt-1 focus:outline-none focus:border-gray-400 focus:border-2 bg-gris_fondo rounded-md appearance-none border  w-full py-2 px-3 mb-3"
+              />
+            </fieldset>
+            <fieldset className="pb-3">
+              <label className="font-bold">Nombre de usuario:</label>
+              <input
+                type="text"
+                name="username"
+                placeholder="Juan Pérez"
+                onChange={handleChange}
+                className="mt-1 focus:outline-none focus:border-gray-400 focus:border-2 bg-gris_fondo rounded-md appearance-none border  w-full py-2 px-3 mb-3"
+              />
+            </fieldset>
+            <fieldset className="pb-3">
+              <label className="font-bold">Telefono:</label>
+              <input
+                type="text"
+                name="phone"
+                placeholder="5512345678"
+                onChange={handleChange}
+                className="mt-1 focus:outline-none focus:border-gray-400 focus:border-2 bg-gris_fondo rounded-md appearance-none border  w-full py-2 px-3 mb-3"
+              />
+            </fieldset>
+            <fieldset className="pb-3">
+              <label className="font-bold">Pasaporte:</label>
+              <input
+                type="text"
+                name="passport"
+                placeholder="ABC123456"
+                onChange={handleChange}
+                className="mt-1 focus:border-gray-400 focus:border-2  bg-gris_fondo rounded-md appearance-none border  w-full py-2 px-3 mb-3"
+              />
+            </fieldset>
 
-          <label>Nombre de usuario</label>
-          <input
-            type="text"
-            name="username"
-            onChange={handleChange}
-            className="mt-3 focus:outline-none focus:border-gray-400 focus:border-2  shadow appearance-none border  w-full py-2 px-3 mb-3"
-          />
-
-          <label>Telefono</label>
-          <input
-            type="text"
-            name="phone"
-            onChange={handleChange}
-            className="mt-3 focus:outline-none focus:border-gray-400 focus:border-2  shadow appearance-none border  w-full py-2 px-3 mb-3"
-          />
-
-          <label>Pasaporte</label>
-          <input
-            type="text"
-            name="passport"
-            onChange={handleChange}
-            className="mt-3 focus:border-gray-400 focus:border-2  shadow appearance-none border  w-full py-2 px-3 mb-3"
-          />
-
-          <button
-            className={`${poppins} mt-10 bg-naranja_enf my-3 rounded p-2 w-full hover:bg-negro_fondo hover:text-white`}>
-            Registrarse
-          </button>
+            <button
+              className={`${rubik} text-white mt-5 font-bold bg-naranja_enf my-3 rounded p-2 w-full shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
+              Registrarse
+            </button>
+          </section>
         </form>
       </div>
     </div>

@@ -3,7 +3,11 @@ import { useEffect, useState } from "react";
 import Alerts from "@/components/Alerts";
 import { Rubik, Poppins } from "next/font/google";
 import { validateUserForm } from "@/libs/functions";
-import { useRouter } from "next/navigation";
+import { useSelector } from "react-redux/es/hooks/useSelector";
+import axios from "axios";
+import { useAuth } from "@/app/context/AuthContext";
+
+// import { useRouter } from "next/navigation";
 
 const fontRubik = Rubik({
   weight: "600",
@@ -14,25 +18,31 @@ const fontPoppins = Poppins({
   weight: "400",
   subsets: ["latin"],
 });
-
 const poppins = fontPoppins.className;
 const rubik = fontRubik.className;
-let login = true;
+// let login = true;
 
 function Profile() {
-  const router = useRouter();
-  if (!login) {
-    router.push("/");
-    return null;
-  }
+  const user = useSelector((state) => state.user.currentUser);
+  const { logOut } = useAuth();
+
+  // const router = useRouter();
+  // if (!login) {
+  //   router.push("/");
+  //   return null;
+  // }
 
   const inputsInitialValue = {
-    nombre: userData ? userData.displayName : "Perfil",
-    correo: userData ? userData.email : "Correo",
-    pasaporte: "ZZZ123456",
-    telefono: "5512345678",
-    imagen: userData ? userData.photoURL : "",
+    nombre: user.userName,
+    correo: user.userEmail,
+    pasaporte: user.userPassport,
+    telefono: user.userPhone,
+    imagen: user.userImage,
   };
+
+  useEffect(() => {
+    setInputs(inputsInitialValue);
+  }, [user]);
 
   const [errors, setErrors] = useState({});
   const [inputs, setInputs] = useState(inputsInitialValue);
@@ -54,8 +64,25 @@ function Profile() {
     document.body.classList.toggle("stopScroll");
   }
 
+  async function handleSubmit() {
+    let errorsLength = Object.keys(errors).length;
+    if (!errorsLength) {
+      let id = user.userId;
+      let data = {
+        username: inputs.nombre,
+        emailUser: inputs.correo,
+        passport: inputs.pasaporte,
+        phone: inputs.telefono,
+      };
+      const res = axios
+        .put(`http://localhost:3000/api/users/${id}`, data)
+        .then(console.log("success"));
+      handleFormVisibility();
+    }
+  }
+
   return (
-    <div className="grid bg-gris_frente md:text-[2em]">
+    <div className="grid bg-gris_frente md:text-[1.5em] lg:text-[2em]">
       <header
         className={`bg-gris_fondo flex items-center h-[175px] ${rubik} text-[1em] md:text-[1.5em] pl-[10%] space-y-0 space-x-2.5`}>
         <p className={`text-[1em] mt-2 pl-4`}>Perfil</p>
@@ -241,17 +268,18 @@ function Profile() {
               <p className="text-red-600 text-[0.5em]">{errors.telefono}</p>
             )}
           </fieldset>
-          <fieldset className={`${rubik} flex justify-evenly w-3/4 pb-6 pt-4`}>
-            <button
-              type="button"
-              className={`rounded-md px-4 py-[2px] bg-naranja_enf text-white text-[1em] shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
-              Aceptar cambios
-            </button>
+          <fieldset className={`${rubik} flex justify-evenly w-3/4 pt-6`}>
             <button
               type="button"
               onClick={handleFormVisibility}
-              className={`bg-negro_fondo text-white text-[1em] px-4 py-[2px] rounded-md shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
+              className={`bg-negro_fondo text-white text-[0.8em] px-4 py-[2px] rounded-md shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
               Volver
+            </button>
+            <button
+              type="button"
+              onClick={handleSubmit}
+              className={`rounded-md px-4 py-[2px] bg-naranja_enf text-white text-[0.8em] shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
+              Aceptar cambios
             </button>
           </fieldset>
         </form>

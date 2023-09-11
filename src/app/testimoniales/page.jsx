@@ -137,7 +137,7 @@ async function Testimoniales() {
     <div className="bg-white">
       <div>
         <header
-          className={`bg-gris_fondo flex items-center h-[175px] ${rubik} text-[1em] md:text-[1.5em] pl-[10%] space-y-0 space-x-2.5`}>
+          className={`bg-gris_fondo flex items-center h-[175px] ${rubik} text-[1em] md:text-[1.5em] px-[10%] space-y-0 space-x-2.5`}>
           <p className={`text-[1.9em] mt-2 pl-4`}>Testimoniales</p>
           <img
             src="https://drive.google.com/uc?export=download&id=18hd72ccmFxNZhgHNgcH0T3zFAUw4gNmU"
@@ -145,7 +145,12 @@ async function Testimoniales() {
           />
         </header>
       </div>
-      <div>
+      <p className={`${rubik} text-center text-[2em] pt-8`}>Prueba social</p>
+      <p className={`${rubik} text-center text-[1.2em] py-6`}>
+        No tomes sólo nuestra palabra, lee las reseñas que nuestros clientes nos
+        han dejado
+      </p>
+      <div className="flex flex-col items-center pb-8">
         {testimonios.map((testimonio) => {
           return (
             <TestCard

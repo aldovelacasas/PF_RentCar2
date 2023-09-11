@@ -112,7 +112,7 @@ function HomePage() {
       });
     } else {
       window.scrollTo({
-        top: 530,
+        top: 470,
         behavior: "smooth",
       });
     }
@@ -131,7 +131,7 @@ function HomePage() {
       });
     } else {
       window.scrollTo({
-        top: 1100,
+        top: 1000,
         behavior: "smooth",
       });
     }
