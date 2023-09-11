@@ -21,13 +21,6 @@ const rubik = fontRubik.className;
 let completeRentals = {};
 let dataToShow;
 
-// let pantalla;
-// if (window.innerWidth <= 870) {
-//   pantalla = "chica";
-// } else if (window.innerWidth > 870) {
-//   pantalla = "grande";
-// }
-
 function RentalsTable({ visible }) {
   const arrowInitialState = {
     id: false,
@@ -58,31 +51,38 @@ function RentalsTable({ visible }) {
   let allCars = useSelector((state) => state.rental.allCars);
   let allRentals = useSelector((state) => state.rental.allRentals);
 
+  function createRentalsComplete() {
+    completeRentals = allRentals.map((r) => {
+      let user = allUsers.filter((u) => u.id == r.userID)[0];
+      let vehicle = allCars.filter((c) => c.id === r.productID)[0];
+      if (user && vehicle) {
+        return {
+          ...r,
+          user: user.userName ?? user.emailUser,
+          vehicle: vehicle.name,
+          image: vehicle.image,
+          status:
+            r.statusB == 1 && new Date() > new Date(r.fecha_fin)
+              ? "terminado"
+              : r.statusB == 1 && new Date() < new Date(r.fecha_fin)
+              ? "activo"
+              : "cancelado",
+        };
+      }
+    });
+  }
+
   useEffect(() => {
-    if (allUsers.length && allRentals.length && allCars.length) {
-      completeRentals = allRentals.map((r) => {
-        let user = allUsers.filter((u) => u.id == r.userID)[0];
-        let vehicle = allCars.filter((c) => c.id === r.productID)[0];
-        if (user && vehicle) {
-          return {
-            ...r,
-            user: user.userName ?? user.emailUser,
-            vehicle: vehicle.name,
-            image: vehicle.image,
-            status:
-              r.statusB == 1 && new Date() > new Date(r.fecha_fin)
-                ? "terminado"
-                : r.statusB == 1 && new Date() < new Date(r.fecha_fin)
-                ? "activo"
-                : "cancelado",
-          };
-        }
-      });
-    } else {
+    if (!allUsers.length || !allRentals.length || !allCars.length) {
+      setAux(true);
+    }
+  }, [allRentals, allCars, allUsers]);
+  if (aux === true) {
+    createRentalsComplete();
+    if (completeRentals && completeRentals[1] !== undefined) {
       setAux(!aux);
     }
-  }, [allRentals, allCars, allUsers, aux]);
-
+  }
   useEffect(() => {
     setCurrentPage(1);
   }, [completeRentals]);
