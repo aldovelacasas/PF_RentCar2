@@ -72,7 +72,7 @@ export function validateContactForm(inputs) {
 
 export function validateUserForm(inputs) {
   const regexText = /^[A-Záéíóúa-z0-9_,;.-]*$/i;
-  const regexEmail = /^([\wñ]{1,20})@([\w]{1,10})\.([a-z]{2,4})$/i;
+  const regexEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
   const regexPasaporte = /^([A-Za-z]{3})([0-9]{6})$/i;
   const regexPhone = /^[0-9]{10}$/i;
   let errors = {};
