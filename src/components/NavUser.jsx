@@ -1,6 +1,7 @@
 "use client";
 import { Rubik, Poppins } from "next/font/google";
 import { usePathname } from "next/navigation";
+import { useSelector } from "react-redux/es/hooks/useSelector";
 
 const fontRubik = Rubik({
   weight: "600",
@@ -23,6 +24,11 @@ import { BiLink } from "react-icons/bi";
 import Link from "next/link";
 
 export default function NavUser({ userName, userPhoto }) {
+  const user = useSelector((state) => state.user.currentUser);
+  if (user.userImage) {
+    userPhoto = user.userImage;
+  }
+
   const [navActive, setNavActive] = useState(false);
   const { logOut } = useAuth();
 

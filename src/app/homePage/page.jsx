@@ -174,7 +174,7 @@ function HomePage() {
       <header
         className={`bg-gris_fondo relative ${rubik} text-[1em] sm:text-[1.5em]  pl-[10%] space-y-0 space-x-2.5`}>
         <img
-          src="https://drive.google.com/uc?export=download&id=1fDhpaiHuiS5DursxYDnpl3Damj5u7Tep"
+          src="/camionetahome.png"
           className=" float-right w-[50vw] absolute right-[-15%] scale-x-[-1] top-0 z-1"
         />
         <p className={`pt-12 ml-2.5 text-[0.8em] mb-2`}>
@@ -423,7 +423,7 @@ function HomePage() {
           <div className="flex place-content-between items-center">
             <div className="flex w-1/2 gap-3 items-center mt-4">
               <img
-                src="https://as1.ftcdn.net/v2/jpg/06/12/43/02/1000_F_612430205_6OQ7Lz31PcF0isBUvlfJcDOLEkvsHSsx.jpg"
+                src="/testimonialhome1jpg.jpg"
                 className="w-[30px] h-[30px] rounded-full"
               />
               <div>
@@ -444,7 +444,7 @@ function HomePage() {
           <div className="flex place-content-between items-center">
             <div className="flex w-1/2 gap-3 items-center mt-4">
               <img
-                src="https://as1.ftcdn.net/v2/jpg/06/19/08/48/1000_F_619084808_hMVvUzdIiIPSFQz217WhCR8StVF1xRDC.jpg"
+                src="/testimonialhome2.jpg"
                 className="w-[30px] h-[30px] rounded-full"
               />
               <div>

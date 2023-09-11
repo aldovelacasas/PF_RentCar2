@@ -18,15 +18,8 @@ const fontPoppins = Poppins({
 const poppins = fontPoppins.className;
 const rubik = fontRubik.className;
 
-let pantalla;
 let completeRentals = {};
 let dataToShow;
-
-if (window.innerWidth <= 870) {
-  pantalla = "chica";
-} else if (window.innerWidth > 870) {
-  pantalla = "grande";
-}
 
 function RentalsTable({ visible }) {
   const arrowInitialState = {
@@ -58,30 +51,38 @@ function RentalsTable({ visible }) {
   let allCars = useSelector((state) => state.rental.allCars);
   let allRentals = useSelector((state) => state.rental.allRentals);
 
+  function createRentalsComplete() {
+    completeRentals = allRentals.map((r) => {
+      let user = allUsers.filter((u) => u.id == r.userID)[0];
+      let vehicle = allCars.filter((c) => c.id === r.productID)[0];
+      if (user && vehicle) {
+        return {
+          ...r,
+          user: user.userName ?? user.emailUser,
+          vehicle: vehicle.name,
+          image: vehicle.image,
+          status:
+            r.statusB == 1 && new Date() > new Date(r.fecha_fin)
+              ? "terminado"
+              : r.statusB == 1 && new Date() < new Date(r.fecha_fin)
+              ? "activo"
+              : "cancelado",
+        };
+      }
+    });
+  }
+
   useEffect(() => {
-    if (allUsers.length && allRentals.length && allCars.length) {
-      completeRentals = allRentals.map((r) => {
-        let user = allUsers.filter((u) => u.id == r.userID)[0];
-        let vehicle = allCars.filter((c) => c.id === r.productID)[0];
-        if (user && vehicle) {
-          return {
-            ...r,
-            user: user.userName ?? user.emailUser,
-            vehicle: vehicle.name,
-            status:
-              r.statusB == 1 && new Date() > new Date(r.fecha_fin)
-                ? "terminado"
-                : r.statusB == 1 && new Date() < new Date(r.fecha_fin)
-                ? "activo"
-                : "cancelado",
-          };
-        }
-      });
-    } else {
+    if (!allUsers.length || !allRentals.length || !allCars.length) {
+      setAux(true);
+    }
+  }, [allRentals, allCars, allUsers]);
+  if (aux === true) {
+    createRentalsComplete();
+    if (completeRentals && completeRentals[1] !== undefined) {
       setAux(!aux);
     }
-  }, [allRentals, allCars, allUsers, aux]);
-
+  }
   useEffect(() => {
     setCurrentPage(1);
   }, [completeRentals]);
@@ -204,55 +205,32 @@ function RentalsTable({ visible }) {
         <table className={`${poppins} bg-white mt-6`}>
           <tbody className="">
             <tr className="">
-              {pantalla === "chica" ? (
-                <>
-                  <th
-                    onClick={() => handleSort("id")}
-                    className={`${rubik} sm:px-2 min-w-[100px] md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
-                    {arrow.id ? "#Id ▼" : "#Id"}
-                  </th>
-                  <th
-                    onClick={() => handleSort("vehicle")}
-                    className={`${rubik} min-w-[80px] sm:px-1 md:px-4 text-left break-all hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
-                    {arrow.vehicle ? "Vehiculo ▼" : "Vehiculo"}
-                  </th>
-                  <th
-                    onClick={() => handleSort("status")}
-                    className={`${rubik} min-w-[80px] px-1 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
-                    {arrow.status ? "Estado ▼" : "Estado"}
-                  </th>
-                  <th className={`${rubik} px-1 md:px-4 text-left`}>Detalle</th>
-                </>
-              ) : (
-                <>
-                  <th
-                    onClick={() => handleSort("id")}
-                    className={`${rubik} sm:px-2 md:px-4 md:min-w-[80px] text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
-                    {arrow.id ? "#Id ▼" : "#Id"}
-                  </th>
-                  <th
-                    onClick={() => handleSort("user")}
-                    className={`${rubik} sm:px-1 md:px-4 md:min-w-[160px] lg:min-w-[200px] text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
-                    {arrow.user ? "Usuario ▼" : "Usuario"}
-                  </th>
-                  <th
-                    onClick={() => handleSort("vehicle")}
-                    className={`${rubik} sm:px-1 md:px-4 md:min-w-[175px] text-left lg:min-w-[200px] hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
-                    {arrow.vehicle ? "Vehiculo ▼" : "Vehiculo"}
-                  </th>
-                  <th
-                    onClick={() => handleSort("status")}
-                    className={`${rubik} sm:px-1 md:px-4 md:min-w-[150px] text-left lg:min-w-[150px] hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
-                    {arrow.status ? "Estado ▼" : "Estado"}
-                  </th>
-                  <th
-                    onClick={() => handleSort("monto")}
-                    className={`${rubik} px-1 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
-                    {arrow.monto ? "Monto ▼" : "Monto"}
-                  </th>
-                  <th className={`${rubik} px-1 md:px-4 text-left`}>Detalle</th>
-                </>
-              )}
+              <th
+                onClick={() => handleSort("id")}
+                className={`${rubik} sm:px-2 md:px-4 md:min-w-[80px] text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
+                {arrow.id ? "#Id ▼" : "#Id"}
+              </th>
+              <th
+                onClick={() => handleSort("user")}
+                className={`${rubik} hidden sm:inline sm:px-1 md:px-4 md:min-w-[160px] lg:min-w-[200px] text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
+                {arrow.user ? "Usuario ▼" : "Usuario"}
+              </th>
+              <th
+                onClick={() => handleSort("vehicle")}
+                className={`${rubik} sm:px-1 md:px-4 md:min-w-[175px] text-left lg:min-w-[200px] hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
+                {arrow.vehicle ? "Vehiculo ▼" : "Vehiculo"}
+              </th>
+              <th
+                onClick={() => handleSort("status")}
+                className={`${rubik} sm:px-1 md:px-4 md:min-w-[150px] text-left lg:min-w-[150px] hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
+                {arrow.status ? "Estado ▼" : "Estado"}
+              </th>
+              <th
+                onClick={() => handleSort("monto")}
+                className={`${rubik} hidden md:inline px-1 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
+                {arrow.monto ? "Monto ▼" : "Monto"}
+              </th>
+              <th className={`${rubik} px-1 md:px-4 text-left`}>Detalle</th>
             </tr>
             {data?.map((d) => {
               let ultimo;
@@ -273,57 +251,29 @@ function RentalsTable({ visible }) {
                       ? "hover:bg-gris_frente "
                       : "border-b-2 hover:bg-gris_frente "
                   }>
-                  {pantalla === "chica" ? (
-                    <>
-                      <td className=" p-4">{d.id}</td>
-                      <td className=" sm:p-4 break-all">{d.vehicle}</td>
-                      <td className="p-1 sm:p-4">
-                        <span
-                          className={
-                            d.status === "activo"
-                              ? "bg-[#d1fae5] text-[#047857] inline px-2 rounded-md"
-                              : d.status === "terminado"
-                              ? "bg-[#f3f4f6] inline px-2 rounded-md"
-                              : "bg-[#ffe4e6] text-[#be123c] inline px-2 rounded-md"
-                          }>
-                          {estado}
-                        </span>
-                      </td>
-                      <td className=" p-4">
-                        <button
-                          onClick={() => handleRentVisibility(d)}
-                          className="px-2 md:px-4 py-1 border-[1px] rounded-md border-negro_fondo hover:bg-negro_fondo hover:text-white">
-                          Detalle
-                        </button>
-                      </td>
-                    </>
-                  ) : (
-                    <>
-                      <td className=" p-4">{d.id}</td>
-                      <td className=" p-4">{d.user}</td>
-                      <td className=" p-4">{d.vehicle}</td>
-                      <td className="p-4">
-                        <span
-                          className={
-                            d.status === "activo"
-                              ? "bg-[#d1fae5] text-[#047857] inline px-2 rounded-md"
-                              : d.status === "terminado"
-                              ? "bg-[#f3f4f6] inline px-2 rounded-md"
-                              : "bg-[#ffe4e6] text-[#be123c] inline px-2 rounded-md"
-                          }>
-                          {estado}
-                        </span>
-                      </td>
-                      <td className=" p-4 text-right">{d.monto}</td>
-                      <td className=" p-4">
-                        <button
-                          onClick={() => handleRentVisibility(d)}
-                          className="px-2 md:px-4 py-1 border-[1px] rounded-md border-negro_fondo hover:bg-negro_fondo hover:text-white">
-                          Detalle
-                        </button>
-                      </td>
-                    </>
-                  )}
+                  <td className=" p-4">{d.id}</td>
+                  <td className=" p-4 hidden md:inline">{d.user}</td>
+                  <td className=" p-4 hidden md:inline">{d.vehicle}</td>
+                  <td className="p-4">
+                    <span
+                      className={
+                        d.status === "activo"
+                          ? "bg-[#d1fae5] text-[#047857] inline px-2 rounded-md"
+                          : d.status === "terminado"
+                          ? "bg-[#f3f4f6] inline px-2 rounded-md"
+                          : "bg-[#ffe4e6] text-[#be123c] inline px-2 rounded-md"
+                      }>
+                      {estado}
+                    </span>
+                  </td>
+                  <td className=" p-4 text-right">{d.monto}</td>
+                  <td className=" p-4">
+                    <button
+                      onClick={() => handleRentVisibility(d)}
+                      className="px-2 md:px-4 py-1 border-[1px] rounded-md border-negro_fondo hover:bg-negro_fondo hover:text-white">
+                      Detalle
+                    </button>
+                  </td>
                 </tr>
               );
             })}

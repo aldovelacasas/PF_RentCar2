@@ -20,14 +20,6 @@ const fontPoppins = Poppins({
 const poppins = fontPoppins.className;
 const rubik = fontRubik.className;
 
-let pantalla;
-
-if (window.innerWidth <= 870) {
-  pantalla = "chica";
-} else if (window.innerWidth > 870) {
-  pantalla = "grande";
-}
-
 let dataToShow;
 
 function VehiclesTable({ visible, handleAlertsVisibility }) {
@@ -181,54 +173,29 @@ function VehiclesTable({ visible, handleAlertsVisibility }) {
         <table className={`${poppins} bg-white mt-6`}>
           <tbody className="">
             <tr className="">
-              {pantalla === "chica" ? (
-                <>
-                  <th
-                    onClick={() => handleSort("name")}
-                    className={`${rubik} min-w-[90px] sm:min-w-[250px] px-2 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
-                    {arrow.name ? "Marca ▼" : "Marca"}
-                  </th>
-                  <th
-                    onClick={() => handleSort("model")}
-                    className={`${rubik} min-w-[90px] sm:min-w-[250px] px-1 md:px-4 text-left break-all hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
-                    {arrow.model ? "Modelo ▼" : "Modelo"}
-                  </th>
-                  <th
-                    onClick={() => handleSort("price")}
-                    className={`${rubik} min-w-[60px] px-1 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
-                    {arrow.price ? "Precio ▼" : "Precio"}
-                  </th>
-                  <th className={`${rubik} px-1 md:px-4 text-left`}>
-                    Acciones
-                  </th>
-                </>
-              ) : (
-                <>
-                  <th
-                    onClick={() => handleSort("name")}
-                    className={`${rubik} md:min-w-[150px] px-2 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
-                    {arrow.name ? "Nombre ▼" : "Nombre"}
-                  </th>
-                  <th
-                    onClick={() => handleSort("model")}
-                    className={`${rubik} md:min-w-[150px] px-1 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
-                    {arrow.model ? "Modelo ▼" : "Modelo"}
-                  </th>
-                  <th
-                    onClick={() => handleSort("type")}
-                    className={`${rubik} md:min-w-[150px] px-1 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
-                    {arrow.type ? "Tipo ▼" : "Tipo"}
-                  </th>
-                  <th
-                    onClick={() => handleSort("price")}
-                    className={`${rubik} md:min-w-[120px] px-1 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
-                    {arrow.price ? "Precio ▼" : "Precio"}
-                  </th>
-                  <th className={`${rubik} px-1 md:px-4 text-left`}>
-                    Acciones
-                  </th>
-                </>
-              )}
+              <th
+                onClick={() => handleSort("name")}
+                className={`${rubik} md:min-w-[150px] px-2 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
+                {arrow.name ? "Marca ▼" : "Marca"}
+              </th>
+              <th
+                onClick={() => handleSort("model")}
+                className={`${rubik} md:min-w-[150px] px-1 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
+                {arrow.model ? "Modelo ▼" : "Modelo"}
+              </th>
+              <th
+                onClick={() => handleSort("type")}
+                className={`${rubik} hidden md:inline md:min-w-[150px] px-1 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
+                {arrow.type ? "Tipo ▼" : "Tipo"}
+              </th>
+              <th
+                onClick={() => handleSort("price")}
+                className={`${rubik} md:min-w-[120px] px-1 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
+                {arrow.price ? "Precio ▼" : "Precio"}
+              </th>
+              <th className={`${rubik} px-1 md:px-4 text-left`}>Acciones</th>
+              {/* </>
+              )} */}
             </tr>
             {data?.map((d) => {
               let ultimo;
@@ -246,44 +213,22 @@ function VehiclesTable({ visible, handleAlertsVisibility }) {
                       ? "hover:bg-gris_frente "
                       : "border-b-2 hover:bg-gris_frente "
                   }>
-                  {pantalla === "chica" ? (
-                    <>
-                      <td className=" p-4">{d.name}</td>
-                      <td className=" break-all">{d.model}</td>
-                      <td className="p-4 text-right"> ${d.price}</td>
-                      <td className=" p-4">
-                        <button
-                          onClick={() => handleVehiclesVisibility(d)}
-                          className="px-1 py-1 border-[1px] rounded-md bg-gris_fondo border-negro_fondo hover:bg-negro_fondo hover:text-white">
-                          <BsPencilFill />
-                        </button>
-                        <button
-                          onClick={() => handleVehiclesVisibility(d)}
-                          className="px-1 py-1 border-[1px] rounded-md bg-red-500 text-white border-negro_fondo hover:bg-negro_fondo hover:text-white">
-                          <BsFillTrash3Fill />
-                        </button>
-                      </td>
-                    </>
-                  ) : (
-                    <>
-                      <td className=" p-4">{d.name}</td>
-                      <td className=" p-4">{d.model}</td>
-                      <td className=" p-4">{d.type}</td>
-                      <td className="p-4 text-right">${d.price}</td>
-                      <td className=" p-4">
-                        <button
-                          onClick={() => handleVehiclesVisibility(d)}
-                          className="px-2 py-1 border-[1px] rounded-md bg-gris_fondo border-negro_fondo hover:bg-negro_fondo hover:text-white">
-                          <BsPencilFill />
-                        </button>
-                        <button
-                          onClick={() => handleAlertsVisibility(d.id)}
-                          className="px-2 ml-2 py-1 border-[1px] rounded-md bg-red-500 text-white border-negro_fondo hover:bg-negro_fondo hover:text-white">
-                          <BsFillTrash3Fill />
-                        </button>
-                      </td>
-                    </>
-                  )}
+                  <td className=" p-4">{d.name}</td>
+                  <td className=" p-4">{d.model}</td>
+                  <td className=" p-4 hidden md:inline">{d.type}</td>
+                  <td className="p-4 text-right">${d.price}</td>
+                  <td className=" p-4">
+                    <button
+                      onClick={() => handleVehiclesVisibility(d)}
+                      className="px-2 py-1 border-[1px] rounded-md bg-gris_fondo border-negro_fondo hover:bg-negro_fondo hover:text-white">
+                      <BsPencilFill />
+                    </button>
+                    <button
+                      onClick={() => handleAlertsVisibility(d.id)}
+                      className="px-2 ml-2 py-1 border-[1px] rounded-md bg-red-500 text-white border-negro_fondo hover:bg-negro_fondo hover:text-white">
+                      <BsFillTrash3Fill />
+                    </button>
+                  </td>
                 </tr>
               );
             })}

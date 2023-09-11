@@ -4,7 +4,7 @@ import { aboutUs } from "@/libs/aboutUs";
 import { PiCar, PiMapPinBold, PiMoney } from "react-icons/pi";
 import Map from "@/components/maps";
 
-const mapURL = `https://maps.googleapis.com/maps/api/js?v=3.exp&key=${process.env.mapsKey}`;
+const mapURL = `http://maps.googleapis.com/maps/api/js?v=3.exp&key=${process.env.mapsKey}`;
 
 const fontRubik = Rubik({
   weight: "600",
@@ -109,14 +109,14 @@ function AboutPage() {
                 <div className="flex py-2 px-2 justify-around">
                   <a href={i.linkedIn} target="_blank">
                     <img
-                      src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/LinkedIn_logo_initials.png/100px-LinkedIn_logo_initials.png"
+                      src="LinkedIn.png"
                       alt="linkedin logo"
                       className="shadow-sm w-[35px] md:w-[45px] shadow-black rounded-md hover:shadow-md hover:shadow-black"
                     />
                   </a>
                   <a href={i.github} target="_blank">
                     <img
-                      src="https://cdn.pixabay.com/photo/2022/01/30/13/33/github-6980894_1280.png"
+                      src="github.webp"
                       alt="github logo"
                       className="shadow-sm w-[35px] md:w-[50px] shadow-black rounded-full hover:shadow-md hover:shadow-black"
                     />
