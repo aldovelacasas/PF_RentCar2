@@ -7,6 +7,8 @@ import { useRouter } from "next/navigation";
 import { useAuth } from "@/app/context/AuthContext";
 import axios from "axios";
 import { useSelector } from "react-redux/es/hooks/useSelector";
+import { useDispatch } from "react-redux";
+import { getTest } from "@/store/slices/testimonio";
 
 const fontRubik = Rubik({
   weight: "600",
@@ -35,6 +37,7 @@ const rubik = fontRubik.className;
 const bigrubik = bigFontRubik.className;
 
 function OpinionForm({ cars }) {
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.user.currentUser);
   const router = useRouter();
 
@@ -93,6 +96,8 @@ function OpinionForm({ cars }) {
     if (ready()) {
       try {
         await axios.post("/api/post", test);
+        dispatch(getTest());
+        document.getElementById("opinionForm").reset();
         alert("Recibimos tu opinion muchas gracias");
       } catch (error) {
         alert("Disculpa tuvimos un error al cargar tu opinion");
@@ -123,6 +128,7 @@ function OpinionForm({ cars }) {
         ""
       )}
       <form
+        id="opinionForm"
         onSubmit={handleSubmit}
         className={`p-4 sm:px-4 px-4 mx-4 my-4 max-w-md w-full ${
           isUser() ? "opacity-100" : "opacity-20"

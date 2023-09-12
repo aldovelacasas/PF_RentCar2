@@ -2,6 +2,8 @@ import { Rubik, Poppins } from "next/font/google";
 import TestCard from "@/components/TestCard";
 import OpinionForm from "@/components/OpinionForm";
 import axios from "axios";
+import { getTest } from "@/store/slices/testimonio";
+import Reviews from "@/components/Reviews";
 
 const fontRubik = Rubik({
   weight: "600",
@@ -25,15 +27,10 @@ async function getCars() {
   return cars;
 }
 
-async function getTest() {
-  const { data } = await axios("http://localhost:3000/api/post");
-  return data;
-}
-
 async function Testimoniales() {
   try {
     var cars = await getCars();
-    var testimonios = await getTest();
+    var testimonios = useSelector((state) => state.testimonies.testimonies);
     testimonios = testimonios.slice(0, 14);
   } catch (error) {
     console.log(error.message);
@@ -55,7 +52,8 @@ async function Testimoniales() {
         No tomes sólo nuestra palabra, lee las reseñas que nuestros clientes nos
         han dejado
       </p>
-      <div className="flex flex-col items-center pb-8">
+      <Reviews> </Reviews>
+      {/* <div className="flex flex-col items-center pb-8">
         {testimonios.map((testimonio) => {
           return (
             <TestCard
@@ -68,7 +66,7 @@ async function Testimoniales() {
             />
           );
         })}
-      </div>
+      </div> */}
       <OpinionForm cars={cars} />
     </div>
   );
