@@ -4,7 +4,7 @@ export default function CarCard({ car, handleVisibility, handleDetail }) {
   return (
     <div
       key={car.id}
-      className=" bg-white min-w-[200px] max-w-[250px] shadow-md hover:cursor-pointer hover:scale-105 transform transition-transform duration-200 border border-solid border-negro_fondo">
+      className=" bg-white min-w-[200px] max-w-[250px] shadow-md hover:cursor-pointer hover:scale-105 transform transition-transform duration-200 border rounded-sm border-solid border-negro_fondo ">
       <main onClick={() => handleDetail(car)} className="group relative">
         <div className="absolute w-full h-0 bg-[#525252cc] items-center justify-center group-hover:h-full flex group-hover:ease-in-out group-hover:duration-[350ms]">
           <p className="text-white hidden text-center group-hover:block">
@@ -21,6 +21,7 @@ export default function CarCard({ car, handleVisibility, handleDetail }) {
             <h2 className="text-lg font-semibold mb-0 ">{car.name}</h2>
             <p className=" font-bold text-xl mb-0">${car.price}</p>
           </div>
+          <p className="flex flex-wrap justify-between font-normal px-3 mb-0">{car.model}</p>
           <div className="flex px-2 justify-between mb-2">
             <div className="flex ">
               <svg
