@@ -28,3 +28,17 @@ export async function GET(request, { params }) {
     );
   }
 }
+
+export async function DELETE(request, { params }) {
+  try {
+    const result = conn.query(
+      `DELETE FROM posts
+    WHERE id=?
+    `,
+      [params.id]
+    );
+    return NextResponse.json(result);
+  } catch (error) {
+    return NextResponse.json(error.message);
+  }
+}

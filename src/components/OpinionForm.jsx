@@ -5,6 +5,8 @@ import { useState } from "react";
 import validation from "@/libs/validation";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/app/context/AuthContext";
+import axios from "axios";
+import { useSelector } from "react-redux/es/hooks/useSelector";
 
 const fontRubik = Rubik({
   weight: "600",
@@ -33,12 +35,10 @@ const rubik = fontRubik.className;
 const bigrubik = bigFontRubik.className;
 
 function OpinionForm({ cars }) {
+  const user = useSelector((state) => state.user.currentUser);
   const router = useRouter();
 
   const [review, setReview] = useState({
-    email: "",
-    name: "",
-    surname: "",
     opinion: "",
     rating: "",
     car: "",
@@ -73,14 +73,8 @@ function OpinionForm({ cars }) {
 
   const ready = () => {
     return (
-      !error.email &&
       !error.rating &&
-      !error.nameSurname &&
       !error.opinion &&
-      review.email !== "" &&
-      review.name !== "" &&
-      review.surname !== "" &&
-      review.profession !== "" &&
       review.opinion !== "" &&
       review.rating !== "" &&
       review.car !== ""
@@ -89,15 +83,21 @@ function OpinionForm({ cars }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    alert("Agregando Testimonio, Gracias!");
+    const test = {
+      userID: user.userId,
+      productID: review.car,
+      description: review.opinion,
+      rating: review.rating,
+    };
 
-    // if (ready()) {
-    //   try {
-    //     await axios.post("", review);
-    //   } catch (error) {
-    //     alert("Disculpa tuvimos un error al cargar tu review");
-    //   }
-    // }
+    if (ready()) {
+      try {
+        await axios.post("/api/post", test);
+        alert("Recibimos tu opinion muchas gracias");
+      } catch (error) {
+        alert("Disculpa tuvimos un error al cargar tu opinion");
+      }
+    }
   };
 
   const isUser = () => {
