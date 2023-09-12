@@ -4,7 +4,7 @@ export default function CarCard({ car, handleVisibility, handleDetail }) {
   return (
     <div
       key={car.id}
-      className=" bg-white min-w-[200px] max-w-[250px] shadow-md hover:cursor-pointer hover:scale-105 transform transition-transform duration-200 border rounded-sm border-solid border-negro_fondo ">
+      className=" bg-white min-w-[290px] max-w-[291px] shadow-md hover:cursor-pointer hover:scale-105 transform transition-transform duration-200 border rounded-sm border-solid border-negro_fondo ">
       <main onClick={() => handleDetail(car)} className="group relative">
         <div className="absolute w-full h-0 bg-[#525252cc] items-center justify-center group-hover:h-full flex group-hover:ease-in-out group-hover:duration-[350ms]">
           <p className="text-white hidden text-center group-hover:block">
@@ -14,7 +14,7 @@ export default function CarCard({ car, handleVisibility, handleDetail }) {
         <img
           src={car.image}
           alt={car.name}
-          className=" w-[100%] mx-auto mb-4 h-[10rem] object-cover"
+          className=" w-[100%] px-3 py-3 mx-auto mb-4 h-[10rem] object-cover"
         />
         <div>
           <div className="flex flex-wrap justify-between px-3 mb-0">
