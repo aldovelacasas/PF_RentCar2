@@ -124,47 +124,13 @@ function OpinionForm({ cars }) {
       )}
       <form
         onSubmit={handleSubmit}
-        className={`p-4 mx-4 my-4 max-w-md w-full ${
+        className={`p-4 sm:px-4 px-4 mx-4 my-4 max-w-md w-full ${
           isUser() ? "opacity-100" : "opacity-20"
         } `}>
         <h3 className={`${rubik} text-2xl font-bold mb-2`}>Deja tu reseña</h3>
         <p className={`${poppins} text-base text-gray-600 mb-6`}>
           Dinos qué opinas de nuestros servicios
         </p>
-        <label htmlFor="email" className={`${poppins} block mb-1`}>
-          Email
-        </label>
-        <input
-          disabled={!isUser()}
-          type="email"
-          name="email"
-          onChange={handleChange}
-          className="w-full py-2 px-3 mb-3"
-        />
-        {error.email ? (
-          <span className={`${alertPoppins} text-sm`} style={{ color: "red" }}>
-            {error.email}
-          </span>
-        ) : (
-          ""
-        )}
-        <label htmlFor="nameSurname" className={`${poppins} block mb-1`}>
-          Nombre y apellido
-        </label>
-        <input
-          disabled={!isUser()}
-          onChange={handleChange}
-          type="text"
-          name="nameSurname"
-          className="w-full py-2 px-3 mb-3"
-        />
-        {error.nameSurname ? (
-          <span className={`${alertPoppins} text-sm`} style={{ color: "red" }}>
-            {error.nameSurname}
-          </span>
-        ) : (
-          ""
-        )}
         <label htmlFor="car" className={`${poppins} block mb-1`}>
           Auto
         </label>

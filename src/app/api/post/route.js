@@ -5,14 +5,24 @@ export async function GET() {
   try {
     const results = await conn.query(`SELECT
     posts.id AS id_post,
-    user.username AS nombre_usuario,
+    user.image AS image,
+    user.username AS name,
     product.name AS nombre_producto,
     product.model AS modelo_producto,
-    posts.description AS mensaje,
-    posts.rating AS rating,
-    user.image AS image,
-    FROM posts JOIN user ON posts.userID = user.id JOIN product ON posts.productID = product.id;
+    posts.description AS description,
+    posts.rating AS rating
+FROM
+    posts
+JOIN
+    user
+ON
+    posts.userID = user.id
+JOIN
+    product
+ON
+    posts.productID = product.id;
 `);
+
     return NextResponse.json(results);
   } catch (error) {
     return NextResponse.json(
