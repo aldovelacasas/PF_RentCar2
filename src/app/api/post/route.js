@@ -21,16 +21,18 @@ export async function GET() {
 
 export async function POST(request) {
   try {
-    const { userID, description, rating } = await request.json();
+    const { userID, productID, description, rating } = await request.json();
 
     const result = await conn.query("INSERT INTO posts SET ?", {
       userID,
+      productID,
       description,
       rating,
     });
 
     return NextResponse.json({
       userID,
+      productID,
       description,
       rating,
       id: result.insertId,
