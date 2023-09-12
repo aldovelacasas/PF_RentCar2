@@ -5,6 +5,10 @@ import { useState } from "react";
 import validation from "@/libs/validation";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/app/context/AuthContext";
+import axios from "axios";
+import { useSelector } from "react-redux/es/hooks/useSelector";
+import { useDispatch } from "react-redux";
+import { getTest } from "@/store/slices/testimonio";
 
 const fontRubik = Rubik({
   weight: "600",
@@ -33,12 +37,11 @@ const rubik = fontRubik.className;
 const bigrubik = bigFontRubik.className;
 
 function OpinionForm({ cars }) {
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user.currentUser);
   const router = useRouter();
 
   const [review, setReview] = useState({
-    email: "",
-    name: "",
-    surname: "",
     opinion: "",
     rating: "",
     car: "",
@@ -73,14 +76,8 @@ function OpinionForm({ cars }) {
 
   const ready = () => {
     return (
-      !error.email &&
       !error.rating &&
-      !error.nameSurname &&
       !error.opinion &&
-      review.email !== "" &&
-      review.name !== "" &&
-      review.surname !== "" &&
-      review.profession !== "" &&
       review.opinion !== "" &&
       review.rating !== "" &&
       review.car !== ""
@@ -89,15 +86,23 @@ function OpinionForm({ cars }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    alert("Agregando Testimonio, Gracias!");
+    const test = {
+      userID: user.userId,
+      productID: review.car,
+      description: review.opinion,
+      rating: review.rating,
+    };
 
-    // if (ready()) {
-    //   try {
-    //     await axios.post("", review);
-    //   } catch (error) {
-    //     alert("Disculpa tuvimos un error al cargar tu review");
-    //   }
-    // }
+    if (ready()) {
+      try {
+        await axios.post("/api/post", test);
+        dispatch(getTest());
+        document.getElementById("opinionForm").reset();
+        alert("Recibimos tu opinion muchas gracias");
+      } catch (error) {
+        alert("Disculpa tuvimos un error al cargar tu opinion");
+      }
+    }
   };
 
   const isUser = () => {
@@ -123,48 +128,15 @@ function OpinionForm({ cars }) {
         ""
       )}
       <form
+        id="opinionForm"
         onSubmit={handleSubmit}
-        className={`p-4 mx-4 my-4 max-w-md w-full ${
+        className={`p-4 sm:px-4 px-4 mx-4 my-4 max-w-md w-full ${
           isUser() ? "opacity-100" : "opacity-20"
         } `}>
         <h3 className={`${rubik} text-2xl font-bold mb-2`}>Deja tu reseña</h3>
         <p className={`${poppins} text-base text-gray-600 mb-6`}>
           Dinos qué opinas de nuestros servicios
         </p>
-        <label htmlFor="email" className={`${poppins} block mb-1`}>
-          Email
-        </label>
-        <input
-          disabled={!isUser()}
-          type="email"
-          name="email"
-          onChange={handleChange}
-          className="w-full py-2 px-3 mb-3"
-        />
-        {error.email ? (
-          <span className={`${alertPoppins} text-sm`} style={{ color: "red" }}>
-            {error.email}
-          </span>
-        ) : (
-          ""
-        )}
-        <label htmlFor="nameSurname" className={`${poppins} block mb-1`}>
-          Nombre y apellido
-        </label>
-        <input
-          disabled={!isUser()}
-          onChange={handleChange}
-          type="text"
-          name="nameSurname"
-          className="w-full py-2 px-3 mb-3"
-        />
-        {error.nameSurname ? (
-          <span className={`${alertPoppins} text-sm`} style={{ color: "red" }}>
-            {error.nameSurname}
-          </span>
-        ) : (
-          ""
-        )}
         <label htmlFor="car" className={`${poppins} block mb-1`}>
           Auto
         </label>
