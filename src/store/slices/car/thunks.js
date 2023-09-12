@@ -1,5 +1,7 @@
 import { setCars, setModels, startLoadingCars } from "./carSlice";
 
+const apiUrl = process.env.API_URL;
+
 export const getCars = (page = 0) => {
   return async (dispatch, getState) => {
     dispatch(startLoadingCars());

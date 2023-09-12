@@ -9,6 +9,8 @@ import axios from "axios";
 // Make sure to call loadStripe outside of a component’s render to avoid
 // recreating the Stripe object on every render.
 // This is your test publishable API key.
+const apiUrl = process.env.API_URL;
+
 const stripePromise = loadStripe(
   "pk_test_51NnSDoFEH1uvL7eBeDvk8LY99xuJUYrTUKF7iG9QZ3boEE9FMvYMuDD4qbYIpxGwErL0EFdZi5irhp2YXo8D3bru000bbs6Dl4"
 );
@@ -24,7 +26,7 @@ export default function App() {
     let item = { id: "xl-tshirt", price: 80 };
     let cant = 6;
     axios
-      .post("http://localhost:3000/api/create-payment-intent", { item, cant })
+      .post(`${apiUrl}/api/create-payment-intent`, { item, cant })
       .then(({ data }) => setClientSecret(data.clientSecret));
   }, []);
 

@@ -9,6 +9,8 @@ import { useAuth } from "@/app/context/AuthContext";
 
 // import { useRouter } from "next/navigation";
 
+const apiUrl = process.env.API_URL;
+
 const fontRubik = Rubik({
   weight: "600",
   subsets: ["latin"],
@@ -75,7 +77,7 @@ function Profile() {
         phone: inputs.telefono,
       };
       const res = axios
-        .put(`http://localhost:3000/api/users/${id}`, data)
+        .put(`${apiUrl}/api/users/${id}`, data)
         .then(console.log("success"));
       handleFormVisibility();
     }

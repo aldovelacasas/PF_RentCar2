@@ -3,6 +3,8 @@ import TestCard from "@/components/TestCard";
 import OpinionForm from "@/components/OpinionForm";
 import axios from "axios";
 
+const apiUrl = process.env.API_URL;
+
 const fontRubik = Rubik({
   weight: "600",
   subsets: ["latin"],
@@ -118,7 +120,7 @@ const testimonios = [
 ];
 
 async function getCars() {
-  const { data } = await axios("http://localhost:3000/api/products");
+  const { data } = await axios(`${apiUrl}/api/products`);
   console.log(data);
   const cars = [];
   data.map((car) => {
