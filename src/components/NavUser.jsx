@@ -103,7 +103,7 @@ export default function NavUser({ userName, userPhoto }) {
             <img
               src={userPhoto}
               alt={userName}
-              className="w-14 rounded-full mr-2"
+              className="w-14 h-14 object-fill rounded-full mr-2"
             />
           </a>
           <div className="">

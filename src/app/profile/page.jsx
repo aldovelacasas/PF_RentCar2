@@ -113,7 +113,7 @@ function Profile() {
               <img
                 src={inputs.imagen}
                 alt={`Imagen de perfil de ${inputs.nombre}`}
-                className="w-[200px] h-[200px] rounded-full bg-white mb-6 mx-[auto]"
+                className="w-[200px] h-[200px] object-fill rounded-full bg-white mb-6 mx-[auto]"
               />
               <input
                 type="file"
