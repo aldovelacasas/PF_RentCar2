@@ -16,7 +16,7 @@ import {
 import axios from "axios";
 import { useRouter } from "next/navigation";
 
-import {useRouter} from "next/navigation"
+
 
 const AuthContext = createContext();
 
@@ -121,11 +121,11 @@ export const AuthContextProvider = ({ children }) => {
     }
   };
 
-  updatedetail
+
   
   const router = useRouter()
    
-   main
+
   const handleForgotPassword = async () => {
     try {
       const email = prompt("Ingrese su dirección de correo electrónico:");
