@@ -14,6 +14,7 @@ import {
   sendPasswordResetEmail,
 } from "firebase/auth";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 const AuthContext = createContext();
 
@@ -118,6 +119,8 @@ export const AuthContextProvider = ({ children }) => {
     }
   };
 
+  const router = useRouter()
+   
   const handleForgotPassword = async () => {
     try {
       const email = prompt("Ingrese su dirección de correo electrónico:");
