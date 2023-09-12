@@ -58,6 +58,7 @@ export async function POST(request) {
       type,
       description,
       transmission,
+      rating,
     } = JSON.parse(data.get("data"));
 
     const result = await conn.query("INSERT INTO product SET ?", {
@@ -68,6 +69,7 @@ export async function POST(request) {
       capacity,
       type,
       transmission,
+      rating,
       image,
       description,
     });
@@ -80,6 +82,7 @@ export async function POST(request) {
       capacity,
       type,
       transmission,
+      rating,
       image,
       description,
       id: result.insertId,
