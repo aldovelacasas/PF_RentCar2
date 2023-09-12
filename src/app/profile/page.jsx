@@ -76,12 +76,28 @@ function Profile() {
         passport: inputs.pasaporte,
         phone: inputs.telefono,
       };
+      const fdata = new FormData();
+      fdata.append("data", JSON.stringify(data));
       const res = axios
-        .put(`${apiUrl}/api/users/${id}`, data)
+
+        .put(`api/users/${id}`, fdata)
         .then(console.log("success"));
       handleFormVisibility();
     }
   }
+
+  const handleImage = () => {
+    const fileInput = document.getElementById("fileImage");
+    fileInput.click();
+  };
+
+  const imageChange = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("image", e.target.files[0]);
+    const res = await axios.put("/api/users/" + user.userId, formData);
+    alert("Imagen Cambiada");
+  };
 
   return (
     <div className="grid bg-gris_frente md:text-[1.5em] lg:text-[2em]">
@@ -102,7 +118,14 @@ function Profile() {
                 alt={`Imagen de perfil de ${inputs.nombre}`}
                 className="w-[200px] h-[200px] rounded-full bg-white mb-6 mx-[auto]"
               />
+              <input
+                type="file"
+                className="hidden"
+                id="fileImage"
+                accept="image/*"
+                onChange={imageChange}></input>
               <button
+                onClick={handleImage}
                 className={` bg-negro_fondo ${rubik} text-white text-[0.8em] px-4 rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
                 Cambiar foto de perfil
               </button>
