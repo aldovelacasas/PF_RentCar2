@@ -8,6 +8,7 @@ import { AuthContextProvider } from "./context/AuthContext";
 const inter = Inter({ subsets: ["latin"] });
 import Loading from "./loading";
 import { Suspense } from "react";
+import Chat from "@/components/Chat";
 
 export const metadata = {
   title: "Auto Connect",
@@ -22,6 +23,7 @@ export default function RootLayout({ children }) {
           <Providers store={store}>
             <Navbar />
             <Suspense fallback={<Loading />}>{children}</Suspense>
+            <Chat />
             <Footer />
           </Providers>
         </AuthContextProvider>
