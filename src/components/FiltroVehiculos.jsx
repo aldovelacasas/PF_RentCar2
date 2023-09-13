@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setShowCars, orderFilter } from "@/store/slices/car";
 import { MultiSelect } from "react-multi-select-component";
+import DropMenuOrder from "./DropMenuOrder";
 
 export default function FiltroVehiculos() {
   const dispatch = useDispatch();
@@ -142,20 +143,12 @@ export default function FiltroVehiculos() {
         />
       </div>
       <div className={`flex flex-col  sm:w-[20%] w-full`}>
-        <label htmlFor="categoria" className={`text-[1rem] text-white mb-1`}>
+        <label
+          htmlFor="categoria"
+          className={`text-[1rem] text-white mb-1 pb-1`}>
           Ordenar por:
         </label>
-
-        <select
-          id="orden"
-          onChange={handleOrder}
-          className={`min-w-[80px] max-w-[95%] rounded p-3 `}>
-          <option value="" disabled selected></option>
-          <option value="MayorPrecio">Mayor Precio</option>
-          <option value="MenorPrecio">Menor Precio</option>
-          <option value="MayorRating">Mayor calificacion</option>
-          <option value="MenorRating">Menor calificacion</option>
-        </select>
+        <DropMenuOrder></DropMenuOrder>
       </div>
     </form>
   );
