@@ -92,9 +92,31 @@ export const carSlice = createSlice({
         state.showCars = state.capacityCars;
       }
     },
+    orderFilter: (state, action) => {
+      // const { MayorPrecio, MenorPrecio, MayorRating, MenorRating } =
+      //   action.payload;
+
+      if (action.payload == "MayorPrecio") {
+        state.showCars = state.showCars.sort((a, b) => b.price - a.price);
+      }
+      if (action.payload === "MenorPrecio") {
+        state.showCars = state.showCars.sort((a, b) => a.price - b.price);
+      }
+      if (action.payload == "MayorRating") {
+        state.showCars = state.showCars.sort((a, b) => b.rating - a.rating);
+      }
+      if (action.payload === "MenorRating") {
+        state.showCars = state.showCars.sort((a, b) => a.rating - b.rating);
+      }
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { startLoadingCars, setCars, setShowCars, setModels } =
-  carSlice.actions;
+export const {
+  startLoadingCars,
+  setCars,
+  setShowCars,
+  setModels,
+  orderFilter,
+} = carSlice.actions;

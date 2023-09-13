@@ -2,8 +2,9 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setShowCars } from "@/store/slices/car";
+import { setShowCars, orderFilter } from "@/store/slices/car";
 import { MultiSelect } from "react-multi-select-component";
+import DropMenuOrder from "./DropMenuOrder";
 
 export default function FiltroVehiculos() {
   const dispatch = useDispatch();
@@ -29,14 +30,27 @@ export default function FiltroVehiculos() {
     value: capacidad,
   }));
 
+  const optionsOrden = [
+    { label: "Mayor precio", value: "MayorPrecio" },
+    { label: "Menor precio", value: "MenorPrecio" },
+    { label: "Mayor calificacion", value: "MayorCalificacion" },
+    { label: "Menor calificacion", value: "MenorCalificacion" },
+  ];
+
   const [busqueda, setBusqueda] = useState([]);
   const [marca, setMarca] = useState([]);
   const [categoria, setCategoria] = useState([]);
   const [capacidad, setCapacidad] = useState([]);
+  const [orden, setOrden] = useState("");
 
   useEffect(() => {
     dispatch(setShowCars({ marca, categoria, capacidad, busqueda }));
   }, [marca, categoria, capacidad, busqueda]);
+
+  const handleOrder = (event) => {
+    setOrden(event.target.value); // Actualizamos el estado de orden con el valor seleccionado
+    dispatch(orderFilter(event.target.value)); // Enviamos el valor seleccionado al estado global si es necesario
+  };
 
   function handleSearch(e) {
     setBusqueda(e.target.value);
@@ -78,6 +92,7 @@ export default function FiltroVehiculos() {
             selectSomeItems: "Seleccionar...",
             create: "Crear",
           }}
+          closeOnChangedValue={true}
         />
       </div>
       <div className={`flex flex-col sm:w-[20%] w-full`}>
@@ -126,6 +141,14 @@ export default function FiltroVehiculos() {
             create: "Crear",
           }}
         />
+      </div>
+      <div className={`flex flex-col  sm:w-[20%] w-full`}>
+        <label
+          htmlFor="categoria"
+          className={`text-[1rem] text-white mb-1 pb-1`}>
+          Ordenar por:
+        </label>
+        <DropMenuOrder></DropMenuOrder>
       </div>
     </form>
   );
