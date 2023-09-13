@@ -16,8 +16,6 @@ import {
 import axios from "axios";
 import { useRouter } from "next/navigation";
 
-
-
 const AuthContext = createContext();
 
 export const useAuth = () => {
@@ -121,10 +119,7 @@ export const AuthContextProvider = ({ children }) => {
     }
   };
 
-
-  
-  const router = useRouter()
-   
+  const router = useRouter();
 
   const handleForgotPassword = async () => {
     try {
@@ -160,7 +155,7 @@ export const AuthContextProvider = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
         setUser(currentUser);
-        // console.log("usuario autenticado", currentUser);
+        console.log("usuario autenticado", currentUser.getIdToken());
       } else {
         setUser(null);
         console.log("Usuario no autenticado");

@@ -8,6 +8,7 @@ import HelpForm from "@/components/HelpForm";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import Alerts from "@/components/Alerts";
+import { withAuth } from "@/withAuth";
 
 const fontRubik = Rubik({
   weight: "600",
@@ -159,4 +160,4 @@ function AdminMain() {
   );
 }
 
-export default AdminMain;
+export default withAuth(AdminMain);
