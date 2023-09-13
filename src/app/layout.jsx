@@ -6,6 +6,8 @@ import { store } from "@/store";
 import { Inter } from "next/font/google";
 import { AuthContextProvider } from "./context/AuthContext";
 const inter = Inter({ subsets: ["latin"] });
+import Loading from "./loading";
+import { Suspense } from "react";
 
 export const metadata = {
   title: "Auto Connect",
@@ -19,7 +21,7 @@ export default function RootLayout({ children }) {
         <AuthContextProvider>
           <Providers store={store}>
             <Navbar />
-            {children}
+            <Suspense fallback={<Loading />}>{children}</Suspense>
             <Footer />
           </Providers>
         </AuthContextProvider>

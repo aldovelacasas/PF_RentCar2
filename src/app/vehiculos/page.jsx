@@ -29,9 +29,9 @@ function Vehiculos() {
   const [detailVisibility, setDetailVisibility] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [detailData, setDetailData] = useState();
-  const [price, setPrice] = useState();
-  const [model, setModel] = useState();
-  const [image, setImage] = useState();
+  // const [price, setPrice] = useState();
+  // const [model, setModel] = useState();
+  // const [image, setImage] = useState();
 
   useEffect(() => {
     dispatch(getCars());
@@ -44,18 +44,17 @@ function Vehiculos() {
   }, [cars]);
 
   function handleVisibility(data) {
-    if (data.name) {
-      setModel(data.name);
-    }
-    if (data.price) {
-      setPrice(data.price);
-      console.log(data.price);
-    }
-    if (data.image) {
-      setImage(data.image);
-    }
+    setDetailData(data);
+    // if (data.name) {
+    //   setModel(data.name);
+    // }
+    // if (data.price) {
+    //   setPrice(data.price);
+    // }
+    // if (data.image) {
+    //   setImage(data.image);
+    // }
     setVisibility(!visibility);
-    console.log(document.body.classList);
     if (document.body.classList.length === 1) {
       document.body.classList.toggle("stopScroll");
     } else if (!detailVisibility) {
@@ -210,10 +209,8 @@ function Vehiculos() {
       <FormRent
         isAuth={true}
         visible={visibility}
+        car={detailData}
         handleVisible={handleVisibility}
-        model={model}
-        image={image}
-        price={price}
       />
       <CarCardDetail
         visible={detailVisibility}

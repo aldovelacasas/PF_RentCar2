@@ -71,23 +71,6 @@ export default function NavUser({ userName, userPhoto }) {
           <Link href="/AdminConsole/Recoveries">Recuperaciones</Link>
         </li>
 
-        {/* <li
-          className={
-            route === "/contact"
-              ? "list-none text-naranja_enf underline"
-              : "list-none hover:text-naranja_enf transition ease-in-out duration-300 "
-          }>
-          <Link href="/contact">Contáctanos</Link>
-        </li>
-        <li
-          className={
-            route === "/profile"
-              ? "list-none text-naranja_enf underline"
-              : "list-none hover:text-naranja_enf transition ease-in-out duration-300 "
-          }>
-          <Link href="/profile">Perfil</Link>
-        </li> */}
-
         <div className="flex items-center">
           <a href="/profile">
             <img
@@ -101,7 +84,7 @@ export default function NavUser({ userName, userPhoto }) {
             <button
               onClick={logOut}
               className=" block w-full bg-naranja_enf hover:bg-negro_fondo text-white text-xs font-bold py-1 px-2 rounded focus:outline-none focus:shadow-outline">
-              LOG OUT
+              Cerrar sesión
             </button>
           </div>
         </div>

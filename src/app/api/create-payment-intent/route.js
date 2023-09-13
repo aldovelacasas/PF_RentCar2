@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 const stripe = require("stripe")(process.env.STRIPE_KEY);
 
 const calculateOrderAmount = (item = { price: 80 }, cant = 5) => {
-  return item.price * cant * 10;
+  return 1400;
 };
 
 export async function POST(req) {

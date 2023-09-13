@@ -9,6 +9,7 @@ import {
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import emailjs from "@emailjs/browser";
 import Alerts from "./Alerts";
+import { useSelector } from "react-redux";
 
 const fontRubik = Rubik({
   weight: "600",
@@ -35,18 +36,19 @@ export default function CheckoutForm({ paymentKey }) {
     router.push("/homePage");
     return null;
   }
-  let alertMessage;
+  let user = useSelector((state) => state.user.currentUser);
+
   function sendMail() {
-    var templateParams = {
-      mail: ``,
-      userName: ``,
+    let templateParams = {
+      mail: user.userEmail,
+      userName: user.userName,
       model: item,
       cant: cant,
       price: price,
       startDate: startDate,
       endDate: endDate,
     };
-
+    console.log(templateParams);
     emailjs
       .send(
         "service_urf97ga",
@@ -57,13 +59,10 @@ export default function CheckoutForm({ paymentKey }) {
       .then(
         function (response) {
           console.log("SUCCESS!", response.status, response.text);
-          alertMessage = "Pago registrado exitosamente";
           handleVisible();
         },
         function (error) {
           console.log("FAILED...", error);
-          alertMessage =
-            "Ha ocurrido un error, intenta de nuevo en unos minutos";
           handleVisible();
         }
       );
@@ -72,7 +71,6 @@ export default function CheckoutForm({ paymentKey }) {
   const stripe = useStripe();
   const elements = useElements();
 
-  const [email, setEmail] = useState("pcgp22@gmail.com");
   const [message, setMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -109,7 +107,7 @@ export default function CheckoutForm({ paymentKey }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // sendMail()
+    sendMail();
 
     if (!stripe || !elements) {
       return;

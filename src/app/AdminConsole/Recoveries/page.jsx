@@ -39,6 +39,7 @@ function Recoveries() {
 
   const [alertsVisibility, setAlertsVisibility] = useState(false);
   const [visibility, setVisibility] = useState(initialState);
+  const [category, setCategory] = useState("");
 
   function handleVisibility(name) {
     setVisibility({
@@ -47,7 +48,8 @@ function Recoveries() {
     });
   }
 
-  function handleAlertsVisibility() {
+  function handleAlertsVisibility(category) {
+    setCategory(category);
     setAlertsVisibility(!alertsVisibility);
     document.body.classList.toggle("stopScroll");
   }
@@ -86,7 +88,7 @@ function Recoveries() {
           </h3>
           <CarRecTable
             visible={visibility.rentalsVisibility}
-            handleAlertsVisibility={handleAlertsVisibility}
+            handleAlertsVisibility={() => handleAlertsVisibility("vehiculo")}
           />
         </div>
         <div
@@ -106,7 +108,7 @@ function Recoveries() {
           </h3>
           <UsersRecTable
             visible={visibility.vehiclesVisibility}
-            onClick={() => setVehiclesVisibility(!vehiclesVisibility)}
+            handleAlertsVisibility={() => handleAlertsVisibility("usuario")}
           />
         </div>
         <div
@@ -117,6 +119,7 @@ function Recoveries() {
           }>
           <h3
             onClick={() => handleVisibility("formVisibility")}
+            handleAlertsVisibility={handleAlertsVisibility}
             className={
               !visibility.formVisibility
                 ? `lg:px-[8em] text-center text-[1em] mb-2 bg-gris_fondo px-4 py-1 shadow-sm shadow-black hover:shadow-md cursor-pointer rounded-md hover:shadow-black active:shadow-inner active:shadow-black`
@@ -133,19 +136,18 @@ function Recoveries() {
           Alerta
         </p>
         <p className="text-[1em] px-4">
-          ¿Estás seguro de recuperar este vehículo?
+          ¿Estás seguro de recuperar este {category}?
         </p>
-        <p className="text-[0.8em] mt-[-6px] px-4">{`(Podrás ver los vehículos eliminados en la página de restauración)`}</p>
 
-        <div className="flex w-1/2 justify-evenly">
-          <button
-            className={` bg-naranja_enf ${rubik} text-white text-[1em] px-4 rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black `}>
-            Recuperar
-          </button>
+        <div className="flex w-full justify-evenly">
           <button
             onClick={handleAlertsVisibility}
-            className={` bg-negro_fondo ${rubik} text-white text-[1em] px-4 rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black `}>
+            className={` bg-negro_fondo ${rubik} text-white text-[1em] px-6 py-2 rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black `}>
             Cerrar
+          </button>
+          <button
+            className={` bg-naranja_enf ${rubik} text-white text-[1em] px-6 py-2 rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black `}>
+            Recuperar
           </button>
         </div>
       </Alerts>

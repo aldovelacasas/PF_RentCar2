@@ -250,13 +250,13 @@ function VehicleDetail({ visible, data, handleVisible, handleReload }) {
           <button
             type="button"
             onClick={handleVisible}
-            className={`bg-negro_fondo text-white text-[1em] px-8 py-4 shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
+            className={`bg-negro_fondo text-white text-[1em] px-6 py-2 rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
             Volver
           </button>
           <button
             type="submit"
             onClick={handleSubmit}
-            className={` px-8 py-4 bg-naranja_enf text-white text-[1em] shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
+            className={` px-6 py-2 bg-naranja_enf text-white text-[1em] rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
             Aceptar cambios
           </button>
         </div>
