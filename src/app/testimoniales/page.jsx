@@ -53,20 +53,6 @@ async function Testimoniales() {
         han dejado
       </p>
       <Reviews> </Reviews>
-      {/* <div className="flex flex-col items-center pb-8">
-        {testimonios.map((testimonio) => {
-          return (
-            <TestCard
-              key={testimonio.name}
-              name={testimonio.name}
-              profession={testimonio.profession}
-              rating={testimonio.rating}
-              description={testimonio.description}
-              image={testimonio.image}
-            />
-          );
-        })}
-      </div> */}
       <OpinionForm cars={cars} />
     </div>
   );
