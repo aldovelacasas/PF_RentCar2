@@ -23,6 +23,24 @@ export default function CarCardDetail({
   handleRentVisibility,
 }) {
   if (!visible) return null;
+
+  let rating = product.rating ?? 5;
+  let x = 0;
+  let ratingStars = [];
+  let completingStars = [];
+  while (x < rating) {
+    x++;
+    ratingStars.push(x);
+  }
+  if (ratingStars.length < 5) {
+    let y = 5 - ratingStars.length;
+    x = 0;
+    while (x < y) {
+      x++;
+      completingStars.push(x);
+    }
+  }
+
   return (
     <section
       className={` ${poppins} fixed w-[100vw] top-0 left-0 pt-[15vh] h-[100vh] flex justify-center bg-[#dbdbdbcc] z-40`}>
@@ -50,56 +68,16 @@ export default function CarCardDetail({
             </div>
             <div className="flex px-2 justify-between mb-2">
               <div className="flex ">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  className="w-4 h-4 fill-yellow-300">
-                  <path
-                    fillRule="evenodd"
-                    d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  className="w-4 h-4 fill-yellow-300">
-                  <path
-                    fillRule="evenodd"
-                    d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  className="w-4 h-4 fill-yellow-300">
-                  <path
-                    fillRule="evenodd"
-                    d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  className="w-4 h-4 fill-yellow-300">
-                  <path
-                    fillRule="evenodd"
-                    d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  className="w-4 h-4 fill-gray-300">
-                  <path
-                    fillRule="evenodd"
-                    d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
-                    clipRule="evenodd"
-                  />
-                </svg>
+                {ratingStars.map((s) => (
+                  <span key={s} className="text-amarillo_status text-[1.5em]">
+                    ★
+                  </span>
+                ))}
+                {completingStars.map((s) => (
+                  <span key={s} className="text-gris_fondo text-[1.5em]">
+                    ★
+                  </span>
+                ))}
               </div>
               <p className="text-sm font-light pr-2">Por día</p>
             </div>
@@ -130,16 +108,16 @@ export default function CarCardDetail({
         </main>
         <hr className="my-3 mx-2" />
         <div
-          className={` ${rubik} flex justify-evenly lg:w-1/2 mx-[auto] text-[0.9em] py-6  pb-2 mb-4`}>
-          <button
-            onClick={() => handleRentVisibility(product)}
-            className={` rounded-md px-4 py-[2px] bg-naranja_enf text-white text-[1em] shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
-            Rentar
-          </button>
+          className={` ${rubik} flex justify-evenly w-full lg:w-3/4 mx-[auto] text-[0.9em] py-6  pb-2 mb-4`}>
           <button
             onClick={handleClose}
-            className={` bg-gris_fondo text-black text-[1em] px-4 py-[2px] rounded-md shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
+            className={` bg-gris_fondo text-black text-[1em] px-6 py-2 rounded-md shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
             Cerrar
+          </button>
+          <button
+            onClick={() => handleRentVisibility(product)}
+            className={` rounded-md px-8 py-2 bg-naranja_enf text-white text-[1em] shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
+            Rentar
           </button>
         </div>
       </div>

@@ -22,25 +22,17 @@ const today = new Date().toISOString().split("T")[0];
 
 function FormRent({
   visible = false,
-  cat = "Sedan",
   dat = { startDate: today, endDate: today },
   isAuth = false,
+  car,
   handleVisible,
-  model,
-  price,
-  image,
 }) {
-  const [category, setCategory] = useState(cat);
   const [errors, setErrors] = useState({});
-  const [imgsrc, setImgsrc] = useState(
-    image ?? categorias.find((c) => c.tipo === cat).imagen
-  );
   const [dates, setDate] = useState(dat);
+  const [category, setCategory] = useState("Sedan");
 
   function handleOption(e) {
     setCategory(e.target.value);
-    let img = categorias.find((c) => c.tipo === category).imagen;
-    setImgsrc(img);
   }
 
   function handleDateChange(e) {
@@ -52,6 +44,11 @@ function FormRent({
   }
 
   let router = useRouter();
+
+  function handleLogin() {
+    document.body.classList.toggle("stopScroll");
+    router.push("/login");
+  }
 
   function handleValidation(e) {
     e.preventDefault();
@@ -71,9 +68,9 @@ function FormRent({
       let cant = (endDate - startDate) / 3600000 / 24;
       cant += 1;
       router.push(
-        `/payment?item=${model}&cant=${cant}&img=${imgsrc}&price=${price}&startDate=${dates.startDate}&endDate=${dates.endDate}`,
+        `/payment?item=${car.model}&cant=${cant}&img=${car.image}&price=${car.price}&startDate=${dates.startDate}&endDate=${dates.endDate}`,
         {
-          query: { item: `${model}`, cant: `${cant}` },
+          query: { item: `${car.model}`, cant: `${cant}` },
         }
       );
       if (document.body.classList.length === 2) {
@@ -99,33 +96,34 @@ function FormRent({
             </p>
             <fieldset className="flex justify-evenly w-full place-self-center lg:w-2/3 py-6">
               <button
-                className={` bg-naranja_enf ${rubik} text-white px-4 text-[0.8em] rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
-                Inicia Sesión
-              </button>
-              <button
                 type="button"
                 onClick={handleVisible}
-                className={` bg-gris_fondo ${rubik} text-[0.8em] px-4 rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
+                className={` bg-gris_fondo ${rubik} text-[1em] px-4 py-2 rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
                 Cancelar
+              </button>
+              <button
+                onClick={handleLogin}
+                className={` bg-naranja_enf ${rubik} text-white px-4 py-2 text-[1em] rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
+                Inicia Sesión
               </button>
             </fieldset>
           </fieldset>
         ) : (
           <>
-            {model ? (
+            {car.model ? (
               <p className={`${rubik} text-[1.2em]`}>
                 Modelo:
-                <span className="text-naranja_enf"> {model}</span>
+                <span className="text-naranja_enf"> {car.model}</span>
               </p>
             ) : (
               <p className={`${rubik} text-[1.2em]`}>
                 Categoría:
-                <span className="text-naranja_enf"> {cat}</span>
+                <span className="text-naranja_enf"> {car.type}</span>
               </p>
             )}
             <img
-              src={imgsrc}
-              alt={`Imagen del modelo ${model}`}
+              src={car.image}
+              alt={`Imagen del modelo ${car.model}`}
               className="w-1/2 max-h-[200px] my-4 object-scale-down"
             />
             <fieldset>
@@ -134,7 +132,7 @@ function FormRent({
                 una categoría
               </label>
               <br />
-              {!model && (
+              {!car.model && (
                 <>
                   <select
                     className="bg-gris_fondo w-[200px] mb-4 text-[0.9em] md:w-[500px]"
@@ -186,15 +184,15 @@ function FormRent({
             )}
             <fieldset className="flex sticky bottom-0 bg-white justify-evenly w-full lg:w-1/2 py-6">
               <button
-                onClick={handleValidation}
-                className={` bg-naranja_enf ${rubik} text-white text-[0.8em] px-4 py-1 rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
-                Rentar
-              </button>
-              <button
                 type="button"
                 onClick={handleVisible}
-                className={` bg-gris_fondo ${rubik} text-[0.8em] px-4 py-1 rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
+                className={` bg-gris_fondo ${rubik} text-[1em] px-6 py-2 rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
                 Cancelar
+              </button>
+              <button
+                onClick={handleValidation}
+                className={` bg-naranja_enf ${rubik} text-white text-[1em] px-6 py-2 rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
+                Rentar
               </button>
             </fieldset>
           </>

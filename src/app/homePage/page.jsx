@@ -102,7 +102,7 @@ function HomePage() {
   function handleScrollForm() {
     if (window.innerWidth <= 400) {
       window.scrollTo({
-        top: 220,
+        top: 230,
         behavior: "smooth",
       });
     } else if (window.innerWidth <= 800) {
@@ -121,7 +121,7 @@ function HomePage() {
   function handleScrollInfo() {
     if (window.innerWidth <= 400) {
       window.scrollTo({
-        top: 500,
+        top: 540,
         behavior: "smooth",
       });
     } else if (window.innerWidth <= 800) {
@@ -149,9 +149,14 @@ function HomePage() {
         dates: "La fecha de fin no puede ser menor a la fecha de inicio.",
       });
       return;
-    } else if (dates.startDate <= dates.endDate) {
-      setErrors({});
-      router.push("/login");
+    }
+    // else if (dates.startDate <= dates.endDate) {
+    //   setErrors({});
+    //   router.push("/login");
+    // }
+    else {
+      setFormVisibility(true);
+      document.body.classList.toggle("stopScroll");
     }
   }
 
@@ -565,7 +570,7 @@ function HomePage() {
         visible={formVisibility}
         cat={category}
         dat={dates}
-        isAuth={true}
+        isAuth={false}
         handleVisible={handleFormVisibility}
       />
     </div>

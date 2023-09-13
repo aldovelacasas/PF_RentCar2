@@ -69,14 +69,14 @@ function UserDetail({ visible, data, handleVisible }) {
         <div className={`${rubik} flex justify-evenly w-3/4 pb-6 pt-4`}>
           <button
             type="button"
-            className={`rounded-md px-4 py-[2px] bg-naranja_enf text-white text-[1em] shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
-            Aceptar cambios
+            onClick={handleVisible}
+            className={`bg-negro_fondo text-white text-[1em] px-4 py-2 rounded-md shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
+            Volver
           </button>
           <button
             type="button"
-            onClick={handleVisible}
-            className={`bg-negro_fondo text-white text-[1em] px-4 py-[2px] rounded-md shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
-            Volver
+            className={`rounded-md px-4 py-2 bg-naranja_enf text-white text-[1em] shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
+            Aceptar cambios
           </button>
         </div>
       </figure>
