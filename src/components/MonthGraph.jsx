@@ -254,6 +254,15 @@ function MonthGraph({ visible }) {
         },
       },
       {
+        breakpoint: 2000,
+        options: {
+          chart: {
+            height: "400px",
+            width: "900px",
+          },
+        },
+      },
+      {
         theme: {
           mode: "light",
           palette: "palette6",
@@ -263,7 +272,7 @@ function MonthGraph({ visible }) {
   };
   if (visible === false) return null;
   return (
-    <figure className="w-[90vw ] h-[600px] text-black dark:text-white mx-[auto] grid place-content-center bg-white dark:bg-gris_fondo rounded-lg shadow-md shadow-black">
+    <figure className="w-[90vw] h-[600px] text-black dark:text-white mx-[auto] grid place-content-center bg-white dark:bg-gris_fondo rounded-lg shadow-md shadow-black">
       {typeof window !== undefined && (
         <Chart options={options} series={series} />
       )}
