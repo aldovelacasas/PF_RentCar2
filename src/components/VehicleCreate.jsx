@@ -153,7 +153,7 @@ function VehicleDetail({
             </label>{" "}
             <br />
             <input
-              className="border-[1px] rounded-lg border-black my-1 pl-2"
+              className="border-[1px] rounded-lg border-black my-1 pl-2 text-black"
               name="name"
               value={inputs?.name}
               onChange={handleChange}
@@ -168,7 +168,7 @@ function VehicleDetail({
             </label>{" "}
             <br />
             <input
-              className="border-[1px] rounded-lg border-black my-1 pl-2"
+              className="border-[1px] rounded-lg border-black my-1 pl-2 text-black"
               name="model"
               value={inputs?.model}
               onChange={handleChange}
@@ -183,7 +183,7 @@ function VehicleDetail({
             </label>
             <br />
             <input
-              className="border-[1px] rounded-lg border-black my-1 pl-2"
+              className="border-[1px] rounded-lg border-black my-1 pl-2 text-black"
               name="year"
               value={inputs?.year}
               onChange={handleChange}
@@ -197,7 +197,10 @@ function VehicleDetail({
               Tipo:
             </label>{" "}
             <br />
-            <select onChange={handleChange} defaultValue={inputs?.type}>
+            <select
+              onChange={handleChange}
+              defaultValue={inputs?.type}
+              className="text-black">
               <option value="Sedan">Sedan</option>
               <option value="SUV">SUV</option>
               <option value="camioneta">Camioneta</option>
@@ -209,7 +212,7 @@ function VehicleDetail({
             </label>{" "}
             <br />
             <input
-              className="border-[1px] rounded-lg border-black my-1 pl-2"
+              className="border-[1px] rounded-lg border-black my-1 pl-2 text-black"
               name="capacity"
               value={inputs?.capacity}
               onChange={handleChange}
@@ -223,7 +226,10 @@ function VehicleDetail({
               Transmisión:
             </label>{" "}
             <br />
-            <select onChange={handleChange} defaultValue={inputs?.transmission}>
+            <select
+              onChange={handleChange}
+              defaultValue={inputs?.transmission}
+              className="text-black">
               <option value="manual">Manual</option>
               <option value="automática">Automática</option>
             </select>
@@ -234,7 +240,7 @@ function VehicleDetail({
             </label>{" "}
             <br />
             <input
-              className="border-[1px] rounded-lg border-black my-1 pl-2"
+              className="border-[1px] rounded-lg border-black my-1 pl-2 text-black"
               name="price"
               value={inputs?.price}
               onChange={handleChange}
@@ -249,7 +255,7 @@ function VehicleDetail({
             </label>{" "}
             <br />
             <textarea
-              className="border-[1px] rounded-lg w-full border-black my-1 pl-2 resize-none min-h-[150px]"
+              className="border-[1px] rounded-lg w-full border-black my-1 pl-2 resize-none min-h-[150px] text-black"
               name="description"
               value={inputs?.description}
               onChange={handleChange}
