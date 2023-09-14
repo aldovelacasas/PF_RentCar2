@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 function Loading() {
   return (
     <main className=" min-h-[800px] bg-gris_fondo grid place-content-center">

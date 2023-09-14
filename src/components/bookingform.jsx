@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 
 
 async function loadProduct(id) {
-  const { data } = await axios.get(`http://localhost:3000/api/products/${id}`,id);
+  const { data } = await axios.get(`${process.env.API_BASE_URL}/api/products/${id}`,id);
   console.log(data);
   return await data;
 }

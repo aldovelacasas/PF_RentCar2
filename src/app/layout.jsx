@@ -1,6 +1,6 @@
 import { Providers } from "../store/providers";
 import "./globals.css";
-import Navbar from "@/components/Navbar/Navbar";
+import Navbar from "../components/NavBar/Navbar";
 import Footer from "@/components/footer";
 import { store } from "@/store";
 import { Inter } from "next/font/google";
