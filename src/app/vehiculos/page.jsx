@@ -105,7 +105,7 @@ function Vehiculos() {
   };
 
   return (
-    <div className="text-black dark:text-white bg-gris_fondo dark:bg-dark_fondo">
+    <div className="h-max text-black dark:text-white bg-gris_fondo dark:bg-dark_fondo">
       <header
         className={`bg-gris_fondo dark:bg-dark_fondo relative ${rubik} space-y-0 space-x-2.5 p-10 md:text-[1.4em] h-[175px] flex items-center overflow-x-clip`}>
         <p className="text-[2em]  leading-6 pl-6">Nuestros vehículos</p>
@@ -115,12 +115,13 @@ function Vehiculos() {
         />
       </header>
       <section
-        className={`pt-4 ${poppins} mx-[auto] text-[0.8em] bg-gris_frente dark:bg-dark_frente pb-12`}>
+        className={` pt-4 ${poppins} mx-[auto] text-[0.8em] bg-gris_frente dark:bg-dark_frente pb-12`}>
         <p className={`text-[2.4em] ${rubik} mb-2 text-center mt-6`}>
           Encuentra el vehículo ideal
         </p>
-        <FiltroVehiculos />
+        
       </section>
+      <FiltroVehiculos />
       <section
         className={`pt-4 ${rubik} mx-[auto] text-[0.8em] bg-gris_frente dark:bg-dark_frente pb-12 place-items-center w-[95%]`}>
         <div className="  grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-items-center gap-2 gap-y-10">
