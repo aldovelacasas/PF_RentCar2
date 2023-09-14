@@ -49,7 +49,7 @@ export async function POST(request) {
 
     const image = answer.url;
 
-    const {
+    let {
       name,
       price,
       year,
@@ -60,6 +60,10 @@ export async function POST(request) {
       transmission,
       rating,
     } = JSON.parse(data.get("data"));
+
+    if (rating == null || rating == undefined) {
+      rating = 5;
+    }
 
     const result = await conn.query("INSERT INTO product SET ?", {
       name,
