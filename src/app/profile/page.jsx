@@ -1,9 +1,13 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @next/next/no-img-element */
 "use client";
 import { useEffect, useState } from "react";
 import Alerts from "@/components/Alerts";
 import { Rubik, Poppins } from "next/font/google";
 import { validateUserForm } from "@/libs/functions";
-import { useSelector } from "react-redux/es/hooks/useSelector";
+// import { useSelector } from "react-redux/es/hooks/useSelector";
+import { useSelector } from 'react-redux';
+
 import axios from "axios";
 import { useAuth } from "@/app/context/AuthContext";
 

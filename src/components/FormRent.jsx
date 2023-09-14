@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { useState } from "react";
 import { categorias } from "@/libs/categorias.js";
 import { BiSolidCar } from "react-icons/bi";

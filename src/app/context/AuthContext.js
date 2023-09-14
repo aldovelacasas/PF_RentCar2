@@ -15,6 +15,7 @@ import {
 } from "firebase/auth";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import Loading from "../loading";
 
 const AuthContext = createContext();
 
@@ -26,6 +27,7 @@ export const useAuth = () => {
 
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const signup = async (email, password) => {
     try {
@@ -145,7 +147,7 @@ export const AuthContextProvider = ({ children }) => {
 
   const saveData = async (uid, emailUser) => {
     try {
-      await axios.post("/api/users", { uid, emailUser });
+      await axios.post(`${process.env.API_BASE_URL}/api/users`, { uid, emailUser });
     } catch (error) {
       console.error("Error al guardar usuario en la base de datos", error);
     }
@@ -155,9 +157,11 @@ export const AuthContextProvider = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
         setUser(currentUser);
+        setLoading(false);
         console.log("usuario autenticado", currentUser.getIdToken());
       } else {
         setUser(null);
+        setLoading(false);
         console.log("Usuario no autenticado");
       }
     });
@@ -174,7 +178,7 @@ export const AuthContextProvider = ({ children }) => {
         logOut,
         handleForgotPassword,
       }}>
-      {children}
+      {loading ? <Loading /> : children}
     </AuthContext.Provider>
   );
 };

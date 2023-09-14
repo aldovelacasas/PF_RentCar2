@@ -1,3 +1,6 @@
+/* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable @next/next/no-img-element */
+/* eslint-disable react/no-unescaped-entities */
 "use client";
 import { emailValidate } from "@/libs/functions.js";
 import emailjs from "@emailjs/browser";
@@ -100,6 +103,10 @@ function HomePage() {
   }
 
   function handleScrollForm() {
+    if (typeof window !== "undefined") {
+      
+    
+    
     if (window.innerWidth <= 400) {
       window.scrollTo({
         top: 230,
@@ -117,8 +124,11 @@ function HomePage() {
       });
     }
   }
-
+  }
   function handleScrollInfo() {
+    if (typeof window !== "undefined") {
+    
+    
     if (window.innerWidth <= 400) {
       window.scrollTo({
         top: 540,
@@ -136,7 +146,7 @@ function HomePage() {
       });
     }
   }
-
+  }
   function handleDateChange(e) {
     setDate({ ...dates, [e.target.name]: e.target.value });
   }

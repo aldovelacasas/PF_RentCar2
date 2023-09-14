@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { Rubik, Poppins } from "next/font/google";
 
 const fontRubik = Rubik({

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Rubik, Poppins } from "next/font/google";
 import { usuariosBorrados } from "@/libs/placeholdersAdmin";
 import { sliceData, slicePage } from "@/libs/functions";

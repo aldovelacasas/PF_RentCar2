@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable @next/next/no-img-element */
 "use client";
 import { useState } from "react";
 import emailjs from "@emailjs/browser";
@@ -19,7 +21,7 @@ const poppins = fontPoppins.className;
 const rubik = fontRubik.className;
 let message;
 
-function page() {
+function Page() {
   const inputsInitialValue = {
     name: "",
     email: "",
@@ -187,4 +189,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;

@@ -1,4 +1,5 @@
 import Image from "next/image";
+/* eslint-disable jsx-a11y/alt-text */
 
 function Loading() {
   return (

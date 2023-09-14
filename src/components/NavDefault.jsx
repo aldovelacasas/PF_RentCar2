@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable @next/next/no-img-element */
 "use client";
 import { Rubik, Poppins } from "next/font/google";
 import { usePathname } from "next/navigation";

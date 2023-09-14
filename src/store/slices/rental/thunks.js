@@ -10,7 +10,7 @@ import {
 export const getRental = (page = 0) => {
   return async (dispatch, getState) => {
     dispatch(startLoadingRentals());
-    const resp = await fetch(`http://localhost:3000/api/bookings`);
+    const resp = await fetch(`/api/bookings`);
     const data = await resp.json();
 
     dispatch(setRental({ rental: data }));
@@ -20,7 +20,7 @@ export const getRental = (page = 0) => {
 export const getUser = (page = 0) => {
   return async (dispatch, getState) => {
     dispatch(startLoadingUsers());
-    const resp = await fetch(`http://localhost:3000/api/users`);
+    const resp = await fetch(`/api/users`);
     const data = await resp.json();
 
     dispatch(setUser({ user: data }));
@@ -30,7 +30,7 @@ export const getUser = (page = 0) => {
 export const getCars = (page = 0) => {
   return async (dispatch, getState) => {
     dispatch(startLoadingCars());
-    const resp = await fetch(`http://localhost:3000/api/products`);
+    const resp = await fetch(`/api/products`);
     const data = await resp.json();
 
     dispatch(setCars({ cars: data }));

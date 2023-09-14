@@ -4,22 +4,16 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 
 async function loadProduct(id) {
-  const { data } = await axios.get(
-    `http://localhost:3000/api/products/${id}`,
-    id
-  );
-  console.log(data);
+  const { data } = await axios.get(`${process.env.API_BASE_URL}/api/products/${id}`,id);
   return await data;
 }
 
 function BookingForm({ productId }) {
-  console.log(productId);
 
   const [productID, setProductID] = useState({});
 
   useEffect(() => {
     const url = window.location.href;
-    console.log(url);
     const partes = url.split("/");
     const stringId = partes[partes.length - 1];
     const id = Number(stringId);
@@ -46,10 +40,8 @@ function BookingForm({ productId }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(booking);
 
     const res = await axios.post("/api/bookings", booking);
-    console.log(res);
     const rdo = booking;
 
     form.current.reset();
