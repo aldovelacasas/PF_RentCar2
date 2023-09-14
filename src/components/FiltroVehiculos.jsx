@@ -66,8 +66,7 @@ export default function FiltroVehiculos() {
         </label>
         <input
           type="text"
-          className={`bg-white dark:bg-dark_blanco min-w-[80px] w-[95%] rounded h-10  p-2 text-black text-xs`}
-          placeholder="Nombre Vehiculo"
+          className={`bg-white min-w-[80px] w-[95%] rounded h-10  p-2 text-black text-xs`}
           onChange={handleSearch}
         />
       </div>
