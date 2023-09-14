@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 "use client";
 
 import { useEffect, useState } from "react";
@@ -7,13 +8,13 @@ import axios from "axios";
 import CarCard from "@/components/CarCardDetail";
 
 async function loadProduct(id) {
-    const { data } = await axios.get(`http://localhost:3000/api/products/${id}`,id);
+    const { data } = await axios.get(`${process.env.API_BASE_URL}/api/products/${id}`,id);
     console.log(data);
     return await data;
   }
 
 
-function page({productId}) {
+function Page({productId}) {
 
   const [productID, setProductID] = useState({});
 
@@ -41,4 +42,4 @@ function page({productId}) {
   )
 }
 
-export default page
+export default Page

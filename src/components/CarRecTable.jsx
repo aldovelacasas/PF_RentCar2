@@ -21,13 +21,16 @@ const poppins = fontPoppins.className;
 const rubik = fontRubik.className;
 
 let pantalla;
+if (typeof window !== "undefined") {
+
+
 
 if (window.innerWidth <= 870) {
   pantalla = "chica";
 } else if (window.innerWidth > 870) {
   pantalla = "grande";
 }
-
+}
 function CarRecTable({ visible, handleAlertsVisibility }) {
   const arrowInitialState = {
     name: false,
@@ -47,6 +50,7 @@ function CarRecTable({ visible, handleAlertsVisibility }) {
 
   useEffect(() => {
     setCurrentPage(1);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [vehiculosBorrados]);
 
   let dataToShow = vehiculosBorrados;
@@ -62,6 +66,7 @@ function CarRecTable({ visible, handleAlertsVisibility }) {
 
   useEffect(() => {
     setData(sliceData(dataToShow, currentPage, quantityPerPage));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage]);
 
   let currentPages = slicePage(pages, currentPage, 2);

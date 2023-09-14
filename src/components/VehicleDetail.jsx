@@ -1,3 +1,6 @@
+/* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable @next/next/no-img-element */
+/* eslint-disable react-hooks/rules-of-hooks */
 import { Rubik, Poppins } from "next/font/google";
 import { useState, useEffect } from "react";
 import axios from "axios";

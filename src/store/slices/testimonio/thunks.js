@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const getTest = () => {
   return async (dispatch, getState) => {
-    const { data } = await axios("http://localhost:3000/api/post");
+    const { data } = await axios("/api/post");
     dispatch(setTestimonies({ testimonies: data }));
   };
 };

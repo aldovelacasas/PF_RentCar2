@@ -145,7 +145,7 @@ export const AuthContextProvider = ({ children }) => {
 
   const saveData = async (uid, emailUser) => {
     try {
-      await axios.post("/api/users", { uid, emailUser });
+      await axios.post(`${process.env.API_BASE_URL}/api/users`, { uid, emailUser });
     } catch (error) {
       console.error("Error al guardar usuario en la base de datos", error);
     }

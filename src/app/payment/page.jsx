@@ -24,7 +24,7 @@ export default function App() {
     let item = { id: "xl-tshirt", price: 80 };
     let cant = 6;
     axios
-      .post("http://localhost:3000/api/create-payment-intent", { item, cant })
+      .post(`/api/create-payment-intent`, { item, cant })
       .then(({ data }) => setClientSecret(data.clientSecret));
   }, []);
 
