@@ -11,6 +11,7 @@ import { Rubik, Poppins } from "next/font/google";
 import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
 import FormRent from "../../components/FormRent";
 import CarCardDetail from "@/components/CarCardDetail";
+import { useAuth } from "../context/AuthContext";
 
 const fontRubik = Rubik({
   weight: "600",
@@ -26,6 +27,7 @@ const rubik = fontRubik.className;
 
 function Vehiculos() {
   const dispatch = useDispatch();
+  const { user } = useAuth();
 
   const [visibility, setVisibility] = useState(false);
   const [detailVisibility, setDetailVisibility] = useState(false);
@@ -210,7 +212,7 @@ function Vehiculos() {
         </button>
       </div>
       <FormRent
-        isAuth={true}
+        isAuth={user?.displayName !== undefined}
         visible={visibility}
         car={detailData}
         handleVisible={handleVisibility}

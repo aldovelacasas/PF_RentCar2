@@ -8,8 +8,15 @@ import HelpForm from "@/components/HelpForm";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import Alerts from "@/components/Alerts";
-import MonthGraph from "@/components/MonthGraph";
+// import MonthGraph from "@/components/MonthGraph";
 import { withAuth } from "@/withAuth";
+import dynamic from "next/dynamic";
+
+
+const MonthGraph = dynamic(() => import('@/components/MonthGraph'), {
+  ssr: false, // Evitar que se cargue en el servidor
+});
+
 
 const fontRubik = Rubik({
   weight: "600",
@@ -92,13 +99,13 @@ function AdminMain() {
             className={
               !visibility.graphVisibility
                 ? `lg:px-[8em] text-center text-[1em] mb-2 bg-gris_fondo dark:bg-dark_fondo px-4 py-1 shadow-sm shadow-black hover:shadow-md cursor-pointer rounded-md hover:shadow-black active:shadow-inner active:shadow-black`
-                : `w-4/5 md:w-3/4 text-[1em] mb-2 bg-negro_fondo text-white text-center px-4 py-1 shadow-sm shadow-black hover:shadow-md cursor-pointer rounded-md hover:shadow-black active:shadow-inner active:shadow-black`
+                : `w-4/5 md:w-3/4 text-[1em] mb-2 bg-negro_fondo dark:bg-dark_blanco text-white text-center px-4 py-1 shadow-sm shadow-black hover:shadow-md cursor-pointer rounded-md hover:shadow-black active:shadow-inner active:shadow-black`
             }>
             ▼ Gráfico de rentas ▼
           </h3>
-          {typeof window !== undefined && (
+          
             <MonthGraph visible={visibility.graphVisibility} />
-          )}
+          
         </div>
         <div
           className={
@@ -111,7 +118,7 @@ function AdminMain() {
             className={
               !visibility.rentalsVisibility
                 ? `lg:px-[8em] text-center text-[1em] mb-2 bg-gris_fondo dark:bg-dark_fondo px-4 py-1 shadow-sm shadow-black hover:shadow-md cursor-pointer rounded-md hover:shadow-black active:shadow-inner active:shadow-black`
-                : `w-4/5 md:w-3/4 text-[1em] mb-2 bg-negro_fondo text-white text-center px-4 py-1 shadow-sm shadow-black hover:shadow-md cursor-pointer rounded-md hover:shadow-black active:shadow-inner active:shadow-black`
+                : `w-4/5 md:w-3/4 text-[1em] mb-2 bg-negro_fondo dark:bg-dark_blanco text-white text-center px-4 py-1 shadow-sm shadow-black hover:shadow-md cursor-pointer rounded-md hover:shadow-black active:shadow-inner active:shadow-black`
             }>
             ▼ Vehículos en renta ▼
           </h3>
@@ -128,7 +135,7 @@ function AdminMain() {
             className={
               !visibility.vehiclesVisibility
                 ? `lg:px-[8em] text-center text-[1em] mb-2 bg-gris_fondo dark:bg-dark_fondo px-4 py-1 shadow-sm shadow-black hover:shadow-md cursor-pointer rounded-md hover:shadow-black active:shadow-inner active:shadow-black`
-                : `w-4/5 md:w-3/4 text-[1em] mb-2 bg-negro_fondo text-white text-center px-4 py-1 shadow-sm shadow-black hover:shadow-md cursor-pointer rounded-md hover:shadow-black active:shadow-inner active:shadow-black`
+                : `w-4/5 md:w-3/4 text-[1em] mb-2 bg-negro_fondo dark:bg-dark_blanco text-white text-center px-4 py-1 shadow-sm shadow-black hover:shadow-md cursor-pointer rounded-md hover:shadow-black active:shadow-inner active:shadow-black`
             }>
             ▼ Administrar vehículos ▼
           </h3>
@@ -148,7 +155,7 @@ function AdminMain() {
             className={
               !visibility.formVisibility
                 ? `lg:px-[8em] text-center text-[1em] mb-2 bg-gris_fondo dark:bg-dark_fondo px-4 py-1 shadow-sm shadow-black hover:shadow-md cursor-pointer rounded-md hover:shadow-black active:shadow-inner active:shadow-black`
-                : `w-4/5 md:w-3/4 text-[1em] mb-2 bg-negro_fondo text-white text-center px-4 py-1 shadow-sm shadow-black hover:shadow-md cursor-pointer rounded-md hover:shadow-black active:shadow-inner active:shadow-black`
+                : `w-4/5 md:w-3/4 text-[1em] mb-2 bg-negro_fondo dark:bg-dark_blanco text-white text-center px-4 py-1 shadow-sm shadow-black hover:shadow-md cursor-pointer rounded-md hover:shadow-black active:shadow-inner active:shadow-black`
             }>
             ▼ Solicitar ayuda ▼
           </h3>

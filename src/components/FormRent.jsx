@@ -47,7 +47,9 @@ function FormRent({
   let router = useRouter();
 
   function handleLogin() {
-    document.body.classList.toggle("stopScroll");
+    if (document.body.classList.length > 1) {
+      document.body.classList.remove("stopScroll");
+    }
     router.push("/login");
   }
 
