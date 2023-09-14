@@ -21,7 +21,7 @@ const poppins = fontPoppins.className;
 const rubik = fontRubik.className;
 
 async function getCars() {
-  const { data } = await axios("/api/products");
+  const { data } = await axios(`${process.env.API_BASE_URL}/api/products`);
 
   const cars = [];
   data.map((car) => {
