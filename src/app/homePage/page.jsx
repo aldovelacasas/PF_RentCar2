@@ -19,6 +19,11 @@ import { BiSolidCar } from "react-icons/bi";
 import { Rubik, Poppins } from "next/font/google";
 import { useRouter } from "next/navigation.js";
 
+
+
+import React from 'react';
+import WhatsAppButton from "@/components/whatsAppButton.jsx";
+
 const fontRubik = Rubik({
   weight: "600",
   subsets: ["latin"],
@@ -185,6 +190,7 @@ function HomePage() {
   }
 
   return (
+
     <div className="grid bg-gris_frente dark:bg-dark_frente md:text-[1.5em] text-black dark:text-white overflow-x-hidden">
       <header
         className={`bg-gris_fondo dark:bg-dark_fondo relative ${rubik} text-[1em] sm:text-[1.5em]  pl-[10%] space-y-0 space-x-2.5`}>
@@ -205,6 +211,7 @@ function HomePage() {
         <p className={`${poppins} text-[0.6em] mt-2 z-3`}>
           Renta el auto de tus sueños con precios imbatibles,
         </p>
+      <WhatsAppButton />
         <p className={`${poppins} text-[0.6em] pb-4`}>
           km ilimitados, opciones flexibles y mucho más.
         </p>
