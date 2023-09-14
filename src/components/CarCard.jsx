@@ -20,7 +20,7 @@ export default function CarCard({ car, handleVisibility, handleDetail }) {
   return (
     <div
       key={car.id}
-      className=" bg-white w-[290px] md:w-[28vw] lg:w-[22vw] shadow-sm shadow-black hover:cursor-pointer hover:scale-105 transform transition-transform duration-200 border rounded-md hover:shadow-md hover:shadow-black">
+      className=" bg-white dark:bg-dark_blanco w-[290px] md:w-[28vw] lg:w-[22vw] shadow-sm shadow-black hover:cursor-pointer hover:scale-105 transform transition-transform duration-200 border rounded-md hover:shadow-md hover:shadow-black text-black dark:text-white">
       <main onClick={() => handleDetail(car)} className="group relative">
         <div className="absolute w-full h-0 bg-[#525252cc] items-center justify-center rounded-t-md group-hover:h-full flex group-hover:ease-in-out group-hover:duration-[350ms]">
           <p className="text-white hidden text-center group-hover:block">

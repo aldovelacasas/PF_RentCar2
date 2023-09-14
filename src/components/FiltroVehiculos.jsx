@@ -58,14 +58,14 @@ export default function FiltroVehiculos() {
 
   return (
     <form
-      className={`pt-2 text-[0.8em] bg-negro_fondo pb-5 rounded-xl  w-[95%] mx-auto pl-4 justify-center items-center space-y-2 sm:space-y-0 sm:flex sm:flex-wrap`}>
+      className={`pt-2 text-[0.8em] bg-negro_fondo pb-5 rounded-xl  w-[95%] mx-auto pl-4 justify-center items-center space-y-2 sm:space-y-0 sm:flex sm:flex-wrap text-black dark:text-white`}>
       <div className={`flex  flex-col  sm:w-[20%] w-full`}>
         <label htmlFor="busqueda" className={`text-[1rem] text-white mb-1`}>
           Búsqueda
         </label>
         <input
           type="text"
-          className={`bg-white min-w-[80px] w-[95%] rounded h-10  p-2 text-black text-xs`}
+          className={`bg-white dark:bg-dark_blanco min-w-[80px] w-[95%] rounded h-10  p-2 text-black text-xs`}
           placeholder="Nombre Vehiculo"
           onChange={handleSearch}
         />

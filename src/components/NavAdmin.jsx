@@ -1,6 +1,7 @@
 "use client";
 import { Rubik, Poppins } from "next/font/google";
 import { usePathname } from "next/navigation";
+import { BsFillBrightnessHighFill, BsFillMoonStarsFill } from "react-icons/bs";
 
 const fontRubik = Rubik({
   weight: "600",
@@ -21,74 +22,93 @@ import { useAuth } from "@/app/context/AuthContext";
 import Link from "next/link";
 
 export default function NavUser({ userName, userPhoto }) {
+  const [dark, setDark] = useState(false);
   const [navActive, setNavActive] = useState(false);
   const { logOut } = useAuth();
 
   const route = usePathname();
 
+  function handleDarkMode() {
+    document.body.classList.toggle("dark");
+    setDark(!dark);
+  }
+
   return (
-    <nav
-      className={` ${rubik} sticky top-0 w-full z-20 lg:text-[1.5em] flex flex-wrap justify-between content-center px-5 py-4`}>
-      <div className="flex gap-8 ">
-        <Link href="/homePage">
-          <img
-            href="/homePage"
-            src="https://drive.google.com/uc?export=download&id=1xRyrzCMxPuU6OX97500cJd7M7Veh0KXR"
-            className="border-black border-[1.5px] rounded-sm w-[80px] md:w-[150px]"
-          />
-        </Link>
-      </div>
-      <div
-        onClick={() => setNavActive(!navActive)}
-        className={
-          "md:hidden flex flex-col p-[10px] rounded-full hover:bg-slate-400 cursor-pointer"
-        }>
-        <div className="bg-black w-[45px] h-[6px] p-0 m-0 mb-[6px] mt-[6px]" />
-        <div className="bg-black w-[45px] h-[6px] p-0 m-0 mb-[6px]" />
-        <div className="bg-black w-[45px] h-[6px] p-0 m-0 mb-[6px]" />
-      </div>
-      <section
-        className={
-          navActive
-            ? "flex flex-col gap-8 h-full bg-white fixed top-[95px] right-0 w-3/5 pl-8 pt-8"
-            : "md:flex md:gap-4 lg:gap-8 md:mr-3 hidden items-center"
-        }>
-        <li
-          className={
-            route === "/AdminConsole"
-              ? "list-none text-naranja_enf underline "
-              : "list-none hover:text-naranja_enf transition ease-in-out duration-300  "
-          }>
-          <Link href="/AdminConsole">Consola</Link>
-        </li>
-
-        <li
-          className={
-            route === "/AdminConsole/Recoveries"
-              ? "list-none text-naranja_enf underline"
-              : "list-none hover:text-naranja_enf transition ease-in-out duration-300 "
-          }>
-          <Link href="/AdminConsole/Recoveries">Recuperaciones</Link>
-        </li>
-
-        <div className="flex items-center">
-          <a href="/profile">
+    <>
+      <nav
+        className={` ${rubik} sticky text-black dark:text-white top-0 w-full z-20 lg:text-[1.5em] flex flex-wrap justify-between content-center px-5 py-4`}>
+        <div className="flex gap-8 ">
+          <Link href="/homePage">
             <img
-              src={userPhoto}
-              alt={userName}
-              className="w-14 h-14 object-fill rounded-full mr-2"
+              href="/homePage"
+              src="https://drive.google.com/uc?export=download&id=1xRyrzCMxPuU6OX97500cJd7M7Veh0KXR"
+              className="border-black border-[1.5px] rounded-sm w-[80px] md:w-[150px]"
             />
-          </a>
-          <div className="">
-            <span className="block w-full text-sm pb-1">Hola, {userName}</span>
-            <button
-              onClick={logOut}
-              className=" block w-full bg-naranja_enf hover:bg-negro_fondo text-white text-xs font-bold py-1 px-2 rounded focus:outline-none focus:shadow-outline">
-              Cerrar sesión
-            </button>
-          </div>
+          </Link>
         </div>
-      </section>
-    </nav>
+        <div
+          onClick={() => setNavActive(!navActive)}
+          className={
+            "md:hidden flex flex-col p-[10px] rounded-full hover:bg-slate-400 cursor-pointer"
+          }>
+          <div className="bg-black w-[45px] h-[6px] p-0 m-0 mb-[6px] mt-[6px]" />
+          <div className="bg-black w-[45px] h-[6px] p-0 m-0 mb-[6px]" />
+          <div className="bg-black w-[45px] h-[6px] p-0 m-0 mb-[6px]" />
+        </div>
+        <section
+          className={
+            navActive
+              ? "flex flex-col gap-8 h-full bg-white dark:bg-dark_blanco fixed top-[95px] right-0 w-3/5 pl-8 pt-8"
+              : "md:flex md:gap-4 lg:gap-8 md:mr-3 hidden items-center"
+          }>
+          <li
+            className={
+              route === "/AdminConsole"
+                ? "list-none text-naranja_enf underline "
+                : "list-none hover:text-naranja_enf transition ease-in-out duration-300  "
+            }>
+            <Link href="/AdminConsole">Consola</Link>
+          </li>
+
+          <li
+            className={
+              route === "/AdminConsole/Recoveries"
+                ? "list-none text-naranja_enf underline"
+                : "list-none hover:text-naranja_enf transition ease-in-out duration-300 "
+            }>
+            <Link href="/AdminConsole/Recoveries">Recuperaciones</Link>
+          </li>
+
+          <div className="flex items-center">
+            <a href="/profile">
+              <img
+                src={userPhoto}
+                alt={userName}
+                className="w-14 h-14 object-fill rounded-full mr-2"
+              />
+            </a>
+            <div className="">
+              <span className="block w-full text-sm pb-1">
+                Hola, {userName}
+              </span>
+              <button
+                onClick={logOut}
+                className=" block w-full bg-naranja_enf hover:bg-negro_fondo text-white text-xs font-bold py-1 px-2 rounded focus:outline-none focus:shadow-outline">
+                Cerrar sesión
+              </button>
+            </div>
+          </div>
+        </section>
+      </nav>
+      <button
+        onClick={handleDarkMode}
+        className={`absolute top-[80px] right-2 p-4 py-2 dark:bg-gris_fondo bg-dark_fondo rounded-sm shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
+        {dark ? (
+          <BsFillBrightnessHighFill className="text-black" />
+        ) : (
+          <BsFillMoonStarsFill className="text-white" />
+        )}
+      </button>
+    </>
   );
 }

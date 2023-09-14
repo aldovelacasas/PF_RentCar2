@@ -118,13 +118,13 @@ function VehicleDetail({
 
   return (
     <div
-      className={` ${poppins} fixed w-[100vw] top-0 left-0 pt-[15vh] h-[100vh] flex justify-center bg-[#dbdbdbcc] z-40`}>
-      <figure className=" w-full md:w-4/5 lg:w-3/4 max-h-[75vh] place-items-center bg-white max-w-[1000px] shadow-md shadow-black hover:cursor-pointer border border-solid border-negro_fondo grid">
+      className={` ${poppins} fixed w-[100vw] text-black dark:text-white top-0 left-0 pt-[15vh] h-[100vh] flex justify-center bg-[#dbdbdbcc] z-40`}>
+      <figure className=" w-full md:w-4/5 lg:w-3/4 max-h-[75vh] place-items-center bg-white dark:bg-dark_blanco max-w-[1000px] shadow-md shadow-black hover:cursor-pointer border border-solid border-negro_fondo grid">
         <h3
           className={`${rubik} w-1/2 text-center py-1 bg-negro_fondo text-white rounded-full mb-2`}>
           Vehículo #{data.id}
         </h3>
-        <form className="bg-gris_fondo lg:w-1/2 px-6 rounded-2xl overflow-y-scroll max-h-[420px] py-3">
+        <form className="bg-gris_fondo dark:bg-dark_fondo lg:w-1/2 px-6 rounded-2xl overflow-y-scroll max-h-[420px] py-3">
           <fieldset className="grid place-content-center">
             <img src={imageRender} className="max-h-[200px]" />
             <br />

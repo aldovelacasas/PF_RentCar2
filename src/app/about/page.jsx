@@ -21,9 +21,9 @@ const rubik = fontRubik.className;
 
 function AboutPage() {
   return (
-    <div className="grid bg-gris_frente md:text-[1.5em]">
+    <div className="grid bg-gris_frente dark:bg-dark_frente md:text-[1.5em] text-black dark:text-white">
       <header
-        className={`bg-gris_fondo flex items-center h-[175px] ${rubik} text-[1em] sm:text-[1.5em] pl-[10%] space-y-0 space-x-2.5`}>
+        className={`bg-gris_fondo dark:bg-dark_fondo flex items-center h-[175px] ${rubik} text-[1em] sm:text-[1.5em] pl-[10%] space-y-0 space-x-2.5`}>
         <p className={`text-[1.2em] mt-2 pl-4`}>Nuestro Equipo</p>
         <img
           src="https://drive.google.com/uc?export=download&id=1NW9G16ClvYbufG9oBwPhKfgqBc_zg8r0"
@@ -31,7 +31,7 @@ function AboutPage() {
         />
       </header>
       <section
-        className={`pt-4 ${poppins} mx-[auto] w-3/4 text-[0.8em] bg-gris_frente pb-10 mt-8 sm:text-[1.5em]`}>
+        className={`pt-4 ${poppins} mx-[auto] w-3/4 text-[0.8em] bg-gris_frente dark:bg-dark_frente pb-10 mt-8 sm:text-[1.5em]`}>
         <p className={`text-[0.8em] ${rubik} text-center`}>¿Quiénes somos?</p>
         <p className={`text-[1em] ${rubik} text-center`}>Auto Connect</p>
         <p className="pt-4 mb-2 px-8 text-[0.8em]">
@@ -91,7 +91,7 @@ function AboutPage() {
             return (
               <figure
                 key={i.nombre}
-                className="rounded-md p-2 shadow-md shadow-black flex flex-col flex-wrap bg-white h-fit">
+                className="rounded-md p-2 shadow-md shadow-black flex flex-col flex-wrap bg-white dark:bg-dark_blanco h-fit">
                 <img
                   src={i.imagen}
                   alt={`perfil de ${i.nombre}`}

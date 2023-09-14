@@ -113,7 +113,7 @@ function OpinionForm({ cars }) {
   return (
     <div className={`bg-gray-400 flex flex-col items-center justify-center`}>
       {!isUser() ? (
-        <div className="z-10 absolute bg-white sm:p-4 p-2 sm:m-auto m-2 rounded-xl border-black border-2 flex flex-col items-center shadow-sm shadow-black !important">
+        <div className="z-10 absolute bg-white dark:bg-dark_blanco sm:p-4 p-2 sm:m-auto m-2 rounded-xl border-black border-2 flex flex-col items-center shadow-sm shadow-black !important">
           <h3 className={`${bigrubik} text-2xl mb-2 text-center`}>
             Inicia Sesión para dejar tu testimonio
           </h3>
@@ -145,7 +145,7 @@ function OpinionForm({ cars }) {
           onChange={handleChange}
           name="car"
           defaultValue={"Seleccionar"}
-          className="w-full py-2 px-3 mb-3 bg-white">
+          className="w-full py-2 px-3 mb-3 bg-white dark:bg-dark_blanco">
           <option value="Seleccionar" disabled>
             Seleccionar auto
           </option>

@@ -173,12 +173,12 @@ function RentalsTable({ visible }) {
 
   if (visible === false) return null;
   return (
-    <section className="text-[10px] sm:text-[12px] md:text-[16px]">
-      <figure className="bg-white grid place-content-center sm:px-2 md:px-8 py-4 rounded-2xl">
+    <section className="text-[10px] sm:text-[12px] md:text-[16px] text-black dark:text-white">
+      <figure className="bg-white dark:bg-dark_blanco grid place-content-center sm:px-2 md:px-8 py-4 rounded-2xl">
         <h3 className="text-[1.2em]">
           Rentas
           <span
-            className={`${poppins} text-[0.8em] bg-gris_fondo ml-2 py-1 px-2 rounded-full`}>
+            className={`${poppins} text-[0.8em] bg-gris_fondo dark:bg-dark_fondo ml-2 py-1 px-2 rounded-full`}>
             {dataToShow?.length}
           </span>
         </h3>
@@ -202,32 +202,32 @@ function RentalsTable({ visible }) {
           </select>
         </div>
 
-        <table className={`${poppins} bg-white mt-6`}>
+        <table className={`${poppins} bg-white dark:bg-dark_blanco mt-6`}>
           <tbody className="">
             <tr className="">
               <th
                 onClick={() => handleSort("id")}
-                className={`${rubik} sm:px-2 md:px-4 md:min-w-[80px] text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
+                className={`${rubik} sm:px-2 md:px-4 md:min-w-[80px] text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo dark:bg-dark_fondo`}>
                 {arrow.id ? "#Id ▼" : "#Id"}
               </th>
               <th
                 onClick={() => handleSort("user")}
-                className={`${rubik} hidden sm:inline sm:px-1 md:px-4 md:min-w-[160px] lg:min-w-[200px] text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
+                className={`${rubik} hidden sm:inline sm:px-1 md:px-4 md:min-w-[160px] lg:min-w-[200px] text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo dark:bg-dark_fondo`}>
                 {arrow.user ? "Usuario ▼" : "Usuario"}
               </th>
               <th
                 onClick={() => handleSort("vehicle")}
-                className={`${rubik} sm:px-1 md:px-4 md:min-w-[175px] text-left lg:min-w-[200px] hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
+                className={`${rubik} sm:px-1 md:px-4 md:min-w-[175px] text-left lg:min-w-[200px] hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo dark:bg-dark_fondo`}>
                 {arrow.vehicle ? "Vehiculo ▼" : "Vehiculo"}
               </th>
               <th
                 onClick={() => handleSort("status")}
-                className={`${rubik} sm:px-1 md:px-4 md:min-w-[150px] text-left lg:min-w-[150px] hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
+                className={`${rubik} sm:px-1 md:px-4 md:min-w-[150px] text-left lg:min-w-[150px] hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo dark:bg-dark_fondo`}>
                 {arrow.status ? "Estado ▼" : "Estado"}
               </th>
               <th
                 onClick={() => handleSort("monto")}
-                className={`${rubik} hidden md:inline px-1 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
+                className={`${rubik} hidden md:inline px-1 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo dark:bg-dark_fondo`}>
                 {arrow.monto ? "Monto ▼" : "Monto"}
               </th>
               <th className={`${rubik} px-1 md:px-4 text-left`}>Detalle</th>
@@ -248,8 +248,8 @@ function RentalsTable({ visible }) {
                   key={d.id}
                   className={
                     ultimo
-                      ? "hover:bg-gris_frente "
-                      : "border-b-2 hover:bg-gris_frente "
+                      ? "hover:bg-gris_frente dark:bg-dark_frente "
+                      : "border-b-2 hover:bg-gris_frente dark:bg-dark_frente "
                   }>
                   <td className=" p-4">{d.id}</td>
                   <td className=" p-4 hidden md:inline">{d.user}</td>
@@ -348,7 +348,7 @@ function RentalsTable({ visible }) {
       </div>
       <p className="text-1.2em text-center pb-8">
         Total del mes:{" "}
-        <span className="bg-white px-4 py-1 border-2 border-black">
+        <span className="bg-white dark:bg-dark_blanco px-4 py-1 border-2 border-black">
           ${total.toLocaleString()}
         </span>
       </p>

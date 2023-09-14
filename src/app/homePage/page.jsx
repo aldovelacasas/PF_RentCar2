@@ -175,9 +175,9 @@ function HomePage() {
   }
 
   return (
-    <div className="grid bg-gris_frente md:text-[1.5em] overflow-x-hidden">
+    <div className="grid bg-gris_frente dark:bg-dark_frente md:text-[1.5em] text-black dark:text-white overflow-x-hidden">
       <header
-        className={`bg-gris_fondo relative ${rubik} text-[1em] sm:text-[1.5em]  pl-[10%] space-y-0 space-x-2.5`}>
+        className={`bg-gris_fondo dark:bg-dark_fondo relative ${rubik} text-[1em] sm:text-[1.5em]  pl-[10%] space-y-0 space-x-2.5`}>
         <img
           src="/camionetahome.png"
           className=" float-right w-[50vw] absolute right-[-15%] scale-x-[-1] top-0 z-1"
@@ -226,7 +226,7 @@ function HomePage() {
           </label>
           <br />
           <select
-            className="bg-gris_fondo w-[200px] mb-4 text-[0.9em] md:w-[500px]"
+            className="bg-gris_fondo dark:bg-dark_fondo w-[200px] mb-4 text-[0.9em] md:w-[500px]"
             name="category"
             onChange={handleOption}>
             {categorias.map((c) => (
@@ -242,7 +242,7 @@ function HomePage() {
           </label>
           <br />
           <input
-            className="bg-gris_fondo w-[200px] mb-4 text-[0.9em] md:w-[500px]"
+            className="bg-gris_fondo dark:bg-dark_fondo w-[200px] mb-4 text-[0.9em] md:w-[500px]"
             name="startDate"
             type="date"
             min={today}
@@ -258,7 +258,7 @@ function HomePage() {
           </label>
           <br />
           <input
-            className="bg-gris_fondo w-[200px] text-[0.9em] md:w-[500px]"
+            className="bg-gris_fondo dark:bg-dark_fondo w-[200px] text-[0.9em] md:w-[500px]"
             name="endDate"
             type="date"
             min={dates.startDate}
@@ -277,7 +277,7 @@ function HomePage() {
         </button>
       </form>
       <section
-        className={`pt-4 ${poppins} mx-[auto] text-[0.8em] bg-gris_frente pb-12 sm:text-[1.2em] grid`}>
+        className={`pt-4 ${poppins} mx-[auto] text-[0.8em] bg-gris_frente dark:bg-dark_frente pb-12 sm:text-[1.2em] grid`}>
         <p className={`text-[0.8em] ${rubik} mb-2 text-center`}>
           Planea tu viaje
         </p>
@@ -322,7 +322,7 @@ function HomePage() {
         </div>
       </section>
       <section
-        className={`pt-4 ${rubik} w-4/5 grid mx-[auto] text-[0.8em] bg-gris_frente pb-12 sm:text-[1.2em]`}>
+        className={`pt-4 ${rubik} w-4/5 grid mx-[auto] text-[0.8em] bg-gris_frente dark:bg-dark_frente pb-12 sm:text-[1.2em]`}>
         <p className={`text-[0.8em] mb-2 text-center`}>Planea tu viaje</p>
         <p className={`text-[1em] mb-2 text-center`}>
           Alquila tu auto fácil y rápido
@@ -354,7 +354,7 @@ function HomePage() {
         </p>
       </section>
       <section
-        className={` w-3/4 pt-4 ${rubik} mx-[auto] text-[0.8em] bg-gris_frente mt-8 pb-12 sm:text-[1.2em] grid`}>
+        className={` w-3/4 pt-4 ${rubik} mx-[auto] text-[0.8em] bg-gris_frente dark:bg-dark_frente mt-8 pb-12 sm:text-[1.2em] grid`}>
         <p>¿Por qué rentar con nosotros?</p>
         <p className="text-2xl md:text-[1.9em] md:leading-[1.2em]">
           Contamos el vehículo que necesitas al
@@ -409,7 +409,7 @@ function HomePage() {
         </div>
       </section>
       <section
-        className={`pt-8 px-5 ${rubik} mx-[auto] text-[0.8em] bg-gris_fondo rounded-3xl shadow-sm shadow-black pb-12 w-3/4`}>
+        className={`pt-8 px-5 ${rubik} mx-[auto] text-[0.8em] bg-gris_fondo dark:bg-dark_fondo rounded-3xl shadow-sm shadow-black pb-12 w-3/4`}>
         <p className="text-center md:text-[1.3em]">Prueba Social</p>
         <p className="text-2xl md:text-[1.5em] text-center pb-4 md:pb-8">
           Lee las reseñas de otros clientes
@@ -419,7 +419,7 @@ function HomePage() {
           corroborar nuestro excelentísimo servicio.
         </p>
         <div
-          className={`bg-white ${rubik}  p-8 shadow-sm shadow-black rounded-xl mb-4`}>
+          className={`bg-white dark:bg-dark_blanco ${rubik}  p-8 shadow-sm shadow-black rounded-xl mb-4`}>
           <p>
             "Nunca habíamos rentado un auto antes, pero luego de haber puesto
             nuestro voto de confianza en esta página, es una experiencia que
@@ -440,7 +440,7 @@ function HomePage() {
           </div>
         </div>
         <div
-          className={`bg-white ${rubik}  p-8 shadow-sm shadow-black rounded-xl`}>
+          className={`bg-white dark:bg-dark_blanco ${rubik}  p-8 shadow-sm shadow-black rounded-xl`}>
           <p>
             "Después de estas últimas vacaciones me sentí tan libre que me
             gustaría poder recomendarle a todos una aventura igual a la mía. De
@@ -462,13 +462,13 @@ function HomePage() {
         </div>
       </section>
       <section
-        className={`pt-8 px-5 ${rubik} mx-[auto] text-[0.8em] md:mt-[60px] w-3/4 bg-gris_frente pb-12 sm:text-[1.2em]`}>
+        className={`pt-8 px-5 ${rubik} mx-[auto] text-[0.8em] md:mt-[60px] w-3/4 bg-gris_frente dark:bg-dark_frente pb-12 sm:text-[1.2em]`}>
         <p className="text-center">FAQ</p>
         <p className="text-2xl text-center pb-4 md:text-[1.2em]  md:mb-[60px]">
           Preguntas Frecuentes
         </p>
-        <table className="bg-white shadow-md shadow-black md:mb-8">
-          <tbody className="[&>*:nth-child(odd)]:bg-[#ea4e398a] bg-white">
+        <table className="bg-white dark:bg-dark_blanco shadow-md shadow-black md:mb-8">
+          <tbody className="[&>*:nth-child(odd)]:bg-[#ea4e398a] bg-white dark:bg-dark_blanco">
             <tr
               onClick={() => handleCollapse("One")}
               className="cursor-pointer hover:text-blue-600 ">
@@ -529,7 +529,7 @@ function HomePage() {
         </table>
       </section>
       <form
-        className={`pt-2 ${poppins} text-[0.8em]  md:text-[1.2em] bg-gris_fondo  sm:px-[15%] px-4 pb-4  sm:py-[25px] md:py-[50px]`}>
+        className={`pt-2 ${poppins} text-[0.8em]  md:text-[1.2em] bg-gris_fondo dark:bg-dark_fondo  sm:px-[15%] px-4 pb-4  sm:py-[25px] md:py-[50px]`}>
         <p className={`${rubik} text-2xl  md:text-[1.3em]  md:pt-6`}>
           Suscríbete
         </p>

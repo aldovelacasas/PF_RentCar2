@@ -21,7 +21,7 @@ function convertirATitulo(cadena) {
 
 function TestCard({ name, description, profession, rating, image }) {
   return (
-    <div className="p-4 my-5 border border-gray-300 sm:mx-20 rounded-md max-w-[80%] lg:w-[60%] bg-gris_fondo shadow-gray-400 shadow-sm hover:shadow-black transition duration-700 ease-in-out">
+    <div className="p-4 my-5 border border-gray-300 sm:mx-20 rounded-md max-w-[80%] lg:w-[60%] bg-gris_fondo dark:bg-dark_fondo shadow-gray-400 shadow-sm hover:shadow-black transition duration-700 ease-in-out">
       <h4
         className={`text-sm mb-2  italic ${poppins}`}>{`"${description}"`}</h4>
       <div className="flex justify-between items-center space-x-3">

@@ -59,29 +59,29 @@ function Recoveries() {
     return null;
   }
   return (
-    <div className="grid bg-gris_frente overflow-x-hidden">
+    <div className="grid bg-gris_frente dark:bg-dark_frente overflow-x-hidden text-black dark:text-white">
       <header
-        className={`bg-gris_fondo relative ${rubik} space-y-0 space-x-2.5 p-10 md:text-[1.4em] h-[175px] flex items-center overflow-x-clip`}>
+        className={`bg-gris_fondo dark:bg-dark_fondo relative ${rubik} space-y-0 space-x-2.5 p-10 md:text-[1.4em] h-[175px] flex items-center overflow-x-clip`}>
         <h1 className=" text-[1.2em] sm:text-[2em]  leading-6 pl-6">
           Consola de administración
         </h1>
       </header>
       <main
-        className={`pt-4 ${rubik} mx-[auto] text-[0.8em] bg-gris_frente pb-12 sm:text-[1.2em] grid gap-[12px]`}>
+        className={`pt-4 ${rubik} mx-[auto] text-[0.8em] bg-gris_frente dark:bg-dark_frente pb-12 sm:text-[1.2em] grid gap-[12px]`}>
         <h2 className="text-[1.5em] pl-2">
           Recuperación de elementos eliminados
         </h2>
         <div
           className={
             visibility.rentalsVisibility
-              ? "bg-gris_fondo px-2 rounded-2xl break-words grid place-items-center"
+              ? "bg-gris_fondo dark:bg-dark_fondo px-2 rounded-2xl break-words grid place-items-center"
               : ""
           }>
           <h3
             onClick={() => handleVisibility("rentalsVisibility")}
             className={
               !visibility.rentalsVisibility
-                ? `lg:px-[8em] text-center text-[1em] mb-2 bg-gris_fondo px-4 py-1 shadow-sm shadow-black hover:shadow-md cursor-pointer rounded-md hover:shadow-black active:shadow-inner active:shadow-black`
+                ? `lg:px-[8em] text-center text-[1em] mb-2 bg-gris_fondo dark:bg-dark_fondo px-4 py-1 shadow-sm shadow-black hover:shadow-md cursor-pointer rounded-md hover:shadow-black active:shadow-inner active:shadow-black`
                 : `w-4/5 md:w-3/4 text-[1em] mb-2 bg-negro_fondo text-white text-center px-4 py-1 shadow-sm shadow-black hover:shadow-md cursor-pointer rounded-md hover:shadow-black active:shadow-inner active:shadow-black`
             }>
             ▼ Vehículos dados de baja ▼
@@ -94,14 +94,14 @@ function Recoveries() {
         <div
           className={
             visibility.vehiclesVisibility
-              ? "bg-gris_fondo pb-2 rounded-2xl grid place-items-center lg:pb-6"
+              ? "bg-gris_fondo dark:bg-dark_fondo pb-2 rounded-2xl grid place-items-center lg:pb-6"
               : ""
           }>
           <h3
             onClick={() => handleVisibility("vehiclesVisibility")}
             className={
               !visibility.vehiclesVisibility
-                ? `lg:px-[8em] text-center text-[1em] mb-2 bg-gris_fondo px-4 py-1 shadow-sm shadow-black hover:shadow-md cursor-pointer rounded-md hover:shadow-black active:shadow-inner active:shadow-black`
+                ? `lg:px-[8em] text-center text-[1em] mb-2 bg-gris_fondo dark:bg-dark_fondo px-4 py-1 shadow-sm shadow-black hover:shadow-md cursor-pointer rounded-md hover:shadow-black active:shadow-inner active:shadow-black`
                 : `w-4/5 md:w-3/4 text-[1em] mb-2 bg-negro_fondo text-white text-center px-4 py-1 shadow-sm shadow-black hover:shadow-md cursor-pointer rounded-md hover:shadow-black active:shadow-inner active:shadow-black`
             }>
             ▼ Usuarios dados de baja ▼
@@ -114,7 +114,7 @@ function Recoveries() {
         <div
           className={
             visibility.formVisibility
-              ? "bg-gris_fondo pb-2 rounded-2xl grid place-items-center lg:pb-6"
+              ? "bg-gris_fondo dark:bg-dark_fondo pb-2 rounded-2xl grid place-items-center lg:pb-6"
               : ""
           }>
           <h3
@@ -122,7 +122,7 @@ function Recoveries() {
             handleAlertsVisibility={handleAlertsVisibility}
             className={
               !visibility.formVisibility
-                ? `lg:px-[8em] text-center text-[1em] mb-2 bg-gris_fondo px-4 py-1 shadow-sm shadow-black hover:shadow-md cursor-pointer rounded-md hover:shadow-black active:shadow-inner active:shadow-black`
+                ? `lg:px-[8em] text-center text-[1em] mb-2 bg-gris_fondo dark:bg-dark_fondo px-4 py-1 shadow-sm shadow-black hover:shadow-md cursor-pointer rounded-md hover:shadow-black active:shadow-inner active:shadow-black`
                 : `w-4/5 md:w-3/4 text-[1em] mb-2 bg-negro_fondo text-white text-center px-4 py-1 shadow-sm shadow-black hover:shadow-md cursor-pointer rounded-md hover:shadow-black active:shadow-inner active:shadow-black`
             }>
             ▼ Solicitar ayuda ▼
