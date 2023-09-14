@@ -130,7 +130,7 @@ function ProductForm() {
 
   return (
     <form
-      className="bg-white shadow-md rounded-md px-4 sm:px-8 pt-4 pb-4 my-10"
+      className="bg-white text-black dark:text-white dark:bg-dark_blanco shadow-md rounded-md px-4 sm:px-8 pt-4 pb-4 my-10"
       onSubmit={handleSubmit}
       ref={form}>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">

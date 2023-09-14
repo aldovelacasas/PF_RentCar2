@@ -101,15 +101,15 @@ function Profile() {
   };
 
   return (
-    <div className="grid bg-gris_frente md:text-[1.5em] lg:text-[2em]">
+    <div className="grid text-black dark:text-white bg-gris_frente dark:bg-dark_frente md:text-[1.5em] lg:text-[2em]">
       <header
-        className={`bg-gris_fondo flex items-center h-[175px] ${rubik} text-[1em] md:text-[1.5em] pl-[10%] space-y-0 space-x-2.5`}>
+        className={`bg-gris_fondo dark:bg-dark_fondo flex items-center h-[175px] ${rubik} text-[1em] md:text-[1.5em] pl-[10%] space-y-0 space-x-2.5`}>
         <p className={`text-[1em] mt-2 pl-4`}>Perfil</p>
       </header>
-      <main className="bg-white rounded-2xl w-4/5 place-self-center py-6">
+      <main className="bg-white dark:bg-dark_blanco rounded-2xl w-4/5 place-self-center py-6">
         <h1 className={`${rubik} text-[1.5em] pl-[10%]`}>{inputs.nombre}</h1>
         <div className="flex flex-col gap-8 items-center">
-          <section className="w-4/5 bg-gris_fondo rounded-2xl flex flex-wrap justify-between p-8">
+          <section className="w-4/5 bg-gris_fondo dark:bg-dark_fondo rounded-2xl flex flex-wrap justify-between p-8">
             <h3 className="shrink-0 w-full font-bold mb-2 text-[1.2em]">
               Información de la cuenta:
             </h3>
@@ -117,7 +117,7 @@ function Profile() {
               <img
                 src={inputs.imagen}
                 alt={`Imagen de perfil de ${inputs.nombre}`}
-                className="w-[200px] h-[200px] object-fill rounded-full bg-white mb-6 mx-[auto]"
+                className="w-[200px] h-[200px] object-fill rounded-full bg-white dark:bg-dark_blanco mb-6 mx-[auto]"
               />
               <input
                 type="file"
@@ -127,7 +127,7 @@ function Profile() {
                 onChange={imageChange}></input>
               <button
                 onClick={handleImage}
-                className={` bg-negro_fondo ${rubik} text-white text-[0.8em] px-4 rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
+                className={` bg-negro_fondo dark:bg-dark_blanco ${rubik} text-white text-[0.8em] px-4 rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
                 Cambiar foto de perfil
               </button>
             </div>
@@ -144,7 +144,7 @@ function Profile() {
                 <span className="font-bold">Telefono: </span>
                 {inputs.telefono}
               </p>
-              <hr className="border-[2px] border-black my-4" />
+              <hr className="border-[2px] border-black my-4 dark:border-white" />
               <button
                 onClick={handleFormVisibility}
                 className={` bg-naranja_enf ${rubik} text-white text-[0.8em] px-4 rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
@@ -152,7 +152,7 @@ function Profile() {
               </button>
             </div>
           </section>
-          <section className="w-4/5 bg-gris_fondo rounded-2xl p-8">
+          <section className="w-4/5 bg-gris_fondo dark:bg-dark_fondo rounded-2xl p-8">
             <h3 className="font-bold mb-2 text-[1.2em]">
               Configuración de la cuenta:
             </h3>
@@ -198,7 +198,7 @@ function Profile() {
                 Permitir que se usen mis datos con fines publicitarios
               </label>
             </fieldset>
-            <hr className="border-[1px] mt-6 border-black" />
+            <hr className="border-[1px] mt-6 border-black dark:border-white" />
             <button
               onClick={handleVisible}
               className={` bg-red-600 ${rubik} mt-12 text-white text-[0.8em] px-4 rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>

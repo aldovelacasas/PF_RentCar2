@@ -83,8 +83,8 @@ function FormRent({
   if (visible === false) return null;
   return (
     <div
-      className={`fixed w-[100vw] left-[0] h-[100vh] top-[0] bg-[#dbdbdbcc] lg:text-[18px] z-50  grid ${poppins}`}>
-      <form className="fixed w-3/4 justify-self-center top-[15%] flex flex-col items-center max-h-[80vh] overflow-x-auto bg-white border-[2px] border-black rounded-2xl">
+      className={`fixed w-[100vw] left-[0] h-[100vh] top-[0] bg-[#dbdbdbcc] lg:text-[18px] z-50  grid ${poppins} text-black dark:text-white`}>
+      <form className="fixed w-3/4 justify-self-center top-[15%] flex flex-col items-center max-h-[80vh] overflow-x-auto bg-white dark:bg-dark_blanco border-[2px] border-black rounded-2xl">
         <p
           className={`bg-naranja_enf sticky top-0 text-white ${rubik} w-full text-center rounded-t-[15px] mb-4`}>
           Renta tu vehículo
@@ -99,7 +99,7 @@ function FormRent({
               <button
                 type="button"
                 onClick={handleVisible}
-                className={` bg-gris_fondo ${rubik} text-[1em] px-4 py-2 rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
+                className={` bg-gris_fondo dark:bg-dark_fondo ${rubik} text-[1em] px-4 py-2 rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
                 Cancelar
               </button>
               <button
@@ -136,7 +136,7 @@ function FormRent({
               {!car.model && (
                 <>
                   <select
-                    className="bg-gris_fondo w-[200px] mb-4 text-[0.9em] md:w-[500px]"
+                    className="bg-gris_fondo dark:bg-dark_fondo w-[200px] mb-4 text-[0.9em] md:w-[500px]"
                     name="category"
                     onChange={handleOption}
                     value={category}>
@@ -155,7 +155,7 @@ function FormRent({
               </label>
               <br />
               <input
-                className="bg-gris_fondo w-[200px] mb-4 text-[0.9em] md:w-[500px]"
+                className="bg-gris_fondo dark:bg-dark_fondo w-[200px] mb-4 text-[0.9em] md:w-[500px]"
                 name="startDate"
                 type="date"
                 min={today}
@@ -171,7 +171,7 @@ function FormRent({
               </label>
               <br />
               <input
-                className="bg-gris_fondo w-[200px] text-[0.9em] md:w-[500px]"
+                className="bg-gris_fondo dark:bg-dark_fondo w-[200px] text-[0.9em] md:w-[500px]"
                 name="endDate"
                 type="date"
                 min={dates.startDate}
@@ -183,11 +183,11 @@ function FormRent({
             {errors.dates && (
               <p className="text-[1em] text-rojo_status">{errors.dates}</p>
             )}
-            <fieldset className="flex sticky bottom-0 bg-white justify-evenly w-full lg:w-1/2 py-6">
+            <fieldset className="flex sticky bottom-0 bg-white dark:bg-dark_blanco justify-evenly w-full lg:w-1/2 py-6">
               <button
                 type="button"
                 onClick={handleVisible}
-                className={` bg-gris_fondo ${rubik} text-[1em] px-6 py-2 rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
+                className={` bg-gris_fondo dark:bg-dark_fondo ${rubik} text-[1em] px-6 py-2 rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
                 Cancelar
               </button>
               <button

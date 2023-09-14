@@ -18,14 +18,14 @@ function RentalDetail({ visible, data, handleVisible }) {
   if (!visible) return null;
   return (
     <div
-      className={` ${poppins} fixed w-[100vw] top-0 left-0 pt-[15vh] h-[100vh] flex justify-center bg-[#dbdbdbcc] z-40`}>
-      <figure className=" w-full md:w-4/5 lg:w-1/2 rounded-2xl max-h-[75vh] place-items-center bg-gris_fondo max-w-[1000px] shadow-md shadow-black hover:cursor-pointer border border-solid border-negro_fondo grid">
+      className={` ${poppins} fixed text-black dark:text-white w-[100vw] top-0 left-0 pt-[15vh] h-[100vh] flex justify-center bg-[#dbdbdbcc] z-40`}>
+      <figure className=" w-full md:w-4/5 lg:w-1/2 rounded-2xl max-h-[75vh] place-items-center bg-gris_fondo dark:bg-dark_fondo max-w-[1000px] shadow-md shadow-black hover:cursor-pointer border border-solid border-negro_fondo grid">
         <h3
           className={`${rubik} w-1/2 text-center py-1 bg-negro_fondo text-white rounded-full`}>
           Renta #{data.id}
         </h3>
         <img src={data.image} className="max-h-[200px]" />
-        <div className="bg-white px-6 rounded-2xl">
+        <div className="bg-white dark:bg-dark_blanco px-6 rounded-2xl">
           <hr className="my-3 mx-2 border-gris_fondo" />
           <p>
             <span className="font-bold">Usuario: </span>
@@ -58,7 +58,7 @@ function RentalDetail({ visible, data, handleVisible }) {
 
           <div className="flex justify-evenly gap-4">
             <button
-              className={`rounded-md px-4 md:px-6 md:py-2 py-[2px] bg-white text-[1em] shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
+              className={`rounded-md px-4 md:px-6 md:py-2 py-[2px] bg-white dark:bg-dark_blanco text-[1em] shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
               Cancelar renta
             </button>
             <button

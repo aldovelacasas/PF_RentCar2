@@ -56,79 +56,81 @@ export default function Register() {
   };
 
   return (
-    <div className="flex justify-center items-center h-full ">
-      <div className="sm:my-8 my-4 max-w-xl m-2 sm:m-auto ">
-        {error && <Alert message={error} />}
-        <form
-          onSubmit={handleSubmit}
-          className={` ${poppins} mb-4 bg-white bg-opacity-70 shadow-md rounded-2xl pb-4`}>
-          <h1 className="bg-gris_fondo text-center font-bold text-[1.2em] rounded-t-2xl py-2 mb-5 ">
-            Crea una cuenta
-          </h1>
-          <section className="px-8">
-            <fieldset className="pb-3">
-              <label htmlFor="email" className="font-bold">
-                Email
-              </label>
-              <input
-                type="email"
-                name="email"
-                placeholder="correo@gmail.com"
-                onChange={handleChange}
-                className="mt-1 focus:outline-none focus:border-gray-400 focus:border-2 bg-gris_fondo rounded-md appearance-none border  w-full py-2 px-3 mb-3"
-              />
-            </fieldset>
+    <section className="w-full h-full bg-gris_frente dark:bg-dark_frente">
+      <div className="flex justify-center items-center h-full text-black dark:text-white ">
+        <div className="sm:my-8 my-4 max-w-xl m-2 sm:m-auto ">
+          {error && <Alert message={error} />}
+          <form
+            onSubmit={handleSubmit}
+            className={` ${poppins} mb-4 bg-white dark:bg-dark_blanco bg-opacity-70 shadow-md rounded-2xl pb-4`}>
+            <h1 className="bg-gris_fondo dark:bg-dark_fondo text-center font-bold text-[1.2em] rounded-t-2xl py-2 mb-5 ">
+              Crea una cuenta
+            </h1>
+            <section className="px-8">
+              <fieldset className="pb-3">
+                <label htmlFor="email" className="font-bold">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="correo@gmail.com"
+                  onChange={handleChange}
+                  className="mt-1 focus:outline-none focus:border-gray-400 focus:border-2 bg-gris_fondo dark:bg-dark_fondo rounded-md appearance-none border  w-full py-2 px-3 mb-3"
+                />
+              </fieldset>
 
-            <fieldset className="pb-3">
-              <label htmlFor="password" className="font-bold">
-                Contraseña
-              </label>
-              <input
-                type="password"
-                name="password"
-                onChange={handleChange}
-                placeholder="********"
-                className="mt-1 focus:outline-none focus:border-gray-400 focus:border-2 bg-gris_fondo rounded-md appearance-none border  w-full py-2 px-3 mb-3"
-              />
-            </fieldset>
-            <fieldset className="pb-3">
-              <label className="font-bold">Nombre de usuario:</label>
-              <input
-                type="text"
-                name="username"
-                placeholder="Juan Pérez"
-                onChange={handleChange}
-                className="mt-1 focus:outline-none focus:border-gray-400 focus:border-2 bg-gris_fondo rounded-md appearance-none border  w-full py-2 px-3 mb-3"
-              />
-            </fieldset>
-            <fieldset className="pb-3">
-              <label className="font-bold">Telefono:</label>
-              <input
-                type="text"
-                name="phone"
-                placeholder="5512345678"
-                onChange={handleChange}
-                className="mt-1 focus:outline-none focus:border-gray-400 focus:border-2 bg-gris_fondo rounded-md appearance-none border  w-full py-2 px-3 mb-3"
-              />
-            </fieldset>
-            <fieldset className="pb-3">
-              <label className="font-bold">Pasaporte:</label>
-              <input
-                type="text"
-                name="passport"
-                placeholder="ABC123456"
-                onChange={handleChange}
-                className="mt-1 focus:border-gray-400 focus:border-2  bg-gris_fondo rounded-md appearance-none border  w-full py-2 px-3 mb-3"
-              />
-            </fieldset>
+              <fieldset className="pb-3">
+                <label htmlFor="password" className="font-bold">
+                  Contraseña
+                </label>
+                <input
+                  type="password"
+                  name="password"
+                  onChange={handleChange}
+                  placeholder="********"
+                  className="mt-1 focus:outline-none focus:border-gray-400 focus:border-2 bg-gris_fondo dark:bg-dark_fondo rounded-md appearance-none border  w-full py-2 px-3 mb-3"
+                />
+              </fieldset>
+              <fieldset className="pb-3">
+                <label className="font-bold">Nombre de usuario:</label>
+                <input
+                  type="text"
+                  name="username"
+                  placeholder="Juan Pérez"
+                  onChange={handleChange}
+                  className="mt-1 focus:outline-none focus:border-gray-400 focus:border-2 bg-gris_fondo dark:bg-dark_fondo rounded-md appearance-none border  w-full py-2 px-3 mb-3"
+                />
+              </fieldset>
+              <fieldset className="pb-3">
+                <label className="font-bold">Telefono:</label>
+                <input
+                  type="text"
+                  name="phone"
+                  placeholder="5512345678"
+                  onChange={handleChange}
+                  className="mt-1 focus:outline-none focus:border-gray-400 focus:border-2 bg-gris_fondo dark:bg-dark_fondo rounded-md appearance-none border  w-full py-2 px-3 mb-3"
+                />
+              </fieldset>
+              <fieldset className="pb-3">
+                <label className="font-bold">Pasaporte:</label>
+                <input
+                  type="text"
+                  name="passport"
+                  placeholder="ABC123456"
+                  onChange={handleChange}
+                  className="mt-1 focus:border-gray-400 focus:border-2  bg-gris_fondo dark:bg-dark_fondo rounded-md appearance-none border  w-full py-2 px-3 mb-3"
+                />
+              </fieldset>
 
-            <button
-              className={`${rubik} text-white mt-5 font-bold bg-naranja_enf my-3 rounded p-2 w-full shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
-              Registrarse
-            </button>
-          </section>
-        </form>
+              <button
+                className={`${rubik} text-white mt-5 font-bold bg-naranja_enf my-3 rounded p-2 w-full shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
+                Registrarse
+              </button>
+            </section>
+          </form>
+        </div>
       </div>
-    </div>
+    </section>
   );
 }

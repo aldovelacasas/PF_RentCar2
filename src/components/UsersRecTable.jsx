@@ -119,12 +119,12 @@ function CarRecTable({ visible, handleAlertsVisibility }) {
 
   if (visible === false) return null;
   return (
-    <section className="text-[10px] sm:text-[12px] md:text-[16px]">
-      <figure className="bg-white grid place-content-center sm:px-2 md:px-8 py-4 rounded-2xl">
+    <section className="text-[10px] text-black dark:text-white sm:text-[12px] md:text-[16px]">
+      <figure className="bg-white dark:bg-dark_blanco grid place-content-center sm:px-2 md:px-8 py-4 rounded-2xl">
         <h3 className="text-[1.2em] pl-2">
           Usuarios
           <span
-            className={`${poppins} text-[0.8em] bg-gris_fondo ml-2 py-1 px-2 rounded-full`}>
+            className={`${poppins} text-[0.8em] bg-gris_fondo dark:bg-dark_fondo ml-2 py-1 px-2 rounded-full`}>
             {dataToShow.length}
           </span>
         </h3>
@@ -149,27 +149,27 @@ function CarRecTable({ visible, handleAlertsVisibility }) {
             <option value="pasaporte">pasaporte</option>
           </select>
         </div>
-        <table className={`${poppins} bg-white mt-6`}>
+        <table className={`${poppins} mt-6`}>
           <tbody className="">
             <tr className="">
               <th
                 onClick={() => handleSort("id")}
-                className={`${rubik} min-w-[50px] sm:min-w-[100px] px-2 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
+                className={`${rubik} min-w-[50px] sm:min-w-[100px] px-2 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo `}>
                 {arrow.id ? "#Id ▼" : "#Id"}
               </th>
               <th
                 onClick={() => handleSort("nombre")}
-                className={`${rubik} min-w-[90px] sm:min-w-[250px] px-2 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
+                className={`${rubik} min-w-[90px] sm:min-w-[250px] px-2 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo `}>
                 {arrow.nombre ? "Nombre ▼" : "Nombre"}
               </th>
               <th
                 onClick={() => handleSort("pasaporte")}
-                className={`${rubik} min-w-[60px] sm:min-w-[150px] px-1 md:px-4 text-left break-all hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
+                className={`${rubik} min-w-[60px] sm:min-w-[150px] px-1 md:px-4 text-left break-all hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo `}>
                 {arrow.pasaporte ? "Pasaporte ▼" : "Pasaporte"}
               </th>
               <th
                 onClick={() => handleSort("correo")}
-                className={`${rubik} min-w-[60px] sm:min-w-[200px] px-1 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
+                className={`${rubik} min-w-[60px] sm:min-w-[200px] px-1 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo `}>
                 {arrow.correo ? "Correo ▼" : "Correo"}
               </th>
               <th className={`${rubik} px-1 md:px-4 text-left`}>Acciones</th>
@@ -187,8 +187,8 @@ function CarRecTable({ visible, handleAlertsVisibility }) {
                   key={d.id}
                   className={
                     ultimo
-                      ? "hover:bg-gris_frente "
-                      : "border-b-2 hover:bg-gris_frente "
+                      ? "hover:bg-gris_frente  "
+                      : "border-b-2 hover:bg-gris_frente  "
                   }>
                   <td className=" p-4">{d.id}</td>
                   <td className=" break-all">{d.nombre}</td>
@@ -197,7 +197,7 @@ function CarRecTable({ visible, handleAlertsVisibility }) {
                   <td className=" p-4">
                     <button
                       onClick={() => handleVehiclesVisibility(d)}
-                      className="px-2 py-1 border-[1px] rounded-md bg-gris_fondo border-negro_fondo hover:bg-negro_fondo hover:text-white">
+                      className="px-2 py-1 border-[1px] rounded-md bg-gris_fondo dark:bg-dark_fondo border-negro_fondo hover:bg-negro_fondo hover:text-white">
                       <PiPlusCircleBold />
                     </button>
                     <button

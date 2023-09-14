@@ -25,14 +25,14 @@ function UserDetail({ visible, data, handleVisible }) {
 
   return (
     <div
-      className={` ${poppins} fixed w-[100vw] top-0 left-0 pt-[15vh] h-[100vh] flex justify-center bg-[#dbdbdbcc] z-40`}>
-      <figure className=" w-full md:w-4/5 lg:w-3/4 max-h-[75vh] place-items-center bg-gris_fondo rounded-2xl max-w-[1000px] shadow-md shadow-black hover:cursor-pointer border border-solid border-negro_fondo grid">
+      className={` ${poppins} fixed text-black dark:text-white w-[100vw] top-0 left-0 pt-[15vh] h-[100vh] flex justify-center bg-[#dbdbdbcc] z-40`}>
+      <figure className=" w-full md:w-4/5 lg:w-3/4 max-h-[75vh] place-items-center bg-gris_fondo dark:bg-dark_fondo rounded-2xl max-w-[1000px] shadow-md shadow-black hover:cursor-pointer border border-solid border-negro_fondo grid">
         <h3
           className={`${rubik} w-1/2 text-center py-1 bg-negro_fondo text-white rounded-full`}>
           Usuario #{data.id}
         </h3>
         <main
-          className={` ${poppins} bg-gris_fondo  px-6 rounded-2xl overflow-y-scroll max-h-[420px] py-3`}>
+          className={` ${poppins} bg-gris_fondo dark:bg-dark_fondo  px-6 rounded-2xl overflow-y-scroll max-h-[420px] py-3`}>
           <p>
             <span className="font-bold">Nombre: </span>
             {data.nombre}
@@ -47,7 +47,7 @@ function UserDetail({ visible, data, handleVisible }) {
           </p>
           <p className="font-bold">Reservas:</p>
           <hr className="my-3 mx-2 border-white overflow-y-hidden" />
-          <table className="bg-white rounded-lg">
+          <table className="bg-white dark:bg-dark_blanco rounded-lg">
             <tbody>
               <tr className="border-b-2 border-b-black">
                 <th className="font-bold p-2">Vehículo</th>

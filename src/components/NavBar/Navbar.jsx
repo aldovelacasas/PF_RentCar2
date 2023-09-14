@@ -45,7 +45,7 @@ const Navbar = () => {
   }, [users]);
 
   return (
-    <div className="sticky top-0 bg-gris_frente z-20">
+    <div className="sticky top-0 bg-gris_frente dark:bg-dark_frente z-20">
       {user?.displayName === "Auto Contact" ? (
         <NavAdmin userName={user?.displayName} userPhoto={user?.photoURL} />
       ) : user ? (

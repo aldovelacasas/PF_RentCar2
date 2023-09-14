@@ -81,9 +81,9 @@ function Page() {
     }
   }
   return (
-    <div className="grid bg-gris_frente md:text-[2em]">
+    <div className="grid bg-gris_frente dark:bg-dark_frente md:text-[2em] text-black dark:text-white">
       <header
-        className={`bg-gris_fondo flex items-center h-[175px] ${rubik} text-[1em] md:text-[1.5em] pl-[10%] space-y-0 space-x-2.5`}>
+        className={`bg-gris_fondo dark:bg-dark_fondo flex items-center h-[175px] ${rubik} text-[1em] md:text-[1.5em] pl-[10%] space-y-0 space-x-2.5`}>
         <p className={`text-[1em] mt-2 pl-4`}>Contáctanos</p>
         <img
           src="/Contact.png"
@@ -91,7 +91,7 @@ function Page() {
         />
       </header>
       <form
-        className={`md:w-4/5 pt-2 ${poppins} text-[0.8em] sm:text-[1em] max-w-lg justify-self-center bg-gris_frente pb-12`}>
+        className={`md:w-4/5 pt-2 ${poppins} text-[0.8em] sm:text-[1em] max-w-lg justify-self-center bg-gris_frente dark:bg-dark_frente pb-12`}>
         <p className={`text-[0.8em] ${rubik} mb-2 text-center mt-6`}>
           ¿Necesitas más información?
         </p>
@@ -107,7 +107,7 @@ function Page() {
           <input
             name="name"
             placeholder="Juan Pérez"
-            className="bg-gris_fondo w-full text-[0.9em] placeholder:text-grey pl-1"
+            className="bg-gris_fondo dark:bg-dark_fondo w-full text-[0.9em] placeholder:text-grey pl-1"
             value={inputs.name}
             onChange={handleChange}
           />
@@ -129,7 +129,7 @@ function Page() {
           </label>
           <br />
           <input
-            className="bg-gris_fondo w-full text-[0.9em] placeholder:text-grey pl-1"
+            className="bg-gris_fondo dark:bg-dark_fondo w-full text-[0.9em] placeholder:text-grey pl-1"
             name="email"
             placeholder="juanperez@correo.com"
             value={inputs.email}
@@ -153,7 +153,7 @@ function Page() {
             placeholder="20-200 caracteres"
             value={inputs.comments}
             onChange={handleChange}
-            className="bg-gris_fondo w-full h-[100px] resize-none text-[0.9em] placeholder:text-grey pl-1"
+            className="bg-gris_fondo dark:bg-dark_fondo w-full h-[100px] resize-none text-[0.9em] placeholder:text-grey pl-1"
           />
           <br />
           {errors.comments && (

@@ -39,10 +39,10 @@ async function Testimoniales() {
     console.log(error.message);
   }
   return (
-    <div className="bg-white">
+    <div className="bg-white dark:bg-dark_blanco text-black dark:text-white">
       <div>
         <header
-          className={`bg-gris_fondo flex items-center h-[175px] ${rubik} text-[1em] md:text-[1.5em] px-[10%] space-y-0 space-x-2.5`}>
+          className={`bg-gris_fondo dark:bg-dark_fondo flex items-center h-[175px] ${rubik} text-[1em] md:text-[1.5em] px-[10%] space-y-0 space-x-2.5`}>
           <p className={`text-[1.9em] mt-2 pl-4`}>Testimoniales</p>
           <img
             src="https://drive.google.com/uc?export=download&id=18hd72ccmFxNZhgHNgcH0T3zFAUw4gNmU"

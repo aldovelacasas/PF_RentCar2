@@ -174,12 +174,12 @@ function RentalsTable({ visible }) {
 
   if (visible === false) return null;
   return (
-    <section className="text-[10px] sm:text-[12px] md:text-[16px]">
-      <figure className="bg-white grid place-content-center sm:px-2 md:px-8 py-4 rounded-2xl">
+    <section className="text-[10px] sm:text-[12px] md:text-[16px] text-black dark:text-white">
+      <figure className="bg-white dark:bg-dark_blanco grid place-content-center sm:px-2 md:px-8 py-4 rounded-2xl">
         <h3 className="text-[1.2em]">
           Rentas
           <span
-            className={`${poppins} text-[0.8em] bg-gris_fondo ml-2 py-1 px-2 rounded-full`}>
+            className={`${poppins} text-[0.8em] bg-gris_fondo dark:bg-dark_fondo ml-2 py-1 px-2 rounded-full`}>
             {dataToShow?.length}
           </span>
         </h3>
@@ -203,7 +203,7 @@ function RentalsTable({ visible }) {
           </select>
         </div>
 
-        <table className={`${poppins} bg-white mt-6`}>
+        <table className={`${poppins} bg-white dark:bg-dark_blanco mt-6`}>
           <tbody className="">
             <tr className="">
               <th
@@ -213,25 +213,25 @@ function RentalsTable({ visible }) {
               </th>
               <th
                 onClick={() => handleSort("user")}
-                className={`${rubik} hidden sm:inline sm:px-1 md:px-4 md:min-w-[160px] lg:min-w-[200px] text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
+                className={`${rubik} hidden md:table-cell sm:px-1 md:px-4 md:min-w-[160px] lg:min-w-[200px] text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
                 {arrow.user ? "Usuario ▼" : "Usuario"}
               </th>
               <th
                 onClick={() => handleSort("vehicle")}
-                className={`${rubik} sm:px-1 md:px-4 md:min-w-[175px] text-left lg:min-w-[200px] hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
+                className={`${rubik} sm:px-1 md:px-4 md:min-w-[175px] text-left lg:min-w-[200px] hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo `}>
                 {arrow.vehicle ? "Vehiculo ▼" : "Vehiculo"}
               </th>
               <th
                 onClick={() => handleSort("status")}
-                className={`${rubik} sm:px-1 md:px-4 md:min-w-[150px] text-left lg:min-w-[150px] hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
+                className={`${rubik} hidden md:table-cell sm:px-1 md:px-4 md:min-w-[150px] text-left lg:min-w-[150px] hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo `}>
                 {arrow.status ? "Estado ▼" : "Estado"}
               </th>
               <th
                 onClick={() => handleSort("monto")}
-                className={`${rubik} hidden md:inline px-1 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
+                className={`${rubik} px-1 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo `}>
                 {arrow.monto ? "Monto ▼" : "Monto"}
               </th>
-              <th className={`${rubik} px-1 md:px-4 text-left`}>Detalle</th>
+              <th className={`${rubik} px-1 md:px-4 text-left `}>Detalle</th>
             </tr>
             {data?.map((d) => {
               let ultimo;
@@ -253,15 +253,15 @@ function RentalsTable({ visible }) {
                       : "border-b-2 hover:bg-gris_frente "
                   }>
                   <td className=" p-4">{d.id}</td>
-                  <td className=" p-4 hidden md:inline">{d.user}</td>
-                  <td className=" p-4 hidden md:inline">{d.vehicle}</td>
+                  <td className=" p-4 hidden md:table-cell">{d.user}</td>
+                  <td className=" p-4 hidden md:table-cell">{d.vehicle}</td>
                   <td className="p-4">
                     <span
                       className={
                         d.status === "activo"
                           ? "bg-[#d1fae5] text-[#047857] inline px-2 rounded-md"
                           : d.status === "terminado"
-                          ? "bg-[#f3f4f6] inline px-2 rounded-md"
+                          ? "bg-[#f3f4f6] inline px-2 rounded-md text-black"
                           : "bg-[#ffe4e6] text-[#be123c] inline px-2 rounded-md"
                       }>
                       {estado}
@@ -271,7 +271,7 @@ function RentalsTable({ visible }) {
                   <td className=" p-4">
                     <button
                       onClick={() => handleRentVisibility(d)}
-                      className="px-2 md:px-4 py-1 border-[1px] rounded-md border-negro_fondo hover:bg-negro_fondo hover:text-white">
+                      className="px-2 md:px-4 py-1 border-[1px] rounded-md border-negro_fondo dark:bg-dark_fondo hover:bg-negro_fondo hover:text-white">
                       Detalle
                     </button>
                   </td>
@@ -349,7 +349,7 @@ function RentalsTable({ visible }) {
       </div>
       <p className="text-1.2em text-center pb-8">
         Total del mes:{" "}
-        <span className="bg-white px-4 py-1 border-2 border-black">
+        <span className="bg-white dark:bg-dark_blanco px-4 py-1 border-2 border-black">
           ${total.toLocaleString()}
         </span>
       </p>

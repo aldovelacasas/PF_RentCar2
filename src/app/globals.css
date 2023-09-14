@@ -3,6 +3,6 @@
 @tailwind utilities;
 
 body {
-  @apply bg-gris_frente; /* Fondo más claro */
+  @apply bg-gris_frente dark:bg-dark_frente; /* Fondo más claro */
   color: gray-800; /* Texto oscuro */
 }

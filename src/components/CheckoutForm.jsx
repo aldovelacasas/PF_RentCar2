@@ -51,7 +51,6 @@ export default function CheckoutForm({ paymentKey }) {
       startDate: startDate,
       endDate: endDate,
     };
-    console.log(templateParams);
     emailjs
       .send(
         "service_urf97ga",
@@ -110,7 +109,6 @@ export default function CheckoutForm({ paymentKey }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    sendMail();
 
     if (!stripe || !elements) {
       return;
@@ -125,6 +123,7 @@ export default function CheckoutForm({ paymentKey }) {
       },
     });
 
+    sendMail();
     setVisibility(true);
 
     if (error.type === "card_error" || error.type === "validation_error") {
@@ -150,7 +149,7 @@ export default function CheckoutForm({ paymentKey }) {
 
   return (
     <>
-      <main className="grid grid-cols-1 lg:grid-cols-2 p-8 bg-white">
+      <main className="grid grid-cols-1 lg:grid-cols-2 p-8 bg-white dark:bg-dark_blanco text-black dark:text-white">
         <section className="grid place-content-center mb-6">
           <h1 className={`${rubik} text-center text-[1.5em]`}>Tu vehículo:</h1>
           <img className="max-w-[300px] lg:max-w-[400px]" src={img} />

@@ -42,7 +42,7 @@ function HelpForm({ visible }) {
   if (visible === false) return null;
   return (
     <form
-      className={`rounded-2xl mt-6 md:w-4/5 pt-2 ${poppins} text-[16px] sm:text-[1em] max-w-lg justify-self-center bg-white pb-12 px-8`}>
+      className={`rounded-2xl mt-6 md:w-4/5 pt-2 ${poppins} text-[16px] sm:text-[1em] max-w-lg justify-self-center bg-white dark:bg-dark_blanco pb-12 px-8 text-black dark:text-white`}>
       <p className={`text-[0.8em] ${rubik} mb-2 text-center mt-6`}>
         ¿Tienes algún problema con la consola?
       </p>
@@ -58,7 +58,7 @@ function HelpForm({ visible }) {
         <input
           name="name"
           placeholder="Juan Pérez"
-          className="bg-gris_fondo w-full text-[0.9em] placeholder:text-grey pl-1"
+          className="bg-gris_fondo dark:bg-dark_fondo w-full text-[0.9em] placeholder:text-grey pl-1"
           value={inputs.name}
           onChange={handleChange}
         />
@@ -80,7 +80,7 @@ function HelpForm({ visible }) {
         </label>
         <br />
         <input
-          className="bg-gris_fondo w-full text-[0.9em] placeholder:text-grey pl-1"
+          className="bg-gris_fondo dark:bg-dark_fondo w-full text-[0.9em] placeholder:text-grey pl-1"
           name="email"
           placeholder="juanperez@correo.com"
           value={inputs.email}
@@ -104,7 +104,7 @@ function HelpForm({ visible }) {
           placeholder="20-200 caracteres"
           value={inputs.comments}
           onChange={handleChange}
-          className="bg-gris_fondo w-full h-[100px] resize-none text-[0.9em] placeholder:text-grey pl-1"
+          className="bg-gris_fondo dark:bg-dark_fondo w-full h-[100px] resize-none text-[0.9em] placeholder:text-grey pl-1"
         />
         <br />
         {errors.comments && (
