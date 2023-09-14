@@ -8,8 +8,15 @@ import HelpForm from "@/components/HelpForm";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import Alerts from "@/components/Alerts";
-import MonthGraph from "@/components/MonthGraph";
+// import MonthGraph from "@/components/MonthGraph";
 import { withAuth } from "@/withAuth";
+import dynamic from "next/dynamic";
+
+
+const MonthGraph = dynamic(() => import('@/components/MonthGraph'), {
+  ssr: false, // Evitar que se cargue en el servidor
+});
+
 
 const fontRubik = Rubik({
   weight: "600",
@@ -96,9 +103,9 @@ function AdminMain() {
             }>
             ▼ Gráfico de rentas ▼
           </h3>
-          {typeof window !== undefined && (
+          
             <MonthGraph visible={visibility.graphVisibility} />
-          )}
+          
         </div>
         <div
           className={
