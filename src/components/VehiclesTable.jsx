@@ -170,27 +170,27 @@ function VehiclesTable({ visible, handleAlertsVisibility }) {
             <option value="model">Modelo</option>
           </select>
         </div>
-        <table className={`${poppins} bg-white dark:bg-dark_blanco mt-6`}>
+        <table className={`${poppins} mt-6`}>
           <tbody className="">
             <tr className="">
               <th
                 onClick={() => handleSort("name")}
-                className={`${rubik} md:min-w-[150px] px-2 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo dark:bg-dark_fondo`}>
+                className={`${rubik} md:min-w-[150px] px-2 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo `}>
                 {arrow.name ? "Marca ▼" : "Marca"}
               </th>
               <th
                 onClick={() => handleSort("model")}
-                className={`${rubik} md:min-w-[150px] px-1 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo dark:bg-dark_fondo`}>
+                className={`${rubik} md:min-w-[150px] px-1 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo `}>
                 {arrow.model ? "Modelo ▼" : "Modelo"}
               </th>
               <th
                 onClick={() => handleSort("type")}
-                className={`${rubik} hidden md:inline md:min-w-[150px] px-1 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo dark:bg-dark_fondo`}>
+                className={`${rubik} hidden md:inline md:min-w-[150px] px-1 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo `}>
                 {arrow.type ? "Tipo ▼" : "Tipo"}
               </th>
               <th
                 onClick={() => handleSort("price")}
-                className={`${rubik} md:min-w-[120px] px-1 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo dark:bg-dark_fondo`}>
+                className={`${rubik} md:min-w-[120px] px-1 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo `}>
                 {arrow.price ? "Precio ▼" : "Precio"}
               </th>
               <th className={`${rubik} px-1 md:px-4 text-left`}>Acciones</th>
@@ -210,8 +210,8 @@ function VehiclesTable({ visible, handleAlertsVisibility }) {
                   key={d.id}
                   className={
                     ultimo
-                      ? "hover:bg-gris_frente dark:bg-dark_frente "
-                      : "border-b-2 hover:bg-gris_frente dark:bg-dark_frente "
+                      ? "hover:bg-gris_frente  "
+                      : "border-b-2 hover:bg-gris_frente  "
                   }>
                   <td className=" p-4">{d.name}</td>
                   <td className=" p-4">{d.model}</td>

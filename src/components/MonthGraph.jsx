@@ -253,25 +253,31 @@ function MonthGraph({ visible }) {
           },
         },
       },
+      {
+        theme: {
+          mode: "light",
+          palette: "palette6",
+        },
+      },
     ],
   };
   if (visible === false) return null;
   return (
-    <figure className="w-[90vw ] h-[600px] text-black dark:text-white mx-[auto] grid place-content-center bg-white dark:bg-dark_blanco rounded-lg shadow-md shadow-black">
+    <figure className="w-[90vw ] h-[600px] text-black dark:text-white mx-[auto] grid place-content-center bg-white dark:bg-gris_fondo rounded-lg shadow-md shadow-black">
       {typeof window !== undefined && (
         <Chart options={options} series={series} />
       )}
       <section className="grid place-content-center">
         <ul>
-          <li className="text-[0.8em]">
+          <li className="text-[0.8em] text-black">
             <span className="w-[10px] h-[10px] mr-2 inline-block rounded-full bg-[#008ffb]" />
             Sedan: {sedanSales.length}
           </li>
-          <li className="text-[0.8em]">
+          <li className="text-[0.8em] text-black">
             <span className="w-[10px] h-[10px] mr-2 inline-block rounded-full bg-[#00e396]" />
             SUV: {suvSales.length}
           </li>
-          <li className="text-[0.8em]">
+          <li className="text-[0.8em] text-black">
             <span className="w-[10px] h-[10px] mr-2 inline-block rounded-full bg-[#feb019]" />
             Camioneta: {camionetaSales.length}
           </li>

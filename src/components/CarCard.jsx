@@ -30,7 +30,7 @@ export default function CarCard({ car, handleVisibility, handleDetail }) {
         <img
           src={car.image}
           alt={car.name}
-          className=" w-[100%] px-3 py-3 mx-auto mb-4 h-[10rem] object-cover"
+          className=" w-[100%] px-3 py-3 mx-auto mb-4 h-[10rem] object-cover bg-white"
         />
         <div>
           <div className="flex flex-wrap justify-between px-3 mb-0">

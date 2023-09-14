@@ -125,7 +125,7 @@ export default function NavDefault() {
       </nav>
       <button
         onClick={handleDarkMode}
-        className={`absolute top-[80px] right-2 p-4 py-2 dark:bg-gris_fondo bg-dark_fondo rounded-sm shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
+        className={`absolute top-[100px] right-2 p-4 py-2 dark:bg-gris_fondo bg-dark_fondo rounded-sm shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
         {dark ? (
           <BsFillBrightnessHighFill className="text-black" />
         ) : (

@@ -59,9 +59,7 @@ export default function CarCardDetail({
           />
           <div>
             <div className="flex flex-wrap justify-between px-3 mb-0">
-              <h2 className="text-lg font-semibold text-negro_fondo mb-0 ">
-                {product.name}
-              </h2>
+              <h2 className="text-lg font-semibold  mb-0 ">{product.name}</h2>
               <p className="text-begro_fondo font-bold text-xl mb-0">
                 ${product.price}
               </p>
@@ -82,7 +80,7 @@ export default function CarCardDetail({
               <p className="text-sm font-light pr-2">Por día</p>
             </div>
             <div className="flex justify-between px-2 font-light">
-              <p className="mb-2 text-negro_fondo">
+              <p className="mb-2 ">
                 <span className="font-bold">Modelo:</span> {product.model}
               </p>
               <p className="pr-2">
@@ -91,7 +89,7 @@ export default function CarCardDetail({
               </p>
             </div>
             <div className="flex justify-between px-2 font-light">
-              <p className="mb-2 text-negro_fondo">
+              <p className="mb-2">
                 <span className="font-bold">Capacidad (Usuarios):</span>
                 {product.capacity} Personas
               </p>
@@ -100,7 +98,7 @@ export default function CarCardDetail({
               </p>
             </div>
             <hr className="my-2" />
-            <p className="text-negro_fondo text-[1.2em] font-light px-2">
+            <p className=" text-[1.2em] font-light px-2">
               <span className="font-bold">Descripción:</span>{" "}
               {product.description}
             </p>
@@ -111,7 +109,7 @@ export default function CarCardDetail({
           className={` ${rubik} flex justify-evenly w-full lg:w-3/4 mx-[auto] text-[0.9em] py-6  pb-2 mb-4`}>
           <button
             onClick={handleClose}
-            className={` bg-gris_fondo dark:bg-dark_fondo text-black text-[1em] px-6 py-2 rounded-md shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
+            className={` bg-gris_fondo dark:bg-dark_fondo text-black dark:text-white text-[1em] px-6 py-2 rounded-md shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
             Cerrar
           </button>
           <button

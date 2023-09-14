@@ -157,24 +157,24 @@ function CarRecTable({ visible, handleAlertsVisibility }) {
             <option value="model">Modelo</option>
           </select>
         </div>
-        <table className={`${poppins} bg-white dark:bg-dark_blanco mt-6`}>
+        <table className={`${poppins} mt-6`}>
           <tbody className="">
             <tr className="">
               {pantalla === "chica" ? (
                 <>
                   <th
                     onClick={() => handleSort("name")}
-                    className={`${rubik} min-w-[90px] sm:min-w-[150px] px-2 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo dark:bg-dark_fondo`}>
+                    className={`${rubik} min-w-[90px] sm:min-w-[150px] px-2 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo `}>
                     {arrow.name ? "Nombre ▼" : "Nombre"}
                   </th>
                   <th
                     onClick={() => handleSort("model")}
-                    className={`${rubik} min-w-[90px] sm:min-w-[250px] px-1 md:px-4 text-left break-all hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo dark:bg-dark_fondo`}>
+                    className={`${rubik} min-w-[90px] sm:min-w-[250px] px-1 md:px-4 text-left break-all hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo `}>
                     {arrow.model ? "Modelo ▼" : "Modelo"}
                   </th>
                   <th
                     onClick={() => handleSort("price")}
-                    className={`${rubik} min-w-[60px] px-1 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo dark:bg-dark_fondo`}>
+                    className={`${rubik} min-w-[60px] px-1 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo `}>
                     {arrow.price ? "Precio ▼" : "Precio"}
                   </th>
                   <th className={`${rubik} px-1 md:px-4 text-left`}>
@@ -185,22 +185,22 @@ function CarRecTable({ visible, handleAlertsVisibility }) {
                 <>
                   <th
                     onClick={() => handleSort("name")}
-                    className={`${rubik} md:min-w-[150px] px-2 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo dark:bg-dark_fondo`}>
+                    className={`${rubik} md:min-w-[150px] px-2 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo `}>
                     {arrow.name ? "Nombre ▼" : "Nombre"}
                   </th>
                   <th
                     onClick={() => handleSort("model")}
-                    className={`${rubik} md:min-w-[150px] px-1 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo dark:bg-dark_fondo`}>
+                    className={`${rubik} md:min-w-[150px] px-1 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo `}>
                     {arrow.model ? "Modelo ▼" : "Modelo"}
                   </th>
                   <th
                     onClick={() => handleSort("type")}
-                    className={`${rubik} md:min-w-[150px] px-1 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo dark:bg-dark_fondo`}>
+                    className={`${rubik} md:min-w-[150px] px-1 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo `}>
                     {arrow.type ? "Tipo ▼" : "Tipo"}
                   </th>
                   <th
                     onClick={() => handleSort("price")}
-                    className={`${rubik} md:min-w-[120px] px-1 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo dark:bg-dark_fondo`}>
+                    className={`${rubik} md:min-w-[120px] px-1 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
                     {arrow.price ? "Precio ▼" : "Precio"}
                   </th>
                   <th className={`${rubik} px-1 md:px-4 text-left`}>
@@ -222,8 +222,8 @@ function CarRecTable({ visible, handleAlertsVisibility }) {
                   key={d.id}
                   className={
                     ultimo
-                      ? "hover:bg-gris_frente dark:bg-dark_frente "
-                      : "border-b-2 hover:bg-gris_frente dark:bg-dark_frente "
+                      ? "hover:bg-gris_frente  "
+                      : "border-b-2 hover:bg-gris_frente  "
                   }>
                   {pantalla === "chica" ? (
                     <>

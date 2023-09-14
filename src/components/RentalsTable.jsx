@@ -207,30 +207,30 @@ function RentalsTable({ visible }) {
             <tr className="">
               <th
                 onClick={() => handleSort("id")}
-                className={`${rubik} sm:px-2 md:px-4 md:min-w-[80px] text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo dark:bg-dark_fondo`}>
+                className={`${rubik} sm:px-2 md:px-4 md:min-w-[80px] text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
                 {arrow.id ? "#Id ▼" : "#Id"}
               </th>
               <th
                 onClick={() => handleSort("user")}
-                className={`${rubik} hidden sm:inline sm:px-1 md:px-4 md:min-w-[160px] lg:min-w-[200px] text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo dark:bg-dark_fondo`}>
+                className={`${rubik} hidden md:table-cell sm:px-1 md:px-4 md:min-w-[160px] lg:min-w-[200px] text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
                 {arrow.user ? "Usuario ▼" : "Usuario"}
               </th>
               <th
                 onClick={() => handleSort("vehicle")}
-                className={`${rubik} sm:px-1 md:px-4 md:min-w-[175px] text-left lg:min-w-[200px] hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo dark:bg-dark_fondo`}>
+                className={`${rubik} sm:px-1 md:px-4 md:min-w-[175px] text-left lg:min-w-[200px] hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo `}>
                 {arrow.vehicle ? "Vehiculo ▼" : "Vehiculo"}
               </th>
               <th
                 onClick={() => handleSort("status")}
-                className={`${rubik} sm:px-1 md:px-4 md:min-w-[150px] text-left lg:min-w-[150px] hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo dark:bg-dark_fondo`}>
+                className={`${rubik} hidden md:table-cell sm:px-1 md:px-4 md:min-w-[150px] text-left lg:min-w-[150px] hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo `}>
                 {arrow.status ? "Estado ▼" : "Estado"}
               </th>
               <th
                 onClick={() => handleSort("monto")}
-                className={`${rubik} hidden md:inline px-1 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo dark:bg-dark_fondo`}>
+                className={`${rubik} px-1 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo `}>
                 {arrow.monto ? "Monto ▼" : "Monto"}
               </th>
-              <th className={`${rubik} px-1 md:px-4 text-left`}>Detalle</th>
+              <th className={`${rubik} px-1 md:px-4 text-left `}>Detalle</th>
             </tr>
             {data?.map((d) => {
               let ultimo;
@@ -248,19 +248,19 @@ function RentalsTable({ visible }) {
                   key={d.id}
                   className={
                     ultimo
-                      ? "hover:bg-gris_frente dark:bg-dark_frente "
-                      : "border-b-2 hover:bg-gris_frente dark:bg-dark_frente "
+                      ? "hover:bg-gris_frente "
+                      : "border-b-2 hover:bg-gris_frente "
                   }>
                   <td className=" p-4">{d.id}</td>
-                  <td className=" p-4 hidden md:inline">{d.user}</td>
-                  <td className=" p-4 hidden md:inline">{d.vehicle}</td>
+                  <td className=" p-4 hidden md:table-cell">{d.user}</td>
+                  <td className=" p-4 hidden md:table-cell">{d.vehicle}</td>
                   <td className="p-4">
                     <span
                       className={
                         d.status === "activo"
                           ? "bg-[#d1fae5] text-[#047857] inline px-2 rounded-md"
                           : d.status === "terminado"
-                          ? "bg-[#f3f4f6] inline px-2 rounded-md"
+                          ? "bg-[#f3f4f6] inline px-2 rounded-md text-black"
                           : "bg-[#ffe4e6] text-[#be123c] inline px-2 rounded-md"
                       }>
                       {estado}
@@ -270,7 +270,7 @@ function RentalsTable({ visible }) {
                   <td className=" p-4">
                     <button
                       onClick={() => handleRentVisibility(d)}
-                      className="px-2 md:px-4 py-1 border-[1px] rounded-md border-negro_fondo hover:bg-negro_fondo hover:text-white">
+                      className="px-2 md:px-4 py-1 border-[1px] rounded-md border-negro_fondo dark:bg-dark_fondo hover:bg-negro_fondo hover:text-white">
                       Detalle
                     </button>
                   </td>

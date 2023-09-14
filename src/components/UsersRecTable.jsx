@@ -148,27 +148,27 @@ function CarRecTable({ visible, handleAlertsVisibility }) {
             <option value="pasaporte">pasaporte</option>
           </select>
         </div>
-        <table className={`${poppins} bg-white dark:bg-dark_blanco mt-6`}>
+        <table className={`${poppins} mt-6`}>
           <tbody className="">
             <tr className="">
               <th
                 onClick={() => handleSort("id")}
-                className={`${rubik} min-w-[50px] sm:min-w-[100px] px-2 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo dark:bg-dark_fondo`}>
+                className={`${rubik} min-w-[50px] sm:min-w-[100px] px-2 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo `}>
                 {arrow.id ? "#Id ▼" : "#Id"}
               </th>
               <th
                 onClick={() => handleSort("nombre")}
-                className={`${rubik} min-w-[90px] sm:min-w-[250px] px-2 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo dark:bg-dark_fondo`}>
+                className={`${rubik} min-w-[90px] sm:min-w-[250px] px-2 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo `}>
                 {arrow.nombre ? "Nombre ▼" : "Nombre"}
               </th>
               <th
                 onClick={() => handleSort("pasaporte")}
-                className={`${rubik} min-w-[60px] sm:min-w-[150px] px-1 md:px-4 text-left break-all hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo dark:bg-dark_fondo`}>
+                className={`${rubik} min-w-[60px] sm:min-w-[150px] px-1 md:px-4 text-left break-all hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo `}>
                 {arrow.pasaporte ? "Pasaporte ▼" : "Pasaporte"}
               </th>
               <th
                 onClick={() => handleSort("correo")}
-                className={`${rubik} min-w-[60px] sm:min-w-[200px] px-1 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo dark:bg-dark_fondo`}>
+                className={`${rubik} min-w-[60px] sm:min-w-[200px] px-1 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo `}>
                 {arrow.correo ? "Correo ▼" : "Correo"}
               </th>
               <th className={`${rubik} px-1 md:px-4 text-left`}>Acciones</th>
@@ -186,8 +186,8 @@ function CarRecTable({ visible, handleAlertsVisibility }) {
                   key={d.id}
                   className={
                     ultimo
-                      ? "hover:bg-gris_frente dark:bg-dark_frente "
-                      : "border-b-2 hover:bg-gris_frente dark:bg-dark_frente "
+                      ? "hover:bg-gris_frente  "
+                      : "border-b-2 hover:bg-gris_frente  "
                   }>
                   <td className=" p-4">{d.id}</td>
                   <td className=" break-all">{d.nombre}</td>
