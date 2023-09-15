@@ -2,14 +2,16 @@
 "use client";
 
 import { Rubik, Poppins } from "next/font/google";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import validation from "@/libs/validation";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/app/context/AuthContext";
 import axios from "axios";
 // import { useSelector } from "react-redux/es/hooks/useSelector";
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getTest } from "@/store/slices/testimonio";
+import Alerts from "./Alerts";
+import { getCars } from "@/store/slices/car";
 
 const fontRubik = Rubik({
   weight: "600",
@@ -37,10 +39,17 @@ const alertPoppins = alertFontPoppins.className;
 const rubik = fontRubik.className;
 const bigrubik = bigFontRubik.className;
 
-function OpinionForm({ cars }) {
+function OpinionForm() {
   const dispatch = useDispatch();
+  const cars = useSelector((state) => state.cars.allCars);
+  useEffect(() => {
+    dispatch(getCars());
+  }, []);
+
   const user = useSelector((state) => state.user.currentUser);
   const router = useRouter();
+  const [alertVisibility, setAlertVisibility] = useState(false);
+  const [message, setMessage] = useState("");
 
   const [review, setReview] = useState({
     opinion: "",
@@ -99,12 +108,19 @@ function OpinionForm({ cars }) {
         await axios.post("/api/post", test);
         dispatch(getTest());
         document.getElementById("opinionForm").reset();
-        alert("Recibimos tu opinion muchas gracias");
+        setMessage("Recibimos tu opinion muchas gracias");
+        handleVisibility();
       } catch (error) {
-        alert("Disculpa tuvimos un error al cargar tu opinion");
+        setMessage("Disculpa tuvimos un error al cargar tu opinion");
+        handleVisibility();
       }
     }
   };
+
+  function handleVisibility() {
+    setAlertVisibility(!alertVisibility);
+    document.body.classList.toggle("stopScroll");
+  }
 
   const isUser = () => {
     if (useAuth().user) return true;
@@ -150,7 +166,7 @@ function OpinionForm({ cars }) {
           <option value="Seleccionar" disabled>
             Seleccionar auto
           </option>
-          {/* {cars.map((car) => {
+          {cars?.map((car) => {
             return (
               <option key={car.id} value={car.id} name="car">
                 {car.model + " " + car.name}
@@ -165,7 +181,7 @@ function OpinionForm({ cars }) {
             </span>
           ) : (
             ""
-          )} */}
+          )}
         </select>
         <label htmlFor="rating">Rating</label>
         <input
@@ -173,6 +189,8 @@ function OpinionForm({ cars }) {
           type="number"
           onChange={handleChange}
           name="rating"
+          min={1}
+          max={5}
           className="w-full py-2 px-3 mb-3"
           placeholder="Numero entre 1-5"
         />
@@ -209,6 +227,18 @@ function OpinionForm({ cars }) {
           Enviar
         </button>
       </form>
+      <Alerts visible={alertVisibility}>
+        <p
+          className={`bg-naranja_enf text-white ${rubik} w-full text-center rounded-t-[15px]`}>
+          Alerta
+        </p>
+        <p className="text-[0.8em] px-4">{message}</p>
+        <button
+          onClick={handleVisibility}
+          className={` bg-naranja_enf ${rubik} text-white text-[0.8em] px-4 rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
+          Aceptar
+        </button>
+      </Alerts>
     </div>
   );
 }
