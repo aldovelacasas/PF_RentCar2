@@ -5,6 +5,7 @@ import { Rubik, Poppins } from "next/font/google";
 import { usePathname } from "next/navigation";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { BsFillBrightnessHighFill, BsFillMoonStarsFill } from "react-icons/bs";
+import { useRouter } from "next/navigation";
 
 const fontRubik = Rubik({
   weight: "600",
@@ -38,6 +39,13 @@ export default function NavUser({ userName, userPhoto }) {
   const { logOut } = useAuth();
 
   const route = usePathname();
+
+  const router = useRouter();
+
+  function handleLogOut() {
+    logOut();
+    router.push("/login");
+  }
 
   function handleDarkMode() {
     document.body.classList.toggle("dark");
@@ -112,7 +120,7 @@ export default function NavUser({ userName, userPhoto }) {
                 Hola, {userName}
               </span>
               <button
-                onClick={logOut}
+                onClick={handleLogOut}
                 className=" block w-full bg-naranja_enf hover:bg-negro_fondo text-white text-xs font-bold py-1 px-2 rounded focus:outline-none focus:shadow-outline">
                 Cerrar sesión
               </button>

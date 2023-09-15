@@ -42,7 +42,7 @@ export default function Login() {
     setError("");
     try {
       await login(user.email, user.password);
-      router.push("/homePage");
+      router.push("/UserDashBoard");
     } catch (error) {
       console.log(error.code);
       if (error.code === "auth/missing-password") {
