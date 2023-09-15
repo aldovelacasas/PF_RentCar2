@@ -31,7 +31,7 @@ export default function CarCard({ car, handleVisibility, handleDetail }) {
         <img
           src={car.image}
           alt={car.name}
-          className=" w-[100%] px-3 py-3 mx-auto mb-4 h-[10rem] object-cover bg-white"
+          className=" w-[100%] px-3 py-3 mx-auto mb-4 h-[12rem] object-cover bg-white  rounded-t-lg"
         />
         <div>
           <div className="flex flex-wrap justify-between px-3 mb-0">
@@ -63,7 +63,7 @@ export default function CarCard({ car, handleVisibility, handleDetail }) {
       <div className=" flex justify-center pb-3">
         <button
           onClick={() => handleVisibility(car)}
-          className={` w-[90%] bg-naranja_enf text-white text-[1em] px-4 py-1 shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
+          className={` w-[90%] bg-naranja_enf text-white text-[2em] px-4 py-3 shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
           Rentar
         </button>
       </div>
