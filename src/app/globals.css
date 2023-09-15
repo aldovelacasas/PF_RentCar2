@@ -6,3 +6,9 @@ body {
   @apply bg-gris_frente dark:bg-dark_frente; /* Fondo más claro */
   color: gray-800; /* Texto oscuro */
 }
+
+@layer utilities {
+  .pause {
+    animation-play-state: paused;
+  }
+}

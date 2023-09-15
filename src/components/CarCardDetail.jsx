@@ -47,7 +47,7 @@ export default function CarCardDetail({
       className={` ${poppins} fixed w-[100vw] top-0 left-0 pt-[15vh] h-[100vh] flex justify-center bg-[#dbdbdbcc] z-40 text-black dark:text-white`}>
       <div
         key={product.id}
-        className=" w-full max-h-[75vh] bg-white dark:bg-dark_blanco max-w-[1000px] shadow-md shadow-black hover:cursor-pointer border border-solid border-negro_fondo grid">
+        className=" w-full max-h-[78vh] bg-white dark:bg-dark_blanco max-w-[1000px] shadow-md shadow-black hover:cursor-pointer border border-solid border-negro_fondo grid">
         <main className="overflow-y-auto max-h-[60vh]">
           <p
             className={` ${rubik} bg-naranja_enf sticky top-0 py-1 text-center font-bold text-white`}>
@@ -107,7 +107,7 @@ export default function CarCardDetail({
         </main>
         <hr className="my-3 mx-2" />
         <div
-          className={` ${rubik} flex justify-evenly w-full lg:w-3/4 mx-[auto] text-[0.9em] py-6  pb-2 mb-4`}>
+          className={` ${rubik} flex justify-evenly w-full lg:w-3/4 mx-[auto] text-[0.9em] py-2  pb-2 mb-4`}>
           <button
             onClick={handleClose}
             className={` bg-gris_fondo dark:bg-dark_fondo text-black dark:text-white text-[1em] px-6 py-2 rounded-md shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>

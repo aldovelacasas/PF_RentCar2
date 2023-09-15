@@ -49,9 +49,9 @@ export default function NavUser({ userName, userPhoto }) {
       <nav
         className={` ${rubik} sticky text-black dark:text-white top-0 w-full z-20 lg:text-[1.5em] flex flex-wrap justify-between px-5 py-4`}>
         <div className="flex gap-8">
-          <Link href="/homePage">
+          <Link href="/UserDashBoard">
             <img
-              href="/homePage"
+              href="/UserDashBoard"
               src="https://drive.google.com/uc?export=download&id=1xRyrzCMxPuU6OX97500cJd7M7Veh0KXR"
               className="border-black border-[1.5px] rounded-sm w-[80px] md:w-[150px]"
             />
@@ -74,11 +74,11 @@ export default function NavUser({ userName, userPhoto }) {
           }>
           <li
             className={
-              route === "/homePage"
+              route === "/UserDashBoard"
                 ? "list-none text-naranja_enf underline "
                 : "list-none hover:text-naranja_enf transition ease-in-out duration-300   "
             }>
-            <Link href="/homePage">Dashboard</Link>
+            <Link href="/UserDashBoard">Dashboard</Link>
           </li>
 
           <li
