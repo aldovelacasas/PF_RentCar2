@@ -61,7 +61,7 @@ export default function Login() {
   const handleGoogleLogin = async () => {
     try {
       await loginWithGoogle();
-      router.push("/");
+      router.push("/UserDashBoard");
     } catch (error) {
       setError(error.message);
     }
@@ -135,28 +135,30 @@ export default function Login() {
                 Crear usuario
               </a>
             </div>
-            <div
+            <section
               id="alerta"
-              className="hidden bg-white dark:bg-dark_blanco rounded-2xl w-[300px] lg:w-[500px] fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pt-0">
-              <p
-                className={`bg-naranja_enf text-white text-[1.2em] ${rubik} w-full rounded-t-2xl text-center`}>
-                Ingresa tu contraseña:
-              </p>
-              <fieldset className="px-4">
-                <input
-                  type="password"
-                  id="input"
-                  placeholder="Contraseña"
-                  className="border-[2px] w-full border-black bg-gris_frente dark:bg-dark_frente my-4 pl-2 rounded-md"
-                />
-                <br />
-                <button
-                  id="boton"
-                  className={`bg-naranja_enf w-full justify-self-center text-white ${rubik} px-4 py-1 rounded-lg my-4 shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
-                  Aceptar
-                </button>
-              </fieldset>
-            </div>
+              className="bg-gris_fondo fixed top-0 left-0 w-[100vw] h-[100vh] hidden">
+              <div className=" bg-white dark:bg-dark_blanco rounded-2xl w-[300px] lg:w-[500px] fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pt-0">
+                <p
+                  className={`bg-naranja_enf text-white text-[1.2em] ${rubik} w-full rounded-t-2xl text-center`}>
+                  Ingresa tu contraseña:
+                </p>
+                <fieldset className="px-4">
+                  <input
+                    type="password"
+                    id="input"
+                    placeholder="Contraseña"
+                    className="border-[2px] w-full border-black bg-gris_frente dark:bg-dark_frente my-4 pl-2 rounded-md"
+                  />
+                  <br />
+                  <button
+                    id="boton"
+                    className={`bg-naranja_enf w-full justify-self-center text-white ${rubik} px-4 py-1 rounded-lg my-4 shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
+                    Aceptar
+                  </button>
+                </fieldset>
+              </div>
+            </section>
           </main>
         </form>
       </section>
