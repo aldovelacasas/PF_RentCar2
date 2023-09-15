@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 import { useAuth } from "@/app/context/AuthContext";
 import axios from "axios";
 // import { useSelector } from "react-redux/es/hooks/useSelector";
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getTest } from "@/store/slices/testimonio";
 
 const fontRubik = Rubik({
@@ -150,7 +150,7 @@ function OpinionForm({ cars }) {
           <option value="Seleccionar" disabled>
             Seleccionar auto
           </option>
-          {/* {cars.map((car) => {
+          {cars.map((car) => {
             return (
               <option key={car.id} value={car.id} name="car">
                 {car.model + " " + car.name}
@@ -165,7 +165,7 @@ function OpinionForm({ cars }) {
             </span>
           ) : (
             ""
-          )} */}
+          )}
         </select>
         <label htmlFor="rating">Rating</label>
         <input
