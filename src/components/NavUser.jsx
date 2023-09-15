@@ -5,6 +5,7 @@ import { Rubik, Poppins } from "next/font/google";
 import { usePathname } from "next/navigation";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { BsFillBrightnessHighFill, BsFillMoonStarsFill } from "react-icons/bs";
+import { useRouter } from "next/navigation";
 
 const fontRubik = Rubik({
   weight: "600",
@@ -39,6 +40,13 @@ export default function NavUser({ userName, userPhoto }) {
 
   const route = usePathname();
 
+  const router = useRouter();
+
+  function handleLogOut() {
+    logOut();
+    router.push("/login");
+  }
+
   function handleDarkMode() {
     document.body.classList.toggle("dark");
     setDark(!dark);
@@ -49,9 +57,9 @@ export default function NavUser({ userName, userPhoto }) {
       <nav
         className={` ${rubik} sticky text-black dark:text-white top-0 w-full z-20 lg:text-[1.5em] flex flex-wrap justify-between px-5 py-4`}>
         <div className="flex gap-8">
-          <Link href="/homePage">
+          <Link href="/UserDashBoard">
             <img
-              href="/homePage"
+              href="/UserDashBoard"
               src="https://drive.google.com/uc?export=download&id=1xRyrzCMxPuU6OX97500cJd7M7Veh0KXR"
               className="border-black border-[1.5px] rounded-sm w-[80px] md:w-[150px]"
             />
@@ -74,11 +82,11 @@ export default function NavUser({ userName, userPhoto }) {
           }>
           <li
             className={
-              route === "/homePage"
+              route === "/UserDashBoard"
                 ? "list-none text-naranja_enf underline "
                 : "list-none hover:text-naranja_enf transition ease-in-out duration-300   "
             }>
-            <Link href="/homePage">Dashboard</Link>
+            <Link href="/UserDashBoard">Dashboard</Link>
           </li>
 
           <li
@@ -112,7 +120,7 @@ export default function NavUser({ userName, userPhoto }) {
                 Hola, {userName}
               </span>
               <button
-                onClick={logOut}
+                onClick={handleLogOut}
                 className=" block w-full bg-naranja_enf hover:bg-negro_fondo text-white text-xs font-bold py-1 px-2 rounded focus:outline-none focus:shadow-outline">
                 Cerrar sesión
               </button>

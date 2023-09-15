@@ -25,6 +25,12 @@ module.exports = {
         dark_fondo: "#1e1e1e",
         dark_blanco: "#4e4e4e",
       },
+      keyframes: {
+        carousel: {
+          "0%": { transform: "translateX(10px)" },
+          "100%": { transform: "translateX(calc(-268.8px * 13))" },
+        },
+      },
     },
   },
   plugins: [],

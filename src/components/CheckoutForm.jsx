@@ -169,7 +169,7 @@ export default function CheckoutForm({ paymentKey }) {
           <p className="text-[1.5em]">${total.toLocaleString()} USD</p>
         </section>
         <form
-          className=" p-6 grid gap-6 shadow-2xl shadow-gris_fondo"
+          className=" p-6 grid gap-6 shadow-2xl shadow-gris_fondo dark:shadow-black"
           id="payment-form"
           onSubmit={handleSubmit}>
           <PaymentElement
