@@ -13,7 +13,11 @@ export function withAuth(ProtectedRoute) {
       }
     }, [user, router]);
 
-    return user ? <ProtectedRoute {...props} /> : null;
+    return user?.displayName === "Auto Contact" ? (
+      <ProtectedRoute {...props} />
+    ) : (
+      router.push("/login")
+    );
   }
 
   return AuthenticatedComponent;
