@@ -47,17 +47,11 @@ function Vehiculos() {
     setCurrentPage(1);
   }, [cars]);
 
-  function handleVisibility(data) {
+  function handleVisibility(data = detailData) {
     setDetailData(data);
-    // if (data.name) {
-    //   setModel(data.name);
-    // }
-    // if (data.price) {
-    //   setPrice(data.price);
-    // }
-    // if (data.image) {
-    //   setImage(data.image);
-    // }
+    if (visibility && detailVisibility) {
+      handleReturnToDetail(data);
+    }
     setVisibility(!visibility);
     if (document.body.classList.length === 1) {
       document.body.classList.toggle("stopScroll");
@@ -66,7 +60,7 @@ function Vehiculos() {
     }
   }
 
-  function handleDetail(data) {
+  function handleDetail(data = detailData) {
     setDetailData(data);
     handleDetailVisibility();
   }
@@ -74,6 +68,11 @@ function Vehiculos() {
   function handleDetailVisibility() {
     setDetailVisibility(!detailVisibility);
     document.body.classList.toggle("stopScroll");
+  }
+
+  function handleReturnToDetail(data) {
+    setDetailData(data);
+    setDetailVisibility(true);
   }
 
   let dataToShow = cars;
@@ -121,7 +120,6 @@ function Vehiculos() {
         <p className={`text-[2.4em] ${rubik} mb-2 text-center mt-6`}>
           Encuentra el vehículo ideal
         </p>
-        
       </section>
       <FiltroVehiculos />
       <section
@@ -133,7 +131,7 @@ function Vehiculos() {
                 key={car.id}
                 car={car}
                 handleVisibility={handleVisibility}
-                handleDetailVisibility={handleDetailVisibility}
+                handleDetailVisibility={handleDetail}
                 handleDetail={handleDetail}
               />
             );
@@ -215,12 +213,12 @@ function Vehiculos() {
         isAuth={user?.displayName !== undefined}
         visible={visibility}
         car={detailData}
-        handleVisible={handleVisibility}
+        handleVisible={() => handleVisibility(detailData)}
       />
       <CarCardDetail
         visible={detailVisibility}
         product={detailData}
-        handleClose={handleDetailVisibility}
+        handleClose={handleDetail}
         handleRentVisibility={handleVisibility}
       />
     </div>

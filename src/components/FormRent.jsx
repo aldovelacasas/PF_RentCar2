@@ -1,10 +1,14 @@
 /* eslint-disable @next/next/no-img-element */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { categorias } from "@/libs/categorias.js";
 import { BiSolidCar } from "react-icons/bi";
 import { FaCalendarAlt } from "react-icons/fa";
 import { Rubik, Poppins } from "next/font/google";
 import { useRouter } from "next/navigation";
+import { useDispatch, useSelector } from "react-redux";
+import { getRental } from "@/store/slices/rental";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const fontRubik = Rubik({
   weight: "600",
@@ -18,30 +22,62 @@ const fontPoppins = Poppins({
 
 const poppins = fontPoppins.className;
 const rubik = fontRubik.className;
+let currentRentals;
 
-const today = new Date().toISOString().split("T")[0];
+Date.prototype.addDays = function (days) {
+  var date = new Date(this.valueOf());
+  date.setDate(date.getDate() + days);
+  return date;
+};
 
-function FormRent({
-  visible = false,
-  dat = { startDate: today, endDate: today },
-  isAuth = false,
-  car,
-  handleVisible,
-}) {
+function getDates(startDate, stopDate) {
+  let dateArray = [];
+  let currentDate = startDate;
+  while (currentDate <= stopDate) {
+    dateArray.push(new Date(currentDate));
+    currentDate = currentDate.addDays(1);
+  }
+  return dateArray;
+}
+
+function FormRent({ visible = false, isAuth = false, car, handleVisible }) {
+  const dispatch = useDispatch();
+  let allRentals = useSelector((state) => state.rental.allRentals);
+
+  useEffect(() => {
+    if (car) {
+      dispatch(getRental());
+    }
+  }, [car]);
+  let clashingIntervals = [];
+
+  if (car && allRentals[0] && allRentals[0].id) {
+    currentRentals = allRentals.filter((r) => r.productID === car.id);
+
+    currentRentals.forEach((r) => {
+      clashingIntervals.push(
+        getDates(new Date(r.fecha_inicio), new Date(r.fecha_fin))
+      );
+    });
+    clashingIntervals = clashingIntervals.flat(Infinity);
+  }
+
   const [errors, setErrors] = useState({});
-  const [dates, setDate] = useState(dat);
+  const [max, setMax] = useState(null);
   const [category, setCategory] = useState("Sedan");
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
+
+  useEffect(() => {
+    if (startDate) {
+      let maxDate = new Date();
+      maxDate.setDate(startDate.getDate() + 15);
+      setMax(maxDate);
+    }
+  }, [startDate]);
 
   function handleOption(e) {
     setCategory(e.target.value);
-  }
-
-  function handleDateChange(e) {
-    setDate({ ...dates, [e.target.name]: e.target.value });
-  }
-  function handleEndDateChange(e) {
-    setErrors({});
-    setDate({ ...dates, [e.target.name]: e.target.value });
   }
 
   let router = useRouter();
@@ -53,25 +89,38 @@ function FormRent({
     router.push("/login");
   }
 
+  function handleEndDateChange(date) {
+    setEndDate(date);
+    if (startDate <= date) {
+      setErrors({});
+    }
+  }
+
+  function containInvalidDates() {
+    let currentDates = getDates(startDate, endDate).map((d) => d.getDate());
+    let compare = clashingIntervals.map((d) => d.getDate());
+    return currentDates.some((d) => compare.includes(d));
+  }
+
   function handleValidation(e) {
     e.preventDefault();
-    if (dates.startDate > dates.endDate) {
+    if (startDate > endDate) {
       setErrors({
         ...errors,
         dates: "La fecha de fin no puede ser menor a la fecha de inicio.",
       });
       return;
-    } else if (dates.startDate <= dates.endDate) {
-      setErrors({});
-      // let year = dates.endDate.split("-")[0];
-      // let month = dates.endDate.split("-")[1];
-      // let day = dates.endDate.split("-")[2]
-      let endDate = new Date(dates.endDate);
-      let startDate = new Date(dates.startDate);
+    } else if (containInvalidDates()) {
+      setErrors({
+        ...errors,
+        dates: "No puedes incluir fechas inválidas.",
+      });
+      return;
+    } else if (startDate <= endDate) {
       let cant = (endDate - startDate) / 3600000 / 24;
       cant += 1;
       router.push(
-        `/payment?item=${car.model}&cant=${cant}&img=${car.image}&price=${car.price}&startDate=${dates.startDate}&endDate=${dates.endDate}`,
+        `/payment?item=${car.model}&cant=${cant}&img=${car.image}&price=${car.price}&startDate=${startDate}&endDate=${endDate}`,
         {
           query: { item: `${car.model}`, cant: `${cant}` },
         }
@@ -81,7 +130,6 @@ function FormRent({
       }
     }
   }
-
   if (visible === false) return null;
   return (
     <div
@@ -130,13 +178,13 @@ function FormRent({
               className="w-1/2 max-h-[200px] my-4 object-scale-down"
             />
             <fieldset>
-              <label htmlFor="category" className="">
-                <BiSolidCar className="inline text-naranja_enf mr-1" /> Elige
-                una categoría
-              </label>
-              <br />
               {!car.model && (
                 <>
+                  <label htmlFor="category" className="">
+                    <BiSolidCar className="inline text-naranja_enf mr-1" />{" "}
+                    Elige una categoría
+                  </label>
+                  <br />
                   <select
                     className="bg-gris_fondo dark:bg-dark_fondo w-[200px] mb-4 text-[0.9em] md:w-[500px]"
                     name="category"
@@ -156,13 +204,15 @@ function FormRent({
                 de inicio
               </label>
               <br />
-              <input
-                className="bg-gris_fondo dark:bg-dark_fondo w-[200px] mb-4 text-[0.9em] md:w-[500px]"
-                name="startDate"
-                type="date"
-                min={today}
-                value={dates.startDate}
-                onChange={handleDateChange}
+              <DatePicker
+                selected={startDate}
+                onChange={(dates) => setStartDate(dates)}
+                selectsStart
+                startDate={startDate}
+                endDate={endDate}
+                minDate={new Date()}
+                className="bg-gris_fondo w-full pl-2 rounded-md"
+                excludeDates={clashingIntervals}
               />
               <br />
             </fieldset>
@@ -172,14 +222,17 @@ function FormRent({
                 de fin
               </label>
               <br />
-              <input
-                className="bg-gris_fondo dark:bg-dark_fondo w-[200px] text-[0.9em] md:w-[500px]"
-                name="endDate"
-                type="date"
-                min={dates.startDate}
-                value={dates.endDate}
-                onChange={handleEndDateChange}
-              />{" "}
+              <DatePicker
+                selected={endDate}
+                onChange={(date) => handleEndDateChange(date)}
+                selectsEnd
+                startDate={startDate}
+                endDate={endDate}
+                minDate={startDate}
+                maxDate={max}
+                className="bg-gris_fondo w-full pl-2 rounded-md"
+                excludeDates={clashingIntervals}
+              />
               <br />
             </fieldset>
             {errors.dates && (
