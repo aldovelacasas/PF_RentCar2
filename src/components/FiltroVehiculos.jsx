@@ -67,6 +67,7 @@ export default function FiltroVehiculos() {
           </label>
           <input
             type="text"
+            placeholder="Búsqueda por modelo"
             className={`bg-white min-w-[80px] w-[95%] rounded h-10  p-2 text-black text-xs`}
             onChange={handleSearch}
           />
@@ -81,7 +82,7 @@ export default function FiltroVehiculos() {
             value={marca}
             onChange={setMarca}
             labelledBy="Modelo"
-            className={` min-w-[80px] max-w-[95%] rounded py-1`}
+            className={` min-w-[80px] max-w-[95%] rounded py-1 text-black`}
             overrideStrings={{
               allItemsAreSelected: "Todos los modelos",
               clearSearch: "Limpiar busqueda",
@@ -106,7 +107,7 @@ export default function FiltroVehiculos() {
             value={categoria}
             onChange={setCategoria}
             labelledBy="Select"
-            className={` min-w-[80px] max-w-[95%] rounded py-1`}
+            className={` min-w-[80px] max-w-[95%] rounded py-1 text-black`}
             overrideStrings={{
               allItemsAreSelected: "Todas las categorias",
               clearSearch: "Limpiar busqueda",
@@ -129,7 +130,7 @@ export default function FiltroVehiculos() {
             value={capacidad}
             onChange={setCapacidad}
             labelledBy="Capacidad"
-            className={` min-w-[80px] max-w-[95%] rounded py-1`}
+            className={` min-w-[80px] max-w-[95%] rounded py-1 text-black`}
             overrideStrings={{
               allItemsAreSelected: "Todas las capacidades",
               clearSearch: "Limpiar busqueda",

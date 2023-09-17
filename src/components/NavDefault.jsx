@@ -22,6 +22,7 @@ import React, { useState } from "react";
 import "./NavBar/nav.css";
 import Link from "next/link";
 // import { useAuth } from "@/app/context/AuthContext";
+import WhatsAppButton from "@/components/whatsAppButton.jsx";
 
 export default function NavDefault() {
   const [dark, setDark] = useState(false);
@@ -39,7 +40,7 @@ export default function NavDefault() {
   return (
     <>
       <nav
-        className={` ${rubik} sticky top-0 w-full dark:text-white text-black dark:bg-negro_fondo bg-transparent z-20 lg:text-[1.5em] flex flex-wrap justify-between  items-center px-5 py-4`}>
+        className={` ${rubik} sticky top-0 w-full dark:text-white text-black dark:bg-negro_fondo bg-transparent z-20 lg:text-[1.3em] flex flex-wrap justify-between  items-center px-5 py-4`}>
         <div className="flex gap-8">
           <Link href="/homePage">
             <img
@@ -134,6 +135,7 @@ export default function NavDefault() {
           <BsFillMoonStarsFill className="text-white" />
         )}
       </button>
+      <WhatsAppButton />
     </>
   );
 }

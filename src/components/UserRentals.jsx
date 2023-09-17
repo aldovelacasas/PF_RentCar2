@@ -64,7 +64,7 @@ function UserRentals({ visible }) {
       if (user && vehicle) {
         return {
           ...r,
-          user: user.userName ?? user.emailUser,
+          user: user.emailUser,
           vehicle: vehicle.name,
           image: vehicle.image,
           status:
@@ -77,7 +77,7 @@ function UserRentals({ visible }) {
       }
     });
   }
-
+  console.log(completeRentals);
   useEffect(() => {
     if (!allUsers.length || !allRentals.length || !allCars.length) {
       setAux(true);
@@ -100,7 +100,7 @@ function UserRentals({ visible }) {
       completeRentals[0] &&
       completeRentals[0].hasOwnProperty("user")
     ) {
-      rentals = completeRentals.filter((r) => r.u === user.email);
+      rentals = completeRentals.filter((r) => r.user === user.email);
     }
     dataToShow = rentals;
   }, [completeRentals]);
@@ -182,6 +182,7 @@ function UserRentals({ visible }) {
       setArrow({ ...arrowInitialState, [sortCategory]: true });
     }
   }
+  console.log(data);
 
   function handleRent() {
     router.push("/vehiculos");

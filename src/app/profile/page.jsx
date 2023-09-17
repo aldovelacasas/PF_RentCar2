@@ -7,6 +7,7 @@ import { Rubik, Poppins } from "next/font/google";
 import { validateUserForm } from "@/libs/functions";
 // import { useSelector } from "react-redux/es/hooks/useSelector";
 import { useSelector } from "react-redux";
+import { useRouter } from "next/navigation";
 
 import axios from "axios";
 import { useAuth } from "@/app/context/AuthContext";
@@ -29,6 +30,7 @@ const rubik = fontRubik.className;
 function Profile() {
   const user = useSelector((state) => state.user.currentUser);
   const { logOut } = useAuth();
+  const router = useRouter();
 
   // const router = useRouter();
   // if (!login) {
@@ -108,9 +110,9 @@ function Profile() {
       </header>
       <main className="bg-white dark:bg-dark_blanco rounded-2xl w-4/5 place-self-center  py-6">
         <h1 className={`${rubik} text-[1.5em] pl-[10%]`}>{inputs.nombre}</h1>
-        <div className="grid gap-8 place-content-center w-full">
+        <div className="grid gap-8 place-content-center w-full overflow-hidden">
           <section className="w-full place-self-center bg-gris_fondo dark:bg-dark_fondo rounded-2xl grid p-8">
-            <h3 className="w-full font-bold mb-2 text-[1.2em]">
+            <h3 className="w-fit font-bold mb-2 text-[1.2em]">
               Información de la cuenta:
             </h3>
             <div className="grid lg:grid-cols-2">
@@ -132,9 +134,9 @@ function Profile() {
                   Cambiar foto de perfil
                 </button>
               </div>
-              <div className="grid place-content-center w-full">
+              <div className="grid place-content-center w-fit">
                 <p className="py-2">
-                  <span className="font-bold">Correo: </span>
+                  <span className="font-bold ">Correo: </span>
                   {inputs.correo}
                 </p>
                 <p className="py-2">
@@ -217,16 +219,16 @@ function Profile() {
         <p className="text-[0.8em] px-4">
           ¿Estás seguro de querer darte de baja de Auto Connect?
         </p>
-        <div className="flex justify-evenly w-1/2">
+        <div className="flex justify-evenly lg:w-3/4">
           <button
             onClick={handleVisible}
-            className={` bg-naranja_enf ${rubik} text-white text-[0.8em] px-4 rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
-            Sí, darme de baja
+            className={` bg-negro_fondo ${rubik} text-white text-[0.6em] px-4 rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
+            No, volver
           </button>
           <button
             onClick={handleVisible}
-            className={` bg-negro_fondo ${rubik} text-white text-[0.8em] px-4 rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
-            No, volver
+            className={` bg-naranja_enf ${rubik} text-white text-[0.6em] px-4 rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
+            Sí, darme de baja
           </button>
         </div>
       </Alerts>

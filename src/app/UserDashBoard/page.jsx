@@ -5,6 +5,8 @@ import PromoCarousel from "@/components/PromoCarousel";
 import UserRentals from "@/components/UserRentals";
 import CarCarousel from "@/components/CarCarousel";
 import { Rubik, Poppins } from "next/font/google";
+import { useRouter } from "next/navigation";
+import { useAuth } from "../context/AuthContext";
 
 const fontRubik = Rubik({
   weight: "600",
@@ -20,6 +22,12 @@ const poppins = fontPoppins.className;
 const rubik = fontRubik.className;
 
 function page() {
+  const router = useRouter();
+  const { user } = useAuth();
+  if (user.email === "autocontactofficial@gmail.com") {
+    router.push("/AdminConsole");
+  }
+
   return (
     <main className="bg-gris_frente dark:bg-dark_frente text-black dark:text-white overflow-x-hidden">
       <header

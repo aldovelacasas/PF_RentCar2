@@ -106,7 +106,7 @@ function RentalsTable({ visible }) {
     if (dataToShow && dataToShow[0]) {
       setData(sliceData(dataToShow, currentPage, quantityPerPage));
     }
-  }, [completeRentals, currentPage, dataToShow]);
+  }, [completeRentals, currentPage]);
 
   let currentPages = slicePage(pages, currentPage, 2);
 

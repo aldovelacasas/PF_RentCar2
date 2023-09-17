@@ -5,18 +5,15 @@ import { Rubik, Poppins } from "next/font/google";
 import RentalsTable from "@/components/RentalsTable";
 import VehiclesTable from "@/components/VehiclesTable";
 import HelpForm from "@/components/HelpForm";
-import { useRouter } from "next/navigation";
 import axios from "axios";
 import Alerts from "@/components/Alerts";
 // import MonthGraph from "@/components/MonthGraph";
 import { withAuth } from "@/withAuth";
 import dynamic from "next/dynamic";
 
-
-const MonthGraph = dynamic(() => import('@/components/MonthGraph'), {
+const MonthGraph = dynamic(() => import("@/components/MonthGraph"), {
   ssr: false, // Evitar que se cargue en el servidor
 });
-
 
 const fontRubik = Rubik({
   weight: "600",
@@ -29,8 +26,6 @@ const fontPoppins = Poppins({
 });
 const poppins = fontPoppins.className;
 const rubik = fontRubik.className;
-
-let validation = true;
 
 function AdminMain() {
   const initialState = {
@@ -50,8 +45,6 @@ function AdminMain() {
   const [alertsVisibility, setAlertsVisibility] = useState(false);
   const [visibility, setVisibility] = useState(initialState);
   const [id, setId] = useState("");
-
-  let router = useRouter();
 
   function handleVisibility(name) {
     setVisibility({
@@ -73,10 +66,6 @@ function AdminMain() {
     setId(dataId);
   }
 
-  if (!validation) {
-    router.push("/");
-    return null;
-  }
   return (
     <div className="grid bg-gris_frente dark:bg-dark_frente overflow-x-hidden text-black dark:text-white">
       <header
@@ -103,9 +92,8 @@ function AdminMain() {
             }>
             ▼ Gráfico de rentas ▼
           </h3>
-          
-            <MonthGraph visible={visibility.graphVisibility} />
-          
+
+          <MonthGraph visible={visibility.graphVisibility} />
         </div>
         <div
           className={

@@ -26,6 +26,7 @@ import "./NavBar/nav.css";
 import { useAuth } from "@/app/context/AuthContext";
 import { BiLink } from "react-icons/bi";
 import Link from "next/link";
+import WhatsAppButton from "@/components/whatsAppButton.jsx";
 
 export default function NavUser({ userName, userPhoto }) {
   const user = useSelector((state) => state.user.currentUser);
@@ -128,6 +129,7 @@ export default function NavUser({ userName, userPhoto }) {
           </div>
         </section>
       </nav>
+      <WhatsAppButton />
       <button
         onClick={handleDarkMode}
         className={`absolute top-[100px] right-2 p-4 py-2 dark:bg-gris_fondo bg-dark_fondo "

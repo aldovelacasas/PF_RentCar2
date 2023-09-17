@@ -26,7 +26,7 @@ export function emailValidate(input) {
 }
 
 export function validateContactForm(inputs) {
-  const regexText = /^[a-z0-9_,;.-]*$/i;
+  const regexText = /^[a-z0-9_,;.-áéíóú]*$/i;
   const regexEmail = /^([\w]{1,20})+@([\w]{1,10})+\.([a-z]{2,4})$/i;
 
   let errors = {};

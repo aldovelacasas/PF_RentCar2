@@ -43,16 +43,6 @@ function AboutPage() {
           así como toda la infomación que necesites para que puedas comenzar tu
           próximo viaje sin preocupaciones.
         </p>
-        <br />
-        <p className={`text-[0.8em] ${rubik} text-center`}>
-          ¿Donde nos encontras?
-        </p>
-        <Map
-          googleMapURL={mapURL}
-          loadingElement={<div style={{ height: "100%" }} />}
-          containerElement={<div style={{ height: "50vh" }} />}
-          mapElement={<div style={{ height: "100%" }} />}
-        />
         <div className="flex items-baseline">
           <div className="w-full flex flex-col justify-center items-center gap-x-4  px-3">
             <figure className="bg-[#ea4e398a]  rounded-full h-[65px] w-[65px] flex justify-center items-center">
@@ -82,6 +72,17 @@ function AboutPage() {
             </p>
           </div>
         </div>
+        <br />
+
+        <p className={`text-[0.8em] ${rubik} text-center`}>
+          ¿Donde nos encontras?
+        </p>
+        <Map
+          googleMapURL={mapURL}
+          loadingElement={<div style={{ height: "100%" }} />}
+          containerElement={<div style={{ height: "50vh" }} />}
+          mapElement={<div style={{ height: "100%" }} />}
+        />
       </section>
 
       <section className="p-4 pb-[90px] grid justify-self-center">

@@ -18,11 +18,7 @@ import { PiCar, PiCarProfile, PiPhoneCallBold } from "react-icons/pi";
 import { BiSolidCar } from "react-icons/bi";
 import { Rubik, Poppins } from "next/font/google";
 import { useRouter } from "next/navigation.js";
-
-
-
-import React from 'react';
-import WhatsAppButton from "@/components/whatsAppButton.jsx";
+import React from "react";
 
 const fontRubik = Rubik({
   weight: "600",
@@ -109,51 +105,49 @@ function HomePage() {
 
   function handleScrollForm() {
     if (typeof window !== "undefined") {
-      
-    
-    
-    if (window.innerWidth <= 400) {
-      window.scrollTo({
-        top: 230,
-        behavior: "smooth",
-      });
-    } else if (window.innerWidth <= 800) {
-      window.scrollTo({
-        top: 270,
-        behavior: "smooth",
-      });
-    } else {
-      window.scrollTo({
-        top: 470,
-        behavior: "smooth",
-      });
+      if (window.innerWidth <= 400) {
+        window.scrollTo({
+          top: 230,
+          behavior: "smooth",
+        });
+      } else if (window.innerWidth <= 800) {
+        window.scrollTo({
+          top: 270,
+          behavior: "smooth",
+        });
+      } else {
+        window.scrollTo({
+          top: 470,
+          behavior: "smooth",
+        });
+      }
     }
-  }
   }
   function handleScrollInfo() {
     if (typeof window !== "undefined") {
-    
-    
-    if (window.innerWidth <= 400) {
-      window.scrollTo({
-        top: 540,
-        behavior: "smooth",
-      });
-    } else if (window.innerWidth <= 800) {
-      window.scrollTo({
-        top: 580,
-        behavior: "smooth",
-      });
-    } else {
-      window.scrollTo({
-        top: 1000,
-        behavior: "smooth",
-      });
+      if (window.innerWidth <= 400) {
+        window.scrollTo({
+          top: 540,
+          behavior: "smooth",
+        });
+      } else if (window.innerWidth <= 800) {
+        window.scrollTo({
+          top: 580,
+          behavior: "smooth",
+        });
+      } else {
+        window.scrollTo({
+          top: 1000,
+          behavior: "smooth",
+        });
+      }
     }
-  }
   }
   function handleDateChange(e) {
     setDate({ ...dates, [e.target.name]: e.target.value });
+    if (errors) {
+      setErrors({});
+    }
   }
 
   function handleValidation(e) {
@@ -190,7 +184,6 @@ function HomePage() {
   }
 
   return (
-
     <div className="grid bg-gris_frente dark:bg-dark_frente md:text-[1.5em] text-black dark:text-white overflow-x-hidden">
       <header
         className={`bg-gris_fondo dark:bg-dark_fondo relative ${rubik} text-[1em] sm:text-[1.5em]  pl-[10%] space-y-0 space-x-2.5`}>
@@ -211,7 +204,6 @@ function HomePage() {
         <p className={`${poppins} text-[0.6em] mt-2 z-3`}>
           Renta el auto de tus sueños con precios imbatibles,
         </p>
-      <WhatsAppButton />
         <p className={`${poppins} text-[0.6em] pb-4`}>
           km ilimitados, opciones flexibles y mucho más.
         </p>

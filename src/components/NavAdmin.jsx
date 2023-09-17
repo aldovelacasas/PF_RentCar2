@@ -48,9 +48,9 @@ export default function NavUser({ userName, userPhoto }) {
       <nav
         className={` ${rubik} sticky text-black dark:text-white top-0 w-full z-20 lg:text-[1.5em] flex flex-wrap justify-between content-center px-5 py-4`}>
         <div className="flex gap-8 ">
-          <Link href="/homePage">
+          <Link href="/AdminConsole">
             <img
-              href="/homePage"
+              href="/AdminConsole"
               src="https://drive.google.com/uc?export=download&id=1xRyrzCMxPuU6OX97500cJd7M7Veh0KXR"
               className="border-black border-[1.5px] rounded-sm w-[80px] md:w-[150px]"
             />

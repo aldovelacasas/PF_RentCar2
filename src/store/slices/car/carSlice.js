@@ -50,7 +50,7 @@ export const carSlice = createSlice({
         state.showCars = state.searchCars;
       } else if (busqueda && busqueda.length > 0) {
         state.showCars = state.allCars.filter((car) =>
-          car.name.toLowerCase().includes(busqueda.toLowerCase())
+          car.model.toLowerCase().includes(busqueda.toLowerCase())
         );
         state.searchCars = state.showCars;
       }

@@ -47,7 +47,7 @@ function PromoCarousel() {
       className="flex mx-[auto] w-[80vw]">
       <button
         onClick={handlePrevIndex}
-        className="rotate-180  md:px-4 bg-gris_fondo hover:bg-negro_fondo md:text-[2em] hover:text-white active:bg-white">
+        className="rotate-180 dark:text-black  md:px-4 bg-gris_fondo hover:bg-negro_fondo md:text-[2em] hover:text-white active:bg-white">
         ➤
       </button>
       <div className="relative flex justify-center">
@@ -73,7 +73,7 @@ function PromoCarousel() {
       </div>
       <button
         onClick={handleNextIndex}
-        className=" md:px-4 bg-gris_fondo hover:bg-negro_fondo md:text-[2em] hover:text-white active:bg-white">
+        className=" md:px-4 dark:text-black bg-gris_fondo hover:bg-negro_fondo md:text-[2em] hover:text-white active:bg-white">
         ➤
       </button>
     </section>
