@@ -58,98 +58,100 @@ export default function FiltroVehiculos() {
   }
 
   return (
-    <form
-      className={`sticky top-[100px] z-30 pt-2 text-[0.8em] bg-negro_fondo pb-5 rounded-xl  w-full mx-auto pl-4 justify-center items-center space-y-2 sm:space-y-0 sm:flex sm:flex-wrap text-black dark:text-white`}>
-      <div className={`flex  flex-col  sm:w-[20%] w-full`}>
-        <label htmlFor="busqueda" className={`text-[1rem] text-white mb-1`}>
-          Búsqueda
-        </label>
-        <input
-          type="text"
-          className={`bg-white min-w-[80px] w-[95%] rounded h-10  p-2 text-black text-xs`}
-          onChange={handleSearch}
-        />
-      </div>
-      <div className={`flex flex-col sm:w-[20%] w-full`}>
-        <label htmlFor="Modelo" className={`text-[1rem] text-white mb-1`}>
-          Marca
-        </label>
+    <section className="md:sticky md:top-[80px] z-10 bg-gris_fondo py-6 dark:bg-dark_fondo">
+      <form
+        className={`pt-2 text-[0.8em] bg-negro_fondo pb-5 rounded-xl  w-full mx-auto pl-4 justify-center items-center space-y-2 sm:space-y-0 sm:flex sm:flex-wrap text-black dark:text-white`}>
+        <div className={`flex  flex-col  sm:w-[20%] w-full`}>
+          <label htmlFor="busqueda" className={`text-[1rem] text-white mb-1`}>
+            Búsqueda
+          </label>
+          <input
+            type="text"
+            className={`bg-white min-w-[80px] w-[95%] rounded h-10  p-2 text-black text-xs`}
+            onChange={handleSearch}
+          />
+        </div>
+        <div className={`flex flex-col sm:w-[20%] w-full`}>
+          <label htmlFor="Modelo" className={`text-[1rem] text-white mb-1`}>
+            Marca
+          </label>
 
-        <MultiSelect
-          options={optionsMarcas}
-          value={marca}
-          onChange={setMarca}
-          labelledBy="Modelo"
-          className={` min-w-[80px] max-w-[95%] rounded py-1`}
-          overrideStrings={{
-            allItemsAreSelected: "Todos los modelos",
-            clearSearch: "Limpiar busqueda",
-            clearSelected: "Limpiar seleccion",
-            noOptions: "No hay opciones",
-            search: "Buscar",
-            selectAll: "Seleccionar Todo",
-            selectAllFiltered: "Select All (Filtered)",
-            selectSomeItems: "Seleccionar...",
-            create: "Crear",
-          }}
-          closeOnChangedValue={true}
-        />
-      </div>
-      <div className={`flex flex-col sm:w-[20%] w-full`}>
-        <label htmlFor="categoria" className={`text-[1rem] text-white mb-1`}>
-          Categoría
-        </label>
+          <MultiSelect
+            options={optionsMarcas}
+            value={marca}
+            onChange={setMarca}
+            labelledBy="Modelo"
+            className={` min-w-[80px] max-w-[95%] rounded py-1`}
+            overrideStrings={{
+              allItemsAreSelected: "Todos los modelos",
+              clearSearch: "Limpiar busqueda",
+              clearSelected: "Limpiar seleccion",
+              noOptions: "No hay opciones",
+              search: "Buscar",
+              selectAll: "Seleccionar Todo",
+              selectAllFiltered: "Select All (Filtered)",
+              selectSomeItems: "Seleccionar...",
+              create: "Crear",
+            }}
+            closeOnChangedValue={true}
+          />
+        </div>
+        <div className={`flex flex-col sm:w-[20%] w-full`}>
+          <label htmlFor="categoria" className={`text-[1rem] text-white mb-1`}>
+            Categoría
+          </label>
 
-        <MultiSelect
-          options={optionsCategorias}
-          value={categoria}
-          onChange={setCategoria}
-          labelledBy="Select"
-          className={` min-w-[80px] max-w-[95%] rounded py-1`}
-          overrideStrings={{
-            allItemsAreSelected: "Todas las categorias",
-            clearSearch: "Limpiar busqueda",
-            clearSelected: "Limpiar seleccion",
-            noOptions: "No hay opciones",
-            search: "Buscar",
-            selectAll: "Seleccionar Todo",
-            selectAllFiltered: "Select All (Filtered)",
-            selectSomeItems: "Seleccionar...",
-            create: "Crear",
-          }}
-        />
-      </div>
-      <div className={`flex flex-col  sm:w-[20%] w-full`}>
-        <label htmlFor="categoria" className={`text-[1rem] text-white mb-1`}>
-          Capacidad
-        </label>
-        <MultiSelect
-          options={optionsCapacidades}
-          value={capacidad}
-          onChange={setCapacidad}
-          labelledBy="Capacidad"
-          className={` min-w-[80px] max-w-[95%] rounded py-1`}
-          overrideStrings={{
-            allItemsAreSelected: "Todas las capacidades",
-            clearSearch: "Limpiar busqueda",
-            clearSelected: "Limpiar seleccion",
-            noOptions: "No hay opciones",
-            search: "Buscar",
-            selectAll: "Seleccionar Todo",
-            selectAllFiltered: "Select All (Filtered)",
-            selectSomeItems: "Seleccionar...",
-            create: "Crear",
-          }}
-        />
-      </div>
-      <div className={`flex flex-col  sm:w-[20%] w-full`}>
-        <label
-          htmlFor="categoria"
-          className={`text-[1rem] text-white mb-1 pb-1`}>
-          Ordenar por:
-        </label>
-        <DropMenuOrder></DropMenuOrder>
-      </div>
-    </form>
+          <MultiSelect
+            options={optionsCategorias}
+            value={categoria}
+            onChange={setCategoria}
+            labelledBy="Select"
+            className={` min-w-[80px] max-w-[95%] rounded py-1`}
+            overrideStrings={{
+              allItemsAreSelected: "Todas las categorias",
+              clearSearch: "Limpiar busqueda",
+              clearSelected: "Limpiar seleccion",
+              noOptions: "No hay opciones",
+              search: "Buscar",
+              selectAll: "Seleccionar Todo",
+              selectAllFiltered: "Select All (Filtered)",
+              selectSomeItems: "Seleccionar...",
+              create: "Crear",
+            }}
+          />
+        </div>
+        <div className={`flex flex-col  sm:w-[20%] w-full`}>
+          <label htmlFor="categoria" className={`text-[1rem] text-white mb-1`}>
+            Capacidad
+          </label>
+          <MultiSelect
+            options={optionsCapacidades}
+            value={capacidad}
+            onChange={setCapacidad}
+            labelledBy="Capacidad"
+            className={` min-w-[80px] max-w-[95%] rounded py-1`}
+            overrideStrings={{
+              allItemsAreSelected: "Todas las capacidades",
+              clearSearch: "Limpiar busqueda",
+              clearSelected: "Limpiar seleccion",
+              noOptions: "No hay opciones",
+              search: "Buscar",
+              selectAll: "Seleccionar Todo",
+              selectAllFiltered: "Select All (Filtered)",
+              selectSomeItems: "Seleccionar...",
+              create: "Crear",
+            }}
+          />
+        </div>
+        <div className={`flex flex-col  sm:w-[20%] w-full`}>
+          <label
+            htmlFor="categoria"
+            className={`text-[1rem] text-white mb-1 pb-1`}>
+            Ordenar por:
+          </label>
+          <DropMenuOrder></DropMenuOrder>
+        </div>
+      </form>
+    </section>
   );
 }
