@@ -7,6 +7,7 @@ import UsersRecTable from "@/components/UsersRecTable";
 import HelpForm from "@/components/HelpForm";
 import { useRouter } from "next/navigation";
 import Alerts from "@/components/Alerts";
+import { withAuth } from "@/withAuth";
 
 const fontRubik = Rubik({
   weight: "600",
@@ -155,4 +156,4 @@ function Recoveries() {
   );
 }
 
-export default Recoveries;
+export default withAuth(Recoveries);
