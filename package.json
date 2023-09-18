@@ -36,6 +36,7 @@
     "react-dom": "18.2.0",
     "react-icons": "^4.10.1",
     "react-multi-select-component": "^4.3.4",
+    "react-player": "^2.13.0",
     "react-redux": "^8.1.2",
     "serverless-mysql": "^1.5.5",
     "stripe": "^13.4.0",

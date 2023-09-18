@@ -4,6 +4,8 @@
 import { Rubik, Poppins } from "next/font/google";
 import { usePathname } from "next/navigation";
 import { BsFillBrightnessHighFill, BsFillMoonStarsFill } from "react-icons/bs";
+import ReactPlayer from 'react-player'
+
 const fontRubik = Rubik({
   weight: "600",
   subsets: ["latin"],
@@ -38,8 +40,10 @@ export default function NavDefault() {
 
   return (
     <>
+      
       <nav
         className={` ${rubik} sticky top-0 w-full dark:text-white text-black dark:bg-negro_fondo bg-transparent z-20 lg:text-[1.5em] flex flex-wrap justify-between  items-center px-5 py-4`}>
+
         <div className="flex gap-8">
           <Link href="/homePage">
             <img
@@ -48,6 +52,14 @@ export default function NavDefault() {
             />
           </Link>
         </div>
+
+        <ReactPlayer url='https://www.youtube.com/watch?v=P5gCrlsPt3Y&t=40s'      
+          width='10%'
+          height='70px'
+          
+          controls={true}
+        />
+
         <div
           onClick={() => setNavActive(!navActive)}
           className={
