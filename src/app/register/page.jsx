@@ -4,6 +4,7 @@ import { useAuth } from "../context/AuthContext";
 import { useRouter } from "next/navigation";
 import Alert from "../login/Alert";
 import { Poppins, Rubik } from "next/font/google";
+import { useTranslation } from "react-i18next";
 
 const fontPoppins = Poppins({
   weight: "400",
@@ -27,6 +28,7 @@ export default function Register() {
   });
   const { signup, loginWithGoogle } = useAuth();
   const [error, setError] = useState();
+  const { t } = useTranslation();
   const router = useRouter();
 
   const handleChange = ({ target: { name, value } }) => {
@@ -64,12 +66,12 @@ export default function Register() {
             onSubmit={handleSubmit}
             className={` ${poppins} mb-4 bg-white dark:bg-dark_blanco bg-opacity-70 shadow-md rounded-2xl pb-4`}>
             <h1 className="bg-gris_fondo dark:bg-dark_fondo text-center font-bold text-[1.2em] rounded-t-2xl py-2 mb-5 ">
-              Crea una cuenta
+              {t("create")}
             </h1>
             <section className="px-8">
               <fieldset className="pb-3">
                 <label htmlFor="email" className="font-bold">
-                  Email
+                  Email:
                 </label>
                 <input
                   type="email"
@@ -82,7 +84,7 @@ export default function Register() {
 
               <fieldset className="pb-3">
                 <label htmlFor="password" className="font-bold">
-                  Contraseña
+                  {t("password")}:
                 </label>
                 <input
                   type="password"
@@ -93,7 +95,7 @@ export default function Register() {
                 />
               </fieldset>
               <fieldset className="pb-3">
-                <label className="font-bold">Nombre de usuario:</label>
+                <label className="font-bold">{t("username")}:</label>
                 <input
                   type="text"
                   name="username"
@@ -103,7 +105,7 @@ export default function Register() {
                 />
               </fieldset>
               <fieldset className="pb-3">
-                <label className="font-bold">Telefono:</label>
+                <label className="font-bold">{t("phone")}:</label>
                 <input
                   type="text"
                   name="phone"
@@ -113,7 +115,7 @@ export default function Register() {
                 />
               </fieldset>
               <fieldset className="pb-3">
-                <label className="font-bold">Pasaporte:</label>
+                <label className="font-bold">{t("passport")}:</label>
                 <input
                   type="text"
                   name="passport"
@@ -125,7 +127,7 @@ export default function Register() {
 
               <button
                 className={`${rubik} text-white mt-5 font-bold bg-naranja_enf my-3 rounded p-2 w-full shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
-                Registrarse
+                {t("register")}
               </button>
             </section>
           </form>

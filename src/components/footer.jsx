@@ -1,14 +1,14 @@
 "use client";
 import Link from "next/link";
+import { useTranslation } from "react-i18next";
 
 function Footer() {
+  const { t } = useTranslation();
   return (
     <div className="bg-negro_fondo text-white py-8 flex flex-col sm:flex-row justify-between items-center p-4 font-poppins">
       <div className="sm:w-1/3 p-4">
-        <h3 className="text-lg font-semibold">Renta de autos</h3>
-        <p className="text-sm">
-          Ofrecemos la mejor relación calidad/precio en renta de vehículos.
-        </p>
+        <h3 className="text-lg font-semibold">{t("rentadeautos")}</h3>
+        <p className="text-sm">{t("pfooter")} </p>
         <div className="flex items-center text-sm mt-2">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -45,46 +45,44 @@ function Footer() {
         </div>
       </div>
       <div className="sm:w-1/3 p-4 mt-4 sm:mt-0">
-        <h4 className="text-lg font-semibold">
-          Horarios de entrega-recepción de vehículos
-        </h4>
+        <h4 className="text-lg font-semibold">{t("infoFooter")}</h4>
         <p className="text-sm mt-2">
-          Lun-Vie: 9:00am - 9:00pm
+          {t("horarios")}
           <br />
-          Sab-Dom: 9:00am - 7:00pm
+          {t("horarios2")}
         </p>
       </div>
       <div className="sm:w-1/3 p-4 mt-4 sm:mt-0 w-full">
-        <h2 className="text-lg font-semibold">Mapa de Sitio</h2>
+        <h2 className="text-lg font-semibold">{t("map")}</h2>
         <ul className="mt-2 space-y-2 sm:ml-0 sm:pl-0">
           <li className="text-red">
             <Link href="/homePage" className="hover:font-bold">
-              Renta un vehículo
+              {t("rentacar")}
             </Link>
           </li>
           <li>
             <Link href="/vehiculos" className="hover:font-bold">
-              Vehículos
+              {t("cars")}
             </Link>
           </li>
           <li>
             <Link href="/testimoniales" className="hover:font-bold">
-              Testimoniales
+              {t("testimonials")}
             </Link>
           </li>
           <li>
             <Link href="/about" className="hover:font-bold">
-              Sobre nosotros
+              {t("about2")}
             </Link>
           </li>
           <li>
             <Link href="/contact" className="hover:font-bold">
-              ¿Tienes una duda?
+              {t("contact2")}
             </Link>
           </li>
           <li>
             <Link href="/login" className="hover:font-bold">
-              Ingresa
+              {t("login")}
             </Link>
           </li>
         </ul>

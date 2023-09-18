@@ -5,6 +5,7 @@ import { Rubik, Poppins } from "next/font/google";
 import { aboutUs } from "@/libs/aboutUs";
 import { PiCar, PiMapPinBold, PiMoney } from "react-icons/pi";
 import Map from "@/components/maps";
+import { useTranslation } from "react-i18next";
 
 const mapURL = `http://maps.googleapis.com/maps/api/js?v=3.exp&key=${process.env.mapsKey}`;
 
@@ -22,11 +23,13 @@ const poppins = fontPoppins.className;
 const rubik = fontRubik.className;
 
 function AboutPage() {
+  const { t } = useTranslation();
+
   return (
     <div className="grid bg-gris_frente dark:bg-dark_frente md:text-[1.5em] text-black dark:text-white">
       <header
         className={`bg-gris_fondo dark:bg-dark_fondo flex items-center h-[175px] ${rubik} text-[1em] sm:text-[1.5em] pl-[10%] space-y-0 space-x-2.5`}>
-        <p className={`text-[1.2em] mt-2 pl-4`}>Nuestro Equipo</p>
+        <p className={`text-[1.2em] mt-2 pl-4`}>{t("team")}</p>
         <img
           src="https://drive.google.com/uc?export=download&id=1NW9G16ClvYbufG9oBwPhKfgqBc_zg8r0"
           className=" float-right h-[20vh] md:h-[30vh] lg:h-[35vh] absolute right-[10%] scale-x-[-1] top-[10%] z-1"
@@ -34,19 +37,11 @@ function AboutPage() {
       </header>
       <section
         className={`pt-4 ${poppins} mx-[auto] w-3/4 text-[0.8em] bg-gris_frente dark:bg-dark_frente pb-10 mt-8 sm:text-[1.5em]`}>
-        <p className={`text-[0.8em] ${rubik} text-center`}>¿Quiénes somos?</p>
+        <p className={`text-[0.8em] ${rubik} text-center`}>{t("somos")}</p>
         <p className={`text-[1em] ${rubik} text-center`}>Auto Connect</p>
-        <p className="pt-4 mb-2 px-8 text-[0.8em]">
-          Somos una empresa con más de 5 años de experiencia en el negocio de
-          renta de vehículos, cuya misión ese la de brindarte a ti y a tus
-          acompañantes un excelente servicio, autos de alta calidad y limpieza
-          así como toda la infomación que necesites para que puedas comenzar tu
-          próximo viaje sin preocupaciones.
-        </p>
+        <p className="pt-4 mb-2 px-8 text-[0.8em]">{t("textabout")}</p>
         <br />
-        <p className={`text-[0.8em] ${rubik} text-center`}>
-          ¿Donde nos encontras?
-        </p>
+        <p className={`text-[0.8em] ${rubik} text-center`}>{t("donde")}</p>
         <Map
           googleMapURL={mapURL}
           loadingElement={<div style={{ height: "100%" }} />}

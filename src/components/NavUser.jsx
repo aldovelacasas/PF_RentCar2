@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { BsFillBrightnessHighFill, BsFillMoonStarsFill } from "react-icons/bs";
 import { useRouter } from "next/navigation";
+import { useTranslation } from "react-i18next";
 
 const fontRubik = Rubik({
   weight: "600",
@@ -29,6 +30,7 @@ import Link from "next/link";
 
 export default function NavUser({ userName, userPhoto }) {
   const user = useSelector((state) => state.user.currentUser);
+  const { t } = useTranslation();
   if (user.userImage) {
     userPhoto = user.userImage;
   }
@@ -86,7 +88,7 @@ export default function NavUser({ userName, userPhoto }) {
                 ? "list-none text-naranja_enf underline "
                 : "list-none hover:text-naranja_enf transition ease-in-out duration-300   "
             }>
-            <Link href="/UserDashBoard">Dashboard</Link>
+            <Link href="/UserDashBoard">{t("dashboard")}</Link>
           </li>
 
           <li
@@ -95,7 +97,7 @@ export default function NavUser({ userName, userPhoto }) {
                 ? "list-none text-naranja_enf underline"
                 : "list-none hover:text-naranja_enf transition ease-in-out duration-300 "
             }>
-            <Link href="/vehiculos">Vehículos</Link>
+            <Link href="/vehiculos">{t("cars")}</Link>
           </li>
 
           <li
@@ -104,7 +106,7 @@ export default function NavUser({ userName, userPhoto }) {
                 ? "list-none text-naranja_enf underline"
                 : "list-none hover:text-naranja_enf transition ease-in-out duration-300 "
             }>
-            <Link href="/contact">Contáctanos</Link>
+            <Link href="/contact">{t("contact")}</Link>
           </li>
 
           <div className="flex items-center">
@@ -117,12 +119,12 @@ export default function NavUser({ userName, userPhoto }) {
             </a>
             <div className="">
               <span className="block w-full text-sm pb-1">
-                Hola, {userName}
+                {t("hello")}, {userName}
               </span>
               <button
                 onClick={handleLogOut}
                 className=" block w-full bg-naranja_enf hover:bg-negro_fondo text-white text-xs font-bold py-1 px-2 rounded focus:outline-none focus:shadow-outline">
-                Cerrar sesión
+                {t("logout")}
               </button>
             </div>
           </div>
