@@ -6,6 +6,7 @@ import { store } from "@/store";
 import { Inter } from "next/font/google";
 import { AuthContextProvider } from "./context/AuthContext";
 const inter = Inter({ subsets: ["latin"] });
+import ChatBar from "@/components/ChatBar";
 import Loading from "./loading";
 import { Suspense } from "react";
 
@@ -22,6 +23,7 @@ export default function RootLayout({ children }) {
           <Providers store={store}>
             <Navbar />
             <Suspense fallback={<Loading />}>{children}</Suspense>
+            <ChatBar />
             <Footer />
           </Providers>
         </AuthContextProvider>
