@@ -22,7 +22,7 @@ import { useRouter } from "next/navigation.js";
 
 
 import React from 'react';
-import WhatsAppButton from "@/components/whatsAppButton.jsx";
+
 
 const fontRubik = Rubik({
   weight: "600",
@@ -211,7 +211,7 @@ function HomePage() {
         <p className={`${poppins} text-[0.6em] mt-2 z-3`}>
           Renta el auto de tus sueños con precios imbatibles,
         </p>
-      <WhatsAppButton />
+    
         <p className={`${poppins} text-[0.6em] pb-4`}>
           km ilimitados, opciones flexibles y mucho más.
         </p>
