@@ -29,24 +29,21 @@ const DropMenuOrder = () => {
       width: "95%",
       margin: "0px",
       padding: "0px",
-
       //   margin: "5px",
     },
-
     searchBox: {
       border: "none",
-      fontSize: "10px",
+      fontSize: "0.8rem",
+      padding: "5px 0",
       //   minHeight: "10px",
       background: "white",
       margin: "0px 0 5px 0",
 
       //   padding: "8px 0px 5px 5px",
     },
-    searchWrapper: {
-      padding: "2px",
-    },
     inputField: {
-      margin: "10px",
+      margin: "5px",
+      marginTop: "6px",
     },
     chips: {
       margin: "2px 0 2px 0",
