@@ -63,7 +63,7 @@ export default function NavUser({ userName, userPhoto }) {
             <img
               href="/UserDashBoard"
               src="https://drive.google.com/uc?export=download&id=1xRyrzCMxPuU6OX97500cJd7M7Veh0KXR"
-              className="border-black border-[1.5px] rounded-sm w-[80px] md:w-[150px]"
+              className="border-black border-[1.5px] rounded-sm w-[150px]"
             />
           </Link>
         </div>

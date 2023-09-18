@@ -7,6 +7,8 @@ import { validateContactForm } from "@/libs/functions";
 import Alerts from "@/components/Alerts";
 import { Rubik, Poppins } from "next/font/google";
 
+import WhatsAppButton from "@/components/whatsAppButton.jsx";
+
 const fontRubik = Rubik({
   weight: "600",
   subsets: ["latin"],
@@ -94,11 +96,12 @@ function Page() {
         className={`md:w-4/5 pt-2 ${poppins} text-[0.8em] sm:text-[1em] max-w-lg justify-self-center bg-gris_frente dark:bg-dark_frente pb-12`}>
         <p className={`text-[0.8em] ${rubik} mb-2 text-center mt-6`}>
           ¿Necesitas más información?
+          
         </p>
         <p className={`text-[1em] ${rubik} mb-6 text-center`}>
           Cuéntanos tus dudas y te responderemos al momento
         </p>
-
+        
         <fieldset className="justify-self-center mb-4">
           <label htmlFor="name" className="">
             Nombre y apellido
@@ -172,7 +175,10 @@ function Page() {
           className={`bg-naranja_enf w-full justify-self-center text-white text-[0.7em] px-4 py-1 ${poppins} shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
           Enviar
         </button>
-      </form>
+         </form>
+         <p className={`text-[1em] ${rubik} mb-6 text-center`}> Tambien contactanos via</p>
+         <br />
+        <WhatsAppButton className="border border-green-500" phoneNumber="+543816426399" />
       <Alerts visible={visibility}>
         <p
           className={`bg-naranja_enf text-white ${rubik} w-full text-center rounded-t-[15px]`}>
