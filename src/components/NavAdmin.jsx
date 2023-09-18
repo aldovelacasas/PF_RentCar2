@@ -5,6 +5,7 @@ import { Rubik, Poppins } from "next/font/google";
 import { usePathname } from "next/navigation";
 import { BsFillBrightnessHighFill, BsFillMoonStarsFill } from "react-icons/bs";
 import { useRouter } from "next/navigation";
+import { useTranslation } from "react-i18next";
 
 const fontRubik = Rubik({
   weight: "600",
@@ -28,6 +29,7 @@ export default function NavUser({ userName, userPhoto }) {
   const [dark, setDark] = useState(false);
   const [navActive, setNavActive] = useState(false);
   const { logOut } = useAuth();
+  const { t } = useTranslation();
 
   const route = usePathname();
 
@@ -77,7 +79,7 @@ export default function NavUser({ userName, userPhoto }) {
                 ? "list-none text-naranja_enf underline "
                 : "list-none hover:text-naranja_enf transition ease-in-out duration-300  "
             }>
-            <Link href="/AdminConsole">Consola</Link>
+            <Link href="/AdminConsole">{t("console")}</Link>
           </li>
 
           <li
@@ -86,7 +88,7 @@ export default function NavUser({ userName, userPhoto }) {
                 ? "list-none text-naranja_enf underline"
                 : "list-none hover:text-naranja_enf transition ease-in-out duration-300 "
             }>
-            <Link href="/AdminConsole/Recoveries">Recuperaciones</Link>
+            <Link href="/AdminConsole/Recoveries">{t("recoveries")}</Link>
           </li>
 
           <div className="flex items-center">
@@ -99,12 +101,12 @@ export default function NavUser({ userName, userPhoto }) {
             </a>
             <div className="">
               <span className="block w-full text-sm pb-1">
-                Hola, {userName}
+                {t("hello")}, {userName}
               </span>
               <button
                 onClick={handleLogOut}
                 className=" block w-full bg-naranja_enf hover:bg-negro_fondo text-white text-xs font-bold py-1 px-2 rounded focus:outline-none focus:shadow-outline">
-                Cerrar sesión
+                {t("logout")}
               </button>
             </div>
           </div>
