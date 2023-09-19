@@ -9,6 +9,7 @@ import VehicleDetail from "./VehicleDetail";
 import { getCars } from "@/store/slices/car";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
+import { useTranslation } from "react-i18next";
 
 const fontRubik = Rubik({
   weight: "600",
@@ -34,7 +35,7 @@ function VehiclesTable({ visible, handleAlertsVisibility }) {
 
   const router = useRouter();
   const dispatch = useDispatch();
-
+  const { t } = useTranslation();
   const [currentPage, setCurrentPage] = useState(1);
   const [detailData, setDetailData] = useState();
   const [vehiclesDetailVisibility, setVehiclesDetailVisibility] =
@@ -151,18 +152,16 @@ function VehiclesTable({ visible, handleAlertsVisibility }) {
     <section className="text-[10px] text-black dark:text-white sm:text-[12px] md:text-[16px] px-4">
       <figure className="bg-white dark:bg-dark_blanco grid place-content-center sm:px-2 md:px-8 py-4 rounded-2xl">
         <h3 className="text-[1.2em] pl-2">
-          Vehículos
+          {t("cars")}
           <span
             className={`${poppins} text-[0.8em] bg-gris_fondo dark:bg-dark_fondo ml-2 py-1 px-2 rounded-full`}>
             {dataToShow?.length}
           </span>
         </h3>
-        <p className={`${poppins} text-[0.9em] pl-2`}>
-          Vista de los vehículos de la empresa
-        </p>
+        <p className={`${poppins} text-[0.9em] pl-2`}>{t("view-car")}</p>
         <div className="flex flex-wrap pl-2">
           <label htmlFor="search" className="shrink-0 basis-[100%]">
-            Búsqueda:
+            {t("search")}:
           </label>
           <input
             name="search"
@@ -176,8 +175,8 @@ function VehiclesTable({ visible, handleAlertsVisibility }) {
           <select
             className="max-w-[30%]  bg-naranja_enf text-white px-2 rounded-full cursor-pointer shadow-sm shadow-black hover:shadow-md hover:shadow-black"
             onChange={handleSearchCategory}>
-            <option value="name">Marca</option>
-            <option value="model">Modelo</option>
+            <option value="name">{t("brand")}:</option>
+            <option value="model">{t("model")}:</option>
           </select>
         </div>
         <table className={`${poppins} mt-6`}>
@@ -203,7 +202,9 @@ function VehiclesTable({ visible, handleAlertsVisibility }) {
                 className={`${rubik} md:min-w-[120px] px-1 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo `}>
                 {arrow.price ? "Precio ▼" : "Precio"}
               </th>
-              <th className={`${rubik} px-1 md:px-4 text-left`}>Acciones</th>
+              <th className={`${rubik} px-1 md:px-4 text-left`}>
+                {t("actions")}
+              </th>
               {/* </>
               )} */}
             </tr>
@@ -314,7 +315,7 @@ function VehiclesTable({ visible, handleAlertsVisibility }) {
       <button
         onClick={handleCreateVehiclesVisibility}
         className={`bg-naranja_enf w-full text-white text-[1.2em] px-4 py-2 rounded-md shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
-        Añadir vehículo +
+        {t("add-car")} +
       </button>
       <VehicleDetail
         handleReload={handleReload}

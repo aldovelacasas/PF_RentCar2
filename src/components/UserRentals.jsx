@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getRental, getCars, getUser } from "@/store/slices/rental";
 import { useAuth } from "@/app/context/AuthContext";
 import { useRouter } from "next/navigation";
+import { useTranslation } from "react-i18next";
 
 const fontRubik = Rubik({
   weight: "600",
@@ -27,7 +28,7 @@ let dataToShow;
 function UserRentals({ visible }) {
   const { user } = useAuth();
   const router = useRouter();
-
+  const { t } = useTranslation();
   const arrowInitialState = {
     id: false,
     user: false,
@@ -193,18 +194,16 @@ function UserRentals({ visible }) {
         <>
           <figure className="bg-white dark:bg-dark_blanco grid place-content-center sm:px-2 md:px-8 py-4 rounded-2xl">
             <h3 className="text-[1.2em]">
-              Rentas
+              {t("rentas")}
               <span
                 className={`${poppins} text-[0.8em] bg-gris_fondo dark:bg-dark_fondo ml-2 py-1 px-2 rounded-full`}>
                 {dataToShow?.length}
               </span>
             </h3>
-            <p className={`${poppins} text-[0.9em]`}>
-              Vista de las rentas del mes
-            </p>
+            <p className={`${poppins} text-[0.9em]`}>{t("view-rent")}</p>
             <div className="flex flex-wrap">
               <label htmlFor="search" className="shrink-0 basis-[100%]">
-                Búsqueda:
+                {t("search")}:
               </label>
               <input
                 name="search"
@@ -243,7 +242,7 @@ function UserRentals({ visible }) {
                     {arrow.monto ? "Monto ▼" : "Monto"}
                   </th>
                   <th className={`${rubik} px-1 md:px-4 text-left `}>
-                    Detalle
+                    {t("detail")}
                   </th>
                 </tr>
                 {data?.map((d) => {
@@ -284,7 +283,7 @@ function UserRentals({ visible }) {
                         <button
                           onClick={() => handleRentVisibility(d)}
                           className="px-2 md:px-4 py-1 border-[1px] rounded-md border-negro_fondo dark:bg-dark_fondo hover:bg-negro_fondo hover:text-white">
-                          Detalle
+                          {t("detail")}
                         </button>
                       </td>
                     </tr>
@@ -371,12 +370,12 @@ function UserRentals({ visible }) {
         <section className="grid place-content-center gap-4">
           <p
             className={`${rubik} text-center text-[2em] bg-gris_fondo mx-[auto] px-6 py-1 rounded-md dark:text-black`}>
-            No tienes rentas todavía
+            {t("rent-out")}
           </p>
           <button
             onClick={handleRent}
             className="px-3 py-1 shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black  bg-naranja_enf text-white rounded-md">
-            Rentar ahora
+            {t("rent-now")}
           </button>
         </section>
       )}

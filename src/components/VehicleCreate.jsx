@@ -5,6 +5,7 @@ import { Rubik, Poppins } from "next/font/google";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import validation from "@/libs/validation";
+import { useTranslation } from "react-i18next";
 
 const fontRubik = Rubik({
   weight: "600",
@@ -24,7 +25,7 @@ function VehicleCreate({ visible, handleVisible, handleReload }) {
   useEffect(() => {
     const jsondata = window.localStorage.getItem("formData");
     const data = JSON.parse(jsondata);
-
+    const { t } = useTranslation();
     for (const key in data) {
       if (key === "image") {
         setLocalImage(data[key]);
@@ -115,7 +116,7 @@ function VehicleCreate({ visible, handleVisible, handleReload }) {
       <figure className=" w-full md:w-4/5 lg:w-3/4 max-h-[75vh] place-items-center bg-white dark:bg-dark_blanco max-w-[1000px] shadow-md shadow-black hover:cursor-pointer border border-solid border-negro_fondo grid">
         <h3
           className={`${rubik} w-1/2 text-center py-1 bg-negro_fondo text-white rounded-full mb-2`}>
-          Vehículo #{inputs.id}
+          {t("car")} #{inputs.id}
         </h3>
         <form className="bg-gris_fondo dark:bg-dark_fondo lg:w-1/2 px-6 rounded-2xl overflow-y-scroll max-h-[420px] py-3">
           <fieldset className="grid place-content-center">
@@ -139,7 +140,7 @@ function VehicleCreate({ visible, handleVisible, handleReload }) {
           <hr className="my-3 mx-2 border-white overflow-y-hidden" />
           <fieldset>
             <label htmlFor="name" className={`font-bold`}>
-              Marca:
+              {t("brand")}:
             </label>{" "}
             <br />
             <input
@@ -154,7 +155,7 @@ function VehicleCreate({ visible, handleVisible, handleReload }) {
           </fieldset>
           <fieldset>
             <label htmlFor="model" className={`font-bold`}>
-              Modelo:
+              {t("model")}:
             </label>{" "}
             <br />
             <input
@@ -169,7 +170,7 @@ function VehicleCreate({ visible, handleVisible, handleReload }) {
           </fieldset>
           <fieldset>
             <label htmlFor="year" className={`font-bold`}>
-              Año:
+              {t("year")}:
             </label>
             <br />
             <input
@@ -184,7 +185,7 @@ function VehicleCreate({ visible, handleVisible, handleReload }) {
           </fieldset>
           <fieldset>
             <label htmlFor="type" className={`font-bold`}>
-              Tipo:
+              {t("type")}:
             </label>{" "}
             <br />
             <select
@@ -198,7 +199,7 @@ function VehicleCreate({ visible, handleVisible, handleReload }) {
           </fieldset>
           <fieldset>
             <label htmlFor="capacity" className={`font-bold`}>
-              Capacidad:
+              {t("cap")}:
             </label>{" "}
             <br />
             <input
@@ -213,7 +214,7 @@ function VehicleCreate({ visible, handleVisible, handleReload }) {
           </fieldset>
           <fieldset>
             <label htmlFor="transmission" className={`font-bold`}>
-              Transmisión:
+              {t("transm")}:
             </label>{" "}
             <br />
             <select
@@ -226,7 +227,7 @@ function VehicleCreate({ visible, handleVisible, handleReload }) {
           </fieldset>
           <fieldset>
             <label htmlFor="price" className={`font-bold`}>
-              Precio:
+              {t("price")}:
             </label>{" "}
             <br />
             <input
@@ -241,7 +242,7 @@ function VehicleCreate({ visible, handleVisible, handleReload }) {
           </fieldset>
           <fieldset>
             <label htmlFor="description" className={`font-bold`}>
-              Descripción:
+              {t("descrip")}:
             </label>{" "}
             <br />
             <textarea
@@ -262,13 +263,13 @@ function VehicleCreate({ visible, handleVisible, handleReload }) {
             type="button"
             onClick={handleVisible}
             className={`bg-negro_fondo text-white text-[1em] px-8 py-4 shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
-            Volver
+            {t("volver")}
           </button>
           <button
             type="submit"
             onClick={handleSubmit}
             className={` px-8 py-4 bg-naranja_enf text-white text-[1em] shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
-            Aceptar cambios
+            {t("acep-camb")}
           </button>
         </div>
       </figure>

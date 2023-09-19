@@ -202,7 +202,7 @@ function ProductForm() {
           <label
             htmlFor="type"
             className="block text-gray-700 text-sm font-bold mb-2">
-            Tipo
+            {t("type")}
           </label>
           <input
             value={product.type}
@@ -226,7 +226,7 @@ function ProductForm() {
           <label
             htmlFor="capacity"
             className="block text-gray-700 text-sm font-bold mb-2">
-            Capacidad
+            {t("cap")}
           </label>
           <input
             value={product.capacity}
@@ -250,7 +250,7 @@ function ProductForm() {
           <label
             htmlFor="transmission"
             className="block text-gray-700 text-sm font-bold mb-2">
-            Transmision
+            {t("transm")}
           </label>
           <input
             value={product.transmission}
@@ -274,7 +274,7 @@ function ProductForm() {
           <label
             htmlFor="description"
             className="block text-gray-700 text-sm font-bold mb-2">
-            Descripcion
+            {t("descrip")}
           </label>
           <textarea
             value={product.description}
@@ -289,7 +289,7 @@ function ProductForm() {
           <label
             htmlFor="price"
             className="block text-gray-700 text-sm font-bold mb-2">
-            Precio
+            {t("price")}
           </label>
           <input
             value={product.price}
@@ -313,7 +313,7 @@ function ProductForm() {
           <label
             htmlFor="image"
             className="block text-gray-700 text-sm font-bold mb-2">
-            Imagen
+            {t("img")}
           </label>
           <input
             name="image"
@@ -331,7 +331,7 @@ function ProductForm() {
             <span
               className={`${alertPoppins} text-sm`}
               style={{ color: "red" }}>
-              Vuelve a subir tu archivo
+              {t("resub")}
             </span>
           ) : (
             ""
@@ -352,7 +352,7 @@ function ProductForm() {
           }`}
           type="submit"
           disabled={!ready()}>
-          Guardar auto
+          {t("save-car")}
         </button>
       </div>
     </form>

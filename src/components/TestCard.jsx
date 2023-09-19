@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { Rubik, Poppins } from "next/font/google";
+import { useTranslation } from "react-i18next";
 
 const fontRubik = Rubik({
   weight: "600",
@@ -21,6 +22,7 @@ function convertirATitulo(cadena) {
 }
 
 function TestCard({ name, description, profession, rating, image }) {
+  const { t } = useTranslation();
   return (
     <div className="p-4 my-5 border border-gray-300 sm:mx-20 rounded-md max-w-[80%] lg:w-[60%] bg-gris_fondo dark:bg-dark_fondo shadow-gray-400 shadow-sm hover:shadow-black transition duration-700 ease-in-out">
       <h4
@@ -42,7 +44,7 @@ function TestCard({ name, description, profession, rating, image }) {
             <h4 className="text-base font-medium">
               {name ? convertirATitulo(name) : "Anonimo"}
             </h4>
-            <p className="text-sm text-gray-500">Cliente</p>
+            <p className="text-sm text-gray-500">{t("client")}</p>
           </div>
         </div>
         <div className="flex items-center text-yellow-400 space-x-1 mr-1">

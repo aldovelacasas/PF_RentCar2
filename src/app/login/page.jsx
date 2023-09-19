@@ -143,7 +143,7 @@ export default function Login() {
               <div className=" bg-white dark:bg-dark_blanco rounded-2xl w-[300px] lg:w-[500px] fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pt-0">
                 <p
                   className={`bg-naranja_enf text-white text-[1.2em] ${rubik} w-full rounded-t-2xl text-center`}>
-                  Ingresa tu contraseña:
+                  {t("password-in")}:
                 </p>
                 <fieldset className="px-4">
                   <input
@@ -156,7 +156,7 @@ export default function Login() {
                   <button
                     id="boton"
                     className={`bg-naranja_enf w-full justify-self-center text-white ${rubik} px-4 py-1 rounded-lg my-4 shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
-                    Aceptar
+                    {t("accept")}
                   </button>
                 </fieldset>
               </div>

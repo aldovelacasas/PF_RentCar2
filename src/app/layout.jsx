@@ -34,10 +34,10 @@ i18n.use(initReactI18next).init({
   },
 });
 
-export const metadata = {
-  title: "Auto Connect",
-  description: "Soy Henry final proyect",
-};
+// export const metadata = {
+//   title: "Auto Connect",
+//   description: "Soy Henry final proyect",
+// };
 
 export default function RootLayout({ children }) {
   return (

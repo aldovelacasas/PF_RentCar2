@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getRental } from "@/store/slices/rental";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { useTranslation } from "react-i18next";
 
 const fontRubik = Rubik({
   weight: "600",
@@ -33,6 +34,7 @@ Date.prototype.addDays = function (days) {
 function getDates(startDate, stopDate) {
   let dateArray = [];
   let currentDate = startDate;
+
   while (currentDate <= stopDate) {
     dateArray.push(new Date(currentDate));
     currentDate = currentDate.addDays(1);
@@ -44,6 +46,7 @@ function FormRent({ visible = false, isAuth = false, car, handleVisible }) {
   const dispatch = useDispatch();
   let allRentals = useSelector((state) => state.rental.allRentals);
   const user = useSelector((state) => state.user.currentUser);
+  const { t } = useTranslation();
   useEffect(() => {
     if (car) {
       dispatch(getRental());
@@ -153,25 +156,25 @@ function FormRent({ visible = false, isAuth = false, car, handleVisible }) {
       <form className="fixed w-3/4 justify-self-center top-[15%] flex flex-col items-center max-h-[80vh] overflow-x-auto bg-white dark:bg-dark_blanco border-[2px] border-black rounded-2xl">
         <p
           className={`bg-naranja_enf sticky top-0 text-white ${rubik} w-full text-center rounded-t-[15px] mb-4`}>
-          Renta tu vehículo
+          {t("rentacar2")}
         </p>
         {isAuth === false ? (
           <fieldset className="pt-4 grid">
             <hr />
             <p className=" w-4/5 text-center place-self-center md:w-full text-[1em]">
-              Para poder rentar un vehículo, necesitas estar registrado
+              {t("invalid-sesion")}{" "}
             </p>
             <fieldset className="flex justify-evenly w-full place-self-center lg:w-2/3 py-6">
               <button
                 type="button"
                 onClick={handleVisible}
                 className={` bg-gris_fondo dark:bg-dark_fondo ${rubik} text-[1em] px-4 py-2 rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
-                Cancelar
+                {t("cancel")}
               </button>
               <button
                 onClick={handleLogin}
                 className={` bg-naranja_enf ${rubik} text-white px-4 py-2 text-[1em] rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
-                Inicia Sesión
+                {t("sign in")}
               </button>
             </fieldset>
           </fieldset>
@@ -179,13 +182,12 @@ function FormRent({ visible = false, isAuth = false, car, handleVisible }) {
           <>
             {car.model ? (
               <p className={`${rubik} text-[1.2em]`}>
-                Modelo:
+                {t("model")}:
                 <span className="text-naranja_enf"> {car.model}</span>
               </p>
             ) : (
               <p className={`${rubik} text-[1.2em]`}>
-                Categoría:
-                <span className="text-naranja_enf"> {car.type}</span>
+                {t("cat")}:<span className="text-naranja_enf"> {car.type}</span>
               </p>
             )}
             <img
@@ -198,7 +200,7 @@ function FormRent({ visible = false, isAuth = false, car, handleVisible }) {
                 <>
                   <label htmlFor="category" className="">
                     <BiSolidCar className="inline text-naranja_enf mr-1" />{" "}
-                    Elige una categoría
+                    {t("category")}
                   </label>
                   <br />
                   <select
@@ -216,8 +218,8 @@ function FormRent({ visible = false, isAuth = false, car, handleVisible }) {
             </fieldset>
             <fieldset>
               <label htmlFor="fechaInicio" className="">
-                <FaCalendarAlt className="inline text-naranja_enf mr-1" /> Fecha
-                de inicio
+                <FaCalendarAlt className="inline text-naranja_enf mr-1" />
+                {t("fechainicio")}
               </label>
               <br />
               <DatePicker
@@ -234,8 +236,8 @@ function FormRent({ visible = false, isAuth = false, car, handleVisible }) {
             </fieldset>
             <fieldset>
               <label htmlFor="endDate" className="">
-                <FaCalendarAlt className="inline text-naranja_enf mr-1" /> Fecha
-                de fin
+                <FaCalendarAlt className="inline text-naranja_enf mr-1" />{" "}
+                {t("fechafin")}
               </label>
               <br />
               <DatePicker
@@ -262,7 +264,7 @@ function FormRent({ visible = false, isAuth = false, car, handleVisible }) {
                 type="button"
                 onClick={handleVisible}
                 className={` bg-gris_fondo dark:bg-dark_fondo ${rubik} text-[1em] px-6 py-2 rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
-                Cancelar
+                {t("cancel")}
               </button>
               {errors.info ? (
                 <button
@@ -274,7 +276,7 @@ function FormRent({ visible = false, isAuth = false, car, handleVisible }) {
                 <button
                   onClick={handleValidation}
                   className={` bg-naranja_enf ${rubik} text-white text-[1em] px-6 py-2 rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
-                  Rentar
+                  {t("rentar")}
                 </button>
               )}
             </fieldset>

@@ -202,10 +202,7 @@ function HomePage() {
           {t("renta-de-vehiculos")}
         </p>
         <p className={`${poppins} text-[0.6em] mt-2 z-3`}>
-          Renta el auto de tus sueños con precios imbatibles,
-        </p>
-        <p className={`${poppins} text-[0.6em] pb-4`}>
-          km ilimitados, opciones flexibles y mucho más.
+          {t("renta-sueños")}
         </p>
         <p className={`${poppins} text-[0.6em] pb-4`}>{t("km")}</p>
         <div className="flex place-content-evenly w-full sm:w-2/3 mt-3 pb-10 md:pt-[40px] lg:w-1/2">

@@ -1,4 +1,5 @@
 import { Rubik } from "next/font/google";
+import { useTranslation } from "react-i18next";
 const fontRubik = Rubik({
   subsets: ["latin"],
 });
@@ -6,6 +7,7 @@ const fontRubik = Rubik({
 const rubik = fontRubik.className;
 
 function Form(props) {
+  const { t } = useTranslation();
   return (
     <form className="z-50">
       <input
@@ -18,7 +20,7 @@ function Form(props) {
       <button
         className={`${rubik} bg-naranja_enf rounded px-2 py-2 text-white font-bold shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}
         onClick={props.connect}>
-        Hablar con representante
+        {t("chat-rep")}
       </button>
     </form>
   );
