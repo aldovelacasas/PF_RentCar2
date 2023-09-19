@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 import { useRouter } from "next/navigation";
-
+import { useTranslation } from "react-i18next";
 import { Rubik, Poppins } from "next/font/google";
 
 const fontRubik = Rubik({
@@ -16,7 +16,6 @@ const fontPoppins = Poppins({
 
 const poppins = fontPoppins.className;
 const rubik = fontRubik.className;
-
 export default function CarCardDetail({
   product,
   visible,
@@ -24,6 +23,7 @@ export default function CarCardDetail({
   handleRentVisibility,
 }) {
   if (!visible) return null;
+  const { t } = useTranslation();
 
   let rating = product.rating ?? 5;
   let x = 0;
@@ -51,7 +51,7 @@ export default function CarCardDetail({
         <main className="overflow-y-auto max-h-[60vh]">
           <p
             className={` ${rubik} bg-naranja_enf sticky top-0 py-1 text-center font-bold text-white`}>
-            Detalle del vehículo
+            {t("detail-car")}
           </p>
           <img
             src={product.image}
@@ -78,29 +78,31 @@ export default function CarCardDetail({
                   </span>
                 ))}
               </div>
-              <p className="text-sm font-light pr-2">Por día</p>
+              <p className="text-sm font-light pr-2">{t("for-day")}</p>
             </div>
             <div className="flex justify-between px-2 font-light">
               <p className="mb-2 ">
-                <span className="font-bold">Modelo:</span> {product.model}
+                <span className="font-bold">{t("model")}:</span> {product.model}
               </p>
               <p className="pr-2">
-                <span className="font-bold">Año:</span>
+                <span className="font-bold">{t("year")}:</span>
                 {product.year}
               </p>
             </div>
             <div className="flex justify-between px-2 font-light">
               <p className="mb-2">
-                <span className="font-bold">Capacidad (Usuarios):</span>
-                {product.capacity} Personas
+                <span className="font-bold">
+                  {t("cap")} ({t("users")}):
+                </span>
+                {product.capacity} {t("people")}
               </p>
               <p className="pr-2">
-                <span className="font-bold">Tipo:</span> {product.type}
+                <span className="font-bold">{t("type")}:</span> {product.type}
               </p>
             </div>
             <hr className="my-2" />
             <p className=" text-[1.2em] font-light px-2">
-              <span className="font-bold">Descripción:</span>{" "}
+              <span className="font-bold">{t("descrip")}:</span>{" "}
               {product.description}
             </p>
           </div>
@@ -111,12 +113,12 @@ export default function CarCardDetail({
           <button
             onClick={handleClose}
             className={` bg-gris_fondo dark:bg-dark_fondo text-black dark:text-white text-[1em] px-6 py-2 rounded-md shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
-            Cerrar
+            {t("close")}
           </button>
           <button
             onClick={() => handleRentVisibility(product)}
             className={` rounded-md px-8 py-2 bg-naranja_enf text-white text-[1em] shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
-            Rentar
+            {t("rentar")}
           </button>
         </div>
       </div>

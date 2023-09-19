@@ -55,7 +55,7 @@ function AboutPage() {
             </figure>
             <p className={`text-[1.2em] ${rubik}`}>80</p>
             <p className={`text-[0.8em] ${rubik} mb-2 text-center`}>
-              Vehículos
+              {t("cars")}
             </p>
           </div>
           <div className="w-full flex flex-col justify-center items-center gap-x-4  px-3 my-10">
@@ -64,7 +64,7 @@ function AboutPage() {
             </figure>
             <p className={`text-[1.2em] ${rubik}`}>+500</p>
             <p className={`text-[0.8em] ${rubik} mb-2 text-center`}>
-              Rentas exitosas
+              {t("exitosas")}
             </p>
           </div>
           <div className="w-full flex flex-col justify-center items-center gap-x-4  px-3">
@@ -73,15 +73,13 @@ function AboutPage() {
             </figure>
             <p className={`text-[1.2em] ${rubik}`}>7</p>
             <p className={`text-[0.8em] ${rubik} mb-2 text-center`}>
-              Puntos de servicio
+              {t("points")}
             </p>
           </div>
         </div>
         <br />
 
-        <p className={`text-[0.8em] ${rubik} text-center`}>
-          ¿Donde nos encontras?
-        </p>
+        <p className={`text-[0.8em] ${rubik} text-center`}>{t("donde")}</p>
         <Map
           googleMapURL={mapURL}
           loadingElement={<div style={{ height: "100%" }} />}
@@ -91,9 +89,7 @@ function AboutPage() {
       </section>
 
       <section className="p-4 pb-[90px] grid justify-self-center">
-        <p className={`text-[1em] ${rubik} mb-6 text-center `}>
-          Nuestro Equipo
-        </p>
+        <p className={`text-[1em] ${rubik} mb-6 text-center `}>{t("team")}</p>
         <div className="grid w-4/5 place-self-center grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[15px]">
           {aboutUs.map((i) => {
             return (
@@ -110,7 +106,7 @@ function AboutPage() {
                     <strong>{i.nombre} </strong>
                   </p>
                   <p>
-                    <strong>Área: </strong>
+                    <strong>{t("area")}: </strong>
                     {i.area}
                   </p>
                 </div>
