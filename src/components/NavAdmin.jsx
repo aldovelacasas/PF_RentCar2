@@ -89,6 +89,15 @@ export default function NavUser({ userName, userPhoto }) {
             <Link href="/AdminConsole/Recoveries">Recuperaciones</Link>
           </li>
 
+          <li
+            className={
+              route === "/AdminConsole/chat-admin"
+                ? "list-none text-naranja_enf underline"
+                : "list-none hover:text-naranja_enf transition ease-in-out duration-300 "
+            }>
+            <Link href="/AdminConsole/chat-admin">Chat</Link>
+          </li>
+
           <div className="flex items-center">
             <a href="/profile">
               <img
