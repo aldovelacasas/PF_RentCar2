@@ -1,3 +1,4 @@
+"use client";
 import { Providers } from "../store/providers";
 import "./globals.css";
 import Navbar from "../components/NavBar/Navbar";
@@ -9,6 +10,31 @@ const inter = Inter({ subsets: ["latin"] });
 import ChatBar from "@/components/ChatBar";
 import Loading from "./loading";
 import { Suspense } from "react";
+import { I18nextProvider, initReactI18next } from "react-i18next";
+import i18n from "i18next";
+
+// Importa tus archivos de traducción
+import esTranslation from "../translations/es.json";
+import enTranslation from "../translations/en.json";
+import LanguageSelector from "@/components/LanguageSelector";
+
+const resources = {
+  es: {
+    translation: esTranslation,
+  },
+  en: {
+    translation: enTranslation,
+  },
+};
+
+i18n.use(initReactI18next).init({
+  resources,
+  lng: "es", // Establece el idioma predeterminado
+  fallbackLng: "es", // Idioma de respaldo si no se encuentra una traducción
+  interpolation: {
+    escapeValue: false, // Evita la escapada de HTML
+  },
+});
 
 export const metadata = {
   title: "Auto Connect",
@@ -22,6 +48,7 @@ export default function RootLayout({ children }) {
         <AuthContextProvider>
           <Providers store={store}>
             <Navbar />
+            <LanguageSelector />
             <Suspense fallback={<Loading />}>{children}</Suspense>
             <ChatBar />
             <Footer />

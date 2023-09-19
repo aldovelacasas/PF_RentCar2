@@ -162,7 +162,8 @@ function OpinionForm() {
           onChange={handleChange}
           name="car"
           defaultValue={"Seleccionar"}
-          className="w-full py-2 px-3 mb-3 bg-white dark:bg-dark_blanco">
+          className="shadow-sm shadow-black
+          w-full py-2 px-3 mb-3 bg-white dark:bg-dark_blanco border rounded-xl">
           <option value="Seleccionar" disabled>
             Seleccionar auto
           </option>
@@ -191,7 +192,8 @@ function OpinionForm() {
           name="rating"
           min={1}
           max={5}
-          className="w-full py-2 px-3 mb-3"
+          className="shadow-sm shadow-black
+          w-full py-2 px-3 mb-3 border rounded-xl"
           placeholder="Numero entre 1-5"
         />
         {error.rating ? (
@@ -210,7 +212,8 @@ function OpinionForm() {
           name="opinion"
           cols="30"
           rows="5"
-          className="w-full py-2 px-3 mb-3"></textarea>
+          className=" shadow-sm shadow-black
+           w-full py-2 px-3 mb-3 border rounded-xl dark:text-black "></textarea>
         {error.opinion ? (
           <span className={`${alertPoppins} text-sm`} style={{ color: "red" }}>
             {error.opinion}
@@ -219,7 +222,7 @@ function OpinionForm() {
           ""
         )}
         <button
-          className={`${poppins} bg-naranja_enf rounded px-3 py-2 ${
+          className={`${poppins} bg-naranja_enf border rounded-xl px-3 py-2  ${
             !ready() ? "opacity-60" : ""
           } ${error.opinion ? "ml-2" : ""}`}
           type="submit"
@@ -235,7 +238,8 @@ function OpinionForm() {
         <p className="text-[0.8em] px-4">{message}</p>
         <button
           onClick={handleVisibility}
-          className={` bg-naranja_enf ${rubik} text-white text-[0.8em] px-4 rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
+          className={` shadow-sm shadow-black
+          bg-naranja_enf ${rubik} text-white text-[0.8em] px-4 rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
           Aceptar
         </button>
       </Alerts>

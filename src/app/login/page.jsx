@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Alert from "./Alert";
 import { Rubik, Poppins } from "next/font/google";
+import { useTranslation } from "react-i18next";
 
 const fontRubik = Rubik({
   weight: "600",
@@ -32,6 +33,7 @@ export default function Login() {
   const { login, loginWithGoogle, handleForgotPassword } = useAuth();
   const [error, setError] = useState();
   const router = useRouter();
+  const { t } = useTranslation();
 
   const handleChange = ({ target: { name, value } }) => {
     setUser({ ...user, [name]: value });
@@ -76,7 +78,7 @@ export default function Login() {
           onSubmit={handleSubmit}
           className=" bg-white dark:bg-dark_blanco bg-opacity-70 shadow-sm shadow-black rounded-2xl pb-8 mb-12">
           <h1 className="bg-gris_fondo dark:bg-dark_fondo text-center font-bold text-[1.2em] rounded-t-2xl py-2 mb-5 ">
-            Inicia sesión
+            {t("sign in")}
           </h1>
           <main className="px-8">
             <fieldset className="mb-6">
@@ -93,7 +95,7 @@ export default function Login() {
             </fieldset>
 
             <fieldset className="mb-6">
-              <label htmlFor="password">Contraseña</label>
+              <label htmlFor="password">{t("password")}</label>
               <input
                 type="password"
                 name="password"
@@ -107,11 +109,11 @@ export default function Login() {
             <button
               onClick={handleForgotPassword}
               className="text-center hover:underline block w-full">
-              ¿Olvidaste tu contraseña?
+              {t("passwordForgot")}
             </button>
             <button
               className={`${rubik} mb-2 text-white font-bold bg-naranja_enf my-3 rounded p-2 w-full  shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
-              Ingresar
+              {t("login")}
             </button>
 
             <button
@@ -122,17 +124,17 @@ export default function Login() {
                 className="w-[50px] float-left"
               />{" "}
               <span className="text-centar bg-gris_frente dark:bg-dark_frente w-4/5 py-3">
-                Ingresa con tu cuenta de Google
+                {t("accountGoogle")}
               </span>
             </button>
             <div className="w-full">
               <p className="w-full text-center my-6 text-[1.1em] text-gray-700 dark:text-white">
-                No tienes una cuenta?
+                {t("account")}
               </p>
               <a
                 href="/register"
                 className={`${rubik} block bg-negro_fondo text-white my-3 text-center rounded py-3 w-full hover:bg-negro_fondo hover:text-white shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
-                Crear usuario
+                {t("create")}
               </a>
             </div>
             <section

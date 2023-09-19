@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { Poppins } from "next/font/google";
 import validation from "@/libs/validation";
+import { useTranslation } from "react-i18next";
 
 const alertFontPoppins = Poppins({
   weight: "200",
@@ -37,7 +38,7 @@ function ProductForm() {
   }, []);
 
   const [localimage, setLocalImage] = useState(false);
-
+  const { t } = useTranslation();
   const [product, setProduct] = useState({
     name: "",
     model: "",
@@ -138,7 +139,7 @@ function ProductForm() {
           <label
             htmlFor="name"
             className="block text-gray-700 text-sm font-bold mb-2">
-            Marca
+            {t("brand")}
           </label>
           <input
             value={product.name}
@@ -177,7 +178,7 @@ function ProductForm() {
           <label
             htmlFor="year"
             className="block text-gray-700 text-sm font-bold mb-2">
-            Año
+            {t("year")}
           </label>
           <input
             value={product.year}

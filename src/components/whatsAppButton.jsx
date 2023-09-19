@@ -1,29 +1,16 @@
-// WhatsAppButton.js
+import React from "react";
 
-import React from 'react';
-
-const WhatsAppButton = () => {
-  const phoneNumber = '+543816426399'; // Reemplaza con tu número de teléfono
-  const message = 'Hola, quiero saber más sobre los automoviles que rentan'; // Reemplaza con tu mensaje predeterminado
-
-  const handleClick = () => {
-    const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-    window.location.href = url;
-  };
-
+const WhatsAppButton = ({ phoneNumber }) => {
   return (
-    <button
-      onClick={handleClick}
-      className="fixed bottom-5 right-5 p-0 rounded-full z-10 dark:bg-dark_fondo"
-    >
-      <img
-        src="/Rv.png" // Ruta de tu imagen de WhatsApp
-        alt="WhatsApp Icon"
-        className="w-16 h-16 rounded-full" // Clases de Tailwind CSS para el tamaño de la imagen
-      />
-    </button>
+    <a 
+      href={`https://wa.me/${phoneNumber}`}
+      target="_blank"
+      rel="noopener noreferrer"
+      className=" text-lg mx-auto mb-10 bg-naranja_enf  text-white py-2 px-4 rounded-full shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black">
+      WhatsApp
+    </a>
   );
 };
 
-export default WhatsAppButton;
 
+export default WhatsAppButton;

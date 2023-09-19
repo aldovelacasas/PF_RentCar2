@@ -4,6 +4,7 @@
 import { Rubik, Poppins } from "next/font/google";
 import { usePathname } from "next/navigation";
 import { BsFillBrightnessHighFill, BsFillMoonStarsFill } from "react-icons/bs";
+import { useTranslation } from "react-i18next";
 const fontRubik = Rubik({
   weight: "600",
   subsets: ["latin"],
@@ -26,6 +27,7 @@ import Link from "next/link";
 export default function NavDefault() {
   const [dark, setDark] = useState(false);
   const [navActive, setNavActive] = useState(false);
+  const { t } = useTranslation();
 
   const route = usePathname();
 
@@ -44,7 +46,7 @@ export default function NavDefault() {
           <Link href="/homePage">
             <img
               src="https://drive.google.com/uc?export=download&id=1xRyrzCMxPuU6OX97500cJd7M7Veh0KXR"
-              className="border-black border-[1.5px] rounded-sm w-[80px] md:w-[150px]"
+              className="border-black border-[1.5px] rounded-sm w-[150px]"
             />
           </Link>
         </div>
@@ -69,7 +71,7 @@ export default function NavDefault() {
                 ? "list-none text-naranja_enf underline"
                 : "list-none hover:text-naranja_enf transition ease-in-out duration-300 "
             }>
-            <Link href="/homePage">Inicio</Link>
+            <Link href="/homePage">{t("home")}</Link>
           </li>
 
           <li
@@ -78,7 +80,7 @@ export default function NavDefault() {
                 ? "list-none text-naranja_enf underline"
                 : "list-none hover:text-naranja_enf transition ease-in-out duration-300 "
             }>
-            <Link href="/vehiculos">Vehículos</Link>
+            <Link href="/vehiculos">{t("cars")}</Link>
           </li>
           <li
             className={
@@ -86,7 +88,7 @@ export default function NavDefault() {
                 ? "list-none text-naranja_enf underline"
                 : "list-none hover:text-naranja_enf transition ease-in-out duration-300 "
             }>
-            <Link href="/testimoniales">Testimoniales</Link>
+            <Link href="/testimoniales">{t("testimonials")}</Link>
           </li>
           <li
             className={
@@ -94,7 +96,7 @@ export default function NavDefault() {
                 ? "list-none text-naranja_enf underline"
                 : "list-none hover:text-naranja_enf transition ease-in-out duration-300 "
             }>
-            <Link href="/about">Nosotros</Link>
+            <Link href="/about">{t("about")}</Link>
           </li>
           <li
             className={
@@ -102,7 +104,7 @@ export default function NavDefault() {
                 ? "list-none text-naranja_enf underline"
                 : "list-none hover:text-naranja_enf transition ease-in-out duration-300 "
             }>
-            <Link href="/contact">Contáctanos</Link>
+            <Link href="/contact">{t("contact")}</Link>
           </li>
           {login ? (
             <li
@@ -111,7 +113,7 @@ export default function NavDefault() {
                   ? "list-none text-naranja_enf underline"
                   : "list-none hover:text-naranja_enf transition ease-in-out duration-300 "
               }>
-              <Link href="/profile">Perfil</Link>
+              <Link href="/profile">{t("profile")}</Link>
             </li>
           ) : (
             <li
@@ -120,7 +122,7 @@ export default function NavDefault() {
                   ? "list-none text-naranja_enf underline"
                   : "list-none hover:text-naranja_enf transition ease-in-out duration-300 "
               }>
-              <Link href="/login">Ingresar</Link>
+              <Link href="/login">{t("login")}</Link>
             </li>
           )}
         </section>
