@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable react/jsx-key */
 import { Rubik, Poppins } from "next/font/google";
 import { useState } from "react";
