@@ -16,7 +16,7 @@ const rubik = fontRubik.className;
 
 function UserDetail({ visible, data, handleVisible }) {
   if (!visible) return null;
-
+  console.log(data);
   //     id: data.id,
   //     nombre: data.nombre,
   //     pasaporte: data.pasaporte,
@@ -35,15 +35,15 @@ function UserDetail({ visible, data, handleVisible }) {
           className={` ${poppins} bg-gris_fondo dark:bg-dark_fondo  px-6 rounded-2xl overflow-y-scroll max-h-[420px] py-3`}>
           <p>
             <span className="font-bold">Nombre: </span>
-            {data.nombre}
+            {data.username ?? "N/A"}
           </p>
           <p>
             <span className="font-bold">Pasaporte: </span>
-            {data.pasaporte}
+            {data.passport ?? "N/A"}
           </p>
           <p>
             <span className="font-bold">Correo: </span>
-            {data.correo}
+            {data.emailUser ?? "N/A"}
           </p>
           <p className="font-bold">Reservas:</p>
           <hr className="my-3 mx-2 border-white overflow-y-hidden" />
@@ -55,14 +55,54 @@ function UserDetail({ visible, data, handleVisible }) {
                 <th className="font-bold">Fecha Fin</th>
                 <th className="font-bold p-2">Estado</th>
               </tr>
-              {data.reservas.map((r) => (
-                <tr className="border-b-2 border-b-black">
-                  <td className="p-2">{r.vehiculo}</td>
-                  <td className="p-2">{r.fechaInicio}</td>
-                  <td className="p-2">{r.fechaFin}</td>
-                  <td className="p-2">{r.estado}</td>
-                </tr>
-              ))}
+              {data.rentals?.map((r) => {
+                const meses = [
+                  "Enero",
+                  "Feb.",
+                  "Marzo",
+                  "Abril",
+                  "Mayo",
+                  "Junio",
+                  "Julio",
+                  "Agosto",
+                  "Sept.",
+                  "Oct.",
+                  "Nov.",
+                  "Dic.",
+                ];
+
+                let startDay = new Date(r.fecha_inicio).getDay();
+                let startMonth = new Date(r.fecha_inicio).getMonth();
+                let startYear = new Date(r.fecha_inicio).getFullYear();
+
+                let fechaInicio = `${startDay}/${meses[startMonth]}/${startYear}`;
+
+                let endDay = new Date(r.fecha_fin).getDay();
+                let endMonth = new Date(r.fecha_fin).getMonth();
+                let endYear = new Date(r.fecha_fin).getFullYear();
+
+                let fechaFin = `${endDay}/${meses[endMonth]}/${endYear}`;
+                return (
+                  <tr className="border-b-2 border-b-black">
+                    <td className="p-2">{r.vehicle ?? r.productID}</td>
+                    <td className="p-2">{fechaInicio}</td>
+                    <td className="p-2">{fechaFin}</td>
+                    {r.statusB == 1 && new Date() > new Date(r.fecha_fin) ? (
+                      <td className="bg-[#d1fae5] text-[#047857] px-2 rounded-md m-2 grid place-content-center">
+                        Terminado
+                      </td>
+                    ) : r.statusB == 1 && new Date() < new Date(r.fecha_fin) ? (
+                      <td className="bg-[#f3f4f6] px-2 rounded-md text-black m-2 grid place-content-center">
+                        Activo
+                      </td>
+                    ) : (
+                      <td className="bg-[#ffe4e6] text-[#be123c] px-2 rounded-md m-2 grid place-content-center">
+                        Cancelado
+                      </td>
+                    )}
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
           <hr className="my-3 mx-2 border-white" />
@@ -73,11 +113,6 @@ function UserDetail({ visible, data, handleVisible }) {
             onClick={handleVisible}
             className={`bg-negro_fondo text-white text-[1em] px-4 py-2 rounded-md shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
             Volver
-          </button>
-          <button
-            type="button"
-            className={`rounded-md px-4 py-2 bg-naranja_enf text-white text-[1em] shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
-            Aceptar cambios
           </button>
         </div>
       </figure>

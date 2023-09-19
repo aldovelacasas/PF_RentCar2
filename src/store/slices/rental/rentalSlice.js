@@ -4,6 +4,7 @@ const initialState = {
   allRentals: [],
   allCars: [],
   allUsers: [],
+  deletedUsers: [],
   allRentalsConnected: [],
   currentUserRentals: [],
   isRentalsLoading: false,
@@ -34,7 +35,10 @@ export const rentalSlice = createSlice({
     },
     setUser: (state, action) => {
       state.isUsersLoading = false;
-      state.allUsers = action.payload.user;
+      state.allUsers = action.payload.user.filter((u) => u.isActive === null);
+      state.deletedUsers = action.payload.user.filter(
+        (u) => u.isActive !== null
+      );
     },
   },
 });

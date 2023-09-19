@@ -419,7 +419,6 @@ function HomePage() {
       </section>
       <section
         className={`pt-8 px-5 ${rubik} mx-[auto] text-[0.8em] bg-gris_fondo dark:bg-dark_fondo rounded-3xl shadow-sm shadow-black pb-12 w-3/4`}>
-        <p className="text-center md:text-[1.3em]">Prueba Social</p>
         <p className="text-2xl md:text-[1.5em] text-center pb-4 md:pb-8">
           Lee las reseñas de otros clientes
         </p>

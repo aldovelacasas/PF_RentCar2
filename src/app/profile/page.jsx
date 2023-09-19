@@ -6,11 +6,11 @@ import Alerts from "@/components/Alerts";
 import { Rubik, Poppins } from "next/font/google";
 import { validateUserForm } from "@/libs/functions";
 // import { useSelector } from "react-redux/es/hooks/useSelector";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
-
 import axios from "axios";
 import { useAuth } from "@/app/context/AuthContext";
+import { getUser, setCurrentUser } from "@/store/slices/user";
 
 // import { useRouter } from "next/navigation";
 
@@ -28,10 +28,44 @@ const rubik = fontRubik.className;
 // let login = true;
 
 function Profile() {
-  const user = useSelector((state) => state.user.currentUser);
-  const { logOut } = useAuth();
+  const currentUser = useSelector((state) => state.user.currentUser);
+  // const { logOut } = useAuth();
   const router = useRouter();
+  const dispatch = useDispatch();
+  const { user } = useAuth();
 
+  let users = useSelector((state) => state.user.allUsers);
+  let rentals = useSelector((state) => state.user.allRentals);
+  const [aux, setAux] = useState(false);
+
+  useEffect(() => {
+    if (user && user.email) {
+      dispatch(getUser());
+    }
+  }, [user, aux]);
+
+  useEffect(() => {
+    let res = users.filter((u) => u.emailUser === user.email);
+    let userRentals = rentals?.filter((r) => r.userID === res.id);
+    if (res && res[0]) {
+      let { id, uid, username, emailUser, passport, phone, image, isActive } =
+        res[0];
+      userRentals = userRentals;
+      dispatch(
+        setCurrentUser({
+          id: id,
+          uid: uid,
+          username: username ?? user.displayName,
+          emailUser: emailUser,
+          passport: passport ?? "",
+          phone: phone ?? "",
+          image: image ?? user.photoURL,
+          isActive: isActive,
+          userRentals: userRentals,
+        })
+      );
+    }
+  }, [users]);
   // const router = useRouter();
   // if (!login) {
   //   router.push("/");
@@ -39,21 +73,22 @@ function Profile() {
   // }
 
   const inputsInitialValue = {
-    nombre: user.userName,
-    correo: user.userEmail,
-    pasaporte: user.userPassport,
-    telefono: user.userPhone,
-    imagen: user.userImage,
+    nombre: currentUser.userName,
+    correo: currentUser.userEmail,
+    pasaporte: currentUser.userPassport,
+    telefono: currentUser.userPhone,
+    imagen: currentUser.userImage,
   };
 
   useEffect(() => {
     setInputs(inputsInitialValue);
-  }, [user]);
+  }, [currentUser]);
 
   const [errors, setErrors] = useState({});
   const [inputs, setInputs] = useState(inputsInitialValue);
   const [visibility, setVisibility] = useState(false);
   const [formVisibility, setFormVisibility] = useState(false);
+  const [imageAlertVisibility, setImageAlertVisibility] = useState(false);
 
   function handleChange(e) {
     setInputs({ ...inputs, [e.target.name]: e.target.value });
@@ -73,7 +108,7 @@ function Profile() {
   async function handleSubmit() {
     let errorsLength = Object.keys(errors).length;
     if (!errorsLength) {
-      let id = user.userId;
+      let id = currentUser.userId;
       let data = {
         username: inputs.nombre,
         emailUser: inputs.correo,
@@ -94,12 +129,29 @@ function Profile() {
     fileInput.click();
   };
 
+  async function handleDelete() {
+    let formData = new FormData();
+    formData.append("data", JSON.stringify({ isActive: false }));
+    const res = await axios
+      .put(`/api/users/${currentUser.userId}`, formData)
+      .then((res) => console.log(res));
+  }
+
+  function handleReload() {
+    router.push("/profile");
+    router.refresh();
+    console.log("reload");
+    setAux(!aux);
+    setImageAlertVisibility(false);
+    // router.reload();
+  }
+
   const imageChange = async (e) => {
     e.preventDefault();
     const formData = new FormData();
     formData.append("image", e.target.files[0]);
-    const res = await axios.put("/api/users/" + user.userId, formData);
-    alert("Imagen Cambiada");
+    const res = await axios.put("/api/users/" + currentUser.userId, formData);
+    setImageAlertVisibility(true);
   };
 
   return (
@@ -219,15 +271,15 @@ function Profile() {
         <p className="text-[0.8em] px-4">
           ¿Estás seguro de querer darte de baja de Auto Connect?
         </p>
-        <div className="flex justify-evenly lg:w-3/4">
+        <div className="flex justify-evenly w-full">
           <button
             onClick={handleVisible}
-            className={` bg-negro_fondo ${rubik} text-white text-[0.6em] px-4 rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
+            className={` bg-negro_fondo ${rubik} text-white text-[0.8em] px-6 py-2 rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
             No, volver
           </button>
           <button
-            onClick={handleVisible}
-            className={` bg-naranja_enf ${rubik} text-white text-[0.6em] px-4 rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
+            onClick={handleDelete}
+            className={` bg-naranja_enf ${rubik} text-white text-[0.8em] px-6 py-2 rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
             Sí, darme de baja
           </button>
         </div>
@@ -313,6 +365,22 @@ function Profile() {
             </button>
           </fieldset>
         </form>
+      </Alerts>
+      <Alerts visible={imageAlertVisibility}>
+        <p
+          className={`bg-naranja_enf text-white ${rubik} w-full text-center rounded-t-[15px]`}>
+          Alerta
+        </p>
+        <p className="text-[0.8em] px-4">Imagen cambiada correctamente</p>
+        <button
+          type="button"
+          onClick={handleReload}
+          className={`rounded-md px-4 py-[2px] bg-naranja_enf text-white text-[0.8em] shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
+          Aceptar
+        </button>
+        <p className="text-[0.6em]">
+          *Al dar click en aceptar la página será recargada
+        </p>
       </Alerts>
     </div>
   );

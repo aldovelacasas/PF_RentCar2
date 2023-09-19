@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import RentalDetail from "./RentalDetail";
 import { useDispatch, useSelector } from "react-redux";
 import { getRental, getCars, getUser } from "@/store/slices/rental";
+import axios from "axios";
 
 const fontRubik = Rubik({
   weight: "600",
@@ -149,6 +150,7 @@ function RentalsTable({ visible }) {
     setCategory(e.target.value);
   }
 
+  console.log(dataToShow);
   function handleSort(sortCategory) {
     let ordenated = dataToShow.sort((a, b) => {
       if (a[sortCategory] < b[sortCategory]) {
@@ -160,7 +162,7 @@ function RentalsTable({ visible }) {
       return 0;
     });
     dataToShow = ordenated;
-    setAux(!aux);
+    // setAux(!aux);
     setData(sliceData(ordenated, currentPage, quantityPerPage));
     setCurrentPage(1);
     setArrow({ ...arrowInitialState, [sortCategory]: true });
@@ -170,6 +172,22 @@ function RentalsTable({ visible }) {
   if (data && data.length) {
     dataToShow.forEach((d) => (total += 5));
     total = total * 2;
+  }
+
+  async function handleCancel(id) {
+    let formData = new FormData();
+    formData.append("data", JSON.stringify({ statusB: 0 }));
+    const res = await axios
+      .put(`/api/bookings/${id}`, formData)
+      .then((res) => console.log(res));
+  }
+
+  async function handleActive(id) {
+    let formData = new FormData();
+    formData.append("data", JSON.stringify({ statusB: 1 }));
+    const res = await axios
+      .put(`/api/bookings/${id}`, formData)
+      .then((res) => console.log(res));
   }
 
   if (visible === false) return null;
@@ -357,6 +375,8 @@ function RentalsTable({ visible }) {
         visible={rentalDetailVisibility}
         data={detailData}
         handleVisible={handleRentVisibility}
+        handleActive={handleActive}
+        handleCancel={handleCancel}
       />
     </section>
   );

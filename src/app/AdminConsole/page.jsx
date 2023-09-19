@@ -53,11 +53,13 @@ function AdminMain() {
     });
   }
 
-  function handleDeletion() {
+  async function handleDeletion() {
     // axios.put(`/api/products/${id}`, { isActive: false }).then(console.log("Borrado exitosamente"));
-    axios
-      .delete(`/api/products/${id}?id=${id}`)
-      .then(console.log("Borrado exitosamente"));
+    let formData = new FormData();
+    formData.append("data", JSON.stringify({ capacity: 0 }));
+    const res = await axios
+      .put(`/api/products/${id}`, formData)
+      .then((res) => console.log(res));
   }
 
   function handleAlertsVisibility(dataId) {

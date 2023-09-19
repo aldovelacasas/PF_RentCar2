@@ -46,3 +46,42 @@ export async function DELETE(request, { params }) {
     return NextResponse.json({ message: error.message }, { status: 500 });
   }
 }
+
+export async function PUT(request, { params }) {
+  try {
+    const info = await request.formData();
+
+    const jsondata = info.get("data");
+    const data = JSON.parse(jsondata);
+
+    var result = await conn.query("UPDATE bookings SET ? WHERE id = ?", [
+      data,
+      params.id,
+    ]);
+
+    if (result.affectedRows === 0) {
+      return NextResponse.json(
+        {
+          message: "renta no encontrada",
+        },
+        {
+          status: 400,
+        }
+      );
+    }
+    const updateBooking = await conn.query(
+      "SELECT * FROM bookings WHERE id = ?",
+      [params.id]
+    );
+
+    return NextResponse.json(updateBooking[0]);
+  } catch (error) {
+    console.log(error.message);
+    return NextResponse.json(
+      {
+        message: error.message,
+      },
+      { status: 500 }
+    );
+  }
+}

@@ -14,12 +14,45 @@ const fontPoppins = Poppins({
 const poppins = fontPoppins.className;
 const rubik = fontRubik.className;
 
-function RentalDetail({ visible, data, handleVisible }) {
+function RentalDetail({
+  visible,
+  data,
+  handleVisible,
+  handleActive,
+  handleCancel,
+}) {
   if (!visible) return null;
+  const meses = [
+    "Enero",
+    "Feb.",
+    "Marzo",
+    "Abril",
+    "Mayo",
+    "Junio",
+    "Julio",
+    "Agosto",
+    "Sept.",
+    "Oct.",
+    "Nov.",
+    "Dic.",
+  ];
+
+  let startDay = new Date(data.fecha_inicio).getDay();
+  let startMonth = new Date(data.fecha_inicio).getMonth();
+  let startYear = new Date(data.fecha_inicio).getFullYear();
+
+  let fechaInicio = `${startDay}/${meses[startMonth]}/${startYear}`;
+
+  let endDay = new Date(data.fecha_fin).getDay();
+  let endMonth = new Date(data.fecha_fin).getMonth();
+  let endYear = new Date(data.fecha_fin).getFullYear();
+
+  let fechaFin = `${endDay}/${meses[endMonth]}/${endYear}`;
+
   return (
     <div
       className={` ${poppins} fixed text-black dark:text-white w-[100vw] top-0 left-0 pt-[15vh] h-[100vh] flex justify-center bg-[#dbdbdbcc] z-40`}>
-      <figure className=" w-full md:w-4/5 lg:w-1/2 rounded-2xl max-h-[75vh] place-items-center bg-gris_fondo dark:bg-dark_fondo max-w-[1000px] shadow-md shadow-black hover:cursor-pointer border border-solid border-negro_fondo grid">
+      <figure className=" w-full md:w-4/5 lg:w-1/2 rounded-2xl max-h-[75vh] place-items-center bg-gris_fondo dark:bg-dark_fondo max-w-[1000px] shadow-md shadow-black border border-solid border-negro_fondo grid">
         <h3
           className={`${rubik} w-1/2 text-center py-1 bg-negro_fondo text-white rounded-full`}>
           Renta #{data.id}
@@ -45,7 +78,7 @@ function RentalDetail({ visible, data, handleVisible }) {
           </p>
           <p>
             <span className="font-bold">Fechas: </span>
-            {data.fecha_inicio} - {data.fecha_fin}
+            {fechaInicio} - {fechaFin}
           </p>
           <hr className="my-3 mx-2 border-gris_fondo" />
         </div>
@@ -58,10 +91,12 @@ function RentalDetail({ visible, data, handleVisible }) {
 
           <div className="flex justify-evenly gap-4">
             <button
+              onClick={() => handleCancel(data.id)}
               className={`rounded-md px-4 md:px-6 md:py-2 py-[2px] bg-white dark:bg-dark_blanco text-[1em] shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
               Cancelar renta
             </button>
             <button
+              onClick={() => handleActive(data.id)}
               className={`rounded-md px-4 md:px-6 md:py-2 py-[2px] bg-naranja_enf text-white text-[1em] shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
               Finalizar renta
             </button>

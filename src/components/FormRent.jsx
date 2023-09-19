@@ -43,7 +43,8 @@ function getDates(startDate, stopDate) {
 function FormRent({ visible = false, isAuth = false, car, handleVisible }) {
   const dispatch = useDispatch();
   let allRentals = useSelector((state) => state.rental.allRentals);
-
+  const user = useSelector((state) => state.user.currentUser);
+  console.log(user);
   useEffect(() => {
     if (car) {
       dispatch(getRental());
@@ -96,6 +97,10 @@ function FormRent({ visible = false, isAuth = false, car, handleVisible }) {
     }
   }
 
+  function handleProfile() {
+    router.push("/profile");
+  }
+
   function containInvalidDates() {
     let currentDates = getDates(startDate, endDate).map((d) => d.getDate());
     let compare = clashingIntervals.map((d) => d.getDate());
@@ -117,16 +122,23 @@ function FormRent({ visible = false, isAuth = false, car, handleVisible }) {
       });
       return;
     } else if (startDate <= endDate) {
-      let cant = (endDate - startDate) / 3600000 / 24;
-      cant += 1;
-      router.push(
-        `/payment?item=${car.model}&cant=${cant}&img=${car.image}&price=${car.price}&startDate=${startDate}&endDate=${endDate}`,
-        {
-          query: { item: `${car.model}`, cant: `${cant}` },
+      if (user.userPassport && user.Phone) {
+        let cant = (endDate - startDate) / 3600000 / 24;
+        cant += 1;
+        router.push(
+          `/payment?item=${car.model}&cant=${cant}&img=${car.image}&price=${car.price}&startDate=${startDate}&endDate=${endDate}`,
+          {
+            query: { item: `${car.model}`, cant: `${cant}` },
+          }
+        );
+        if (document.body.classList.length === 2) {
+          document.body.classList.remove("stopScroll");
         }
-      );
-      if (document.body.classList.length === 2) {
-        document.body.classList.remove("stopScroll");
+      } else {
+        setErrors({
+          ...errors,
+          info: "Aún no has registrado tus datos en tu perfil",
+        });
       }
     }
   }
@@ -238,6 +250,9 @@ function FormRent({ visible = false, isAuth = false, car, handleVisible }) {
             {errors.dates && (
               <p className="text-[1em] text-rojo_status">{errors.dates}</p>
             )}
+            {errors.info && (
+              <p className="text-[1em] text-rojo_status">{errors.info}</p>
+            )}
             <fieldset className="flex sticky bottom-0 bg-white dark:bg-dark_blanco justify-evenly w-full lg:w-1/2 py-6">
               <button
                 type="button"
@@ -245,11 +260,19 @@ function FormRent({ visible = false, isAuth = false, car, handleVisible }) {
                 className={` bg-gris_fondo dark:bg-dark_fondo ${rubik} text-[1em] px-6 py-2 rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
                 Cancelar
               </button>
-              <button
-                onClick={handleValidation}
-                className={` bg-naranja_enf ${rubik} text-white text-[1em] px-6 py-2 rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
-                Rentar
-              </button>
+              {errors.info ? (
+                <button
+                  onClick={handleProfile}
+                  className={` bg-naranja_enf ${rubik} text-white text-[1em] px-6 py-2 rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
+                  Ir a mi perfil
+                </button>
+              ) : (
+                <button
+                  onClick={handleValidation}
+                  className={` bg-naranja_enf ${rubik} text-white text-[1em] px-6 py-2 rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
+                  Rentar
+                </button>
+              )}
             </fieldset>
           </>
         )}

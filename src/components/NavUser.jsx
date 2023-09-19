@@ -28,7 +28,7 @@ import { BiLink } from "react-icons/bi";
 import Link from "next/link";
 import WhatsAppButton from "@/components/whatsAppButton.jsx";
 
-export default function NavUser({ userName, userPhoto }) {
+export default function NavUser({ userName, userPhoto, userEmail }) {
   const user = useSelector((state) => state.user.currentUser);
   if (user.userImage) {
     userPhoto = user.userImage;
@@ -118,7 +118,7 @@ export default function NavUser({ userName, userPhoto }) {
             </a>
             <div className="">
               <span className="block w-full text-sm pb-1">
-                Hola, {userName}
+                Hola, {userName??userEmail}
               </span>
               <button
                 onClick={handleLogOut}

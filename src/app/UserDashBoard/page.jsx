@@ -26,6 +26,7 @@ function page() {
   const { user } = useAuth();
   if (user.email === "autocontactofficial@gmail.com") {
     router.push("/AdminConsole");
+    return;
   }
 
   return (

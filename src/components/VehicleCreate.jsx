@@ -18,22 +18,7 @@ const fontPoppins = Poppins({
 const poppins = fontPoppins.className;
 const rubik = fontRubik.className;
 
-function VehicleDetail({
-  visible,
-  data = {
-    price: "",
-    name: "",
-    model: "",
-    year: "",
-    type: "Sedan",
-    capacity: "",
-    transmission: "manual",
-    description: "",
-    image: "",
-  },
-  handleVisible,
-  handleReload,
-}) {
+function VehicleCreate({ visible, handleVisible, handleReload }) {
   if (!visible) return null;
 
   useEffect(() => {
@@ -44,31 +29,30 @@ function VehicleDetail({
       if (key === "image") {
         setLocalImage(data[key]);
       } else if (key && key !== "") {
-        setInputs((prevProduct) => ({
-          ...prevProduct,
-          [key]: data[key],
-        }));
+        // setInputs((prevProduct) => ({
+        //   ...prevProduct,
+        //   [key]: data[key],
+        // }));
       }
     }
   }, []);
   const initialState = {
-    id: data.id,
-    image: data.image,
-    name: data.name,
-    model: data.model,
-    year: data.year,
-    type: data.type,
-    capacity: data.capacity,
-    transmission: data.transmission,
-    price: data.price,
-    description: data.description,
+    price: "",
+    name: "",
+    model: "",
+    year: "",
+    type: "Sedan",
+    capacity: "",
+    transmission: "manual",
+    description: "",
+    image: "",
   };
 
   const [localimage, setLocalImage] = useState(false);
   const [inputs, setInputs] = useState(initialState);
   const [error, setError] = useState({});
 
-  const [image, setImage] = useState(data.image ?? "");
+  const [image, setImage] = useState("");
   const [imageRender, setImageRender] = useState(image);
 
   const setLocalStorage = () => {
@@ -125,7 +109,7 @@ function VehicleDetail({
       <figure className=" w-full md:w-4/5 lg:w-3/4 max-h-[75vh] place-items-center bg-white dark:bg-dark_blanco max-w-[1000px] shadow-md shadow-black hover:cursor-pointer border border-solid border-negro_fondo grid">
         <h3
           className={`${rubik} w-1/2 text-center py-1 bg-negro_fondo text-white rounded-full mb-2`}>
-          Vehículo #{data.id}
+          Vehículo #{inputs.id}
         </h3>
         <form className="bg-gris_fondo dark:bg-dark_fondo lg:w-1/2 px-6 rounded-2xl overflow-y-scroll max-h-[420px] py-3">
           <fieldset className="grid place-content-center">
@@ -286,4 +270,4 @@ function VehicleDetail({
   );
 }
 
-export default VehicleDetail;
+export default VehicleCreate;

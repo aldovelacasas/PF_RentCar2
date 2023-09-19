@@ -8,6 +8,7 @@ import HelpForm from "@/components/HelpForm";
 import { useRouter } from "next/navigation";
 import Alerts from "@/components/Alerts";
 import { withAuth } from "@/withAuth";
+import axios from "axios";
 
 const fontRubik = Rubik({
   weight: "600",
@@ -41,6 +42,7 @@ function Recoveries() {
   const [alertsVisibility, setAlertsVisibility] = useState(false);
   const [visibility, setVisibility] = useState(initialState);
   const [category, setCategory] = useState("");
+  const [id, setId] = useState(null);
 
   function handleVisibility(name) {
     setVisibility({
@@ -49,10 +51,28 @@ function Recoveries() {
     });
   }
 
-  function handleAlertsVisibility(category) {
-    setCategory(category);
+  async function handleVehicleRecovery() {
+    // axios.put(`/api/products/${id}`, { isActive: false }).then(console.log("Borrado exitosamente"));
+    let formData = new FormData();
+    formData.append("data", JSON.stringify({ capacity: 5 }));
+    const res = await axios
+      .put(`/api/products/${id}`, formData)
+      .then((res) => console.log(res));
+  }
+
+  async function handleUserRecovery() {
+    let formData = new FormData();
+    formData.append("data", JSON.stringify({ isActive: null }));
+    const res = await axios
+      .put(`/api/users/${id}`, formData)
+      .then((res) => console.log(res));
+  }
+
+  function handleAlertsVisibility(category, dataId) {
     setAlertsVisibility(!alertsVisibility);
     document.body.classList.toggle("stopScroll");
+    setId(dataId);
+    setCategory(category);
   }
 
   if (!validation) {
@@ -89,7 +109,7 @@ function Recoveries() {
           </h3>
           <CarRecTable
             visible={visibility.rentalsVisibility}
-            handleAlertsVisibility={() => handleAlertsVisibility("vehiculo")}
+            handleAlertsVisibility={handleAlertsVisibility}
           />
         </div>
         <div
@@ -109,7 +129,7 @@ function Recoveries() {
           </h3>
           <UsersRecTable
             visible={visibility.vehiclesVisibility}
-            handleAlertsVisibility={() => handleAlertsVisibility("usuario")}
+            handleAlertsVisibility={handleAlertsVisibility}
           />
         </div>
         <div
@@ -139,7 +159,6 @@ function Recoveries() {
         <p className="text-[1em] px-4">
           ¿Estás seguro de recuperar este {category}?
         </p>
-
         <div className="flex w-full justify-evenly">
           <button
             onClick={handleAlertsVisibility}
@@ -147,6 +166,11 @@ function Recoveries() {
             Cerrar
           </button>
           <button
+            onClick={
+              category === "vehículo"
+                ? handleVehicleRecovery
+                : handleUserRecovery
+            }
             className={` bg-naranja_enf ${rubik} text-white text-[1em] px-6 py-2 rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black `}>
             Recuperar
           </button>

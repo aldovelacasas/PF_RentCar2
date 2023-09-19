@@ -49,7 +49,11 @@ const Navbar = () => {
       {user?.displayName === "Auto Contact" ? (
         <NavAdmin userName={user?.displayName} userPhoto={user?.photoURL} />
       ) : user ? (
-        <NavUser userName={user?.displayName} userPhoto={user?.photoURL} />
+        <NavUser
+          userName={user?.displayName}
+          userPhoto={user?.photoURL}
+          userEmail={user?.userEmail}
+        />
       ) : (
         <NavDefault></NavDefault>
       )}
