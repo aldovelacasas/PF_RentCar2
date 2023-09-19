@@ -1,12 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Rubik, Poppins } from "next/font/google";
-import { usuariosBorrados } from "@/libs/placeholdersAdmin";
 import { sliceData, slicePage } from "@/libs/functions";
 import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
 import { RiRecycleFill } from "react-icons/ri";
 import { PiPlusCircleBold } from "react-icons/pi";
 import UserDetail from "./UserDetail";
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getRental, getCars, getUser } from "@/store/slices/rental";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 const fontRubik = Rubik({
   weight: "600",
@@ -20,6 +23,9 @@ const fontPoppins = Poppins({
 const poppins = fontPoppins.className;
 const rubik = fontRubik.className;
 
+let completeRentals = {};
+let dataToShow;
+
 function CarRecTable({ visible, handleAlertsVisibility }) {
   const arrowInitialState = {
     id: false,
@@ -27,34 +33,93 @@ function CarRecTable({ visible, handleAlertsVisibility }) {
     pasaporte: false,
     correo: false,
   };
+
+  const dispatch = useDispatch();
+  const router = useRouter();
   const [currentPage, setCurrentPage] = useState(1);
   const [detailData, setDetailData] = useState();
   const [vehiclesDetailVisibility, setVehiclesDetailVisibility] =
     useState(false);
   const [search, setSearch] = useState("");
   const [data, setData] = useState();
-  const [category, setCategory] = useState("nombre");
+  const [category, setCategory] = useState("name");
   const [aux, setAux] = useState(false);
   const [arrow, setArrow] = useState(arrowInitialState);
 
   useEffect(() => {
-    setCurrentPage(1);
-  }, [usuariosBorrados]);
+    dispatch(getRental());
+    dispatch(getCars());
+    dispatch(getUser());
+  }, [aux]);
 
-  let dataToShow = usuariosBorrados;
+  let allUsers = useSelector((state) => state.rental.deletedUsers);
+  let allCars = useSelector((state) => state.rental.allCars);
+  let allRentals = useSelector((state) => state.rental.allRentals);
+
+  function createRentalsComplete() {
+    completeRentals = allUsers.map((u) => {
+      let rentals = allRentals.filter((r) => r.userID == u.id);
+      rentals = rentals.map((r) => {
+        let vehicle = allCars.filter((c) => c.id == r.productID)[0].model;
+        return {
+          ...r,
+          vehicle,
+        };
+      });
+      if (rentals) {
+        return {
+          ...u,
+          rentals,
+        };
+      }
+    });
+  }
+  useEffect(() => {
+    if (!allUsers.length || !allRentals.length || !allCars.length) {
+      setAux(true);
+    }
+  }, [allRentals, allCars, allUsers]);
+
+  if (aux === true && allCars.length) {
+    createRentalsComplete();
+    if (completeRentals && completeRentals[0] !== undefined) {
+      setAux(false);
+    }
+  }
+
+  function handleReload() {
+    router.push("/AdminConsole/Recoveries");
+    router.refresh();
+    setAux(!aux);
+    handleVehiclesVisibility();
+    // router.reload();
+  }
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [completeRentals]);
+
+  useEffect(() => {
+    dataToShow = completeRentals;
+  }, [completeRentals]);
+
   let quantityPerPage = 10;
-  let max = Math.ceil(dataToShow.length / quantityPerPage);
   let pages = [];
+  let max = 1;
+  if (dataToShow) {
+    max = Math.ceil(dataToShow.length / quantityPerPage);
+  }
   let x = 0;
 
   while (x < max) {
     x++;
     pages.push(x);
   }
-
   useEffect(() => {
-    setData(sliceData(dataToShow, currentPage, quantityPerPage));
-  }, [currentPage]);
+    if (dataToShow && dataToShow[0]) {
+      setData(sliceData(dataToShow, currentPage, quantityPerPage));
+    }
+  }, [completeRentals, currentPage]);
 
   let currentPages = slicePage(pages, currentPage, 2);
 
@@ -84,11 +149,12 @@ function CarRecTable({ visible, handleAlertsVisibility }) {
 
   function handleSearch(e) {
     setSearch(e.target.value);
-    setData(
-      dataToShow.filter((d) =>
-        d[category].toLowerCase().includes(e.target.value.toLowerCase())
-      )
+    dataToShow = completeRentals;
+    let results = dataToShow.filter((d) =>
+      d[category].toLowerCase().includes(e.target.value.toLowerCase())
     );
+    dataToShow = results;
+    setData(sliceData(results, currentPage, quantityPerPage));
     setCurrentPage(1);
   }
 
@@ -97,24 +163,20 @@ function CarRecTable({ visible, handleAlertsVisibility }) {
   }
 
   function handleSort(sortCategory) {
-    let order = "asc";
-    if (order === "asc") {
-      let ordenated = dataToShow.sort((a, b) => {
-        if (a[sortCategory] < b[sortCategory]) {
-          return -1;
-        }
-        if (a[sortCategory] > b[sortCategory]) {
-          return 1;
-        }
-        return 0;
-      });
-      setData(sliceData(ordenated, currentPage, quantityPerPage));
-      setCurrentPage;
-      setAux(!aux);
-      setArrow({ ...arrowInitialState, [sortCategory]: true });
-    } else {
-      setData(data.sort((a, b) => b[sortCategory] - a[sortCategory]));
-    }
+    let ordenated = dataToShow.sort((a, b) => {
+      if (a[sortCategory] < b[sortCategory]) {
+        return -1;
+      }
+      if (a[sortCategory] > b[sortCategory]) {
+        return 1;
+      }
+      return 0;
+    });
+    dataToShow = ordenated;
+    setAux(!aux);
+    setData(sliceData(ordenated, currentPage, quantityPerPage));
+    setCurrentPage(1);
+    setArrow({ ...arrowInitialState, [sortCategory]: true });
   }
 
   if (visible === false) return null;
@@ -159,7 +221,7 @@ function CarRecTable({ visible, handleAlertsVisibility }) {
               </th>
               <th
                 onClick={() => handleSort("nombre")}
-                className={`${rubik} min-w-[90px] sm:min-w-[250px] px-2 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo `}>
+                className={`${rubik} min-w-[90px] sm:min-w-[150px] px-2 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo `}>
                 {arrow.nombre ? "Nombre ▼" : "Nombre"}
               </th>
               <th
@@ -191,9 +253,9 @@ function CarRecTable({ visible, handleAlertsVisibility }) {
                       : "border-b-2 hover:bg-gris_frente  "
                   }>
                   <td className=" p-4">{d.id}</td>
-                  <td className=" break-all">{d.nombre}</td>
-                  <td className="p-4 text-right"> {d.pasaporte}</td>
-                  <td className="p-4 text-right"> {d.correo}</td>
+                  <td className=" break-all">{d.username}</td>
+                  <td className="p-4 text-right"> {d.passport}</td>
+                  <td className="p-4 text-right"> {d.emailUser}</td>
                   <td className=" p-4">
                     <button
                       onClick={() => handleVehiclesVisibility(d)}
@@ -201,7 +263,7 @@ function CarRecTable({ visible, handleAlertsVisibility }) {
                       <PiPlusCircleBold />
                     </button>
                     <button
-                      onClick={handleAlertsVisibility}
+                      onClick={() => handleAlertsVisibility("usuario", d.id)}
                       className="px-2 ml-2 py-1 border-[1px] rounded-md bg-green-500 text-white border-negro_fondo hover:bg-negro_fondo hover:text-white">
                       <RiRecycleFill />
                     </button>
@@ -271,7 +333,7 @@ function CarRecTable({ visible, handleAlertsVisibility }) {
         <button
           onClick={handleNext}
           className={
-            currentPage === max
+            currentPage === max || max === 0
               ? "px-3 py-1 border-[2px] border-black bg-negro_fondo text-white rounded-md"
               : "px-3 py-1 border-[2px] border-black bg-naranja_enf text-white rounded-md"
           }>

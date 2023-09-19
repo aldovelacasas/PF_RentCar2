@@ -116,8 +116,8 @@ function Vehiculos() {
         />
       </header>
       <section
-        className={` pt-4 ${poppins} mx-[auto] text-[0.8em] bg-gris_frente dark:bg-dark_frente pb-12`}>
-        <p className={`text-[2.4em] ${rubik} mb-2 text-center mt-6`}>
+        className={` pt-4 ${poppins} mx-[auto] text-[0.8em] bg-gris_frente dark:bg-dark_frente pb-8`}>
+        <p className={`text-[2.4em] ${rubik} text-center mt-6`}>
           Encuentra el vehículo ideal
         </p>
       </section>

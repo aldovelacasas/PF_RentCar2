@@ -4,6 +4,7 @@ const initialState = {
   allCars: [],
   showCars: [],
   searchCars: [],
+  deletedCars: [],
   modelCars: [],
   categoryCars: [],
   capacityCars: [],
@@ -24,7 +25,8 @@ export const carSlice = createSlice({
     setCars: (state, action) => {
       state.isLoading = false;
       state.allCars = action.payload.cars;
-      state.showCars = action.payload.cars;
+      state.deletedCars = action.payload.cars.filter((c) => c.capacity === 0);
+      state.showCars = action.payload.cars.filter((c) => c.capacity !== 0);
       state.searchCars = action.payload.cars;
       state.modelCars = action.payload.cars;
       state.categoryCars = action.payload.cars;
@@ -50,7 +52,7 @@ export const carSlice = createSlice({
         state.showCars = state.searchCars;
       } else if (busqueda && busqueda.length > 0) {
         state.showCars = state.allCars.filter((car) =>
-          car.name.toLowerCase().includes(busqueda.toLowerCase())
+          car.model.toLowerCase().includes(busqueda.toLowerCase())
         );
         state.searchCars = state.showCars;
       }

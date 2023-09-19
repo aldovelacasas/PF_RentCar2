@@ -51,7 +51,7 @@ function CarCarousel() {
               car={car}
               className="w-[290px] "
               handleVisibility={handleVisibility}
-              handleDetailVisibility={handleDetailVisibility}
+              handleDetailVisibility={handleDetail}
               handleDetail={handleDetail}
             />
           );
@@ -73,12 +73,12 @@ function CarCarousel() {
         isAuth={user?.displayName !== undefined}
         visible={visibility}
         car={detailData}
-        handleVisible={handleVisibility}
+        handleVisible={() => handleVisibility(detailData)}
       />
       <CarCardDetail
         visible={detailVisibility}
         product={detailData}
-        handleClose={handleDetailVisibility}
+        handleClose={handleDetail}
         handleRentVisibility={handleVisibility}
       />
     </section>

@@ -5,6 +5,8 @@ import PromoCarousel from "@/components/PromoCarousel";
 import UserRentals from "@/components/UserRentals";
 import CarCarousel from "@/components/CarCarousel";
 import { Rubik, Poppins } from "next/font/google";
+import { useRouter } from "next/navigation";
+import { useAuth } from "../context/AuthContext";
 
 const fontRubik = Rubik({
   weight: "600",
@@ -20,6 +22,16 @@ const poppins = fontPoppins.className;
 const rubik = fontRubik.className;
 
 function page() {
+  const router = useRouter();
+  const { user } = useAuth();
+
+  if (user?.email === "autocontactofficial@gmail.com") {
+    router.push("/AdminConsole");
+    return;
+  } else if (!user) {
+    router.push("/login");
+  }
+
   return (
     <main className="bg-gris_frente dark:bg-dark_frente text-black dark:text-white overflow-x-hidden">
       <header
@@ -28,7 +40,9 @@ function page() {
       </header>
       <section
         className={`${rubik}  text-[1.2em] md:text-[1.5em] bg-gris_fondo pb-12 dark:bg-dark_fondo`}>
-        <h2 className=" pl-[10%] py-4 text-black dark:text-white">Promociones</h2>
+        <h2 className=" pl-[10%] py-4 text-black dark:text-white">
+          Promociones
+        </h2>
         <PromoCarousel />
       </section>
       <section
@@ -41,7 +55,7 @@ function page() {
           Vehículos sugeridos:
         </h2>
         <br />
-        
+
         <CarCarousel className="" />
       </section>
       <section className={` text-[1.2em]`}>

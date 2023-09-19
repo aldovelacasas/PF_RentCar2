@@ -19,9 +19,7 @@ import { BiSolidCar } from "react-icons/bi";
 import { Rubik, Poppins } from "next/font/google";
 import { useRouter } from "next/navigation.js";
 import { useTranslation } from "react-i18next";
-import React from 'react';
-
-
+import React from "react";
 
 const fontRubik = Rubik({
   weight: "600",
@@ -149,6 +147,9 @@ function HomePage() {
   }
   function handleDateChange(e) {
     setDate({ ...dates, [e.target.name]: e.target.value });
+    if (errors) {
+      setErrors({});
+    }
   }
 
   function handleValidation(e) {
@@ -203,10 +204,8 @@ function HomePage() {
         <p className={`${poppins} text-[0.6em] mt-2 z-3`}>
           Renta el auto de tus sueños con precios imbatibles,
         </p>
-    
         <p className={`${poppins} text-[0.6em] pb-4`}>
           km ilimitados, opciones flexibles y mucho más.
-
         </p>
         <p className={`${poppins} text-[0.6em] pb-4`}>{t("km")}</p>
         <div className="flex place-content-evenly w-full sm:w-2/3 mt-3 pb-10 md:pt-[40px] lg:w-1/2">
@@ -400,7 +399,6 @@ function HomePage() {
       </section>
       <section
         className={`pt-8 px-5 ${rubik} mx-[auto] text-[0.8em] bg-gris_fondo dark:bg-dark_fondo rounded-3xl shadow-sm shadow-black pb-12 w-3/4`}>
-        <p className="text-center md:text-[1.3em]">{t("socialprube")}</p>
         <p className="text-2xl md:text-[1.5em] text-center pb-4 md:pb-8">
           {t("lee")}
         </p>

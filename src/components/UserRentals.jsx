@@ -64,7 +64,7 @@ function UserRentals({ visible }) {
       if (user && vehicle) {
         return {
           ...r,
-          user: user.userName ?? user.emailUser,
+          user: user.emailUser,
           vehicle: vehicle.name,
           image: vehicle.image,
           status:
@@ -77,7 +77,6 @@ function UserRentals({ visible }) {
       }
     });
   }
-
   useEffect(() => {
     if (!allUsers.length || !allRentals.length || !allCars.length) {
       setAux(true);
@@ -100,7 +99,7 @@ function UserRentals({ visible }) {
       completeRentals[0] &&
       completeRentals[0].hasOwnProperty("user")
     ) {
-      rentals = completeRentals.filter((r) => r.u === user.email);
+      rentals = completeRentals.filter((r) => r.user === user.email);
     }
     dataToShow = rentals;
   }, [completeRentals]);
@@ -354,7 +353,7 @@ function UserRentals({ visible }) {
             <button
               onClick={handleNext}
               className={
-                currentPage === max
+                currentPage === max || max === 0
                   ? "px-3 py-1 shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black  bg-negro_fondo text-white rounded-md"
                   : "px-3 py-1 shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black  bg-naranja_enf text-white rounded-md"
               }>
@@ -365,6 +364,7 @@ function UserRentals({ visible }) {
             visible={rentalDetailVisibility}
             data={detailData}
             handleVisible={handleRentVisibility}
+            isUser={true}
           />
         </>
       ) : (

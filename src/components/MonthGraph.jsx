@@ -87,7 +87,7 @@ function MonthGraph({ visible }) {
     let fifteenToTwenty = 0;
     let twentyToTwentyfive = 0;
     let last = 0;
-    sedanSales.forEach((r) => {
+    array.forEach((r) => {
       if (new Date(r.fecha_inicio) < new Date(`2023-${currentMonth}-5`)) {
         zeroToFive += 1;
       } else if (
@@ -276,8 +276,8 @@ function MonthGraph({ visible }) {
       {typeof window !== undefined && (
         <Chart options={options} series={series} />
       )}
-      <section className="grid place-content-center">
-        <ul>
+      <section className="grid w-full">
+        <ul className="flex flex-wrap justify-evenly items-baseline w-full">
           <li className="text-[0.8em] text-black">
             <span className="w-[10px] h-[10px] mr-2 inline-block rounded-full bg-[#008ffb]" />
             Sedan: {sedanSales.length}
@@ -289,6 +289,9 @@ function MonthGraph({ visible }) {
           <li className="text-[0.8em] text-black">
             <span className="w-[10px] h-[10px] mr-2 inline-block rounded-full bg-[#feb019]" />
             Camioneta: {camionetaSales.length}
+          </li>
+          <li className="text-[1em] text-black mt-2">
+            Total: {camionetaSales.length + suvSales.length + sedanSales.length}
           </li>
         </ul>
       </section>

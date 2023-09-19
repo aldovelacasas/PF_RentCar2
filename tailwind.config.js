@@ -30,6 +30,14 @@ module.exports = {
           "0%": { transform: "translateX(10px)" },
           "100%": { transform: "translateX(calc(-268.8px * 13))" },
         },
+        bouncing: {
+          "0%, 100%": {
+            transform: "none",
+          },
+          "50%": {
+            transform: "translateY(-15%)",
+          },
+        },
       },
     },
   },

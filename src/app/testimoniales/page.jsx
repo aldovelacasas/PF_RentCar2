@@ -50,10 +50,9 @@ async function Testimoniales() {
           />
         </header>
       </div>
-      <p className={`${rubik} text-center text-[2em] pt-8`}>Prueba social</p>
+      <p className={`${rubik} text-center text-[2em] pt-8`}>Algunas reseñas</p>
       <p className={`${rubik} text-center text-[1.2em] py-6`}>
-        No tomes sólo nuestra palabra, lee las reseñas que nuestros clientes nos
-        han dejado
+        Lee algunas de las opiniones que nuestros clientes nos han dejado.
       </p>
       <Reviews> </Reviews>
       <OpinionForm cars={cars} />

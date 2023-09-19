@@ -212,7 +212,7 @@ function OpinionForm() {
           name="opinion"
           cols="30"
           rows="5"
-          className=" shadow-sm shadow-black
+          className=" shadow-sm shadow-black resize-none
            w-full py-2 px-3 mb-3 border rounded-xl dark:text-black "></textarea>
         {error.opinion ? (
           <span className={`${alertPoppins} text-sm`} style={{ color: "red" }}>

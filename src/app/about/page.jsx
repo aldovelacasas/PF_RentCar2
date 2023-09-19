@@ -77,6 +77,17 @@ function AboutPage() {
             </p>
           </div>
         </div>
+        <br />
+
+        <p className={`text-[0.8em] ${rubik} text-center`}>
+          ¿Donde nos encontras?
+        </p>
+        <Map
+          googleMapURL={mapURL}
+          loadingElement={<div style={{ height: "100%" }} />}
+          containerElement={<div style={{ height: "50vh" }} />}
+          mapElement={<div style={{ height: "100%" }} />}
+        />
       </section>
 
       <section className="p-4 pb-[90px] grid justify-self-center">

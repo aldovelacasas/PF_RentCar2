@@ -1,25 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 function LanguageSelector() {
   const { i18n } = useTranslation();
+  const [lang, setlang] = useState(true);
 
-  const changeLanguage = (language) => {
+  const changeLanguage = () => {
+    setlang(!lang);
+    let language = "es";
+    if (lang) language = "en";
     i18n.changeLanguage(language);
   };
 
   return (
-    <div className="language-selector dark:bg-dark_fondo">
+    <div className=" absolute top-[85px] right-[80px] dark:bg-gris_fondo bg-dark_blanco rounded-sm shadow-sm">
       <button
-        className="px-3 py-2  text-white rounded"
-        onClick={() => changeLanguage("es")}>
-        <img src="mex.png" alt="Bandera Español" width="30" height="30" />
-      </button>
-
-      <button
-        className="px-3 py-2 text-white rounded  "
-        onClick={() => changeLanguage("en")}>
-        <img src="eeuu.png" alt="Bandera Español" width="30" height="30" />
+        className="px-3 py-2 text-white rounded  shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black"
+        onClick={changeLanguage}>
+        {!lang ? (
+          <img src="eeuu.png" alt="Bandera Español" width="30" height="30" />
+        ) : (
+          <img src="mex.png" alt="Bandera Español" width="30" height="30" />
+        )}
       </button>
     </div>
   );

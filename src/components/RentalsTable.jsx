@@ -6,6 +6,8 @@ import { useEffect, useState } from "react";
 import RentalDetail from "./RentalDetail";
 import { useDispatch, useSelector } from "react-redux";
 import { getRental, getCars, getUser } from "@/store/slices/rental";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 const fontRubik = Rubik({
   weight: "600",
@@ -31,6 +33,7 @@ function RentalsTable({ visible }) {
     monto: false,
   };
 
+  const router = useRouter();
   const dispatch = useDispatch();
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -46,7 +49,7 @@ function RentalsTable({ visible }) {
     dispatch(getRental());
     dispatch(getCars());
     dispatch(getUser());
-  }, []);
+  }, [aux]);
 
   let allUsers = useSelector((state) => state.rental.allUsers);
   let allCars = useSelector((state) => state.rental.allCars);
@@ -106,7 +109,7 @@ function RentalsTable({ visible }) {
     if (dataToShow && dataToShow[0]) {
       setData(sliceData(dataToShow, currentPage, quantityPerPage));
     }
-  }, [completeRentals, currentPage, dataToShow]);
+  }, [completeRentals, currentPage]);
 
   let currentPages = slicePage(pages, currentPage, 2);
 
@@ -160,7 +163,7 @@ function RentalsTable({ visible }) {
       return 0;
     });
     dataToShow = ordenated;
-    setAux(!aux);
+    // setAux(!aux);
     setData(sliceData(ordenated, currentPage, quantityPerPage));
     setCurrentPage(1);
     setArrow({ ...arrowInitialState, [sortCategory]: true });
@@ -170,6 +173,32 @@ function RentalsTable({ visible }) {
   if (data && data.length) {
     dataToShow.forEach((d) => (total += 5));
     total = total * 2;
+  }
+
+  async function handleCancel(id) {
+    let formData = new FormData();
+    formData.append("data", JSON.stringify({ statusB: 0 }));
+    const res = await axios
+      .put(`/api/bookings/${id}`, formData)
+      .then((res) => console.log(res));
+    handleReload();
+  }
+
+  async function handleActive(id) {
+    let formData = new FormData();
+    formData.append("data", JSON.stringify({ statusB: 1 }));
+    const res = await axios
+      .put(`/api/bookings/${id}`, formData)
+      .then((res) => console.log(res));
+    handleReload();
+  }
+
+  function handleReload() {
+    router.push("/AdminConsole");
+    router.refresh();
+    setAux(!aux);
+    handleRentVisibility();
+    // router.reload();
   }
 
   if (visible === false) return null;
@@ -357,6 +386,9 @@ function RentalsTable({ visible }) {
         visible={rentalDetailVisibility}
         data={detailData}
         handleVisible={handleRentVisibility}
+        handleActive={handleActive}
+        handleCancel={handleCancel}
+        handleReload={handleReload}
       />
     </section>
   );

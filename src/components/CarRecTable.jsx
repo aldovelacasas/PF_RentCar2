@@ -1,12 +1,13 @@
 import { Rubik, Poppins } from "next/font/google";
-import { vehiculosBorrados } from "@/libs/placeholdersAdmin";
+import { useDispatch, useSelector } from "react-redux";
 import { sliceData, slicePage } from "@/libs/functions";
 import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
 import { BsPencilFill } from "react-icons/bs";
 import { RiRecycleFill } from "react-icons/ri";
-
+import { getCars } from "@/store/slices/car";
 import { useEffect, useState } from "react";
 import VehicleDetail from "./VehicleDetail";
+import { useRouter } from "next/navigation";
 
 const fontRubik = Rubik({
   weight: "600",
@@ -22,14 +23,11 @@ const rubik = fontRubik.className;
 
 let pantalla;
 if (typeof window !== "undefined") {
-
-
-
-if (window.innerWidth <= 870) {
-  pantalla = "chica";
-} else if (window.innerWidth > 870) {
-  pantalla = "grande";
-}
+  if (window.innerWidth <= 870) {
+    pantalla = "chica";
+  } else if (window.innerWidth > 870) {
+    pantalla = "grande";
+  }
 }
 function CarRecTable({ visible, handleAlertsVisibility }) {
   const arrowInitialState = {
@@ -47,10 +45,16 @@ function CarRecTable({ visible, handleAlertsVisibility }) {
   const [category, setCategory] = useState("name");
   const [aux, setAux] = useState(false);
   const [arrow, setArrow] = useState(arrowInitialState);
+  const router = useRouter();
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getCars());
+  }, [aux]);
 
+  let vehiculosBorrados = useSelector((state) => state.cars.deletedCars);
   useEffect(() => {
     setCurrentPage(1);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [vehiculosBorrados]);
 
   let dataToShow = vehiculosBorrados;
@@ -66,8 +70,8 @@ function CarRecTable({ visible, handleAlertsVisibility }) {
 
   useEffect(() => {
     setData(sliceData(dataToShow, currentPage, quantityPerPage));
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentPage]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [vehiculosBorrados, currentPage]);
 
   let currentPages = slicePage(pages, currentPage, 2);
 
@@ -107,6 +111,22 @@ function CarRecTable({ visible, handleAlertsVisibility }) {
 
   function handleSearchCategory(e) {
     setCategory(e.target.value);
+  }
+  async function handleRecovery() {
+    // axios.put(`/api/products/${id}`, { isActive: false }).then(console.log("Borrado exitosamente"));
+    let formData = new FormData();
+    formData.append("data", JSON.stringify({ capacity: 5 }));
+    const res = await axios
+      .put(`/api/products/${id}`, formData)
+      .then((res) => console.log(res));
+    handleReload();
+  }
+
+  function handleReload() {
+    router.push("/AdminConsole/Recoveries");
+    router.refresh();
+    setAux(!aux);
+    // router.reload();
   }
 
   function handleSort(sortCategory) {
@@ -242,7 +262,9 @@ function CarRecTable({ visible, handleAlertsVisibility }) {
                           <BsPencilFill />
                         </button>
                         <button
-                          onClick={handleAlertsVisibility}
+                          onClick={() =>
+                            handleAlertsVisibility("vehículo", d.id)
+                          }
                           className="px-1 py-1 border-[1px] rounded-md bg-green-500 text-white border-negro_fondo hover:bg-negro_fondo hover:text-white">
                           <RiRecycleFill />
                         </button>
@@ -261,7 +283,9 @@ function CarRecTable({ visible, handleAlertsVisibility }) {
                           <BsPencilFill />
                         </button>
                         <button
-                          onClick={handleAlertsVisibility}
+                          onClick={() =>
+                            handleAlertsVisibility("vehículo", d.id)
+                          }
                           className="px-2 ml-2 py-1 border-[1px] rounded-md bg-green-500 text-white border-negro_fondo hover:bg-negro_fondo hover:text-white">
                           <RiRecycleFill />
                         </button>
@@ -344,6 +368,7 @@ function CarRecTable({ visible, handleAlertsVisibility }) {
         visible={vehiclesDetailVisibility}
         data={detailData}
         handleVisible={handleVehiclesVisibility}
+        handleReload={handleReload}
       />
     </section>
   );

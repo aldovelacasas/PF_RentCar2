@@ -100,7 +100,7 @@ function VehicleDetail({ visible, data, handleVisible, handleReload }) {
         formData.append("file", image);
       }
       const res = await axios.put(`/api/products/${inputs.id}`, formData);
-      // handleReload();
+      handleReload();
       handleVisible();
     } else {
       console.log(error);

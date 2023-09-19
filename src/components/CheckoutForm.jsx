@@ -13,6 +13,7 @@ import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import emailjs from "@emailjs/browser";
 import Alerts from "./Alerts";
 import { useSelector } from "react-redux";
+import axios from "axios";
 
 const fontRubik = Rubik({
   weight: "600",
@@ -26,6 +27,7 @@ export default function CheckoutForm({ paymentKey }) {
   const path = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();
+  const carId = searchParams.get("carId");
   const item = searchParams.get("item");
   const cant = searchParams.get("cant");
   const img = searchParams.get("img");
@@ -33,10 +35,9 @@ export default function CheckoutForm({ paymentKey }) {
   const startDate = searchParams.get("startDate");
   const endDate = searchParams.get("endDate");
   let total = cant * price;
-  console.log(paymentKey);
 
   if (item === null || cant === null || img === null || price === null) {
-    router.push("/homePage");
+    router.push("/UserDashBoard");
     return null;
   }
   let user = useSelector((state) => state.user.currentUser);
@@ -107,6 +108,20 @@ export default function CheckoutForm({ paymentKey }) {
     });
   }, [stripe]);
 
+  async function submitRent() {
+    const formData = {
+      userID: user.userId,
+      productID: carId,
+      fecha_inicio: startDate,
+      fecha_fin: endDate,
+      monto: price,
+      statusB: 1,
+    };
+    const res = axios
+      .post(`api/bookings/`, formData)
+      .then(console.log("registrado"));
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -124,6 +139,7 @@ export default function CheckoutForm({ paymentKey }) {
     });
 
     sendMail();
+    submitRent();
     setVisibility(true);
 
     if (error.type === "card_error" || error.type === "validation_error") {
@@ -138,7 +154,7 @@ export default function CheckoutForm({ paymentKey }) {
   function handleAccept() {
     if (message === "Pago realizado, gracias por confiar en AutoConnect") {
       setVisibility(false);
-      router.push("/");
+      router.push("/UserDashBoard");
     } else {
     }
   }
@@ -169,7 +185,7 @@ export default function CheckoutForm({ paymentKey }) {
           <p className="text-[1.5em]">${total.toLocaleString()} USD</p>
         </section>
         <form
-          className=" p-6 grid gap-6 shadow-2xl shadow-gris_fondo dark:shadow-black"
+          className=" p-6 grid gap-6 shadow-2xl shadow-gris_fondo dark:bg-gris_fondo dark:shadow-black"
           id="payment-form"
           onSubmit={handleSubmit}>
           <PaymentElement

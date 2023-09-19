@@ -49,8 +49,7 @@ function PromoCarousel() {
       <button
         onClick={handlePrevIndex}
         className="dark:hover:bg-gris_frente md:px-4 bg-gris_fondo hover:bg-negro_fondo md:text-[2em] hover:text-white active:bg-white dark:bg-dark_fondo dark:hover:text-black">
-        <FiChevronLeft/>
-
+        <FiChevronLeft />
       </button>
       <div className="relative flex justify-center">
         <Image
@@ -76,8 +75,7 @@ function PromoCarousel() {
       <button
         onClick={handleNextIndex}
         className="dark:bg-dark_fondo dark:hover:bg-gris_frente md:px-4 bg-gris_fondo hover:bg-negro_fondo md:text-[2em] hover:text-white active:bg-white dark:hover:text-black">
-        
-          <FiChevronRight/>
+        <FiChevronRight />
       </button>
     </section>
   );

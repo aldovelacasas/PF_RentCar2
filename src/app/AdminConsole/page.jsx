@@ -5,13 +5,13 @@ import { Rubik, Poppins } from "next/font/google";
 import RentalsTable from "@/components/RentalsTable";
 import VehiclesTable from "@/components/VehiclesTable";
 import HelpForm from "@/components/HelpForm";
-import { useRouter } from "next/navigation";
 import axios from "axios";
 import Alerts from "@/components/Alerts";
 import { useTranslation } from "react-i18next";
 // import MonthGraph from "@/components/MonthGraph";
 import { withAuth } from "@/withAuth";
 import dynamic from "next/dynamic";
+import { useRouter } from "next/navigation";
 
 const MonthGraph = dynamic(() => import("@/components/MonthGraph"), {
   ssr: false, // Evitar que se cargue en el servidor
@@ -29,9 +29,11 @@ const fontPoppins = Poppins({
 const poppins = fontPoppins.className;
 const rubik = fontRubik.className;
 
-let validation = true;
-
 function AdminMain() {
+  const [aux, setAux] = useState(false);
+
+  const router = useRouter();
+
   const initialState = {
     graphVisibility: true,
     rentalsVisibility: false,
@@ -51,8 +53,6 @@ function AdminMain() {
   const [id, setId] = useState("");
   const { t } = useTranslation();
 
-  let router = useRouter();
-
   function handleVisibility(name) {
     setVisibility({
       ...falseState,
@@ -60,11 +60,23 @@ function AdminMain() {
     });
   }
 
-  function handleDeletion() {
+  function handleReload() {
+    router.push("/AdminConsole");
+    router.refresh();
+    console.log("reload");
+    setAux(!aux);
+    handleAlertsVisibility(false);
+    // router.reload();
+  }
+
+  async function handleDeletion() {
     // axios.put(`/api/products/${id}`, { isActive: false }).then(console.log("Borrado exitosamente"));
-    axios
-      .delete(`/api/products/${id}?id=${id}`)
-      .then(console.log("Borrado exitosamente"));
+    let formData = new FormData();
+    formData.append("data", JSON.stringify({ capacity: 0 }));
+    const res = await axios
+      .put(`/api/products/${id}`, formData)
+      .then((res) => console.log(res));
+    handleReload();
   }
 
   function handleAlertsVisibility(dataId) {
@@ -73,10 +85,6 @@ function AdminMain() {
     setId(dataId);
   }
 
-  if (!validation) {
-    router.push("/");
-    return null;
-  }
   return (
     <div className="grid bg-gris_frente dark:bg-dark_frente overflow-x-hidden text-black dark:text-white">
       <header
