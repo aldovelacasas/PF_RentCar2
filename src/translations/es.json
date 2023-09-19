@@ -102,6 +102,8 @@
   "venahorra": "Ven y ahorra con nosotros",
   "atclient": "Contamos con atención al cliente",
   "xq": "¿Por qué rentar con nosotros?",
+  "order": "Ordenar por",
+  "search-model": "Buscar por modelo",
   "contamoscon": "Contamos con el vehículo que necesitas al",
   "bestprice": "mejor precio",
   "infotext": "Descubre las mejores ofertas con nuestros precios imbatibles dándote la mejor relación calidad/precio del mercado. Nuestros vehículos son revisados y lavados antes de lllegar a tus manos, de manera que te e vitas temas desagradables e inesperados que encontrarías en nuestra competencia.",
@@ -138,7 +140,7 @@
   "nom-ap": "Nombre y Apellido",
   "coment-qya": "Comentarios o dudas",
   "send": "Enviar",
-  "contac3": "Tambien contactanos via",
+  "contact3": "También contactanos via",
   "our-cars": "Nuestros vehículos",
   "find-car": "Encuentra el vehículo ideal",
   "vacio": "Nada que mostrar",
@@ -185,5 +187,11 @@
   "op": "Opinión",
   "rev-de": "Deja tu reseña",
   "rev-de2": "Dinos qué opinas de nuestros servicios",
-  "sel-car": " Seleccionar auto"
+  "sel-car": " Seleccionar auto",
+  "selected": "Seleccionar...",
+  "select-all": "Seleccionar todo",
+  "price-max": "Mayor precio",
+  "price-min": "Menor precio",
+  "cal-max": "Mayor calificación",
+  "cal-min": "Menor calificación"
 }

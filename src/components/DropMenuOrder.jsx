@@ -1,16 +1,19 @@
+"use client";
 import Multiselect from "multiselect-react-dropdown";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { orderFilter } from "@/store/slices/car"; // Asegúrate de importar esto desde la ubicación correcta
+import { useTranslation } from "react-i18next";
 
 const DropMenuOrder = () => {
   const dispatch = useDispatch();
   const [selectedValues, setSelectedValues] = useState([]);
+  const { t } = useTranslation();
   const optionsOrden = [
-    { name: "Mayor precio", id: "MayorPrecio" },
-    { name: "Menor precio", id: "MenorPrecio" },
-    { name: "Mayor calificación", id: "MayorRating" },
-    { name: "Menor calificación", id: "MenorRating" },
+    { name: t("price-max"), id: "MayorPrecio" },
+    { name: t("price-min"), id: "MenorPrecio" },
+    { name: t("cal-max"), id: "MayorRating" },
+    { name: t("cal-min"), id: "MenorRating" },
   ];
 
   const onSelect = (selectedList, selectedItem) => {
@@ -68,7 +71,7 @@ const DropMenuOrder = () => {
         onSelect={onSelect}
         onRemove={onRemove}
         displayValue="name"
-        placeholder="Seleccionar..."
+        placeholder={t("selected")}
         singleSelect={true}
         style={customStyles}
       />

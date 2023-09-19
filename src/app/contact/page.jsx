@@ -175,7 +175,7 @@ function Page() {
           {t("send")}
         </button>
       </form>
-      <p className={`text-[1em] ${rubik} mb-6 text-center`}> {t("contact3")}</p>
+      <p className={`text-[1em] ${rubik} mb-6 text-center`}>{t("contact3")}</p>
       <br />
       <WhatsAppButton
         className="border border-green-500"
