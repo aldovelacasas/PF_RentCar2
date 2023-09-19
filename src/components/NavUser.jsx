@@ -7,6 +7,8 @@ import { useSelector } from "react-redux/es/hooks/useSelector";
 import { BsFillBrightnessHighFill, BsFillMoonStarsFill } from "react-icons/bs";
 import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
+import LanguageSelector from "@/components/LanguageSelector";
+import ChatBar from "@/components/ChatBar";
 
 const fontRubik = Rubik({
   weight: "600",
@@ -27,7 +29,6 @@ import "./NavBar/nav.css";
 import { useAuth } from "@/app/context/AuthContext";
 import { BiLink } from "react-icons/bi";
 import Link from "next/link";
-import WhatsAppButton from "@/components/whatsAppButton.jsx";
 
 export default function NavUser({ userName, userPhoto, userEmail }) {
   const user = useSelector((state) => state.user.currentUser);
@@ -131,10 +132,9 @@ export default function NavUser({ userName, userPhoto, userEmail }) {
           </div>
         </section>
       </nav>
-      <WhatsAppButton />
       <button
         onClick={handleDarkMode}
-        className={`absolute top-[100px] right-2 p-4 py-2 dark:bg-gris_fondo bg-dark_fondo "
+        className={`absolute top-[85px] right-2 p-4 py-2 dark:bg-gris_fondo bg-dark_fondo "
         } rounded-sm shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
         {dark ? (
           <BsFillBrightnessHighFill className="text-black" />
@@ -142,6 +142,8 @@ export default function NavUser({ userName, userPhoto, userEmail }) {
           <BsFillMoonStarsFill className="text-white" />
         )}
       </button>
+      <LanguageSelector />
+      <ChatBar />
     </>
   );
 }

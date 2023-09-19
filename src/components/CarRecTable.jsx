@@ -7,6 +7,7 @@ import { RiRecycleFill } from "react-icons/ri";
 import { getCars } from "@/store/slices/car";
 import { useEffect, useState } from "react";
 import VehicleDetail from "./VehicleDetail";
+import { useRouter } from "next/navigation";
 
 const fontRubik = Rubik({
   weight: "600",
@@ -44,14 +45,13 @@ function CarRecTable({ visible, handleAlertsVisibility }) {
   const [category, setCategory] = useState("name");
   const [aux, setAux] = useState(false);
   const [arrow, setArrow] = useState(arrowInitialState);
-
+  const router = useRouter();
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getCars());
-  }, []);
+  }, [aux]);
 
   let vehiculosBorrados = useSelector((state) => state.cars.deletedCars);
-  console.log(vehiculosBorrados);
   useEffect(() => {
     setCurrentPage(1);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -119,6 +119,14 @@ function CarRecTable({ visible, handleAlertsVisibility }) {
     const res = await axios
       .put(`/api/products/${id}`, formData)
       .then((res) => console.log(res));
+    handleReload();
+  }
+
+  function handleReload() {
+    router.push("/AdminConsole/Recoveries");
+    router.refresh();
+    setAux(!aux);
+    // router.reload();
   }
 
   function handleSort(sortCategory) {
@@ -360,6 +368,7 @@ function CarRecTable({ visible, handleAlertsVisibility }) {
         visible={vehiclesDetailVisibility}
         data={detailData}
         handleVisible={handleVehiclesVisibility}
+        handleReload={handleReload}
       />
     </section>
   );

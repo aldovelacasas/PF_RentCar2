@@ -58,7 +58,7 @@ export default function FiltroVehiculos() {
   }
 
   return (
-    <section className="md:sticky md:top-[80px] z-10 bg-gris_fondo py-6 dark:bg-dark_fondo">
+    <section className="md:sticky md:top-[80px] md:z-[1] bg-gris_fondo py-6 pt-8 dark:bg-dark_fondo">
       <form
         className={`pt-2 text-[0.8em] bg-negro_fondo pb-5 rounded-xl  w-full mx-auto pl-4 justify-center items-center space-y-2 sm:space-y-0 sm:flex sm:flex-wrap text-black dark:text-white`}>
         <div className={`flex  flex-col  sm:w-[20%] w-full`}>

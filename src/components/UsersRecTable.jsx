@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getRental, getCars, getUser } from "@/store/slices/rental";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 const fontRubik = Rubik({
   weight: "600",
@@ -34,7 +35,7 @@ function CarRecTable({ visible, handleAlertsVisibility }) {
   };
 
   const dispatch = useDispatch();
-
+  const router = useRouter();
   const [currentPage, setCurrentPage] = useState(1);
   const [detailData, setDetailData] = useState();
   const [vehiclesDetailVisibility, setVehiclesDetailVisibility] =
@@ -49,7 +50,7 @@ function CarRecTable({ visible, handleAlertsVisibility }) {
     dispatch(getRental());
     dispatch(getCars());
     dispatch(getUser());
-  }, []);
+  }, [aux]);
 
   let allUsers = useSelector((state) => state.rental.deletedUsers);
   let allCars = useSelector((state) => state.rental.allCars);
@@ -86,6 +87,14 @@ function CarRecTable({ visible, handleAlertsVisibility }) {
     }
   }
 
+  function handleReload() {
+    router.push("/AdminConsole/Recoveries");
+    router.refresh();
+    setAux(!aux);
+    handleVehiclesVisibility();
+    // router.reload();
+  }
+
   useEffect(() => {
     setCurrentPage(1);
   }, [completeRentals]);
@@ -106,7 +115,6 @@ function CarRecTable({ visible, handleAlertsVisibility }) {
     x++;
     pages.push(x);
   }
-  console.log(data);
   useEffect(() => {
     if (dataToShow && dataToShow[0]) {
       setData(sliceData(dataToShow, currentPage, quantityPerPage));
@@ -213,7 +221,7 @@ function CarRecTable({ visible, handleAlertsVisibility }) {
               </th>
               <th
                 onClick={() => handleSort("nombre")}
-                className={`${rubik} min-w-[90px] sm:min-w-[250px] px-2 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo `}>
+                className={`${rubik} min-w-[90px] sm:min-w-[150px] px-2 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo `}>
                 {arrow.nombre ? "Nombre ▼" : "Nombre"}
               </th>
               <th

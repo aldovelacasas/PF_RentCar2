@@ -44,7 +44,6 @@ function FormRent({ visible = false, isAuth = false, car, handleVisible }) {
   const dispatch = useDispatch();
   let allRentals = useSelector((state) => state.rental.allRentals);
   const user = useSelector((state) => state.user.currentUser);
-  console.log(user);
   useEffect(() => {
     if (car) {
       dispatch(getRental());
@@ -122,11 +121,16 @@ function FormRent({ visible = false, isAuth = false, car, handleVisible }) {
       });
       return;
     } else if (startDate <= endDate) {
-      if (user.userPassport && user.Phone) {
+      if (user.userPassport && user.userPhone) {
         let cant = (endDate - startDate) / 3600000 / 24;
         cant += 1;
+        cant = Math.ceil(cant);
         router.push(
-          `/payment?item=${car.model}&cant=${cant}&img=${car.image}&price=${car.price}&startDate=${startDate}&endDate=${endDate}`,
+          `/payment?carId=${car.id}&item=${car.model}&cant=${cant}&img=${
+            car.image
+          }&price=${car.price}&startDate=${new Date(startDate)
+            .toJSON()
+            .slice(0, 10)}&endDate=${new Date(endDate).toJSON().slice(0, 10)}`,
           {
             query: { item: `${car.model}`, cant: `${cant}` },
           }

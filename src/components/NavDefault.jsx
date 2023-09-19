@@ -23,7 +23,8 @@ import React, { useState } from "react";
 import "./NavBar/nav.css";
 import Link from "next/link";
 // import { useAuth } from "@/app/context/AuthContext";
-import WhatsAppButton from "@/components/whatsAppButton.jsx";
+import LanguageSelector from "@/components/LanguageSelector";
+import ChatBar from "@/components/ChatBar";
 
 export default function NavDefault() {
   const [dark, setDark] = useState(false);
@@ -130,14 +131,15 @@ export default function NavDefault() {
       </nav>
       <button
         onClick={handleDarkMode}
-        className={`absolute top-[100px] right-2 p-4 py-2 dark:bg-gris_fondo bg-dark_fondo rounded-sm shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
+        className={`absolute top-[85px] right-2 p-4 py-2 dark:bg-gris_fondo bg-dark_fondo rounded-sm shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
         {dark ? (
           <BsFillBrightnessHighFill className="text-black" />
         ) : (
           <BsFillMoonStarsFill className="text-white" />
         )}
       </button>
-      <WhatsAppButton />
+      <LanguageSelector />
+      <ChatBar />
     </>
   );
 }

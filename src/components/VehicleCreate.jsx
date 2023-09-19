@@ -68,6 +68,9 @@ function VehicleCreate({ visible, handleVisible, handleReload }) {
 
   function handleChange(e) {
     if (e.target.name === "image") {
+      if (error.image) {
+        setError({});
+      }
       setImage(e.target.files[0]);
       setImageRender(URL.createObjectURL(e.target.files[0]));
       setError({ ...error, image: validation(e.target.files[0], "file") });
@@ -85,6 +88,9 @@ function VehicleCreate({ visible, handleVisible, handleReload }) {
   }
 
   const handleSubmit = async (e) => {
+    if (image === "") {
+      setError({ ...error, image: "Por favor elige una imagen" });
+    }
     let errorsLength = Object.values(error).filter(
       (e) => e !== "" && e !== undefined
     ).length;
@@ -96,7 +102,7 @@ function VehicleCreate({ visible, handleVisible, handleReload }) {
       formData.append("file", image);
       const res = await axios.post(`/api/products/`, formData);
       console.log(res);
-      //   handleReload();
+      handleReload();
       handleVisible();
     } else {
       console.log(error);

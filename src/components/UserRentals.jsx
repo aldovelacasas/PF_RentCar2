@@ -77,7 +77,6 @@ function UserRentals({ visible }) {
       }
     });
   }
-  console.log(completeRentals);
   useEffect(() => {
     if (!allUsers.length || !allRentals.length || !allCars.length) {
       setAux(true);
@@ -182,7 +181,6 @@ function UserRentals({ visible }) {
       setArrow({ ...arrowInitialState, [sortCategory]: true });
     }
   }
-  console.log(data);
 
   function handleRent() {
     router.push("/vehiculos");
@@ -355,7 +353,7 @@ function UserRentals({ visible }) {
             <button
               onClick={handleNext}
               className={
-                currentPage === max
+                currentPage === max || max === 0
                   ? "px-3 py-1 shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black  bg-negro_fondo text-white rounded-md"
                   : "px-3 py-1 shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black  bg-naranja_enf text-white rounded-md"
               }>
@@ -366,6 +364,7 @@ function UserRentals({ visible }) {
             visible={rentalDetailVisibility}
             data={detailData}
             handleVisible={handleRentVisibility}
+            isUser={true}
           />
         </>
       ) : (

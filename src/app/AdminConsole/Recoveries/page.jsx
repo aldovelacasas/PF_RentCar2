@@ -43,6 +43,7 @@ function Recoveries() {
   const [visibility, setVisibility] = useState(initialState);
   const [category, setCategory] = useState("");
   const [id, setId] = useState(null);
+  const [aux, setAux] = useState(false);
 
   function handleVisibility(name) {
     setVisibility({
@@ -58,6 +59,7 @@ function Recoveries() {
     const res = await axios
       .put(`/api/products/${id}`, formData)
       .then((res) => console.log(res));
+    handleReload();
   }
 
   async function handleUserRecovery() {
@@ -66,6 +68,7 @@ function Recoveries() {
     const res = await axios
       .put(`/api/users/${id}`, formData)
       .then((res) => console.log(res));
+    handleReload();
   }
 
   function handleAlertsVisibility(category, dataId) {
@@ -73,6 +76,13 @@ function Recoveries() {
     document.body.classList.toggle("stopScroll");
     setId(dataId);
     setCategory(category);
+  }
+
+  function handleReload() {
+    router.push("/AdminConsole/Recoveries");
+    router.refresh();
+    setAux(!aux);
+    // router.reload();
   }
 
   if (!validation) {
@@ -110,6 +120,7 @@ function Recoveries() {
           <CarRecTable
             visible={visibility.rentalsVisibility}
             handleAlertsVisibility={handleAlertsVisibility}
+            handleReload={handleReload}
           />
         </div>
         <div

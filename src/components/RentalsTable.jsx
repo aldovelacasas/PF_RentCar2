@@ -7,6 +7,7 @@ import RentalDetail from "./RentalDetail";
 import { useDispatch, useSelector } from "react-redux";
 import { getRental, getCars, getUser } from "@/store/slices/rental";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 const fontRubik = Rubik({
   weight: "600",
@@ -32,6 +33,7 @@ function RentalsTable({ visible }) {
     monto: false,
   };
 
+  const router = useRouter();
   const dispatch = useDispatch();
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -47,7 +49,7 @@ function RentalsTable({ visible }) {
     dispatch(getRental());
     dispatch(getCars());
     dispatch(getUser());
-  }, []);
+  }, [aux]);
 
   let allUsers = useSelector((state) => state.rental.allUsers);
   let allCars = useSelector((state) => state.rental.allCars);
@@ -150,7 +152,6 @@ function RentalsTable({ visible }) {
     setCategory(e.target.value);
   }
 
-  console.log(dataToShow);
   function handleSort(sortCategory) {
     let ordenated = dataToShow.sort((a, b) => {
       if (a[sortCategory] < b[sortCategory]) {
@@ -180,6 +181,7 @@ function RentalsTable({ visible }) {
     const res = await axios
       .put(`/api/bookings/${id}`, formData)
       .then((res) => console.log(res));
+    handleReload();
   }
 
   async function handleActive(id) {
@@ -188,6 +190,15 @@ function RentalsTable({ visible }) {
     const res = await axios
       .put(`/api/bookings/${id}`, formData)
       .then((res) => console.log(res));
+    handleReload();
+  }
+
+  function handleReload() {
+    router.push("/AdminConsole");
+    router.refresh();
+    setAux(!aux);
+    handleRentVisibility();
+    // router.reload();
   }
 
   if (visible === false) return null;
@@ -377,6 +388,7 @@ function RentalsTable({ visible }) {
         handleVisible={handleRentVisibility}
         handleActive={handleActive}
         handleCancel={handleCancel}
+        handleReload={handleReload}
       />
     </section>
   );

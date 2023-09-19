@@ -8,6 +8,7 @@ import VehicleCreate from "@/components/VehicleCreate";
 import VehicleDetail from "./VehicleDetail";
 import { getCars } from "@/store/slices/car";
 import { useDispatch, useSelector } from "react-redux";
+import { useRouter } from "next/navigation";
 
 const fontRubik = Rubik({
   weight: "600",
@@ -31,6 +32,7 @@ function VehiclesTable({ visible, handleAlertsVisibility }) {
     price: false,
   };
 
+  const router = useRouter();
   const dispatch = useDispatch();
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -47,7 +49,7 @@ function VehiclesTable({ visible, handleAlertsVisibility }) {
 
   useEffect(() => {
     dispatch(getCars());
-  }, []);
+  }, [aux]);
 
   let cars = useSelector((state) => state.cars.showCars);
 
@@ -135,6 +137,13 @@ function VehiclesTable({ visible, handleAlertsVisibility }) {
     setData(sliceData(ordenated, currentPage, quantityPerPage));
     setCurrentPage(1);
     setArrow({ ...arrowInitialState, [sortCategory]: true });
+  }
+
+  function handleReload() {
+    router.push("/AdminConsole");
+    router.refresh();
+    setAux(!aux);
+    // router.reload();
   }
 
   if (visible === false) return null;
@@ -308,13 +317,13 @@ function VehiclesTable({ visible, handleAlertsVisibility }) {
         Añadir vehículo +
       </button>
       <VehicleDetail
-        // handleReload={handleReload}
+        handleReload={handleReload}
         visible={vehiclesDetailVisibility}
         data={detailData}
         handleVisible={handleVehiclesVisibility}
       />
       <VehicleCreate
-        // handleReload={handleReload}
+        handleReload={handleReload}
         visible={createVehiclesVisibility}
         handleVisible={handleCreateVehiclesVisibility}
       />

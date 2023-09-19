@@ -11,6 +11,7 @@ import { useTranslation } from "react-i18next";
 // import MonthGraph from "@/components/MonthGraph";
 import { withAuth } from "@/withAuth";
 import dynamic from "next/dynamic";
+import { useRouter } from "next/navigation";
 
 const MonthGraph = dynamic(() => import("@/components/MonthGraph"), {
   ssr: false, // Evitar que se cargue en el servidor
@@ -29,6 +30,10 @@ const poppins = fontPoppins.className;
 const rubik = fontRubik.className;
 
 function AdminMain() {
+  const [aux, setAux] = useState(false);
+
+  const router = useRouter();
+
   const initialState = {
     graphVisibility: true,
     rentalsVisibility: false,
@@ -55,6 +60,15 @@ function AdminMain() {
     });
   }
 
+  function handleReload() {
+    router.push("/AdminConsole");
+    router.refresh();
+    console.log("reload");
+    setAux(!aux);
+    handleAlertsVisibility(false);
+    // router.reload();
+  }
+
   async function handleDeletion() {
     // axios.put(`/api/products/${id}`, { isActive: false }).then(console.log("Borrado exitosamente"));
     let formData = new FormData();
@@ -62,6 +76,7 @@ function AdminMain() {
     const res = await axios
       .put(`/api/products/${id}`, formData)
       .then((res) => console.log(res));
+    handleReload();
   }
 
   function handleAlertsVisibility(dataId) {

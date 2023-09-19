@@ -24,9 +24,12 @@ const rubik = fontRubik.className;
 function page() {
   const router = useRouter();
   const { user } = useAuth();
-  if (user.email === "autocontactofficial@gmail.com") {
+
+  if (user?.email === "autocontactofficial@gmail.com") {
     router.push("/AdminConsole");
     return;
+  } else if (!user) {
+    router.push("/login");
   }
 
   return (
@@ -37,7 +40,9 @@ function page() {
       </header>
       <section
         className={`${rubik}  text-[1.2em] md:text-[1.5em] bg-gris_fondo pb-12 dark:bg-dark_fondo`}>
-        <h2 className=" pl-[10%] py-4 text-black dark:text-white">Promociones</h2>
+        <h2 className=" pl-[10%] py-4 text-black dark:text-white">
+          Promociones
+        </h2>
         <PromoCarousel />
       </section>
       <section
@@ -50,7 +55,7 @@ function page() {
           Vehículos sugeridos:
         </h2>
         <br />
-        
+
         <CarCarousel className="" />
       </section>
       <section className={` text-[1.2em]`}>

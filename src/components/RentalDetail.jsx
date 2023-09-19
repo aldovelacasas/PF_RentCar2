@@ -20,6 +20,7 @@ function RentalDetail({
   handleVisible,
   handleActive,
   handleCancel,
+  isUser = false,
 }) {
   if (!visible) return null;
   const meses = [
@@ -37,13 +38,13 @@ function RentalDetail({
     "Dic.",
   ];
 
-  let startDay = new Date(data.fecha_inicio).getDay();
+  let startDay = data.fecha_inicio.slice(8, 10);
   let startMonth = new Date(data.fecha_inicio).getMonth();
   let startYear = new Date(data.fecha_inicio).getFullYear();
 
   let fechaInicio = `${startDay}/${meses[startMonth]}/${startYear}`;
 
-  let endDay = new Date(data.fecha_fin).getDay();
+  let endDay = data.fecha_fin.slice(8, 10);
   let endMonth = new Date(data.fecha_fin).getMonth();
   let endYear = new Date(data.fecha_fin).getFullYear();
 
@@ -70,7 +71,7 @@ function RentalDetail({
           </p>
           <p>
             <span className="font-bold">Monto: </span>
-            {data.monto}
+            {data.monto} USD
           </p>
           <p>
             <span className="font-bold">Estado: </span>
@@ -88,19 +89,20 @@ function RentalDetail({
             className={`bg-negro_fondo text-white text-[1em] px-4 md:px-6 md:py-2 py-[2px] rounded-md shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
             Volver
           </button>
-
-          <div className="flex justify-evenly gap-4">
-            <button
-              onClick={() => handleCancel(data.id)}
-              className={`rounded-md px-4 md:px-6 md:py-2 py-[2px] bg-white dark:bg-dark_blanco text-[1em] shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
-              Cancelar renta
-            </button>
-            <button
-              onClick={() => handleActive(data.id)}
-              className={`rounded-md px-4 md:px-6 md:py-2 py-[2px] bg-naranja_enf text-white text-[1em] shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
-              Finalizar renta
-            </button>
-          </div>
+          {!isUser && (
+            <div className="flex justify-evenly gap-4">
+              <button
+                onClick={() => handleCancel(data.id)}
+                className={`rounded-md px-4 md:px-6 md:py-2 py-[2px] bg-white dark:bg-dark_blanco text-[1em] shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
+                Cancelar renta
+              </button>
+              <button
+                onClick={() => handleActive(data.id)}
+                className={`rounded-md px-4 md:px-6 md:py-2 py-[2px] bg-naranja_enf text-white text-[1em] shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
+                Finalizar renta
+              </button>
+            </div>
+          )}
         </div>
       </figure>
     </div>
