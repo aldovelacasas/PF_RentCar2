@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { useState, useRef, useEffect } from "react";
-import ChatAdmin from "../../components/ChatAdmin";
+import ChatAdmin from "../../../components/ChatAdmin";
 import io from "socket.io-client";
 import immer from "immer";
 

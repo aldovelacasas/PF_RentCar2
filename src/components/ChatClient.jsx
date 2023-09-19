@@ -50,17 +50,17 @@ function ChatClient(props) {
   }
 
   return (
-    <div className="">
-      <div className="">
+    <div className="flex flex-col h-[300px] max-h-[300px]">
+      <div className="overflow-y-auto overflow-x-hidden flex-grow">
         <div className="">{body}</div>
-        <textarea
-          className="resize-none"
-          id="textbox"
-          value={props.message}
-          onChange={props.handleMessageChange}
-          onKeyPress={handleKeyPress}
-          placeholder="Escribe tu mensaje"></textarea>
       </div>
+      <textarea
+        className="resize-none mt-2 border border-gray-300 rounded p-2"
+        id="textbox"
+        value={props.message}
+        onChange={props.handleMessageChange}
+        onKeyPress={handleKeyPress}
+        placeholder="Escribe tu mensaje"></textarea>
     </div>
   );
 }
