@@ -456,7 +456,7 @@ function HomePage() {
           <tbody className="[&>*:nth-child(odd)]:bg-[#ea4e398a] bg-white dark:bg-dark_blanco">
             <tr
               onClick={() => handleCollapse("One")}
-              className="cursor-pointer hover:text-blue-600 ">
+              className="cursor-pointer hover:text-blue-600 dark:hover:text-black">
               <td className="py-1 text-center w-full">{t("time")} </td>
               <td className="px-2">▼</td>
             </tr>
@@ -469,7 +469,7 @@ function HomePage() {
             </tr>
             <tr
               onClick={() => handleCollapse("Two")}
-              className="cursor-pointer hover:text-blue-600 ">
+              className="cursor-pointer hover:text-blue-600 dark:hover:text-black">
               <td className="py-1 text-center">{t("algo")}</td>
               <td className="px-2">▼</td>
             </tr>
@@ -481,7 +481,7 @@ function HomePage() {
               )}
             </tr>
             <tr
-              className="cursor-pointer hover:text-blue-600 "
+              className="cursor-pointer hover:text-blue-600 dark:hover:text-black"
               onClick={() => handleCollapse("Three")}>
               <td className="py-1 text-center">{t("seguro")}</td>
               <td className="px-2">▼</td>
