@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getRental, getCars, getUser } from "@/store/slices/rental";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { useTranslation } from "react-i18next";
 
 const fontRubik = Rubik({
   weight: "600",
@@ -33,7 +34,7 @@ function CarRecTable({ visible, handleAlertsVisibility }) {
     pasaporte: false,
     correo: false,
   };
-
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const router = useRouter();
   const [currentPage, setCurrentPage] = useState(1);
@@ -184,18 +185,16 @@ function CarRecTable({ visible, handleAlertsVisibility }) {
     <section className="text-[10px] text-black dark:text-white sm:text-[12px] md:text-[16px]">
       <figure className="bg-white dark:bg-dark_blanco grid place-content-center sm:px-2 md:px-8 py-4 rounded-2xl">
         <h3 className="text-[1.2em] pl-2">
-          Usuarios
+          {t("users")}
           <span
             className={`${poppins} text-[0.8em] bg-gris_fondo dark:bg-dark_fondo ml-2 py-1 px-2 rounded-full`}>
             {dataToShow.length}
           </span>
         </h3>
-        <p className={`${poppins} text-[0.9em] pl-2`}>
-          Vista de los usuarios dados de baja
-        </p>
+        <p className={`${poppins} text-[0.9em] pl-2`}>{t("view-users")}</p>
         <div className="flex flex-wrap pl-2">
           <label htmlFor="search" className="shrink-0 basis-[100%]">
-            Búsqueda:
+            {t("search")}:
           </label>
           <input
             name="search"
@@ -207,8 +206,8 @@ function CarRecTable({ visible, handleAlertsVisibility }) {
           <select
             className="max-w-[30%]  bg-naranja_enf text-white px-2 rounded-full cursor-pointer shadow-sm shadow-black hover:shadow-md hover:shadow-black"
             onChange={handleSearchCategory}>
-            <option value="nombre">Nombre</option>
-            <option value="pasaporte">pasaporte</option>
+            <option value="nombre">{t("name")}</option>
+            <option value="pasaporte">{t("passport")}</option>
           </select>
         </div>
         <table className={`${poppins} mt-6`}>
@@ -234,7 +233,9 @@ function CarRecTable({ visible, handleAlertsVisibility }) {
                 className={`${rubik} min-w-[60px] sm:min-w-[200px] px-1 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo `}>
                 {arrow.correo ? "Correo ▼" : "Correo"}
               </th>
-              <th className={`${rubik} px-1 md:px-4 text-left`}>Acciones</th>
+              <th className={`${rubik} px-1 md:px-4 text-left`}>
+                {t("actions")}
+              </th>
             </tr>
             {data?.map((d) => {
               let ultimo;

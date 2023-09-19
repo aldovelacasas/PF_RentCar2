@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getTest } from "@/store/slices/testimonio";
 import Alerts from "./Alerts";
 import { getCars } from "@/store/slices/car";
+import { useTranslation } from "react-i18next";
 
 const fontRubik = Rubik({
   weight: "600",
@@ -41,6 +42,7 @@ const bigrubik = bigFontRubik.className;
 
 function OpinionForm() {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
   const cars = useSelector((state) => state.cars.allCars);
   useEffect(() => {
     dispatch(getCars());
@@ -138,7 +140,7 @@ function OpinionForm() {
             onClick={() => router.push("/login")}
             className={`${poppins} bg-naranja_enf rounded-xl px-3 py-2 text-sm sm:text-base hover:bg-negro_fondo hover:text-white`}
             type="button">
-            Iniciar Sesión
+            {t("sign in")}
           </button>
         </div>
       ) : (
@@ -150,12 +152,12 @@ function OpinionForm() {
         className={`p-4 sm:px-4 px-4 mx-4 my-4 max-w-md w-full ${
           isUser() ? "opacity-100" : "opacity-20"
         } `}>
-        <h3 className={`${rubik} text-2xl font-bold mb-2`}>Deja tu reseña</h3>
+        <h3 className={`${rubik} text-2xl font-bold mb-2`}>{t("rev-de")}</h3>
         <p className={`${poppins} text-base text-gray-600 mb-6`}>
-          Dinos qué opinas de nuestros servicios
+          {t("rev-de2")}
         </p>
         <label htmlFor="car" className={`${poppins} block mb-1`}>
-          Auto
+          {t("car")}
         </label>
         <select
           disabled={!isUser()}
@@ -165,7 +167,7 @@ function OpinionForm() {
           className="shadow-sm shadow-black
           w-full py-2 px-3 mb-3 bg-white dark:bg-dark_blanco border rounded-xl">
           <option value="Seleccionar" disabled>
-            Seleccionar auto
+            {t("sel-car")}
           </option>
           {cars?.map((car) => {
             return (
@@ -204,7 +206,7 @@ function OpinionForm() {
           ""
         )}
         <label htmlFor="opinion" className={`${poppins} block mb-1`}>
-          Opinión
+          {t("op")}
         </label>
         <textarea
           disabled={!isUser()}
@@ -227,20 +229,20 @@ function OpinionForm() {
           } ${error.opinion ? "ml-2" : ""}`}
           type="submit"
           disabled={!ready()}>
-          Enviar
+          {t("send")}
         </button>
       </form>
       <Alerts visible={alertVisibility}>
         <p
           className={`bg-naranja_enf text-white ${rubik} w-full text-center rounded-t-[15px]`}>
-          Alerta
+          {t("alert")}
         </p>
         <p className="text-[0.8em] px-4">{message}</p>
         <button
           onClick={handleVisibility}
           className={` shadow-sm shadow-black
           bg-naranja_enf ${rubik} text-white text-[0.8em] px-4 rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
-          Aceptar
+          {t("accept")}
         </button>
       </Alerts>
     </div>

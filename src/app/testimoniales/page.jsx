@@ -1,3 +1,4 @@
+"use client";
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable react-hooks/rules-of-hooks */
@@ -7,6 +8,7 @@ import OpinionForm from "@/components/OpinionForm";
 import axios from "axios";
 import { getTest } from "@/store/slices/testimonio";
 import Reviews from "@/components/Reviews";
+import { useTranslation } from "react-i18next";
 
 const fontRubik = Rubik({
   weight: "600",
@@ -31,6 +33,7 @@ async function getCars() {
 }
 
 async function Testimoniales() {
+  const { t } = useTranslation();
   try {
     var cars = await getCars();
     var testimonios = useSelector((state) => state.testimonies.testimonies);
@@ -43,17 +46,15 @@ async function Testimoniales() {
       <div>
         <header
           className={`bg-gris_fondo dark:bg-dark_fondo flex items-center h-[175px] ${rubik} text-[1em] md:text-[1.5em] px-[10%] space-y-0 space-x-2.5`}>
-          <p className={`text-[1.9em] mt-2 pl-4`}>Testimoniales</p>
+          <p className={`text-[1.9em] mt-2 pl-4`}>{t("testimonials")}</p>
           <img
             src="https://drive.google.com/uc?export=download&id=18hd72ccmFxNZhgHNgcH0T3zFAUw4gNmU"
             className=" float-right h-[10vh] md:h-[25vh] lg:h-[29vh] absolute right-[10%] top-[8%] z-1"
           />
         </header>
       </div>
-      <p className={`${rubik} text-center text-[2em] pt-8`}>Algunas reseñas</p>
-      <p className={`${rubik} text-center text-[1.2em] py-6`}>
-        Lee algunas de las opiniones que nuestros clientes nos han dejado.
-      </p>
+      <p className={`${rubik} text-center text-[2em] pt-8`}>{t("reviews")}</p>
+      <p className={`${rubik} text-center text-[1.2em] py-6`}>{t("lee-rev")}</p>
       <Reviews> </Reviews>
       <OpinionForm cars={cars} />
     </div>

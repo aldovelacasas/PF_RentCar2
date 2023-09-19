@@ -6,7 +6,7 @@ import emailjs from "@emailjs/browser";
 import { validateContactForm } from "@/libs/functions";
 import Alerts from "@/components/Alerts";
 import { Rubik, Poppins } from "next/font/google";
-
+import { useTranslation } from "react-i18next";
 import WhatsAppButton from "@/components/whatsAppButton.jsx";
 
 const fontRubik = Rubik({
@@ -29,7 +29,7 @@ function Page() {
     email: "",
     comments: "",
   };
-
+  const { t } = useTranslation();
   const [errors, setErrors] = useState({});
   const [inputs, setInputs] = useState(inputsInitialValue);
   const [visibility, setVisibility] = useState(false);
@@ -86,7 +86,7 @@ function Page() {
     <div className="grid bg-gris_frente dark:bg-dark_frente md:text-[2em] text-black dark:text-white">
       <header
         className={`bg-gris_fondo dark:bg-dark_fondo flex items-center h-[175px] ${rubik} text-[1em] md:text-[1.5em] pl-[10%] space-y-0 space-x-2.5`}>
-        <p className={`text-[1em] mt-2 pl-4`}>Contáctanos</p>
+        <p className={`text-[1em] mt-2 pl-4`}>{t("contact")}</p>
         <img
           src="/Contact.png"
           className=" float-right w-[30vw] md:w-[20vw] lg:w-[18vw] absolute right-[5%] top-[10%] z-1"
@@ -95,16 +95,15 @@ function Page() {
       <form
         className={`md:w-4/5 pt-2 ${poppins} text-[0.8em] sm:text-[1em] max-w-lg justify-self-center bg-gris_frente dark:bg-dark_frente pb-12`}>
         <p className={`text-[0.8em] ${rubik} mb-2 text-center mt-6`}>
-          ¿Necesitas más información?
-          
+          {t("more-info")}
         </p>
         <p className={`text-[1em] ${rubik} mb-6 text-center`}>
-          Cuéntanos tus dudas y te responderemos al momento
+          {t("respondemos")}
         </p>
-        
+
         <fieldset className="justify-self-center mb-4">
           <label htmlFor="name" className="">
-            Nombre y apellido
+            {t("nom-ap")}
           </label>
           <br />
           <input
@@ -147,7 +146,7 @@ function Page() {
         </fieldset>
         <fieldset className="justify-self-center mb-2">
           <label htmlFor="comments" className="">
-            Comentarios o dudas
+            {t("coment-qya")}
           </label>
           <br />
           <textarea
@@ -173,22 +172,25 @@ function Page() {
         <button
           onClick={handleSubmit}
           className={`bg-naranja_enf w-full justify-self-center text-white text-[0.7em] px-4 py-1 ${poppins} shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
-          Enviar
+          {t("send")}
         </button>
-         </form>
-         <p className={`text-[1em] ${rubik} mb-6 text-center`}> Tambien contactanos via</p>
-         <br />
-        <WhatsAppButton className="border border-green-500" phoneNumber="+543816426399" />
+      </form>
+      <p className={`text-[1em] ${rubik} mb-6 text-center`}> {t("contact3")}</p>
+      <br />
+      <WhatsAppButton
+        className="border border-green-500"
+        phoneNumber="+543816426399"
+      />
       <Alerts visible={visibility}>
         <p
           className={`bg-naranja_enf text-white ${rubik} w-full text-center rounded-t-[15px]`}>
-          Alerta
+          {t("alert")}
         </p>
         <p className="text-[0.8em] px-4">{message}</p>
         <button
           onClick={handleVisible}
           className={` bg-naranja_enf ${rubik} text-white text-[0.8em] px-4 rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
-          Aceptar
+          {t("accept")}
         </button>
       </Alerts>
     </div>
