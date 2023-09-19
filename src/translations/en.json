@@ -102,7 +102,9 @@
   "venahorra": "Come and save with us",
   "atclient": "We have customer service",
   "xq": "Why rent with us?",
-  "contamoscon": "We have the vehicle you need at the best price",
+  "order": "Order by",
+  "search-model": "Search by model",
+  "contamoscon": "We have the vehicle you need at the",
   "bestprice": "best price",
   "infotext": "Discover the best offers with our unbeatable prices giving you the best quality / price ratio in the market. Our vehicles are checked and washed before they reach your hands, so that you can see unpleasant and unexpected topics that you would find in our competition.",
   "dondequieras": "Drive wherever you want",
@@ -185,5 +187,11 @@
   "op": "Opinion",
   "rev-de": "Leave your review",
   "rev-de2": "Tell us what you think of our services",
-  "sel-car": "Select a car"
+  "sel-car": "Select a car",
+  "selected": "Select...",
+  "select-all": "Select all",
+  "price-max": "Higher price",
+  "price-min": "Lower price",
+  "cal-max": "Higher rating",
+  "cal-min": "Lower rating"
 }
