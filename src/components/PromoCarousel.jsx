@@ -3,6 +3,7 @@ import promoUno from "../images/PromocionUno.jpg";
 import promoDos from "../images/PromocionDos.jpg";
 import promoTres from "../images/PromocionTres.jpg";
 import Image from "next/image";
+import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
 
 function PromoCarousel() {
   let nextImage;
@@ -47,8 +48,8 @@ function PromoCarousel() {
       className="flex mx-[auto] w-[80vw]">
       <button
         onClick={handlePrevIndex}
-        className="rotate-180 dark:text-black  md:px-4 bg-gris_fondo hover:bg-negro_fondo md:text-[2em] hover:text-white active:bg-white">
-        ➤
+        className="dark:hover:bg-gris_frente md:px-4 bg-gris_fondo hover:bg-negro_fondo md:text-[2em] hover:text-white active:bg-white dark:bg-dark_fondo dark:hover:text-black">
+        <FiChevronLeft />
       </button>
       <div className="relative flex justify-center">
         <Image
@@ -73,8 +74,8 @@ function PromoCarousel() {
       </div>
       <button
         onClick={handleNextIndex}
-        className=" md:px-4 dark:text-black bg-gris_fondo hover:bg-negro_fondo md:text-[2em] hover:text-white active:bg-white">
-        ➤
+        className="dark:bg-dark_fondo dark:hover:bg-gris_frente md:px-4 bg-gris_fondo hover:bg-negro_fondo md:text-[2em] hover:text-white active:bg-white dark:hover:text-black">
+        <FiChevronRight />
       </button>
     </section>
   );

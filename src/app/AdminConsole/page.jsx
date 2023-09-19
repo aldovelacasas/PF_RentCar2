@@ -7,6 +7,7 @@ import VehiclesTable from "@/components/VehiclesTable";
 import HelpForm from "@/components/HelpForm";
 import axios from "axios";
 import Alerts from "@/components/Alerts";
+import { useTranslation } from "react-i18next";
 // import MonthGraph from "@/components/MonthGraph";
 import { withAuth } from "@/withAuth";
 import dynamic from "next/dynamic";
@@ -45,6 +46,7 @@ function AdminMain() {
   const [alertsVisibility, setAlertsVisibility] = useState(false);
   const [visibility, setVisibility] = useState(initialState);
   const [id, setId] = useState("");
+  const { t } = useTranslation();
 
   function handleVisibility(name) {
     setVisibility({
@@ -73,12 +75,12 @@ function AdminMain() {
       <header
         className={`bg-gris_fondo dark:bg-dark_fondo  relative ${rubik} space-y-0 space-x-2.5 p-10 md:text-[1.4em] h-[175px] flex items-center overflow-x-clip`}>
         <h1 className=" text-[1.2em] sm:text-[2em]  leading-6 pl-6">
-          Consola de administración
+          {t("consoleAdmin")}
         </h1>
       </header>
       <main
         className={`pt-4 ${rubik} mx-[auto] text-[0.8em] bg-gris_frente dark:bg-dark_frente pb-12 sm:text-[1.2em] grid gap-[12px]`}>
-        <h2 className="text-[1.5em] pl-2">Bienvenido Admin</h2>
+        <h2 className="text-[1.5em] pl-2">{t("welcomeAdmin")}</h2>
         <div
           className={
             visibility.graphVisibility
@@ -92,7 +94,7 @@ function AdminMain() {
                 ? `lg:px-[8em] text-center text-[1em] mb-2 bg-gris_fondo dark:bg-dark_fondo px-4 py-1 shadow-sm shadow-black hover:shadow-md cursor-pointer rounded-md hover:shadow-black active:shadow-inner active:shadow-black`
                 : `w-4/5 md:w-3/4 text-[1em] mb-2 bg-negro_fondo dark:bg-dark_blanco text-white text-center px-4 py-1 shadow-sm shadow-black hover:shadow-md cursor-pointer rounded-md hover:shadow-black active:shadow-inner active:shadow-black`
             }>
-            ▼ Gráfico de rentas ▼
+            ▼ {t("graph")} ▼
           </h3>
 
           <MonthGraph visible={visibility.graphVisibility} />
@@ -110,7 +112,7 @@ function AdminMain() {
                 ? `lg:px-[8em] text-center text-[1em] mb-2 bg-gris_fondo dark:bg-dark_fondo px-4 py-1 shadow-sm shadow-black hover:shadow-md cursor-pointer rounded-md hover:shadow-black active:shadow-inner active:shadow-black`
                 : `w-4/5 md:w-3/4 text-[1em] mb-2 bg-negro_fondo dark:bg-dark_blanco text-white text-center px-4 py-1 shadow-sm shadow-black hover:shadow-md cursor-pointer rounded-md hover:shadow-black active:shadow-inner active:shadow-black`
             }>
-            ▼ Vehículos en renta ▼
+            ▼ {t("rented")} ▼
           </h3>
           <RentalsTable visible={visibility.rentalsVisibility} />
         </div>
@@ -127,7 +129,7 @@ function AdminMain() {
                 ? `lg:px-[8em] text-center text-[1em] mb-2 bg-gris_fondo dark:bg-dark_fondo px-4 py-1 shadow-sm shadow-black hover:shadow-md cursor-pointer rounded-md hover:shadow-black active:shadow-inner active:shadow-black`
                 : `w-4/5 md:w-3/4 text-[1em] mb-2 bg-negro_fondo dark:bg-dark_blanco text-white text-center px-4 py-1 shadow-sm shadow-black hover:shadow-md cursor-pointer rounded-md hover:shadow-black active:shadow-inner active:shadow-black`
             }>
-            ▼ Administrar vehículos ▼
+            ▼ {t("manageCars")} ▼
           </h3>
           <VehiclesTable
             visible={visibility.vehiclesVisibility}
@@ -147,7 +149,7 @@ function AdminMain() {
                 ? `lg:px-[8em] text-center text-[1em] mb-2 bg-gris_fondo dark:bg-dark_fondo px-4 py-1 shadow-sm shadow-black hover:shadow-md cursor-pointer rounded-md hover:shadow-black active:shadow-inner active:shadow-black`
                 : `w-4/5 md:w-3/4 text-[1em] mb-2 bg-negro_fondo dark:bg-dark_blanco text-white text-center px-4 py-1 shadow-sm shadow-black hover:shadow-md cursor-pointer rounded-md hover:shadow-black active:shadow-inner active:shadow-black`
             }>
-            ▼ Solicitar ayuda ▼
+            ▼ {t("help")} ▼
           </h3>
           <HelpForm visible={visibility.formVisibility} />
         </div>
@@ -155,23 +157,21 @@ function AdminMain() {
       <Alerts visible={alertsVisibility}>
         <p
           className={`bg-naranja_enf text-white ${rubik} w-full text-center rounded-t-[15px]`}>
-          Alerta
+          {t("alert")}
         </p>
-        <p className="text-[1em] px-4">
-          ¿Estás seguro de eliminar este vehículo?
-        </p>
-        <p className="text-[0.8em] mt-[-6px] px-4">{`(Podrás ver los vehículos eliminados en la página de restauración)`}</p>
+        <p className="text-[1em] px-4">{t("deleteCar")}</p>
+        <p className="text-[0.8em] mt-[-6px] px-4">{t("deleteCarRest")}</p>
 
         <div className="flex w-1/2 justify-evenly">
           <button
             onClick={handleDeletion}
             className={` bg-naranja_enf ${rubik} text-white text-[1em] px-4 rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black `}>
-            Borrar
+            {t("delete")}
           </button>
           <button
             onClick={handleAlertsVisibility}
             className={` bg-negro_fondo ${rubik} text-white text-[1em] px-4 rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black `}>
-            Cerrar
+            {t("close")}
           </button>
         </div>
       </Alerts>

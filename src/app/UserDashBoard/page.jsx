@@ -36,8 +36,8 @@ function page() {
         <h1 className={`py-14 ml-2.5 text-[1.5em]`}>Panel de Usuario</h1>
       </header>
       <section
-        className={`${rubik} text-[1.2em] md:text-[1.5em] bg-negro_fondo pb-12 dark:bg-dark_blanco`}>
-        <h2 className=" pl-[10%] py-4 text-white">Promociones</h2>
+        className={`${rubik}  text-[1.2em] md:text-[1.5em] bg-gris_fondo pb-12 dark:bg-dark_fondo`}>
+        <h2 className=" pl-[10%] py-4 text-black dark:text-white">Promociones</h2>
         <PromoCarousel />
       </section>
       <section
@@ -46,9 +46,11 @@ function page() {
         <UserRentals />
       </section>
       <section className={`${rubik} px-4 mt-6 pt-8 dark:bg-dark_blanco`}>
-        <h2 className="text-[1.2em] md:text-[1.5em] pl-[10%]">
+        <h2 className="text-center text-[1.5em] md:text-[1.5em] pl-[0%]">
           Vehículos sugeridos:
         </h2>
+        <br />
+        
         <CarCarousel className="" />
       </section>
       <section className={` text-[1.2em]`}>

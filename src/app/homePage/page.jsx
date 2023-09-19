@@ -18,6 +18,7 @@ import { PiCar, PiCarProfile, PiPhoneCallBold } from "react-icons/pi";
 import { BiSolidCar } from "react-icons/bi";
 import { Rubik, Poppins } from "next/font/google";
 import { useRouter } from "next/navigation.js";
+import { useTranslation } from "react-i18next";
 import React from "react";
 
 const fontRubik = Rubik({
@@ -53,6 +54,7 @@ function HomePage() {
     Two: true,
     Three: true,
   });
+  const { t } = useTranslation();
 
   function handleChange(e) {
     let newdisplay = categorias.find((c) => c.tipo === e.target.value);
@@ -191,15 +193,13 @@ function HomePage() {
           src="/camionetahome.png"
           className=" float-right w-[50vw] absolute right-[-15%] scale-x-[-1] top-0 z-1"
         />
-        <p className={`pt-12 ml-2.5 text-[0.8em] mb-2`}>
-          Planea tu viaje ahora
-        </p>
+        <p className={`pt-12 ml-2.5 text-[0.8em] mb-2`}>{t("plan")}</p>
         <p className="text-[1.3em]  leading-6  md:leading-[1.8em]">
-          <span className="text-naranja_enf">Ahorra </span>
-          con nuestra
+          <span className="text-naranja_enf"> {t("ahorra")} </span>
+          {t("connuestra")}
         </p>
         <p className="text-[1.3em] leading-6 md:leading-[1.2em] md:pb-4">
-          renta de vehículos
+          {t("renta-de-vehiculos")}
         </p>
         <p className={`${poppins} text-[0.6em] mt-2 z-3`}>
           Renta el auto de tus sueños con precios imbatibles,
@@ -207,17 +207,18 @@ function HomePage() {
         <p className={`${poppins} text-[0.6em] pb-4`}>
           km ilimitados, opciones flexibles y mucho más.
         </p>
+        <p className={`${poppins} text-[0.6em] pb-4`}>{t("km")}</p>
         <div className="flex place-content-evenly w-full sm:w-2/3 mt-3 pb-10 md:pt-[40px] lg:w-1/2">
           <button
             onClick={handleScrollForm}
             className={`bg-naranja_enf text-white text-[0.7em] px-4 py-1 ${poppins} shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
-            Renta <BsCheckCircleFill className="inline pl-1" />
+            {t("rent")} <BsCheckCircleFill className="inline pl-1" />
           </button>
           <button
             type="button"
             onClick={handleScrollInfo}
             className={`bg-negro_fondo text-white text-[0.7em] px-4 py-1 ${poppins} shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
-            Conoce más
+            {t("more")}
             <BsChevronCompactRight className="inline pl-1 pr-0 mr-0 " />
           </button>
         </div>
@@ -226,12 +227,12 @@ function HomePage() {
         className={` rounded-3xl mt-8 ${poppins} text-[0.8em] sm:text-[1em] md:text-[1.2em] px-[20%] justify-self-center bg-[#fff6] mb-2 shadow-sm shadow-negro_fondo pb-12`}>
         <p
           className={`text-[1em] md:text-[1.2em] ${rubik} mb-2 md:mt-[40px] text-center`}>
-          Renta un auto
+          {t("rentacar")}
         </p>
         <fieldset>
           <label htmlFor="category" className="">
-            <BiSolidCar className="inline text-naranja_enf mr-1" /> Elige una
-            categoría
+            <BiSolidCar className="inline text-naranja_enf mr-1" />
+            {t("category")}
           </label>
           <br />
           <select
@@ -246,8 +247,8 @@ function HomePage() {
         </fieldset>
         <fieldset>
           <label htmlFor="fechaInicio" className="">
-            <FaCalendarAlt className="inline text-naranja_enf mr-1" /> Fecha de
-            inicio
+            <FaCalendarAlt className="inline text-naranja_enf mr-1" />{" "}
+            {t("fechainicio")}
           </label>
           <br />
           <input
@@ -262,8 +263,8 @@ function HomePage() {
         </fieldset>
         <fieldset>
           <label htmlFor="endDate" className="">
-            <FaCalendarAlt className="inline text-naranja_enf mr-1" /> Fecha de
-            fin
+            <FaCalendarAlt className="inline text-naranja_enf mr-1" />{" "}
+            {t("fechafin")}
           </label>
           <br />
           <input
@@ -282,16 +283,16 @@ function HomePage() {
         <button
           onClick={handleValidation}
           className={`bg-naranja_enf w-full text-white text-[0.8em] px-4 py-1 mt-8 ${rubik} shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
-          Rentar
+          {t("rent")}
         </button>
       </form>
       <section
         className={`pt-4 ${poppins} mx-[auto] text-[0.8em] bg-gris_frente dark:bg-dark_frente pb-12 sm:text-[1.2em] grid`}>
         <p className={`text-[0.8em] ${rubik} mb-2 text-center`}>
-          Planea tu viaje
+          {t("planahora")}
         </p>
         <p className={`text-[1em] ${rubik} mb-6 text-center`}>
-          Alquila tu auto fácil y rápido
+          {t("alquilafacil")}
         </p>
         <div className="md:flex items-baseline w-4/5 justify-self-center">
           <div className="w-full flex justify-center items-center md:flex-col gap-x-4 px-3">
@@ -299,11 +300,8 @@ function HomePage() {
               <PiCar className="text-[50px] md:text-[80px] text-naranja_enf" />
             </figure>
             <div className="w-2/3 md:text-center md:text-[0.8em]">
-              <p className={`text-[0.8em] ${rubik} mb-2`}>Elije tu carro</p>
-              <p className={`text-[0.8em] ${poppins}  `}>
-                Contamos con una gran colección de vehículos disponibles sólo
-                para ti.
-              </p>
+              <p className={`text-[0.8em] ${rubik} mb-2`}>{t("carchoose")}</p>
+              <p className={`text-[0.8em] ${poppins}  `}>{t("parati")}</p>
             </div>
           </div>
           <div className="w-full flex justify-center items-center md:flex-col gap-x-4  px-3 my-10">
@@ -311,9 +309,9 @@ function HomePage() {
               <PiPhoneCallBold className="text-[50px] md:text-[80px] text-naranja_enf font-thin" />
             </figure>
             <div className="w-2/3 md:text-center md:text-[0.8em]">
-              <p className={`text-[0.8em] ${rubik} mb-2`}>¿Dudas?</p>
+              <p className={`text-[0.8em] ${rubik} mb-2`}>{t("dudas")}</p>
               <p className={`text-[0.8em] ${poppins} mb-2 `}>
-                Contacta con nosotros y te responderemos al momento.
+                {t("dudasinfo")}
               </p>
             </div>
           </div>
@@ -322,9 +320,9 @@ function HomePage() {
               <PiCarProfile className="text-[50px] md:text-[80px] text-naranja_enf" />
             </figure>
             <div className="w-2/3 md:text-center md:text-[0.8em]">
-              <p className={`text-[0.8em] ${rubik} mb-2`}>Conduce</p>
+              <p className={`text-[0.8em] ${rubik} mb-2`}>{t("conduce")}</p>
               <p className={`text-[0.8em] ${poppins} mb-2 `}>
-                Disfruta de la renta de tu vehículo vayas a donde vayas.
+                {t("conduceinfo")}
               </p>
             </div>
           </div>
@@ -332,10 +330,6 @@ function HomePage() {
       </section>
       <section
         className={`pt-4 ${rubik} w-4/5 grid mx-[auto] text-[0.8em] bg-gris_frente dark:bg-dark_frente pb-12 sm:text-[1.2em]`}>
-        <p className={`text-[0.8em] mb-2 text-center`}>Planea tu viaje</p>
-        <p className={`text-[1em] mb-2 text-center`}>
-          Alquila tu auto fácil y rápido
-        </p>
         <img
           src={display}
           className="w-4/5 justify-self-center object-scale-down max-h-[300px] md:max-h-[400px]"
@@ -355,27 +349,20 @@ function HomePage() {
       <section
         className={`pt-4 ${rubik} mx-[auto] my-8 text-white text-center text-[0.8em] w-full bg-negro_fondo pb-6 sm:py-[40px] md:py-[80px] sm:text-[1.2em]`}>
         <p className="text-2xl md:text-[1.8em] md:leading-[1.8em]">
-          Ven y ahorra con nosotros
+          {t("venahorra")}
         </p>
         <p>
-          Contamos con atención al cliente{" "}
-          <span className="text-naranja_enf">24/7</span>
+          {t("atclient")} <span className="text-naranja_enf">24/7</span>
         </p>
       </section>
       <section
         className={` w-3/4 pt-4 ${rubik} mx-[auto] text-[0.8em] bg-gris_frente dark:bg-dark_frente mt-8 pb-12 sm:text-[1.2em] grid`}>
-        <p>¿Por qué rentar con nosotros?</p>
+        <p>{t("xq")}</p>
         <p className="text-2xl md:text-[1.9em] md:leading-[1.2em]">
-          Contamos el vehículo que necesitas al
-          <span className="text-naranja_enf"> mejor precio</span>
+          {t("contamoscon")}
+          <span className="text-naranja_enf"> {t("bestprice")}</span>
         </p>
-        <p className="pt-4 mb-8">
-          Descubre las mejores ofertas con nuestros precios imbatibles dándote
-          la mejor relación calidad/precio del mercado. Nuestros vehículos son
-          revisados y lavados antes de lllegar a tus manos, de manera que te e
-          vitas temas desagradables e inesperados que encontrarías en nuestra
-          competencia.
-        </p>
+        <p className="pt-4 mb-8">{t("infotext")}</p>
         <div className="md:flex items-baseline justify-self-center">
           <div className="md:flex-col w-full flex justify-center items-center gap-x-4  px-3">
             <figure className="bg-[#ea4e398a] float-left rounded-full h-[65px] w-[65px] md:h-[100px] md:w-[100px] flex justify-center items-center">
@@ -383,12 +370,9 @@ function HomePage() {
             </figure>
             <div className="w-2/3 md:text-center md:text-[0.8em]">
               <p className={`text-[0.8em] ${rubik} mb-2`}>
-                Conduce hasta donde quieras
+                {t("dondequieras")}
               </p>
-              <p className={`text-[0.8em] ${poppins}  `}>
-                Lleva tu próxima aventura al siguiente nivel con nuestros
-                vehículos de la mejor calidad.
-              </p>
+              <p className={`text-[0.8em] ${poppins}  `}>{t("proxav")}</p>
             </div>
           </div>
           <div className="md:flex-col w-full flex justify-center items-center gap-x-4  px-3 my-10">
@@ -396,11 +380,8 @@ function HomePage() {
               <BsFillCreditCard2BackFill className="text-[30px] md:text-[60px] text-naranja_enf font-thin" />
             </figure>
             <div className="w-2/3 md:text-center md:text-[0.8em]">
-              <p className={`text-[0.8em] ${rubik} mb-2`}>Facilidad de pago</p>
-              <p className={`text-[0.8em] ${poppins} mb-2 `}>
-                Paga con tu tarjeta de crédito o débito de manera fácil y
-                segura.
-              </p>
+              <p className={`text-[0.8em] ${rubik} mb-2`}>{t("facilpago")}</p>
+              <p className={`text-[0.8em] ${poppins} mb-2 `}>{t("tarj")}</p>
             </div>
           </div>
           <div className="md:flex-col w-full flex justify-center items-center gap-x-4  px-3">
@@ -408,11 +389,10 @@ function HomePage() {
               <FaSearchDollar className="text-[30px] md:text-[60px] text-naranja_enf stroke-2" />
             </figure>
             <div className="w-2/3 md:text-center md:text-[0.8em]">
-              <p className={`text-[0.8em] ${rubik} mb-2`}>Sin cargos ocultos</p>
-              <p className={`text-[0.8em] ${poppins} mb-2 `}>
-                Nuestros precios son finales por lo que una vez pagado, puedes
-                disfrutar de la calma de tu viaje.
+              <p className={`text-[0.8em] ${rubik} mb-2`}>
+                {t("cargosocultos")}
               </p>
+              <p className={`text-[0.8em] ${poppins} mb-2 `}>{t("nueprice")}</p>
             </div>
           </div>
         </div>
@@ -420,12 +400,9 @@ function HomePage() {
       <section
         className={`pt-8 px-5 ${rubik} mx-[auto] text-[0.8em] bg-gris_fondo dark:bg-dark_fondo rounded-3xl shadow-sm shadow-black pb-12 w-3/4`}>
         <p className="text-2xl md:text-[1.5em] text-center pb-4 md:pb-8">
-          Lee las reseñas de otros clientes
+          {t("lee")}
         </p>
-        <p className="pb-4">
-          Más de 5 años de experiencia nos respaldan y nuestros clientes pueden
-          corroborar nuestro excelentísimo servicio.
-        </p>
+        <p className="pb-4">{t("mascinco")}</p>
         <div
           className={`bg-white dark:bg-dark_blanco ${rubik}  p-8 shadow-sm shadow-black rounded-xl mb-4`}>
           <p>
@@ -473,64 +450,47 @@ function HomePage() {
         className={`pt-8 px-5 ${rubik} mx-[auto] text-[0.8em] md:mt-[60px] w-3/4 bg-gris_frente dark:bg-dark_frente pb-12 sm:text-[1.2em]`}>
         <p className="text-center">FAQ</p>
         <p className="text-2xl text-center pb-4 md:text-[1.2em]  md:mb-[60px]">
-          Preguntas Frecuentes
+          {t("faq")}
         </p>
         <table className="bg-white dark:bg-dark_blanco shadow-md shadow-black md:mb-8">
           <tbody className="[&>*:nth-child(odd)]:bg-[#ea4e398a] bg-white dark:bg-dark_blanco">
             <tr
               onClick={() => handleCollapse("One")}
               className="cursor-pointer hover:text-blue-600 ">
-              <td className="py-1 text-center w-full">
-                ¿Cuánto tiempo tengo para devolver el pedido?
-              </td>
+              <td className="py-1 text-center w-full">{t("time")} </td>
               <td className="px-2">▼</td>
             </tr>
             <tr>
               {collapsed.One === true ? (
                 <></>
               ) : (
-                <td className={`py-1 px-2 pb-8 ${poppins}`}>
-                  Después de vencido tu periodo de renta, cuentas con una hora
-                  de tolerancia para devolver el vehículo.
-                </td>
+                <td className={`py-1 px-2 pb-8 ${poppins}`}>{t("desp")}</td>
               )}
             </tr>
             <tr
               onClick={() => handleCollapse("Two")}
               className="cursor-pointer hover:text-blue-600 ">
-              <td className="py-1 text-center">
-                ¿Qué pasa si olvidé algo en el interior del auto?
-              </td>
+              <td className="py-1 text-center">{t("algo")}</td>
               <td className="px-2">▼</td>
             </tr>
             <tr>
               {collapsed.Two === true ? (
                 <></>
               ) : (
-                <td className={`py-1 px-2 pb-8 ${poppins}`}>
-                  No te preocupes, nosotros te contactaremos tan pronto
-                  realicemos la limpieza del vehículo para que puedas venir a
-                  recoger tus pertenencias.
-                </td>
+                <td className={`py-1 px-2 pb-8 ${poppins}`}>{t("ntp")}</td>
               )}
             </tr>
             <tr
               className="cursor-pointer hover:text-blue-600 "
               onClick={() => handleCollapse("Three")}>
-              <td className="py-1 text-center">
-                ¿El vehículo cuenta con seguro?
-              </td>
+              <td className="py-1 text-center">{t("seguro")}</td>
               <td className="px-2">▼</td>
             </tr>
             {collapsed.Three === true ? (
               <></>
             ) : (
               <tr>
-                <td className={`py-1 px-2 pb-8 ${poppins}`}>
-                  Claro que sí, todos nuestros vehículos se encuentran en buen
-                  estado y con todos sus papeles en orden de manera que puedes
-                  conducir sin preocupaciones.
-                </td>
+                <td className={`py-1 px-2 pb-8 ${poppins}`}>{t("claro")}</td>
               </tr>
             )}
           </tbody>
@@ -539,11 +499,9 @@ function HomePage() {
       <form
         className={`pt-2 ${poppins} text-[0.8em]  md:text-[1.2em] bg-gris_fondo dark:bg-dark_fondo  sm:px-[15%] px-4 pb-4  sm:py-[25px] md:py-[50px]`}>
         <p className={`${rubik} text-2xl  md:text-[1.3em]  md:pt-6`}>
-          Suscríbete
+          {t("subscribe")}
         </p>
-        <p className="py-2">
-          Infórmate antes que nadie de nuestras ofertas y descuentos especiales.
-        </p>
+        <p className="py-2">{t("infoantes")} </p>
         <label htmlFor="email">Email</label> <br />
         <input
           type="text"
@@ -556,7 +514,7 @@ function HomePage() {
         <button
           onClick={handleEmailSubmit}
           className="text-white bg-naranja_enf px-4 ml-4 text-[1em]  md:py-3 leading-5 shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black ">
-          Suscribirme
+          {t("subscribe")}
         </button>
         {errors && (
           <p className="text-[0.5em] text-rojo_status">{errors.email}</p>
@@ -565,13 +523,13 @@ function HomePage() {
       <Alerts visible={visibility}>
         <p
           className={`bg-naranja_enf text-white ${rubik} w-full text-center rounded-t-[15px]`}>
-          Alerta
+          {t("alert")}
         </p>
         <p className="text-[0.8em] px-4">{message}</p>
         <button
           onClick={handleVisible}
           className={` bg-naranja_enf ${rubik} text-white text-[0.8em] px-4 rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black `}>
-          Aceptar
+          {t("accept")}
         </button>
       </Alerts>
       <FormRent
