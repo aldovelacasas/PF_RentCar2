@@ -9,6 +9,7 @@ import { getRental, getCars, getUser } from "@/store/slices/rental";
 import { useAuth } from "@/app/context/AuthContext";
 import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
+import { TbReload } from "react-icons/tb";
 
 const fontRubik = Rubik({
   weight: "600",
@@ -52,7 +53,7 @@ function UserRentals({ visible }) {
     dispatch(getRental());
     dispatch(getCars());
     dispatch(getUser());
-  }, []);
+  }, [aux]);
 
   let allUsers = useSelector((state) => state.rental.allUsers);
   let allCars = useSelector((state) => state.rental.allCars);
@@ -187,19 +188,32 @@ function UserRentals({ visible }) {
     router.push("/vehiculos");
   }
 
+  function handleReset() {
+    router.push("/UserDashBoard");
+    router.refresh();
+    setAux(!aux);
+  }
+
   if (visible === false) return null;
   return (
     <section className="text-[10px] sm:text-[12px] md:text-[16px] text-black dark:text-white">
       {data ? (
         <>
           <figure className="bg-white dark:bg-dark_blanco grid place-content-center sm:px-2 md:px-8 py-4 rounded-2xl">
-            <h3 className="text-[1.2em]">
-              {t("rentas")}
-              <span
-                className={`${poppins} text-[0.8em] bg-gris_fondo dark:bg-dark_fondo ml-2 py-1 px-2 rounded-full`}>
-                {dataToShow?.length}
-              </span>
-            </h3>
+            <div className="flex justify-between flex-wrap mr-6">
+              <h3 className="text-[1.2em]">
+                {t("rentas")}
+                <span
+                  className={`${poppins} text-[0.8em] bg-gris_fondo dark:bg-dark_fondo ml-2 py-1 px-2 rounded-full`}>
+                  {dataToShow?.length}
+                </span>
+              </h3>
+              <button
+                onClick={handleReset}
+                className="inline ml-12 bg-naranja_enf px-4 py-2 text-white rounded-md shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black">
+                <TbReload />
+              </button>
+            </div>
             <p className={`${poppins} text-[0.9em]`}>{t("view-rent")}</p>
             <div className="flex flex-wrap">
               <label htmlFor="search" className="shrink-0 basis-[100%]">
@@ -367,17 +381,25 @@ function UserRentals({ visible }) {
           />
         </>
       ) : (
-        <section className="grid place-content-center gap-4">
-          <p
-            className={`${rubik} text-center text-[2em] bg-gris_fondo mx-[auto] px-6 py-1 rounded-md dark:text-black`}>
-            {t("rent-out")}
-          </p>
+        <div className="flex flex-wrap justify-center">
+          <section className="grid place-content-center gap-4">
+            <p
+              className={`${rubik} text-center text-[2em] bg-gris_fondo mx-[auto] px-6 py-1 rounded-md dark:text-black inline`}>
+              {t("rent-out")}
+            </p>
+
+            <button
+              onClick={handleRent}
+              className="px-3 py-1 shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black  bg-naranja_enf text-white rounded-md">
+              {t("rent-now")}
+            </button>
+          </section>
           <button
-            onClick={handleRent}
-            className="px-3 py-1 shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black  bg-naranja_enf text-white rounded-md">
-            {t("rent-now")}
+            onClick={handleReset}
+            className="bg-naranja_enf px-4 py-2 h-[30px] text-white rounded-md shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black">
+            <TbReload />
           </button>
-        </section>
+        </div>
       )}
     </section>
   );

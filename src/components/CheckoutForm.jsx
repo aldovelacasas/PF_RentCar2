@@ -50,7 +50,7 @@ export default function CheckoutForm({ paymentKey }) {
       userName: user.userName,
       model: item,
       cant: cant,
-      price: price,
+      price: total,
       startDate: startDate,
       endDate: endDate,
     };
@@ -64,11 +64,9 @@ export default function CheckoutForm({ paymentKey }) {
       .then(
         function (response) {
           console.log("SUCCESS!", response.status, response.text);
-          handleVisible();
         },
         function (error) {
           console.log("FAILED...", error);
-          handleVisible();
         }
       );
   }

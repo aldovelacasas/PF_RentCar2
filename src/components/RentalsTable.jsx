@@ -9,6 +9,7 @@ import { getRental, getCars, getUser } from "@/store/slices/rental";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
+import { TbReload } from "react-icons/tb";
 
 const fontRubik = Rubik({
   weight: "600",
@@ -24,7 +25,9 @@ const rubik = fontRubik.className;
 
 let completeRentals = {};
 let dataToShow;
-
+let allUsers;
+let allCars;
+let allRentals;
 function RentalsTable({ visible }) {
   const arrowInitialState = {
     id: false,
@@ -50,11 +53,12 @@ function RentalsTable({ visible }) {
     dispatch(getRental());
     dispatch(getCars());
     dispatch(getUser());
+    setData();
   }, [aux]);
 
-  let allUsers = useSelector((state) => state.rental.allUsers);
-  let allCars = useSelector((state) => state.rental.allCars);
-  let allRentals = useSelector((state) => state.rental.allRentals);
+  allUsers = useSelector((state) => state.rental.allUsers);
+  allCars = useSelector((state) => state.rental.allCars);
+  allRentals = useSelector((state) => state.rental.allRentals);
 
   function createRentalsComplete() {
     completeRentals = allRentals.map((r) => {
@@ -96,7 +100,7 @@ function RentalsTable({ visible }) {
     dataToShow = completeRentals;
   }, [completeRentals]);
 
-  let quantityPerPage = 10;
+  let quantityPerPage = 5;
   let max = Math.ceil(dataToShow?.length / quantityPerPage);
   let pages = [];
   let x = 0;
@@ -172,8 +176,8 @@ function RentalsTable({ visible }) {
 
   let total = 0;
   if (data && data.length) {
-    dataToShow.forEach((d) => (total += 5));
-    total = total * 2;
+    dataToShow.forEach((d) => (total += d.monto));
+    // total = total * 2;
   }
 
   async function handleCancel(id) {
@@ -198,21 +202,28 @@ function RentalsTable({ visible }) {
     router.push("/AdminConsole");
     router.refresh();
     setAux(!aux);
-    handleRentVisibility();
+    // handleRentVisibility();
     // router.reload();
   }
 
   if (visible === false) return null;
   return (
     <section className="text-[10px] sm:text-[12px] md:text-[16px] text-black dark:text-white">
-      <figure className="bg-white dark:bg-dark_blanco grid place-content-center sm:px-2 md:px-8 py-4 rounded-2xl">
-        <h3 className="text-[1.2em]">
-          {t("rentas")}
-          <span
-            className={`${poppins} text-[0.8em] bg-gris_fondo dark:bg-dark_fondo ml-2 py-1 px-2 rounded-full`}>
-            {dataToShow?.length}
-          </span>
-        </h3>
+      <figure className="bg-white dark:bg-dark_blanco grid place-content-center sm:px-2 md:px-4 py-4 rounded-2xl">
+        <div className="flex justify-between flex-wrap mr-6">
+          <h3 className="text-[1.2em]">
+            {t("rentas")}
+            <span
+              className={`${poppins} text-[0.8em] bg-gris_fondo dark:bg-dark_fondo ml-2 py-1 px-2 rounded-full`}>
+              {dataToShow?.length}
+            </span>
+          </h3>
+          <button
+            onClick={handleReload}
+            className="inline ml-12 bg-naranja_enf px-4 py-2 text-white rounded-md shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black">
+            <TbReload />
+          </button>
+        </div>
         <p className={`${poppins} text-[0.9em]`}>{t("view-rent")}</p>
         <div className="flex flex-wrap">
           <label htmlFor="search" className="shrink-0 basis-[100%]">
@@ -238,22 +249,22 @@ function RentalsTable({ visible }) {
             <tr className="">
               <th
                 onClick={() => handleSort("id")}
-                className={`${rubik} sm:px-2 md:px-4 md:min-w-[80px] text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
+                className={`${rubik} sm:px-2 md:px-4 lg:min-w-[80px] text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
                 {arrow.id ? "#Id ▼" : "#Id"}
               </th>
               <th
                 onClick={() => handleSort("user")}
-                className={`${rubik} hidden md:table-cell sm:px-1 md:px-4 md:min-w-[160px] lg:min-w-[200px] text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
+                className={`${rubik} hidden md:table-cell sm:px-1 md:px-4 lg:min-w-[160px]  text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo`}>
                 {arrow.user ? "Usuario ▼" : "Usuario"}
               </th>
               <th
                 onClick={() => handleSort("vehicle")}
-                className={`${rubik} sm:px-1 md:px-4 md:min-w-[175px] text-left lg:min-w-[200px] hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo `}>
+                className={`${rubik} sm:px-1 md:px-4 lg:min-w-[0px] text-left  hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo `}>
                 {arrow.vehicle ? "Vehiculo ▼" : "Vehiculo"}
               </th>
               <th
                 onClick={() => handleSort("status")}
-                className={`${rubik} hidden md:table-cell sm:px-1 md:px-4 md:min-w-[150px] text-left lg:min-w-[150px] hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo `}>
+                className={`${rubik} hidden md:table-cell sm:px-1 md:px-4  text-left lg:min-w-[100px] hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo `}>
                 {arrow.status ? "Estado ▼" : "Estado"}
               </th>
               <th
@@ -318,8 +329,8 @@ function RentalsTable({ visible }) {
           onClick={handlePrevious}
           className={
             currentPage === 1
-              ? "px-3 py-1 border-[2px] border-black bg-negro_fondo text-white rounded-md"
-              : "px-3 py-1 border-[2px] border-black bg-naranja_enf text-white rounded-md"
+              ? "px-3 py-1 shadow-sm shadow-black bg-negro_fondo text-white rounded-md hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black"
+              : "px-3 py-1 shadow-sm shadow-black bg-naranja_enf text-white rounded-md hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black"
           }>
           <FiChevronLeft className="symbolSearch" />
         </button>
@@ -328,8 +339,8 @@ function RentalsTable({ visible }) {
             onClick={() => setCurrentPage(1)}
             className={
               currentPage === 1
-                ? "px-3 py-1 border-[2px] border-black bg-negro_fondo text-white rounded-md"
-                : "px-3 py-1 border-[2px] border-black bg-naranja_enf text-white rounded-md"
+                ? "px-3 py-1 shadow-sm shadow-black bg-negro_fondo text-white rounded-md hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black"
+                : "px-3 py-1 shadow-sm shadow-black bg-naranja_enf text-white rounded-md hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black"
             }>
             1
           </button>
@@ -343,28 +354,28 @@ function RentalsTable({ visible }) {
                 onClick={handlePageChange}
                 className={
                   currentPage === p
-                    ? "px-3 py-1 border-[2px] border-black bg-negro_fondo text-white rounded-md"
-                    : "px-3 py-1 border-[2px] border-black bg-naranja_enf text-white rounded-md"
+                    ? "px-3 py-1 shadow-sm shadow-black bg-negro_fondo text-white rounded-md hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black"
+                    : "px-3 py-1 shadow-sm shadow-black bg-naranja_enf text-white rounded-md hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black"
                 }
                 key={p}>
                 {p}
               </button>
             );
           })}
-        {currentPage + 3 < max ? (
+        {currentPage + 4 < max ? (
           <>
             <span>...</span>
             <button
               onClick={() => setCurrentPage(max)}
-              className="px-3 py-1 border-[2px] border-black bg-naranja_enf text-white rounded-md">
+              className="px-3 py-1 shadow-sm shadow-black bg-naranja_enf text-white rounded-md hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black">
               {max}
             </button>
           </>
         ) : (
-          currentPage + 3 <= max && (
+          currentPage + 5 <= max && (
             <button
               onClick={() => setCurrentPage(max)}
-              className="px-3 py-1 border-[2px] border-black bg-naranja_enf text-white rounded-md">
+              className="px-3 py-1 shadow-sm shadow-black bg-naranja_enf text-white rounded-md hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black">
               {max}
             </button>
           )
@@ -373,8 +384,8 @@ function RentalsTable({ visible }) {
           onClick={handleNext}
           className={
             currentPage === max
-              ? "px-3 py-1 border-[2px] border-black bg-negro_fondo text-white rounded-md"
-              : "px-3 py-1 border-[2px] border-black bg-naranja_enf text-white rounded-md"
+              ? "px-3 py-1 shadow-sm shadow-black bg-negro_fondo text-white rounded-md hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black"
+              : "px-3 py-1 shadow-sm shadow-black bg-naranja_enf text-white rounded-md hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black"
           }>
           <FiChevronRight className="symbolSearch" />
         </button>

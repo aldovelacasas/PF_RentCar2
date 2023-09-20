@@ -10,6 +10,7 @@ import { getCars } from "@/store/slices/car";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
+import { TbReload } from "react-icons/tb";
 
 const fontRubik = Rubik({
   weight: "600",
@@ -63,7 +64,7 @@ function VehiclesTable({ visible, handleAlertsVisibility }) {
     dataToShow = [...cars];
   }, [cars]);
 
-  let quantityPerPage = 8;
+  let quantityPerPage = 5;
   let max = Math.ceil(dataToShow?.length / quantityPerPage);
   let pages = [];
   let x = 0;
@@ -151,13 +152,20 @@ function VehiclesTable({ visible, handleAlertsVisibility }) {
   return (
     <section className="text-[10px] text-black dark:text-white sm:text-[12px] md:text-[16px] px-4">
       <figure className="bg-white dark:bg-dark_blanco grid place-content-center sm:px-2 md:px-8 py-4 rounded-2xl">
-        <h3 className="text-[1.2em] pl-2">
-          {t("cars")}
-          <span
-            className={`${poppins} text-[0.8em] bg-gris_fondo dark:bg-dark_fondo ml-2 py-1 px-2 rounded-full`}>
-            {dataToShow?.length}
-          </span>
-        </h3>
+        <div className="flex justify-between flex-wrap mr-6">
+          <h3 className="text-[1.2em] pl-2">
+            {t("cars")}
+            <span
+              className={`${poppins} text-[0.8em] bg-gris_fondo dark:bg-dark_fondo ml-2 py-1 px-2 rounded-full`}>
+              {dataToShow?.length}
+            </span>
+          </h3>
+          <button
+            onClick={handleReload}
+            className="inline ml-12 bg-naranja_enf px-4 py-2 text-white rounded-md shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black">
+            <TbReload />
+          </button>
+        </div>
         <p className={`${poppins} text-[0.9em] pl-2`}>{t("view-car")}</p>
         <div className="flex flex-wrap pl-2">
           <label htmlFor="search" className="shrink-0 basis-[100%]">
@@ -284,7 +292,7 @@ function VehiclesTable({ visible, handleAlertsVisibility }) {
               </button>
             );
           })}
-        {currentPage + 3 < max ? (
+        {currentPage + 4 < max ? (
           <>
             <span>...</span>
             <button
@@ -294,7 +302,7 @@ function VehiclesTable({ visible, handleAlertsVisibility }) {
             </button>
           </>
         ) : (
-          currentPage + 3 <= max && (
+          currentPage + 5 <= max && (
             <button
               onClick={() => setCurrentPage(max)}
               className="px-3 py-1 shadow-sm shadow-black bg-naranja_enf text-white rounded-md hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black">
