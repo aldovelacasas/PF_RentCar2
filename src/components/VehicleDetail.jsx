@@ -20,23 +20,53 @@ const fontPoppins = Poppins({
 const poppins = fontPoppins.className;
 const rubik = fontRubik.className;
 
-function VehicleDetail({ visible, data, handleVisible, handleReload }) {
+function VehicleDetail({
+  visible,
+  data = {
+    id: "",
+    image: "",
+    name: "",
+    model: "",
+    year: "",
+    type: "",
+    capacity: "",
+    transmission: "",
+    price: "",
+    description: "",
+  },
+  handleVisible,
+  handleReload,
+}) {
   const router = useRouter();
   const { t } = useTranslation();
-  if (!visible) return null;
-
-  const initialState = {
-    id: data.id,
-    image: data.image,
-    name: data.name,
-    model: data.model,
-    year: data.year,
-    type: data.type,
-    capacity: data.capacity,
-    transmission: data.transmission,
-    price: data.price,
-    description: data.description,
+  let initialState = {
+    id: "",
+    image: "",
+    name: "",
+    model: "",
+    year: "",
+    type: "",
+    capacity: "",
+    transmission: "",
+    price: "",
+    description: "",
   };
+
+  useEffect(() => {
+    initialState = {
+      id: data.id,
+      image: data.image,
+      name: data.name,
+      model: data.model,
+      year: data.year,
+      type: data.type,
+      capacity: data.capacity,
+      transmission: data.transmission,
+      price: data.price,
+      description: data.description,
+    };
+    setInputs(initialState);
+  }, [data]);
 
   useEffect(() => {
     const jsondata = window.localStorage.getItem("formData");
@@ -108,7 +138,7 @@ function VehicleDetail({ visible, data, handleVisible, handleReload }) {
       console.log(error);
     }
   };
-
+  if (!visible) return null;
   return (
     <div
       className={` ${poppins} fixed text-black dark:text-white w-[100vw] top-0 left-0 pt-[15vh] h-[100vh] flex justify-center bg-[#dbdbdbcc] z-40`}>
