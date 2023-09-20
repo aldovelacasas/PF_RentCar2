@@ -1,30 +1,37 @@
 "use client";
 import React from "react";
+import { Rubik, Poppins } from "next/font/google";
+
+const fontRubik = Rubik({
+  weight: "600",
+  subsets: ["latin"],
+});
+
+const fontPoppins = Poppins({
+  weight: "400",
+  subsets: ["latin"],
+});
+const poppins = fontPoppins.className;
+const rubik = fontRubik.className;
 
 function ChatAdmin(props) {
-  console.log("Admin cliente", props);
   function renderUser(user) {
-    if (user.id === props.yourId) {
-      return (
-        <ul className="cursor-pointer" key={user.id}>
-          <li> {user.name}</li>
-        </ul>
-      );
-    }
     const currentChat = {
       chatName: user.username,
       isChannel: false,
       receiverId: user.id,
     };
-    console.log("current chat", currentChat);
+
     return (
       <div
-        className="cursor-pointer"
+        className={`cursor-pointer border-b border-gray-300 py-3 px-4 hover:bg-naranja_enf ${
+          props.selected == user.username ? "bg-naranja_enf" : ""
+        }`}
         onClick={() => {
           props.toggleChat(currentChat);
         }}
         key={user.id}>
-        {user.username}
+        <p className={`text-lg font-medium ${poppins}`}>{user.username}</p>
       </div>
     );
   }
@@ -34,7 +41,6 @@ function ChatAdmin(props) {
   );
 
   function renderMessages(message, index) {
-    console.log(message);
     return (
       <div
         key={index}
@@ -56,7 +62,7 @@ function ChatAdmin(props) {
             className={`relative ${
               message.sender === "AutoConnect" ? "items-start" : "items-end"
             }`}>
-            <p className="bg-white p-3 rounded-lg shadow-md relative">
+            <p className="bg-white p-3 rounded-lg shadow-md relative max-w-[35vh]">
               {message.content}
             </p>
             <div
@@ -80,19 +86,16 @@ function ChatAdmin(props) {
       e.preventDefault(), props.sendMessage();
     }
   }
-
   return (
     <div className="h-[70vh] w-full flex">
       {props.yourId === "3456789" && (
         <div className=" w-1/6 border-r border-black pl-4 pt-4">
-          <h3>All users</h3>
+          <h2 className={`${rubik}`}>Usuarios</h2>
           {filteredUsers?.map(renderUser)}
         </div>
       )}
       <div className="w-5/6 flex flex-col">
-        <div className="h-10 w-full border-b border-black">
-          {props.currentChat.chatName}
-        </div>
+        <div className="h-10 w-full"></div>
         <div className="h-[50vh] w-full overflow-scroll border-b border-black">
           {body}
         </div>

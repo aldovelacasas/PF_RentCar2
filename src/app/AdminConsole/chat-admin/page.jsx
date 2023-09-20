@@ -21,6 +21,7 @@ export default function Admin() {
   const [allUsers, setAllUsers] = useState([]);
   const [messages, setMessages] = useState(initialMessagesState);
   const [message, setMessage] = useState([]);
+  const [selected, setSelected] = useState("");
   const socketRef = useRef();
 
   function handleMessageChange(e) {
@@ -51,7 +52,6 @@ export default function Admin() {
   }
 
   function toggleChat(currentChat) {
-    console.log("AHORA SI", currentChat);
     if (!messages[currentChat.chatName]) {
       const newMessages = immer(messages, (draft) => {
         draft[currentChat.chatName] = [];
@@ -60,6 +60,7 @@ export default function Admin() {
       setMessages(newMessages);
     }
     setCurrentChat(currentChat);
+    setSelected(currentChat.chatName);
   }
 
   function connect() {
@@ -97,6 +98,7 @@ export default function Admin() {
         currentChat={currentChat}
         toggleChat={toggleChat}
         messages={messages[currentChat.chatName]}
+        selected={selected}
       />
     );
   } else {

@@ -1,8 +1,13 @@
+import { Rubik } from "next/font/google";
+const fontRubik = Rubik({
+  weight: "400",
+  subsets: ["latin"],
+});
+
+const rubik = fontRubik.className;
+
 function ChatClient(props) {
-  console.log("propiedades cliente", props);
   function renderMessages(message, index) {
-    console.log("miraaaaa", message);
-    console.log(message);
     return (
       <div
         key={index}
@@ -49,18 +54,30 @@ function ChatClient(props) {
     }
   }
 
+  function handleSend(e) {
+    e.preventDefault();
+    props.sendMessage();
+  }
+
   return (
     <div className="flex flex-col h-[300px] max-h-[300px]">
       <div className="overflow-y-auto overflow-x-hidden flex-grow">
         <div className="">{body}</div>
       </div>
-      <textarea
-        className="resize-none mt-2 border border-gray-300 rounded p-2"
-        id="textbox"
-        value={props.message}
-        onChange={props.handleMessageChange}
-        onKeyPress={handleKeyPress}
-        placeholder="Escribe tu mensaje"></textarea>
+      <div className="flex flex-row">
+        <textarea
+          className="resize-none mt-2 border border-gray-300 rounded p-2 w-3/4 mx-2"
+          id="textbox"
+          value={props.message}
+          onChange={props.handleMessageChange}
+          onKeyPress={handleKeyPress}
+          placeholder="Escribe tu mensaje"></textarea>
+        <button
+          className={`${rubik} text-s bg-naranja_enf w-[20vh] rounded px-2  text-white font-bold shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}
+          onClick={handleSend}>
+          Enviar
+        </button>
+      </div>
     </div>
   );
 }
