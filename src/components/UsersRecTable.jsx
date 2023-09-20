@@ -28,7 +28,7 @@ const rubik = fontRubik.className;
 let completeRentals = {};
 let dataToShow;
 
-function CarRecTable({ visible, handleAlertsVisibility }) {
+function CarRecTable({ visible, handleRecAlertsVisibility }) {
   const arrowInitialState = {
     id: false,
     nombre: false,
@@ -90,10 +90,10 @@ function CarRecTable({ visible, handleAlertsVisibility }) {
   }
 
   function handleReload() {
-    router.push("/AdminConsole/Recoveries");
+    router.push("/AdminConsole");
     router.refresh();
     setAux(!aux);
-    handleVehiclesVisibility();
+    // handleVehiclesVisibility();
     // router.reload();
   }
 
@@ -272,7 +272,7 @@ function CarRecTable({ visible, handleAlertsVisibility }) {
                       <PiPlusCircleBold />
                     </button>
                     <button
-                      onClick={() => handleAlertsVisibility("usuario", d.id)}
+                      onClick={() => handleRecAlertsVisibility("usuario", d.id)}
                       className="px-2 ml-2 py-1 border-[1px] rounded-md bg-green-500 text-white border-negro_fondo hover:bg-negro_fondo hover:text-white">
                       <RiRecycleFill />
                     </button>
@@ -342,7 +342,7 @@ function CarRecTable({ visible, handleAlertsVisibility }) {
         <button
           onClick={handleNext}
           className={
-            currentPage === max
+            currentPage === max || max === 0
               ? "px-3 py-1 shadow-sm shadow-black bg-negro_fondo text-white rounded-md hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black"
               : "px-3 py-1 shadow-sm shadow-black bg-naranja_enf text-white rounded-md hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black"
           }>

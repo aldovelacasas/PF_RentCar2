@@ -164,7 +164,7 @@ function FormRent({ visible = false, isAuth = false, car, handleVisible }) {
             <p className=" w-4/5 text-center place-self-center md:w-full text-[1em]">
               {t("invalid-sesion")}{" "}
             </p>
-            <fieldset className="flex justify-evenly w-full place-self-center lg:w-2/3 py-6">
+            <fieldset className="flex justify-evenly w-full place-self-center py-6">
               <button
                 type="button"
                 onClick={handleVisible}
@@ -172,6 +172,7 @@ function FormRent({ visible = false, isAuth = false, car, handleVisible }) {
                 {t("cancel")}
               </button>
               <button
+                type="button"
                 onClick={handleLogin}
                 className={` bg-naranja_enf ${rubik} text-white px-4 py-2 text-[1em] rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
                 {t("sign in")}

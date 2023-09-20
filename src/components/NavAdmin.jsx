@@ -53,7 +53,11 @@ export default function NavUser({ userName, userPhoto }) {
           <Link href="/AdminConsole">
             <img
               href="/AdminConsole"
-              src="https://drive.google.com/uc?export=download&id=1xRyrzCMxPuU6OX97500cJd7M7Veh0KXR"
+              src={
+                !document.body.classList.contains("dark")
+                  ? "https://drive.google.com/uc?export=download&id=1xRyrzCMxPuU6OX97500cJd7M7Veh0KXR"
+                  : "https://drive.google.com/uc?export=download&id=1synJL4Eoyp5TbR8rqZrBQaFu1vOAEKAo"
+              }
               className="border-black border-[1.5px] rounded-sm w-[150px] "
             />
           </Link>

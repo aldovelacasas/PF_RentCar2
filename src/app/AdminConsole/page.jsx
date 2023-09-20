@@ -77,7 +77,6 @@ function AdminMain() {
     router.refresh();
     console.log("reload");
     setAux(!aux);
-    handleAlertsVisibility(false);
     // router.reload();
   }
 
@@ -88,6 +87,7 @@ function AdminMain() {
     const res = await axios
       .put(`/api/products/${id}`, formData)
       .then((res) => console.log(res));
+    setAlertsVisibility(false);
     handleReload();
   }
 
@@ -97,10 +97,10 @@ function AdminMain() {
     setId(dataId);
   }
 
-  function handleAlertsRecVisibility(category, dataID) {
-    setRecAlertsVisibility(!alertsVisibility);
+  function handleAlertsRecVisibility(category, dataID = "") {
+    setRecAlertsVisibility(!alertsRecVisibility);
     document.body.classList.toggle("stopScroll");
-    setId(dataId);
+    setId(dataID);
     setCategory(category);
   }
 
@@ -111,6 +111,7 @@ function AdminMain() {
     const res = await axios
       .put(`/api/products/${id}`, formData)
       .then((res) => console.log(res));
+    setRecAlertsVisibility(!alertsRecVisibility);
     handleReload();
   }
 
@@ -121,6 +122,7 @@ function AdminMain() {
       .put(`/api/users/${id}`, formData)
       .then((res) => console.log(res));
     handleReload();
+    setRecAlertsVisibility();
   }
 
   return (
@@ -203,7 +205,7 @@ function AdminMain() {
           />
           <UsersRecTable
             visible={visibility.usersRecVisibility}
-            handleAlertsVisibility={handleAlertsRecVisibility}
+            handleRecAlertsVisibility={handleAlertsRecVisibility}
           />
           <CarRecTable
             visible={visibility.carRecVisibility}
@@ -223,14 +225,14 @@ function AdminMain() {
 
         <div className="flex w-1/2 justify-evenly">
           <button
-            onClick={handleDeletion}
-            className={` bg-naranja_enf ${rubik} text-white text-[1em] px-4 rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black `}>
-            {t("delete")}
+            onClick={handleAlertsVisibility}
+            className={` bg-negro_fondo ${rubik} text-white text-[1em] px-4 py-2 rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black `}>
+            {t("close")}
           </button>
           <button
-            onClick={handleAlertsVisibility}
-            className={` bg-negro_fondo ${rubik} text-white text-[1em] px-4 rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black `}>
-            {t("close")}
+            onClick={handleDeletion}
+            className={` bg-naranja_enf ${rubik} text-white text-[1em] px-4 py-2 rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black `}>
+            {t("delete")}
           </button>
         </div>
       </Alerts>

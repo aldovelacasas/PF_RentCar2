@@ -16,9 +16,14 @@ const fontPoppins = Poppins({
 const poppins = fontPoppins.className;
 const rubik = fontRubik.className;
 
-function UserDetail({ visible, data, handleVisible }) {
+function UserDetail({
+  visible,
+  data = {
+    id: "",
+  },
+  handleVisible,
+}) {
   if (!visible) return null;
-  console.log(data);
   //     id: data.id,
   //     nombre: data.nombre,
   //     pasaporte: data.pasaporte,
