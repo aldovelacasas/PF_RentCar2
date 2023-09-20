@@ -6,10 +6,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { setShowCars, orderFilter } from "@/store/slices/car";
 import { MultiSelect } from "react-multi-select-component";
 import DropMenuOrder from "./DropMenuOrder";
+import { useTranslation } from "react-i18next";
 
 export default function FiltroVehiculos() {
   const dispatch = useDispatch();
-
+  const { t } = useTranslation();
   const categorias = useSelector((state) => state.cars.categorias);
   const marcas = useSelector((state) => state.cars.marcas);
   const capacidades = useSelector((state) => state.cars.capacidad);
@@ -63,18 +64,18 @@ export default function FiltroVehiculos() {
         className={`pt-2 text-[0.8em] bg-negro_fondo pb-5 rounded-xl  w-full mx-auto pl-4 justify-center items-center space-y-2 sm:space-y-0 sm:flex sm:flex-wrap text-black dark:text-white`}>
         <div className={`flex  flex-col  sm:w-[20%] w-full`}>
           <label htmlFor="busqueda" className={`text-[1rem] text-white mb-1`}>
-            Búsqueda
+            {t("search")}
           </label>
           <input
             type="text"
-            placeholder="Búsqueda por modelo"
+            placeholder={t("search-model")}
             className={`bg-white min-w-[80px] w-[95%] rounded h-10  p-2 text-black text-xs`}
             onChange={handleSearch}
           />
         </div>
         <div className={`flex flex-col sm:w-[20%] w-full`}>
           <label htmlFor="Modelo" className={`text-[1rem] text-white mb-1`}>
-            Marca
+            {t("brand")}
           </label>
 
           <MultiSelect
@@ -89,7 +90,7 @@ export default function FiltroVehiculos() {
               clearSelected: "Limpiar seleccion",
               noOptions: "No hay opciones",
               search: "Buscar",
-              selectAll: "Seleccionar Todo",
+              selectAll: t("select-all"),
               selectAllFiltered: "Select All (Filtered)",
               selectSomeItems: "Seleccionar...",
               create: "Crear",
@@ -99,7 +100,7 @@ export default function FiltroVehiculos() {
         </div>
         <div className={`flex flex-col sm:w-[20%] w-full`}>
           <label htmlFor="categoria" className={`text-[1rem] text-white mb-1`}>
-            Categoría
+            {t("cat")}
           </label>
 
           <MultiSelect
@@ -114,7 +115,7 @@ export default function FiltroVehiculos() {
               clearSelected: "Limpiar seleccion",
               noOptions: "No hay opciones",
               search: "Buscar",
-              selectAll: "Seleccionar Todo",
+              selectAll: t("select-all"),
               selectAllFiltered: "Select All (Filtered)",
               selectSomeItems: "Seleccionar...",
               create: "Crear",
@@ -123,7 +124,7 @@ export default function FiltroVehiculos() {
         </div>
         <div className={`flex flex-col  sm:w-[20%] w-full`}>
           <label htmlFor="categoria" className={`text-[1rem] text-white mb-1`}>
-            Capacidad
+            {t("cap")}
           </label>
           <MultiSelect
             options={optionsCapacidades}
@@ -137,7 +138,7 @@ export default function FiltroVehiculos() {
               clearSelected: "Limpiar seleccion",
               noOptions: "No hay opciones",
               search: "Buscar",
-              selectAll: "Seleccionar Todo",
+              selectAll: t("select-all"),
               selectAllFiltered: "Select All (Filtered)",
               selectSomeItems: "Seleccionar...",
               create: "Crear",
@@ -148,7 +149,7 @@ export default function FiltroVehiculos() {
           <label
             htmlFor="categoria"
             className={`text-[1rem] text-white mb-1 pb-1`}>
-            Ordenar por:
+            {t("order")}:
           </label>
           <DropMenuOrder></DropMenuOrder>
         </div>

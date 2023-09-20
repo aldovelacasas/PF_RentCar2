@@ -14,6 +14,7 @@ import emailjs from "@emailjs/browser";
 import Alerts from "./Alerts";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import { useTranslation } from "react-i18next";
 
 const fontRubik = Rubik({
   weight: "600",
@@ -34,6 +35,7 @@ export default function CheckoutForm({ paymentKey }) {
   const price = searchParams.get("price");
   const startDate = searchParams.get("startDate");
   const endDate = searchParams.get("endDate");
+  const { t } = useTranslation();
   let total = cant * price;
 
   if (item === null || cant === null || img === null || price === null) {
@@ -48,7 +50,7 @@ export default function CheckoutForm({ paymentKey }) {
       userName: user.userName,
       model: item,
       cant: cant,
-      price: price,
+      price: total,
       startDate: startDate,
       endDate: endDate,
     };
@@ -62,11 +64,9 @@ export default function CheckoutForm({ paymentKey }) {
       .then(
         function (response) {
           console.log("SUCCESS!", response.status, response.text);
-          handleVisible();
         },
         function (error) {
           console.log("FAILED...", error);
-          handleVisible();
         }
       );
   }
@@ -167,21 +167,25 @@ export default function CheckoutForm({ paymentKey }) {
     <>
       <main className="grid grid-cols-1 lg:grid-cols-2 p-8 bg-white dark:bg-dark_blanco text-black dark:text-white">
         <section className="grid place-content-center mb-6">
-          <h1 className={`${rubik} text-center text-[1.5em]`}>Tu vehículo:</h1>
+          <h1 className={`${rubik} text-center text-[1.5em]`}>
+            {t("your-car")}:
+          </h1>
           <img className="max-w-[300px] lg:max-w-[400px]" src={img} />
           <p>
-            <span className="font-bold">Vehículo:</span> {item}
+            <span className="font-bold">{t("car")}:</span> {item}
           </p>
           {cant === "1" ? (
             <p>
-              Por un total de <span className="font-bold">{cant}</span> día
+              {t("for-total")} <span className="font-bold">{cant}</span>{" "}
+              {t("day")}
             </p>
           ) : (
             <p>
-              Por un total de <span className="font-bold">{cant}</span> días
+              {t("for-total")} <span className="font-bold">{cant}</span>{" "}
+              {t("days")}
             </p>
           )}
-          <p className="font-bold">Total de la renta:</p>
+          <p className="font-bold">{t("total")}:</p>
           <p className="text-[1.5em]">${total.toLocaleString()} USD</p>
         </section>
         <form
@@ -211,17 +215,15 @@ export default function CheckoutForm({ paymentKey }) {
       <Alerts visible={visibility} className="fixed top-[40%]">
         <p
           className={`bg-naranja_enf text-white ${rubik} w-full text-center rounded-t-[15px]`}>
-          Alerta
+          {t("alert")}
         </p>
         <p className="text-[1em] px-4">{message}</p>
         <button
           onClick={handleAccept}
           className={` bg-naranja_enf ${rubik} text-white text-[1em] px-4 rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
-          Aceptar
+          {t("accept")}
         </button>
-        <p className="text-[0.8em] mt-[-10px]">
-          *Al dar click en aceptar serás redirigido a la página principal
-        </p>
+        <p className="text-[0.8em] mt-[-10px]">{t("ok-home")}</p>
       </Alerts>
     </>
   );

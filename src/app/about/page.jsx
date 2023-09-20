@@ -38,10 +38,14 @@ function AboutPage() {
       <section
         className={`pt-4 ${poppins} mx-[auto] w-3/4 text-[0.8em] bg-gris_frente dark:bg-dark_frente pb-10 mt-8 sm:text-[1.5em]`}>
         <p className={`text-[0.8em] ${rubik} text-center`}>{t("somos")}</p>
-        <p className={`text-[1em] ${rubik} text-center`}>Auto Connect</p>
+        <p className={`text-[1em] ${rubik} text-center text-naranja_enf`}>
+          Auto Connect
+        </p>
         <p className="pt-4 mb-2 px-8 text-[0.8em]">{t("textabout")}</p>
         <br />
-        <p className={`text-[0.8em] ${rubik} text-center`}>{t("donde")}</p>
+        <p className={`text-[0.8em] ${rubik} pb-10 text-center`}>
+          {t("donde")}
+        </p>
         <Map
           googleMapURL={mapURL}
           loadingElement={<div style={{ height: "100%" }} />}
@@ -55,7 +59,7 @@ function AboutPage() {
             </figure>
             <p className={`text-[1.2em] ${rubik}`}>80</p>
             <p className={`text-[0.8em] ${rubik} mb-2 text-center`}>
-              Vehículos
+              {t("cars")}
             </p>
           </div>
           <div className="w-full flex flex-col justify-center items-center gap-x-4  px-3 my-10">
@@ -64,7 +68,7 @@ function AboutPage() {
             </figure>
             <p className={`text-[1.2em] ${rubik}`}>+500</p>
             <p className={`text-[0.8em] ${rubik} mb-2 text-center`}>
-              Rentas exitosas
+              {t("exitosas")}
             </p>
           </div>
           <div className="w-full flex flex-col justify-center items-center gap-x-4  px-3">
@@ -73,27 +77,15 @@ function AboutPage() {
             </figure>
             <p className={`text-[1.2em] ${rubik}`}>7</p>
             <p className={`text-[0.8em] ${rubik} mb-2 text-center`}>
-              Puntos de servicio
+              {t("points")}
             </p>
           </div>
         </div>
         <br />
-
-        <p className={`text-[0.8em] ${rubik} text-center`}>
-          ¿Donde nos encontras?
-        </p>
-        <Map
-          googleMapURL={mapURL}
-          loadingElement={<div style={{ height: "100%" }} />}
-          containerElement={<div style={{ height: "50vh" }} />}
-          mapElement={<div style={{ height: "100%" }} />}
-        />
       </section>
 
       <section className="p-4 pb-[90px] grid justify-self-center">
-        <p className={`text-[1em] ${rubik} mb-6 text-center `}>
-          Nuestro Equipo
-        </p>
+        <p className={`text-[1em] ${rubik} mb-6 text-center `}>{t("team")}</p>
         <div className="grid w-4/5 place-self-center grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[15px]">
           {aboutUs.map((i) => {
             return (
@@ -110,7 +102,7 @@ function AboutPage() {
                     <strong>{i.nombre} </strong>
                   </p>
                   <p>
-                    <strong>Área: </strong>
+                    <strong>{t("area")}: </strong>
                     {i.area}
                   </p>
                 </div>

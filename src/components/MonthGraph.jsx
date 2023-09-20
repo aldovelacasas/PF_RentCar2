@@ -249,7 +249,7 @@ function MonthGraph({ visible }) {
         options: {
           chart: {
             height: "400px",
-            width: "900px",
+            width: "750px",
           },
         },
       },
@@ -272,9 +272,9 @@ function MonthGraph({ visible }) {
   };
   if (visible === false) return null;
   return (
-    <figure className="w-[90vw] h-[600px] text-black dark:text-white mx-[auto] grid place-content-center bg-white dark:bg-gris_fondo rounded-lg shadow-md shadow-black">
+    <figure className="sm:w-full h-[500px] text-black dark:text-white mx-[auto] grid place-content-center bg-white dark:bg-gris_fondo rounded-lg shadow-md shadow-black">
       {typeof window !== undefined && (
-        <Chart options={options} series={series} />
+        <Chart options={options} series={series} className="w-full" />
       )}
       <section className="grid w-full">
         <ul className="flex flex-wrap justify-evenly items-baseline w-full">

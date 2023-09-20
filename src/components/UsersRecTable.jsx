@@ -10,6 +10,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getRental, getCars, getUser } from "@/store/slices/rental";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { useTranslation } from "react-i18next";
+import { TbReload } from "react-icons/tb";
 
 const fontRubik = Rubik({
   weight: "600",
@@ -33,7 +35,7 @@ function CarRecTable({ visible, handleAlertsVisibility }) {
     pasaporte: false,
     correo: false,
   };
-
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const router = useRouter();
   const [currentPage, setCurrentPage] = useState(1);
@@ -103,7 +105,7 @@ function CarRecTable({ visible, handleAlertsVisibility }) {
     dataToShow = completeRentals;
   }, [completeRentals]);
 
-  let quantityPerPage = 10;
+  let quantityPerPage = 5;
   let pages = [];
   let max = 1;
   if (dataToShow) {
@@ -183,19 +185,24 @@ function CarRecTable({ visible, handleAlertsVisibility }) {
   return (
     <section className="text-[10px] text-black dark:text-white sm:text-[12px] md:text-[16px]">
       <figure className="bg-white dark:bg-dark_blanco grid place-content-center sm:px-2 md:px-8 py-4 rounded-2xl">
-        <h3 className="text-[1.2em] pl-2">
-          Usuarios
-          <span
-            className={`${poppins} text-[0.8em] bg-gris_fondo dark:bg-dark_fondo ml-2 py-1 px-2 rounded-full`}>
-            {dataToShow.length}
-          </span>
-        </h3>
-        <p className={`${poppins} text-[0.9em] pl-2`}>
-          Vista de los usuarios dados de baja
-        </p>
+        <div className="flex justify-between flex-wrap mr-6">
+          <h3 className="text-[1.2em] pl-2">
+            {t("users")}
+            <span
+              className={`${poppins} text-[0.8em] bg-gris_fondo dark:bg-dark_fondo ml-2 py-1 px-2 rounded-full`}>
+              {dataToShow.length}
+            </span>
+          </h3>
+          <button
+            onClick={handleReload}
+            className="inline ml-12 bg-naranja_enf px-4 py-2 text-white rounded-md shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black">
+            <TbReload />
+          </button>
+        </div>
+        <p className={`${poppins} text-[0.9em] pl-2`}>{t("view-users")}</p>
         <div className="flex flex-wrap pl-2">
           <label htmlFor="search" className="shrink-0 basis-[100%]">
-            Búsqueda:
+            {t("search")}:
           </label>
           <input
             name="search"
@@ -207,8 +214,8 @@ function CarRecTable({ visible, handleAlertsVisibility }) {
           <select
             className="max-w-[30%]  bg-naranja_enf text-white px-2 rounded-full cursor-pointer shadow-sm shadow-black hover:shadow-md hover:shadow-black"
             onChange={handleSearchCategory}>
-            <option value="nombre">Nombre</option>
-            <option value="pasaporte">pasaporte</option>
+            <option value="nombre">{t("name")}</option>
+            <option value="pasaporte">{t("passport")}</option>
           </select>
         </div>
         <table className={`${poppins} mt-6`}>
@@ -234,7 +241,9 @@ function CarRecTable({ visible, handleAlertsVisibility }) {
                 className={`${rubik} min-w-[60px] sm:min-w-[200px] px-1 md:px-4 text-left hover:text-naranja_enf cursor-pointer hover:bg-gris_fondo `}>
                 {arrow.correo ? "Correo ▼" : "Correo"}
               </th>
-              <th className={`${rubik} px-1 md:px-4 text-left`}>Acciones</th>
+              <th className={`${rubik} px-1 md:px-4 text-left`}>
+                {t("actions")}
+              </th>
             </tr>
             {data?.map((d) => {
               let ultimo;
@@ -279,8 +288,8 @@ function CarRecTable({ visible, handleAlertsVisibility }) {
           onClick={handlePrevious}
           className={
             currentPage === 1
-              ? "px-3 py-1 border-[2px] border-black bg-negro_fondo text-white rounded-md"
-              : "px-3 py-1 border-[2px] border-black bg-naranja_enf text-white rounded-md"
+              ? "px-3 py-1 shadow-sm shadow-black bg-negro_fondo text-white rounded-md hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black"
+              : "px-3 py-1 shadow-sm shadow-black bg-naranja_enf text-white rounded-md hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black"
           }>
           <FiChevronLeft className="symbolSearch" />
         </button>
@@ -289,8 +298,8 @@ function CarRecTable({ visible, handleAlertsVisibility }) {
             onClick={() => setCurrentPage(1)}
             className={
               currentPage === 1
-                ? "px-3 py-1 border-[2px] border-black bg-negro_fondo text-white rounded-md"
-                : "px-3 py-1 border-[2px] border-black bg-naranja_enf text-white rounded-md"
+                ? "px-3 py-1 shadow-sm shadow-black bg-negro_fondo text-white rounded-md hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black"
+                : "px-3 py-1 shadow-sm shadow-black bg-naranja_enf text-white rounded-md hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black"
             }>
             1
           </button>
@@ -304,28 +313,28 @@ function CarRecTable({ visible, handleAlertsVisibility }) {
                 onClick={handlePageChange}
                 className={
                   currentPage === p
-                    ? "px-3 py-1 border-[2px] border-black bg-negro_fondo text-white rounded-md"
-                    : "px-3 py-1 border-[2px] border-black bg-naranja_enf text-white rounded-md"
+                    ? "px-3 py-1 shadow-sm shadow-black bg-negro_fondo text-white rounded-md hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black"
+                    : "px-3 py-1 shadow-sm shadow-black bg-naranja_enf text-white rounded-md hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black"
                 }
                 key={p}>
                 {p}
               </button>
             );
           })}
-        {currentPage + 3 < max ? (
+        {currentPage + 4 < max ? (
           <>
             <span>...</span>
             <button
               onClick={() => setCurrentPage(max)}
-              className="px-3 py-1 border-[2px] border-black bg-naranja_enf text-white rounded-md">
+              className="px-3 py-1 shadow-sm shadow-black bg-naranja_enf text-white rounded-md hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black">
               {max}
             </button>
           </>
         ) : (
-          currentPage + 3 <= max && (
+          currentPage + 5 <= max && (
             <button
               onClick={() => setCurrentPage(max)}
-              className="px-3 py-1 border-[2px] border-black bg-naranja_enf text-white rounded-md">
+              className="px-3 py-1 shadow-sm shadow-black bg-naranja_enf text-white rounded-md hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black">
               {max}
             </button>
           )
@@ -333,9 +342,9 @@ function CarRecTable({ visible, handleAlertsVisibility }) {
         <button
           onClick={handleNext}
           className={
-            currentPage === max || max === 0
-              ? "px-3 py-1 border-[2px] border-black bg-negro_fondo text-white rounded-md"
-              : "px-3 py-1 border-[2px] border-black bg-naranja_enf text-white rounded-md"
+            currentPage === max
+              ? "px-3 py-1 shadow-sm shadow-black bg-negro_fondo text-white rounded-md hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black"
+              : "px-3 py-1 shadow-sm shadow-black bg-naranja_enf text-white rounded-md hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black"
           }>
           <FiChevronRight className="symbolSearch" />
         </button>

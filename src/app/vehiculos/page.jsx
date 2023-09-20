@@ -12,6 +12,7 @@ import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
 import FormRent from "../../components/FormRent";
 import CarCardDetail from "@/components/CarCardDetail";
 import { useAuth } from "../context/AuthContext";
+import { useTranslation } from "react-i18next";
 
 const fontRubik = Rubik({
   weight: "600",
@@ -28,7 +29,7 @@ const rubik = fontRubik.className;
 function Vehiculos() {
   const dispatch = useDispatch();
   const { user } = useAuth();
-
+  const { t } = useTranslation();
   const [visibility, setVisibility] = useState(false);
   const [detailVisibility, setDetailVisibility] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -109,7 +110,7 @@ function Vehiculos() {
     <div className="h-max text-black dark:text-white bg-gris_fondo dark:bg-dark_fondo">
       <header
         className={`bg-gris_fondo dark:bg-dark_fondo relative ${rubik} space-y-0 space-x-2.5 p-10 md:text-[1.4em] h-[175px] flex items-center overflow-x-clip`}>
-        <p className="text-[2em]  leading-6 pl-6">Nuestros vehículos</p>
+        <p className="text-[2em]  leading-6 pl-6">{t("our-cars")}</p>
         <img
           src="https://drive.google.com/uc?export=download&id=1tTjEHMJE7Y2jdEUCYTCH5gYdg8t06OgM"
           className=" float-right w-[50vw] absolute right-[-15%] scale-x-[-1] top-0 z-1"
@@ -118,7 +119,7 @@ function Vehiculos() {
       <section
         className={` pt-4 ${poppins} mx-[auto] text-[0.8em] bg-gris_frente dark:bg-dark_frente pb-8`}>
         <p className={`text-[2.4em] ${rubik} text-center mt-6`}>
-          Encuentra el vehículo ideal
+          {t("find-car")}
         </p>
       </section>
       <FiltroVehiculos />
@@ -141,7 +142,7 @@ function Vehiculos() {
       <div className="w-full flex justify-center gap-2 mt-8 pb-8">
         {data.length === 0 && (
           <p className="text-[1em] text-center text-naranja_enf px-4 bg-gris_fondo dark:bg-dark_fondo py-2 rounded-full">
-            Nada que mostrar
+            {t("vacio")}
           </p>
         )}
         <button

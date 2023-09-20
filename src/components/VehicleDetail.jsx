@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import validation from "@/libs/validation";
 import { useRouter } from "next/navigation";
+import { useTranslation } from "react-i18next";
 
 const fontRubik = Rubik({
   weight: "600",
@@ -21,6 +22,7 @@ const rubik = fontRubik.className;
 
 function VehicleDetail({ visible, data, handleVisible, handleReload }) {
   const router = useRouter();
+  const { t } = useTranslation();
   if (!visible) return null;
 
   const initialState = {
@@ -113,7 +115,7 @@ function VehicleDetail({ visible, data, handleVisible, handleReload }) {
       <figure className=" w-full md:w-4/5 lg:w-3/4 max-h-[75vh] place-items-center bg-white dark:bg-dark_blanco max-w-[1000px] shadow-md shadow-black hover:cursor-pointer border border-solid border-negro_fondo grid">
         <h3
           className={`${rubik} w-1/2 text-center py-1 bg-negro_fondo text-white rounded-full mb-2`}>
-          Vehículo #{data.id}
+          {t("car")} #{data.id}
         </h3>
         <form className="bg-gris_fondo dark:bg-dark_fondo lg:w-1/2 px-6 rounded-2xl overflow-y-scroll max-h-[420px] py-3">
           <fieldset className="grid place-content-center">
@@ -137,7 +139,7 @@ function VehicleDetail({ visible, data, handleVisible, handleReload }) {
           <hr className="my-3 mx-2 border-white overflow-y-hidden" />
           <fieldset>
             <label htmlFor="name" className={`font-bold`}>
-              Marca:
+              {t("brand")}:
             </label>{" "}
             <br />
             <input
@@ -152,7 +154,7 @@ function VehicleDetail({ visible, data, handleVisible, handleReload }) {
           </fieldset>
           <fieldset>
             <label htmlFor="model" className={`font-bold`}>
-              Modelo:
+              {t("model")}:
             </label>{" "}
             <br />
             <input
@@ -167,7 +169,7 @@ function VehicleDetail({ visible, data, handleVisible, handleReload }) {
           </fieldset>
           <fieldset>
             <label htmlFor="year" className={`font-bold`}>
-              Año:
+              {t("year")}:
             </label>
             <br />
             <input
@@ -182,7 +184,7 @@ function VehicleDetail({ visible, data, handleVisible, handleReload }) {
           </fieldset>
           <fieldset>
             <label htmlFor="type" className={`font-bold`}>
-              Tipo:
+              {t("type")}:
             </label>{" "}
             <br />
             <select
@@ -196,7 +198,7 @@ function VehicleDetail({ visible, data, handleVisible, handleReload }) {
           </fieldset>
           <fieldset>
             <label htmlFor="capacity" className={`font-bold`}>
-              Capacidad:
+              {t("cap")}:
             </label>{" "}
             <br />
             <input
@@ -211,20 +213,20 @@ function VehicleDetail({ visible, data, handleVisible, handleReload }) {
           </fieldset>
           <fieldset>
             <label htmlFor="transmission" className={`font-bold`}>
-              Transmisión:
+              {t("transm")}:
             </label>{" "}
             <br />
             <select
               onChange={handleChange}
               defaultValue={inputs?.transmission}
               className="text-black">
-              <option value="manual">Manual</option>
-              <option value="automática">Automática</option>
+              <option value="manual">{t("man")}</option>
+              <option value="automática">{t("auto")}</option>
             </select>
           </fieldset>
           <fieldset>
             <label htmlFor="price" className={`font-bold`}>
-              Precio:
+              {t("price")}:
             </label>{" "}
             <br />
             <input
@@ -239,7 +241,7 @@ function VehicleDetail({ visible, data, handleVisible, handleReload }) {
           </fieldset>
           <fieldset>
             <label htmlFor="description" className={`font-bold`}>
-              Descripción:
+              {t("descrip")}:
             </label>{" "}
             <br />
             <textarea
@@ -260,13 +262,13 @@ function VehicleDetail({ visible, data, handleVisible, handleReload }) {
             type="button"
             onClick={handleVisible}
             className={`bg-negro_fondo text-white text-[1em] px-6 py-2 rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
-            Volver
+            {t("volver")}
           </button>
           <button
             type="submit"
             onClick={handleSubmit}
             className={` px-6 py-2 bg-naranja_enf text-white text-[1em] rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
-            Aceptar cambios
+            {t("acep-camb")}
           </button>
         </div>
       </figure>

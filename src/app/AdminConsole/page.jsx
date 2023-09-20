@@ -4,6 +4,8 @@ import { useState } from "react";
 import { Rubik, Poppins } from "next/font/google";
 import RentalsTable from "@/components/RentalsTable";
 import VehiclesTable from "@/components/VehiclesTable";
+import CarRecTable from "@/components/CarRecTable";
+import UsersRecTable from "@/components/UsersRecTable";
 import HelpForm from "@/components/HelpForm";
 import axios from "axios";
 import Alerts from "@/components/Alerts";
@@ -39,6 +41,8 @@ function AdminMain() {
     rentalsVisibility: false,
     vehiclesVisibility: false,
     formVisibility: false,
+    usersRecVisibility: false,
+    carRecVisibility: false,
   };
 
   const falseState = {
@@ -46,12 +50,20 @@ function AdminMain() {
     rentalsVisibility: false,
     vehiclesVisibility: false,
     formVisibility: false,
+    usersRecVisibility: false,
+    carRecVisibility: false,
   };
 
   const [alertsVisibility, setAlertsVisibility] = useState(false);
+  const [alertsRecVisibility, setRecAlertsVisibility] = useState(false);
   const [visibility, setVisibility] = useState(initialState);
+  const [category, setCategory] = useState("");
   const [id, setId] = useState("");
   const { t } = useTranslation();
+
+  if (visibility === falseState) {
+    setVisibility(initialState);
+  }
 
   function handleVisibility(name) {
     setVisibility({
@@ -85,6 +97,32 @@ function AdminMain() {
     setId(dataId);
   }
 
+  function handleAlertsRecVisibility(category, dataID) {
+    setRecAlertsVisibility(!alertsVisibility);
+    document.body.classList.toggle("stopScroll");
+    setId(dataId);
+    setCategory(category);
+  }
+
+  async function handleVehicleRecovery() {
+    // axios.put(`/api/products/${id}`, { isActive: false }).then(console.log("Borrado exitosamente"));
+    let formData = new FormData();
+    formData.append("data", JSON.stringify({ capacity: 5 }));
+    const res = await axios
+      .put(`/api/products/${id}`, formData)
+      .then((res) => console.log(res));
+    handleReload();
+  }
+
+  async function handleUserRecovery() {
+    let formData = new FormData();
+    formData.append("data", JSON.stringify({ isActive: null }));
+    const res = await axios
+      .put(`/api/users/${id}`, formData)
+      .then((res) => console.log(res));
+    handleReload();
+  }
+
   return (
     <div className="grid bg-gris_frente dark:bg-dark_frente overflow-x-hidden text-black dark:text-white">
       <header
@@ -93,82 +131,88 @@ function AdminMain() {
           {t("consoleAdmin")}
         </h1>
       </header>
-      <main
-        className={`pt-4 ${rubik} mx-[auto] text-[0.8em] bg-gris_frente dark:bg-dark_frente pb-12 sm:text-[1.2em] grid gap-[12px]`}>
-        <h2 className="text-[1.5em] pl-2">{t("welcomeAdmin")}</h2>
-        <div
-          className={
-            visibility.graphVisibility
-              ? "bg-gris_fondo dark:bg-dark_fondo px-2 rounded-2xl break-words grid place-items-center"
-              : ""
-          }>
-          <h3
-            onClick={() => handleVisibility("graphVisibility")}
-            className={
-              !visibility.graphVisibility
-                ? `lg:px-[8em] text-center text-[1em] mb-2 bg-gris_fondo dark:bg-dark_fondo px-4 py-1 shadow-sm shadow-black hover:shadow-md cursor-pointer rounded-md hover:shadow-black active:shadow-inner active:shadow-black`
-                : `w-4/5 md:w-3/4 text-[1em] mb-2 bg-negro_fondo dark:bg-dark_blanco text-white text-center px-4 py-1 shadow-sm shadow-black hover:shadow-md cursor-pointer rounded-md hover:shadow-black active:shadow-inner active:shadow-black`
-            }>
-            ▼ {t("graph")} ▼
-          </h3>
+      <div className="flex flex-wrap ">
+        <main
+          className={`pl-4 lg:w-[20%] h-max pt-4 ${rubik} mx-[auto] grow-0 text-[0.8em] bg-gris_frente dark:bg-dark_frente pb-12 sm:text-[1.2em]`}>
+          <h2 className="text-[1.5em] pl-2 mb-6">{t("welcomeAdmin")}</h2>
+          <div className="grid grid-cols-2 gap-4 lg:grid-cols-1 sticky top-[150px]">
+            <h3
+              onClick={() => handleVisibility("graphVisibility")}
+              className={
+                !visibility.graphVisibility
+                  ? `text-center text-[1em] mb-2 bg-gris_fondo dark:bg-dark_fondo px-4 py-1 shadow-sm shadow-black hover:shadow-md cursor-pointer rounded-md hover:shadow-black active:shadow-inner active:shadow-black`
+                  : `text-center text-[1em] mb-2 bg-negro_fondo dark:bg-dark_blanco text-white px-4 py-1 shadow-sm shadow-black hover:shadow-md cursor-pointer rounded-md hover:shadow-black active:shadow-inner active:shadow-black`
+              }>
+              {t("graph")}
+            </h3>
 
+            <h3
+              onClick={() => handleVisibility("rentalsVisibility")}
+              className={
+                !visibility.rentalsVisibility
+                  ? `text-center text-[1em] mb-2 bg-gris_fondo dark:bg-dark_fondo px-4 py-1 shadow-sm shadow-black hover:shadow-md cursor-pointer rounded-md hover:shadow-black active:shadow-inner active:shadow-black`
+                  : `text-center text-[1em] mb-2 bg-negro_fondo dark:bg-dark_blanco text-white px-4 py-1 shadow-sm shadow-black hover:shadow-md cursor-pointer rounded-md hover:shadow-black active:shadow-inner active:shadow-black`
+              }>
+              {t("rented")}
+            </h3>
+
+            <h3
+              onClick={() => handleVisibility("vehiclesVisibility")}
+              className={
+                !visibility.vehiclesVisibility
+                  ? `text-center text-[1em] mb-2 bg-gris_fondo dark:bg-dark_fondo px-4 py-1 shadow-sm shadow-black hover:shadow-md cursor-pointer rounded-md hover:shadow-black active:shadow-inner active:shadow-black`
+                  : `text-center text-[1em] mb-2 bg-negro_fondo dark:bg-dark_blanco text-white px-4 py-1 shadow-sm shadow-black hover:shadow-md cursor-pointer rounded-md hover:shadow-black active:shadow-inner active:shadow-black`
+              }>
+              {t("manageCars")}
+            </h3>
+            <h3
+              onClick={() => handleVisibility("carRecVisibility")}
+              className={
+                !visibility.carRecVisibility
+                  ? `text-center text-[1em] mb-2 bg-gris_fondo dark:bg-dark_fondo px-4 py-1 shadow-sm shadow-black hover:shadow-md cursor-pointer rounded-md hover:shadow-black active:shadow-inner active:shadow-black`
+                  : `text-center text-[1em] mb-2 bg-negro_fondo dark:bg-dark_blanco text-white px-4 py-1 shadow-sm shadow-black hover:shadow-md cursor-pointer rounded-md hover:shadow-black active:shadow-inner active:shadow-black`
+              }>
+              Vehículos dados de baja
+            </h3>
+            <h3
+              onClick={() => handleVisibility("usersRecVisibility")}
+              className={
+                !visibility.usersRecVisibility
+                  ? `text-center text-[1em] mb-2 bg-gris_fondo dark:bg-dark_fondo px-4 py-1 shadow-sm shadow-black hover:shadow-md cursor-pointer rounded-md hover:shadow-black active:shadow-inner active:shadow-black`
+                  : `text-center text-[1em] mb-2 bg-negro_fondo dark:bg-dark_blanco text-white px-4 py-1 shadow-sm shadow-black hover:shadow-md cursor-pointer rounded-md hover:shadow-black active:shadow-inner active:shadow-black`
+              }>
+              Usuarios dados de baja
+            </h3>
+            <h3
+              onClick={() => handleVisibility("formVisibility")}
+              className={
+                !visibility.formVisibility
+                  ? `text-center text-[1em] mb-2 bg-gris_fondo dark:bg-dark_fondo px-4 py-1 shadow-sm shadow-black hover:shadow-md cursor-pointer rounded-md hover:shadow-black active:shadow-inner active:shadow-black`
+                  : `text-center text-[1em] mb-2 bg-negro_fondo dark:bg-dark_blanco text-white px-4 py-1 shadow-sm shadow-black hover:shadow-md cursor-pointer rounded-md hover:shadow-black active:shadow-inner active:shadow-black`
+              }>
+              Solicitar ayuda
+            </h3>
+          </div>
+        </main>
+        <figure className="w-full lg:w-[75%] flex flex-wrap justify-center py-6">
           <MonthGraph visible={visibility.graphVisibility} />
-        </div>
-        <div
-          className={
-            visibility.rentalsVisibility
-              ? "bg-gris_fondo dark:bg-dark_fondo px-2 rounded-2xl break-words grid place-items-center"
-              : ""
-          }>
-          <h3
-            onClick={() => handleVisibility("rentalsVisibility")}
-            className={
-              !visibility.rentalsVisibility
-                ? `lg:px-[8em] text-center text-[1em] mb-2 bg-gris_fondo dark:bg-dark_fondo px-4 py-1 shadow-sm shadow-black hover:shadow-md cursor-pointer rounded-md hover:shadow-black active:shadow-inner active:shadow-black`
-                : `w-4/5 md:w-3/4 text-[1em] mb-2 bg-negro_fondo dark:bg-dark_blanco text-white text-center px-4 py-1 shadow-sm shadow-black hover:shadow-md cursor-pointer rounded-md hover:shadow-black active:shadow-inner active:shadow-black`
-            }>
-            ▼ {t("rented")} ▼
-          </h3>
           <RentalsTable visible={visibility.rentalsVisibility} />
-        </div>
-        <div
-          className={
-            visibility.vehiclesVisibility
-              ? "bg-gris_fondo dark:bg-dark_fondo pb-2 rounded-2xl grid place-items-center lg:pb-6"
-              : ""
-          }>
-          <h3
-            onClick={() => handleVisibility("vehiclesVisibility")}
-            className={
-              !visibility.vehiclesVisibility
-                ? `lg:px-[8em] text-center text-[1em] mb-2 bg-gris_fondo dark:bg-dark_fondo px-4 py-1 shadow-sm shadow-black hover:shadow-md cursor-pointer rounded-md hover:shadow-black active:shadow-inner active:shadow-black`
-                : `w-4/5 md:w-3/4 text-[1em] mb-2 bg-negro_fondo dark:bg-dark_blanco text-white text-center px-4 py-1 shadow-sm shadow-black hover:shadow-md cursor-pointer rounded-md hover:shadow-black active:shadow-inner active:shadow-black`
-            }>
-            ▼ {t("manageCars")} ▼
-          </h3>
           <VehiclesTable
             visible={visibility.vehiclesVisibility}
             handleAlertsVisibility={handleAlertsVisibility}
           />
-        </div>
-        <div
-          className={
-            visibility.formVisibility
-              ? "bg-gris_fondo dark:bg-dark_fondo pb-2 rounded-2xl grid place-items-center lg:pb-6"
-              : ""
-          }>
-          <h3
-            onClick={() => handleVisibility("formVisibility")}
-            className={
-              !visibility.formVisibility
-                ? `lg:px-[8em] text-center text-[1em] mb-2 bg-gris_fondo dark:bg-dark_fondo px-4 py-1 shadow-sm shadow-black hover:shadow-md cursor-pointer rounded-md hover:shadow-black active:shadow-inner active:shadow-black`
-                : `w-4/5 md:w-3/4 text-[1em] mb-2 bg-negro_fondo dark:bg-dark_blanco text-white text-center px-4 py-1 shadow-sm shadow-black hover:shadow-md cursor-pointer rounded-md hover:shadow-black active:shadow-inner active:shadow-black`
-            }>
-            ▼ {t("help")} ▼
-          </h3>
+          <UsersRecTable
+            visible={visibility.usersRecVisibility}
+            handleAlertsVisibility={handleAlertsRecVisibility}
+          />
+          <CarRecTable
+            visible={visibility.carRecVisibility}
+            handleAlertsVisibility={handleAlertsRecVisibility}
+            handleReload={handleReload}
+          />
           <HelpForm visible={visibility.formVisibility} />
-        </div>
-      </main>
+        </figure>
+      </div>
       <Alerts visible={alertsVisibility}>
         <p
           className={`bg-naranja_enf text-white ${rubik} w-full text-center rounded-t-[15px]`}>
@@ -187,6 +231,31 @@ function AdminMain() {
             onClick={handleAlertsVisibility}
             className={` bg-negro_fondo ${rubik} text-white text-[1em] px-4 rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black `}>
             {t("close")}
+          </button>
+        </div>
+      </Alerts>
+      <Alerts visible={alertsRecVisibility}>
+        <p
+          className={`bg-naranja_enf text-white ${rubik} w-full text-center rounded-t-[15px]`}>
+          Alerta
+        </p>
+        <p className="text-[1em] px-4">
+          ¿Estás seguro de recuperar este {category}?
+        </p>
+        <div className="flex w-full justify-evenly">
+          <button
+            onClick={handleAlertsRecVisibility}
+            className={` bg-negro_fondo ${rubik} text-white text-[1em] px-6 py-2 rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black `}>
+            Cerrar
+          </button>
+          <button
+            onClick={
+              category === "vehículo"
+                ? handleVehicleRecovery
+                : handleUserRecovery
+            }
+            className={` bg-naranja_enf ${rubik} text-white text-[1em] px-6 py-2 rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black `}>
+            Recuperar
           </button>
         </div>
       </Alerts>

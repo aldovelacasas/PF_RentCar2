@@ -202,10 +202,7 @@ function HomePage() {
           {t("renta-de-vehiculos")}
         </p>
         <p className={`${poppins} text-[0.6em] mt-2 z-3`}>
-          Renta el auto de tus sueños con precios imbatibles,
-        </p>
-        <p className={`${poppins} text-[0.6em] pb-4`}>
-          km ilimitados, opciones flexibles y mucho más.
+          {t("renta-sueños")}
         </p>
         <p className={`${poppins} text-[0.6em] pb-4`}>{t("km")}</p>
         <div className="flex place-content-evenly w-full sm:w-2/3 mt-3 pb-10 md:pt-[40px] lg:w-1/2">
@@ -398,13 +395,13 @@ function HomePage() {
         </div>
       </section>
       <section
-        className={`pt-8 px-5 ${rubik} mx-[auto] text-[0.8em] bg-gris_fondo dark:bg-dark_fondo rounded-3xl shadow-sm shadow-black pb-12 w-3/4`}>
-        <p className="text-2xl md:text-[1.5em] text-center pb-4 md:pb-8">
+        className={`pt-8 px-5 ${rubik} mx-[auto] text-[0.8em] bg-gris_fondo dark:bg-dark_fondo rounded-3xl shadow-sm shadow-black pb-12 sm:w-3/4`}>
+        <p className="text-2xl md:text-[1.5em] text-center pb-4 md:pb-8 w-full">
           {t("lee")}
         </p>
         <p className="pb-4">{t("mascinco")}</p>
         <div
-          className={`bg-white dark:bg-dark_blanco ${rubik}  p-8 shadow-sm shadow-black rounded-xl mb-4`}>
+          className={`bg-white dark:bg-dark_blanco ${poppins}  p-8 sm:mx-12 shadow-sm shadow-black rounded-xl mb-4`}>
           <p>
             "Nunca habíamos rentado un auto antes, pero luego de haber puesto
             nuestro voto de confianza en esta página, es una experiencia que
@@ -417,7 +414,7 @@ function HomePage() {
                 className="w-[30px] h-[30px] rounded-full"
               />
               <div>
-                <p>Juanito Pérez</p>
+                <p className="text-[0.9em]">Juanito Pérez</p>
                 <p className={`${poppins} text-[0.8em]`}>Abogado</p>
               </div>
             </div>
@@ -425,7 +422,7 @@ function HomePage() {
           </div>
         </div>
         <div
-          className={`bg-white dark:bg-dark_blanco ${rubik}  p-8 shadow-sm shadow-black rounded-xl`}>
+          className={`bg-white dark:bg-dark_blanco ${poppins}  p-8 sm:mx-12 shadow-sm shadow-black rounded-xl`}>
           <p>
             "Después de estas últimas vacaciones me sentí tan libre que me
             gustaría poder recomendarle a todos una aventura igual a la mía. De
@@ -438,7 +435,7 @@ function HomePage() {
                 className="w-[30px] h-[30px] rounded-full"
               />
               <div>
-                <p>Juana López</p>
+                <p className="text-[0.9em]">Juana López</p>
                 <p className={`${poppins} text-[0.8em]`}>Contadora</p>
               </div>
             </div>
@@ -447,7 +444,7 @@ function HomePage() {
         </div>
       </section>
       <section
-        className={`pt-8 px-5 ${rubik} mx-[auto] text-[0.8em] md:mt-[60px] w-3/4 bg-gris_frente dark:bg-dark_frente pb-12 sm:text-[1.2em]`}>
+        className={`pt-8 px-5 ${rubik} mx-[auto] text-[0.8em] md:mt-[60px] sm:w-3/4 bg-gris_frente dark:bg-dark_frente pb-12 sm:text-[1.2em]`}>
         <p className="text-center">FAQ</p>
         <p className="text-2xl text-center pb-4 md:text-[1.2em]  md:mb-[60px]">
           {t("faq")}
@@ -456,7 +453,7 @@ function HomePage() {
           <tbody className="[&>*:nth-child(odd)]:bg-[#ea4e398a] bg-white dark:bg-dark_blanco">
             <tr
               onClick={() => handleCollapse("One")}
-              className="cursor-pointer hover:text-blue-600 ">
+              className="cursor-pointer hover:text-blue-600 dark:hover:text-black">
               <td className="py-1 text-center w-full">{t("time")} </td>
               <td className="px-2">▼</td>
             </tr>
@@ -469,7 +466,7 @@ function HomePage() {
             </tr>
             <tr
               onClick={() => handleCollapse("Two")}
-              className="cursor-pointer hover:text-blue-600 ">
+              className="cursor-pointer hover:text-blue-600 dark:hover:text-black">
               <td className="py-1 text-center">{t("algo")}</td>
               <td className="px-2">▼</td>
             </tr>
@@ -481,7 +478,7 @@ function HomePage() {
               )}
             </tr>
             <tr
-              className="cursor-pointer hover:text-blue-600 "
+              className="cursor-pointer hover:text-blue-600 dark:hover:text-black"
               onClick={() => handleCollapse("Three")}>
               <td className="py-1 text-center">{t("seguro")}</td>
               <td className="px-2">▼</td>
@@ -513,7 +510,7 @@ function HomePage() {
         />
         <button
           onClick={handleEmailSubmit}
-          className="text-white bg-naranja_enf px-4 ml-4 text-[1em]  md:py-3 leading-5 shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black ">
+          className="text-white bg-naranja_enf px-3 sm:px-4 ml-4 text-[1em]  md:py-3 leading-5 shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black ">
           {t("subscribe")}
         </button>
         {errors && (

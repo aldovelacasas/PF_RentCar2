@@ -8,6 +8,7 @@ import HelpForm from "@/components/HelpForm";
 import { useRouter } from "next/navigation";
 import Alerts from "@/components/Alerts";
 import { withAuth } from "@/withAuth";
+import { useTranslation } from "react-i18next";
 import axios from "axios";
 
 const fontRubik = Rubik({
@@ -26,7 +27,7 @@ let validation = true;
 
 function Recoveries() {
   let router = useRouter();
-
+  const { t } = useTranslation();
   const initialState = {
     rentalsVisibility: true,
     vehiclesVisibility: false,
@@ -94,14 +95,12 @@ function Recoveries() {
       <header
         className={`bg-gris_fondo dark:bg-dark_fondo relative ${rubik} space-y-0 space-x-2.5 p-10 md:text-[1.4em] h-[175px] flex items-center overflow-x-clip`}>
         <h1 className=" text-[1.2em] sm:text-[2em]  leading-6 pl-6">
-          Consola de administración
+          {t("consoleAdmin")}
         </h1>
       </header>
       <main
         className={`pt-4 ${rubik} mx-[auto] text-[0.8em] bg-gris_frente dark:bg-dark_frente pb-12 sm:text-[1.2em] grid gap-[12px]`}>
-        <h2 className="text-[1.5em] pl-2">
-          Recuperación de elementos eliminados
-        </h2>
+        <h2 className="text-[1.5em] pl-2">{t("recup-admin")}</h2>
         <div
           className={
             visibility.rentalsVisibility
