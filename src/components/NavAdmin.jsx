@@ -82,14 +82,14 @@ export default function NavUser({ userName, userPhoto }) {
             <Link href="/AdminConsole">{t("console")}</Link>
           </li>
 
-          <li
+          {/* <li
             className={
               route === "/AdminConsole/Recoveries"
                 ? "list-none text-naranja_enf underline"
                 : "list-none hover:text-naranja_enf transition ease-in-out duration-300 "
             }>
             <Link href="/AdminConsole/Recoveries">{t("recoveries")}</Link>
-          </li>
+          </li> */}
 
           <li
             className={
