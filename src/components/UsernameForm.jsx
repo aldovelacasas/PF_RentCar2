@@ -26,7 +26,6 @@ function Form(props) {
         </button>
       </div>
 
-    <form className="z-50">
       <input
         placeholder="Ingresa tu nombre.."
         type="text"
