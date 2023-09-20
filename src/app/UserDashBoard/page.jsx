@@ -22,7 +22,7 @@ const fontPoppins = Poppins({
 const poppins = fontPoppins.className;
 const rubik = fontRubik.className;
 
-function page() {
+function Page() {
   const router = useRouter();
   const { user } = useAuth();
   const { t } = useTranslation();
@@ -62,4 +62,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;
