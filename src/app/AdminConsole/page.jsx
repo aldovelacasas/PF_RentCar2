@@ -1,5 +1,4 @@
 "use client";
-
 import { useState } from "react";
 import { Rubik, Poppins } from "next/font/google";
 import RentalsTable from "@/components/RentalsTable";
@@ -10,13 +9,12 @@ import HelpForm from "@/components/HelpForm";
 import axios from "axios";
 import Alerts from "@/components/Alerts";
 import { useTranslation } from "react-i18next";
-// import MonthGraph from "@/components/MonthGraph";
 import { withAuth } from "@/withAuth";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
 
 const MonthGraph = dynamic(() => import("@/components/MonthGraph"), {
-  ssr: false, // Evitar que se cargue en el servidor
+  ssr: false,
 });
 
 const fontRubik = Rubik({
@@ -75,13 +73,11 @@ function AdminMain() {
   function handleReload() {
     router.push("/AdminConsole");
     router.refresh();
-    console.log("reload");
     setAux(!aux);
     // router.reload();
   }
 
   async function handleDeletion() {
-    // axios.put(`/api/products/${id}`, { isActive: false }).then(console.log("Borrado exitosamente"));
     let formData = new FormData();
     formData.append("data", JSON.stringify({ capacity: 0 }));
     const res = await axios
@@ -105,7 +101,6 @@ function AdminMain() {
   }
 
   async function handleVehicleRecovery() {
-    // axios.put(`/api/products/${id}`, { isActive: false }).then(console.log("Borrado exitosamente"));
     let formData = new FormData();
     formData.append("data", JSON.stringify({ capacity: 5 }));
     const res = await axios

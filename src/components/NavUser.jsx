@@ -9,6 +9,10 @@ import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import LanguageSelector from "@/components/LanguageSelector";
 import ChatBar from "@/components/ChatBar";
+import React, { useState } from "react";
+import "./NavBar/nav.css";
+import { useAuth } from "@/app/context/AuthContext";
+import Link from "next/link";
 
 const fontRubik = Rubik({
   weight: "600",
@@ -21,14 +25,6 @@ const fontPoppins = Poppins({
 });
 const poppins = fontPoppins.className;
 const rubik = fontRubik.className;
-
-// import Link from "next/link";
-import React, { useState } from "react";
-// import NavItem from "./NavItem";
-import "./NavBar/nav.css";
-import { useAuth } from "@/app/context/AuthContext";
-import { BiLink } from "react-icons/bi";
-import Link from "next/link";
 
 export default function NavUser({ userName, userPhoto, userEmail }) {
   const user = useSelector((state) => state.user.currentUser);

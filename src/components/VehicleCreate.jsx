@@ -52,7 +52,7 @@ function VehicleCreate({ visible, handleVisible, handleReload }) {
   const [localimage, setLocalImage] = useState(false);
   const [inputs, setInputs] = useState(initialState);
   const [error, setError] = useState({});
-
+  const { t } = useTranslation();
   const [image, setImage] = useState("");
   const [imageRender, setImageRender] = useState(image);
 
@@ -102,7 +102,6 @@ function VehicleCreate({ visible, handleVisible, handleReload }) {
       formData.append("data", JSON.stringify(inputs));
       formData.append("file", image);
       const res = await axios.post(`/api/products/`, formData);
-      console.log(res);
       handleReload();
       handleVisible();
     } else {

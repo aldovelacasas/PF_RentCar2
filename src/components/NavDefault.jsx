@@ -5,6 +5,11 @@ import { Rubik, Poppins } from "next/font/google";
 import { usePathname } from "next/navigation";
 import { BsFillBrightnessHighFill, BsFillMoonStarsFill } from "react-icons/bs";
 import { useTranslation } from "react-i18next";
+import React, { useState } from "react";
+import "./NavBar/nav.css";
+import Link from "next/link";
+import LanguageSelector from "@/components/LanguageSelector";
+import ChatBar from "@/components/ChatBar";
 const fontRubik = Rubik({
   weight: "600",
   subsets: ["latin"],
@@ -16,15 +21,6 @@ const fontPoppins = Poppins({
 });
 const poppins = fontPoppins.className;
 const rubik = fontRubik.className;
-
-// import Link from "next/link";
-import React, { useState } from "react";
-// import NavItem from "./NavItem";
-import "./NavBar/nav.css";
-import Link from "next/link";
-// import { useAuth } from "@/app/context/AuthContext";
-import LanguageSelector from "@/components/LanguageSelector";
-import ChatBar from "@/components/ChatBar";
 
 export default function NavDefault() {
   const [dark, setDark] = useState(false);

@@ -15,8 +15,6 @@ export default function FiltroVehiculos() {
   const marcas = useSelector((state) => state.cars.marcas);
   const capacidades = useSelector((state) => state.cars.capacidad);
 
-  // console.log(categorias);
-
   const optionsCategorias = categorias.map((categoria) => ({
     label: categoria,
     value: categoria,
@@ -92,7 +90,7 @@ export default function FiltroVehiculos() {
               search: "Buscar",
               selectAll: t("select-all"),
               selectAllFiltered: "Select All (Filtered)",
-              selectSomeItems: "Seleccionar...",
+              selectSomeItems: t("selected"),
               create: "Crear",
             }}
             closeOnChangedValue={true}
@@ -117,7 +115,7 @@ export default function FiltroVehiculos() {
               search: "Buscar",
               selectAll: t("select-all"),
               selectAllFiltered: "Select All (Filtered)",
-              selectSomeItems: "Seleccionar...",
+              selectSomeItems: t("selected"),
               create: "Crear",
             }}
           />
@@ -140,7 +138,7 @@ export default function FiltroVehiculos() {
               search: "Buscar",
               selectAll: t("select-all"),
               selectAllFiltered: "Select All (Filtered)",
-              selectSomeItems: "Seleccionar...",
+              selectSomeItems: t("selected"),
               create: "Crear",
             }}
           />

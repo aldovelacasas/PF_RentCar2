@@ -8,38 +8,32 @@ import axios from "axios";
 import CarCard from "@/components/CarCardDetail";
 
 async function loadProduct(id) {
-    const { data } = await axios.get(`${process.env.API_BASE_URL}/api/products/${id}`,id);
-    console.log(data);
-    return await data;
-  }
+  const { data } = await axios.get(
+    `${process.env.API_BASE_URL}/api/products/${id}`,
+    id
+  );
+  return await data;
+}
 
-
-function Page({productId}) {
-
+function Page({ productId }) {
   const [productID, setProductID] = useState({});
-
 
   useEffect(() => {
     const url = window.location.href;
-  console.log(url);
-  const partes = url.split('/');
-  const stringId = partes[partes.length - 1];
-  const id=Number(stringId)
+    const partes = url.split("/");
+    const stringId = partes[partes.length - 1];
+    const id = Number(stringId);
 
     loadProduct(+id).then((data) => setProductID(data));
   }, []);
 
   return (
-
     <>
-
       <div class="flex justify-center">
         <CarCard key={productID.id} product={productID} />
       </div>
-
     </>
-    
-  )
+  );
 }
 
-export default Page
+export default Page;

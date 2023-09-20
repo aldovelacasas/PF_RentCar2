@@ -10,7 +10,6 @@ import { useDispatch, useSelector } from "react-redux";
 const Navbar = () => {
   const dispatch = useDispatch();
   const { user } = useAuth();
-  console.log(user);
 
   let users = useSelector((state) => state.user.allUsers);
   let rentals = useSelector((state) => state.user.allRentals);

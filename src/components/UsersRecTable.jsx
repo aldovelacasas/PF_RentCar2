@@ -8,7 +8,6 @@ import UserDetail from "./UserDetail";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getRental, getCars, getUser } from "@/store/slices/rental";
-import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import { TbReload } from "react-icons/tb";

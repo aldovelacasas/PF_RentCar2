@@ -3,10 +3,8 @@
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable react-hooks/rules-of-hooks */
 import { Rubik, Poppins } from "next/font/google";
-import TestCard from "@/components/TestCard";
 import OpinionForm from "@/components/OpinionForm";
 import axios from "axios";
-import { getTest } from "@/store/slices/testimonio";
 import Reviews from "@/components/Reviews";
 import { useTranslation } from "react-i18next";
 

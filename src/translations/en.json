@@ -193,5 +193,7 @@
   "price-max": "Higher price",
   "price-min": "Lower price",
   "cal-max": "Higher rating",
-  "cal-min": "Lower rating"
+  "cal-min": "Lower rating",
+  "enter-name": "Enter your name",
+  "connect": "Connect"
 }

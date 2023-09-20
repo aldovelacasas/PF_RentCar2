@@ -1,4 +1,5 @@
 import { Rubik } from "next/font/google";
+import { useTranslation } from "react-i18next";
 const fontRubik = Rubik({
   weight: "400",
   subsets: ["latin"],
@@ -7,6 +8,7 @@ const fontRubik = Rubik({
 const rubik = fontRubik.className;
 
 function ChatClient(props) {
+  const { t } = useTranslation();
   function renderMessages(message, index) {
     return (
       <div
@@ -75,7 +77,7 @@ function ChatClient(props) {
         <button
           className={`${rubik} text-s bg-naranja_enf w-[20vh] rounded px-2  text-white font-bold shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}
           onClick={handleSend}>
-          Enviar
+          {t("send")}
         </button>
       </div>
     </div>
