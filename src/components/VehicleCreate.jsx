@@ -22,7 +22,6 @@ const rubik = fontRubik.className;
 function VehicleCreate({ visible, handleVisible, handleReload }) {
   if (!visible) return null;
 
-  const { t } = useTranslation();
   useEffect(() => {
     const jsondata = window.localStorage.getItem("formData");
     const data = JSON.parse(jsondata);
