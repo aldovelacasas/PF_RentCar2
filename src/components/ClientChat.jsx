@@ -1,11 +1,11 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Form from "./UsernameForm";
 import ChatClient from "./ChatClient";
 import io from "socket.io-client";
 import immer from "immer";
 const initialMessagesState = {};
 
-export const ClientChat = ({ openChat }) => {
+export const ClientChat = ({ openChat, socketRef }) => {
   const [username, setUsername] = useState("");
   const [connected, setConnected] = useState(false);
   const [currentChat, setCurrentChat] = useState({
@@ -14,7 +14,6 @@ export const ClientChat = ({ openChat }) => {
   });
   const [messages, setMessages] = useState(initialMessagesState);
   const [message, setMessage] = useState("");
-  const socketRef = useRef();
 
   function handleMessageChange(e) {
     setMessage(e.target.value);
