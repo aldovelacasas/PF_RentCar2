@@ -18,7 +18,6 @@ const rubik = fontRubik.className;
 
 function UserDetail({ visible, data, handleVisible }) {
   if (!visible) return null;
-  console.log(data);
   //     id: data.id,
   //     nombre: data.nombre,
   //     pasaporte: data.pasaporte,

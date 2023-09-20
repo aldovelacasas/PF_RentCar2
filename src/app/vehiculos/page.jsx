@@ -34,9 +34,6 @@ function Vehiculos() {
   const [detailVisibility, setDetailVisibility] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [detailData, setDetailData] = useState();
-  // const [price, setPrice] = useState();
-  // const [model, setModel] = useState();
-  // const [image, setImage] = useState();
 
   useEffect(() => {
     dispatch(getCars());

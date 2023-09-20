@@ -34,7 +34,7 @@ export const ClientChat = ({ openChat, socketRef }) => {
     socketRef.current.emit("send message", payload);
     const newMessages = immer(messages, (draft) => {
       if (!draft[currentChat.chatName]) {
-        draft[currentChat.chatName] = []; // Initialize the array if it doesn't exist
+        draft[currentChat.chatName] = [];
       }
       draft[currentChat.chatName].push({
         sender: username,

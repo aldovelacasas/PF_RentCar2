@@ -54,7 +54,6 @@ function Recoveries() {
   }
 
   async function handleVehicleRecovery() {
-    // axios.put(`/api/products/${id}`, { isActive: false }).then(console.log("Borrado exitosamente"));
     let formData = new FormData();
     formData.append("data", JSON.stringify({ capacity: 5 }));
     const res = await axios

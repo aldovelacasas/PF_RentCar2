@@ -120,7 +120,6 @@ function CarRecTable({ visible, handleAlertsVisibility }) {
     router.push("/AdminConsole/Recoveries");
     router.refresh();
     setAux(!aux);
-    // router.reload();
   }
 
   function handleSort(sortCategory) {

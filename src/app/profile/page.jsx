@@ -5,15 +5,12 @@ import { useEffect, useState } from "react";
 import Alerts from "@/components/Alerts";
 import { Rubik, Poppins } from "next/font/google";
 import { validateUserForm } from "@/libs/functions";
-// import { useSelector } from "react-redux/es/hooks/useSelector";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import axios from "axios";
 import { useAuth } from "@/app/context/AuthContext";
 import { getUser, setCurrentUser } from "@/store/slices/user";
-
-// import { useRouter } from "next/navigation";
 
 const fontRubik = Rubik({
   weight: "600",
@@ -26,11 +23,9 @@ const fontPoppins = Poppins({
 });
 const poppins = fontPoppins.className;
 const rubik = fontRubik.className;
-// let login = true;
 
 function Profile() {
   const currentUser = useSelector((state) => state.user.currentUser);
-  // const { logOut } = useAuth();
   const router = useRouter();
   const dispatch = useDispatch();
   const { user } = useAuth();
@@ -68,11 +63,6 @@ function Profile() {
       );
     }
   }, [users]);
-  // const router = useRouter();
-  // if (!login) {
-  //   router.push("/");
-  //   return null;
-  // }
 
   const inputsInitialValue = {
     nombre: currentUser.userName,

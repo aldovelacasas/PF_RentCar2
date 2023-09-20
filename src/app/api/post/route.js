@@ -111,23 +111,3 @@ export async function POST(request) {
     );
   }
 }
-
-// export async function PUT(request) {
-//   try {
-//     const data = await request.json();
-//     let arr = [];
-//     for (let i in data) {
-//       let result = await conn.query(
-//         `(SELECT AVG(posts.rating) AS rating FROM posts WHERE posts.productID = ?)`,
-//         data[i].id
-//       );
-//       await conn.query(
-//         `UPDATE product SET rating = ${result[0].rating} WHERE id = ${data[i].id}`
-//       );
-//     }
-//     console.log(arr);
-//     return NextResponse.json("Hecho");
-//   } catch (error) {
-//     return NextResponse.json(error.message);
-//   }
-// }
