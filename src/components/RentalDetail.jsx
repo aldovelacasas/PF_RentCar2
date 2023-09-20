@@ -40,17 +40,27 @@ function RentalDetail({
     "Dic.",
   ];
   const { t } = useTranslation();
-  let startDay = data.fecha_inicio.slice(8, 10);
-  let startMonth = new Date(data.fecha_inicio).getMonth();
-  let startYear = new Date(data.fecha_inicio).getFullYear();
+  let startDay = data?.fecha_inicio.slice(8, 10);
+  let startMonth = new Date(data?.fecha_inicio).getMonth();
+  let startYear = new Date(data?.fecha_inicio).getFullYear();
 
   let fechaInicio = `${startDay}/${meses[startMonth]}/${startYear}`;
 
-  let endDay = data.fecha_fin.slice(8, 10);
-  let endMonth = new Date(data.fecha_fin).getMonth();
-  let endYear = new Date(data.fecha_fin).getFullYear();
+  let endDay = data?.fecha_fin.slice(8, 10);
+  let endMonth = new Date(data?.fecha_fin).getMonth();
+  let endYear = new Date(data?.fecha_fin).getFullYear();
 
   let fechaFin = `${endDay}/${meses[endMonth]}/${endYear}`;
+
+  function handleRentCancel(id) {
+    handleCancel(id);
+    handleVisible();
+  }
+
+  function handleRentActive(id) {
+    handleActive(id);
+    handleVisible();
+  }
 
   return (
     <div
@@ -94,12 +104,12 @@ function RentalDetail({
           {!isUser && (
             <div className="flex justify-evenly gap-4">
               <button
-                onClick={() => handleCancel(data.id)}
+                onClick={() => handleRentCancel(data.id)}
                 className={`rounded-md px-4 md:px-6 md:py-2 py-[2px] bg-white dark:bg-dark_blanco text-[1em] shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
                 {t("cancel-rent")}
               </button>
               <button
-                onClick={() => handleActive(data.id)}
+                onClick={() => handleRentActive(data.id)}
                 className={`rounded-md px-4 md:px-6 md:py-2 py-[2px] bg-naranja_enf text-white text-[1em] shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
                 {t("finish-rent")}
               </button>

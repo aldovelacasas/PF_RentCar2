@@ -13,9 +13,9 @@ function LanguageSelector() {
   };
 
   return (
-    <div className=" absolute top-[85px] right-[80px] dark:bg-gris_fondo bg-dark_blanco rounded-sm shadow-sm">
+    <div className=" absolute top-[85px] right-[65px] dark:bg-gris_fondo bg-dark_blanco rounded-sm shadow-sm">
       <button
-        className="px-3 py-2 text-white rounded  shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black"
+        className="px-3 py-[7px] text-white rounded  shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black"
         onClick={changeLanguage}>
         {!lang ? (
           <img src="eeuu.png" alt="Bandera Español" width="30" height="30" />
