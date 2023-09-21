@@ -4,10 +4,11 @@ import { useState, useRef, useEffect } from "react";
 import ChatAdmin from "../../../components/ChatAdmin";
 import io from "socket.io-client";
 import immer from "immer";
+import { withAuth } from "@/withAuth";
 
 const initialMessagesState = {};
 
-export default function Admin() {
+function Admin() {
   const [username, setUsername] = useState({
     username: "AutoConnect",
     id: "1234567890",
@@ -117,3 +118,5 @@ export default function Admin() {
 
   return <div> {body} </div>;
 }
+
+export default withAuth(Admin);
