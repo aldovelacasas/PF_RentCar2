@@ -290,7 +290,7 @@ function MonthGraph({ visible }) {
             <span className="w-[10px] h-[10px] mr-2 inline-block rounded-full bg-[#feb019]" />
             Camioneta: {camionetaSales.length}
           </li>
-          <li className="text-[1em] text-black mt-2">
+          <li className="text-[1em] text-black mt-2 font-bold">
             Total: {camionetaSales.length + suvSales.length + sedanSales.length}
           </li>
         </ul>

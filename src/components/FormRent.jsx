@@ -47,10 +47,20 @@ function FormRent({ visible = false, isAuth = false, car, handleVisible }) {
   let allRentals = useSelector((state) => state.rental.allRentals);
   const user = useSelector((state) => state.user.currentUser);
   const { t } = useTranslation();
+
+  const [errors, setErrors] = useState({});
+  const [max, setMax] = useState(null);
+  const [category, setCategory] = useState("Sedan");
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
+
   useEffect(() => {
     if (car) {
       dispatch(getRental());
     }
+    setErrors({});
+    setStartDate(new Date());
+    setEndDate(new Date());
   }, [car]);
   let clashingIntervals = [];
 
@@ -64,12 +74,6 @@ function FormRent({ visible = false, isAuth = false, car, handleVisible }) {
     });
     clashingIntervals = clashingIntervals.flat(Infinity);
   }
-
-  const [errors, setErrors] = useState({});
-  const [max, setMax] = useState(null);
-  const [category, setCategory] = useState("Sedan");
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
 
   useEffect(() => {
     if (startDate) {
@@ -100,6 +104,9 @@ function FormRent({ visible = false, isAuth = false, car, handleVisible }) {
   }
 
   function handleProfile() {
+    if (document.body.classList.length > 1) {
+      document.body.classList.remove("stopScroll");
+    }
     router.push("/profile");
   }
 
@@ -270,6 +277,7 @@ function FormRent({ visible = false, isAuth = false, car, handleVisible }) {
               {errors.info ? (
                 <button
                   onClick={handleProfile}
+                  type="button"
                   className={` bg-naranja_enf ${rubik} text-white text-[1em] px-6 py-2 rounded-lg shadow-sm shadow-black hover:shadow-md hover:shadow-black active:shadow-inner active:shadow-black`}>
                   Ir a mi perfil
                 </button>
