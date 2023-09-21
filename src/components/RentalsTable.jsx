@@ -176,7 +176,7 @@ function RentalsTable({ visible }) {
 
   let total = 0;
   if (data && data.length) {
-    dataToShow.forEach((d) => (total += d.monto));
+    dataToShow.forEach((d) => (total += d?.monto));
     // total = total * 2;
   }
 
