@@ -34,7 +34,8 @@ export default function NavUser({ userName, userPhoto, userEmail }) {
   }
 
   const [navActive, setNavActive] = useState(false);
-  const [dark, setDark] = useState(false);
+  let bodyClass = document.body.classList;
+  const [dark, setDark] = useState(bodyClass.contains("dark"));
 
   const { logOut } = useAuth();
 
