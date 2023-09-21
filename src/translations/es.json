@@ -29,6 +29,7 @@
   "console": "Consola",
   "recoveries": "Recuperaciones",
   "password": "Contraseña",
+  "password2": "Confirma la contraseña",
   "create": "Crear usuario",
   "account": "No tienes una cuenta?",
   "passwordForgot": "¿Olvidaste tu contraseña?",

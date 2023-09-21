@@ -20,14 +20,12 @@ const rubik = fontRubik.className;
 
 export default function Register() {
   const [user, setUser] = useState({
-    username: "",
-    passport: "",
     email: "",
     password: "",
-    phone: "",
   });
   const { signup, loginWithGoogle } = useAuth();
   const [error, setError] = useState();
+  const [repPassword, setRepPassword] = useState("");
   const { t } = useTranslation();
   const router = useRouter();
 
@@ -56,6 +54,20 @@ export default function Register() {
       }
     }
   };
+
+  function validatePassword(pass) {
+    if (pass == user.password) {
+      setError();
+    } else if (pass !== user.password) {
+      setError("Las contraseñas no son iguales");
+    }
+  }
+
+  function handlePassChange(e) {
+    setRepPassword(e.target.value);
+    console.log(user.password, repPassword);
+    validatePassword(e.target.value);
+  }
 
   return (
     <section className="w-full h-full bg-gris_frente dark:bg-dark_frente">
@@ -94,34 +106,18 @@ export default function Register() {
                   className="mt-1 focus:outline-none focus:border-gray-400 focus:border-2 bg-gris_fondo dark:bg-dark_fondo rounded-md appearance-none border  w-full py-2 px-3 mb-3"
                 />
               </fieldset>
+
               <fieldset className="pb-3">
-                <label className="font-bold">{t("username")}:</label>
+                <label htmlFor="password2" className="font-bold">
+                  {t("password2")}:
+                </label>
                 <input
-                  type="text"
-                  name="username"
-                  placeholder="Juan Pérez"
-                  onChange={handleChange}
+                  type="password"
+                  name="password2"
+                  onChange={handlePassChange}
+                  placeholder="********"
+                  value={repPassword}
                   className="mt-1 focus:outline-none focus:border-gray-400 focus:border-2 bg-gris_fondo dark:bg-dark_fondo rounded-md appearance-none border  w-full py-2 px-3 mb-3"
-                />
-              </fieldset>
-              <fieldset className="pb-3">
-                <label className="font-bold">{t("phone")}:</label>
-                <input
-                  type="text"
-                  name="phone"
-                  placeholder="5512345678"
-                  onChange={handleChange}
-                  className="mt-1 focus:outline-none focus:border-gray-400 focus:border-2 bg-gris_fondo dark:bg-dark_fondo rounded-md appearance-none border  w-full py-2 px-3 mb-3"
-                />
-              </fieldset>
-              <fieldset className="pb-3">
-                <label className="font-bold">{t("passport")}:</label>
-                <input
-                  type="text"
-                  name="passport"
-                  placeholder="ABC123456"
-                  onChange={handleChange}
-                  className="mt-1 focus:border-gray-400 focus:border-2  bg-gris_fondo dark:bg-dark_fondo rounded-md appearance-none border  w-full py-2 px-3 mb-3"
                 />
               </fieldset>
 
