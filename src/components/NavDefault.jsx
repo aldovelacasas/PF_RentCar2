@@ -23,7 +23,8 @@ const poppins = fontPoppins.className;
 const rubik = fontRubik.className;
 
 export default function NavDefault() {
-  const [dark, setDark] = useState(false);
+  let bodyClass = document.body.classList;
+  const [dark, setDark] = useState(bodyClass.contains("dark"));
   const [navActive, setNavActive] = useState(false);
   const { t } = useTranslation();
 
@@ -38,7 +39,7 @@ export default function NavDefault() {
   return (
     <>
       <nav
-        className={` ${rubik} sticky top-0 w-full dark:text-white text-black dark:bg-negro_fondo bg-transparent z-20 lg:text-[1.3em] flex flex-wrap justify-between  items-center px-5 py-4`}>
+        className={` ${rubik} sticky top-0 w-full dark:text-white text-black dark:bg-negro_fondo bg-transparent z-20 md:text-[0.8em] lg:text-[1em] flex flex-wrap justify-between  items-center px-5 py-4`}>
         <div className="flex gap-8">
           <Link href="/homePage">
             <img

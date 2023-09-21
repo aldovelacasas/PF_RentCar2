@@ -23,7 +23,8 @@ const poppins = fontPoppins.className;
 const rubik = fontRubik.className;
 
 export default function NavUser({ userName, userPhoto }) {
-  const [dark, setDark] = useState(false);
+  let bodyClass = document.body.classList;
+  const [dark, setDark] = useState(bodyClass.contains("dark"));
   const [navActive, setNavActive] = useState(false);
   const { logOut } = useAuth();
   const { t } = useTranslation();
