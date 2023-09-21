@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 
 function LanguageSelector() {
   const { i18n } = useTranslation();
-  const [lang, setlang] = useState(true);
+  const [lang, setlang] = useState(i18n.language === "es");
 
   const changeLanguage = () => {
     setlang(!lang);
