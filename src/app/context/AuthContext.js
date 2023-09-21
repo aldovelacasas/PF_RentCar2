@@ -147,7 +147,7 @@ export const AuthContextProvider = ({ children }) => {
 
   const saveData = async (uid, emailUser) => {
     try {
-      await axios.post(`${process.env.API_BASE_URL}/api/users`, {
+      await axios.post("/api/users", {
         uid,
         emailUser,
       });
