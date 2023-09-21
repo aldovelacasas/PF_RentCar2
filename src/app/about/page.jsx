@@ -32,7 +32,7 @@ function AboutPage() {
         <p className={`text-[1.2em] mt-2 pl-4`}>{t("team")}</p>
         <img
           src="https://drive.google.com/uc?export=download&id=1NW9G16ClvYbufG9oBwPhKfgqBc_zg8r0"
-          className=" float-right h-[20vh] md:h-[30vh] lg:h-[35vh] absolute right-[10%] scale-x-[-1] top-[10%] z-1"
+          className=" float-right h-[10vh] md:h-[30vh] lg:h-[35vh] absolute right-[10%] scale-x-[-1] top-[10%] z-1"
         />
       </header>
       <section

@@ -29,6 +29,7 @@
   "console": "Console",
   "recoveries": "Recoveries",
   "password": "Password",
+  "password2": "Confirm password",
   "create": "Create account",
   "account": "Don't have an account?",
   "passwordForgot": "Forgot your password?",
