@@ -20,8 +20,11 @@ const rubik = fontRubik.className;
 
 export default function Register() {
   const [user, setUser] = useState({
+    username: "",
+    passport: "",
     email: "",
     password: "",
+    phone: "",
   });
   const { signup, loginWithGoogle } = useAuth();
   const [error, setError] = useState();

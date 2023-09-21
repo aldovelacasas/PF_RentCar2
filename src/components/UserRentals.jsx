@@ -101,7 +101,7 @@ function UserRentals({ visible }) {
       completeRentals[0] &&
       completeRentals[0].hasOwnProperty("user")
     ) {
-      rentals = completeRentals.filter((r) => r.user === user.email);
+      rentals = completeRentals.filter((r) => r?.user === user?.email);
     }
     dataToShow = rentals;
   }, [completeRentals]);
